@@ -1,5 +1,4 @@
 ---
-layout: default
 title: "TabCordion v1.3 (Beta)"
 noindex: true
 localcss: "init.css"
@@ -19,12 +18,12 @@ localjs: "init.js"
 <h2>Dependencies</h2>
 
 <ul>
-  <li><a href="https://github.com/radancyco/tmp-tabcordion/blob/main/index.html">HTML</a> - HTML for all variations are the same. Data-attributes drive the transformation.</li>
-  <li><a href="https://github.com/radancyco/tmp-tabcordion/blob/main/init.scss">CSS</a> - The CSS is written in Sass, so you will need to <a href="https://sass-lang.com/install">install it</a>. Once installed, command line to the directory where init.scss lives and run: <code>sass --watch init.scss:init.css --style compressed</code></li>
-  <li><a href="https://github.com/radancyco/tmp-tabcordion/blob/main/init.js">JavaScript</a> - Only Plain Vanilla here. Look Mom, no jQuery!</li>
+  <li><a href="https://github.com/radancyco/pattern-library/blob/main/tabcordion/index.html">HTML</a> - HTML for all variations are the same. Data-attributes drive the transformation.</li>
+  <li><a href="https://github.com/radancyco/pattern-library/blob/main/tabcordion/init.scss">CSS</a> - The CSS is written in Sass, so you will need to <a href="https://sass-lang.com/install">install it</a>. Once installed, command line to the directory where init.scss lives and run: <code>sass --watch init.scss:init.css --style compressed</code></li>
+  <li><a href="https://github.com/radancyco/pattern-library/blob/main/tabcordion/init.js">JavaScript</a> - Only Plain Vanilla here. Look Mom, no jQuery!</li>
 </ul>
 
-<p><a href="https://github.com/radancyco/tmp-tabcordion/archive/main.zip">Download Repository</a> - Please note that <a href="https://jekyllrb.com/">Jekyll</a> is a requirement to run the repository locally. Contact <a href="mailto:michael.spellacy@tmp.com">Michael Spellacy (Spell)</a> for further setup instructions.</p>
+<p><a href="https://github.com/radancyco/pattern-library/archive/main.zip">Download Repository</a> - Please note that <a href="https://jekyllrb.com/">Jekyll</a> is a requirement to run the repository locally. Contact <a href="mailto:michael.spellacy@tmp.com">Michael Spellacy (Spell)</a> for further setup instructions.</p>
 
 <h2>Roadmap</h2>
 
@@ -35,11 +34,13 @@ localjs: "init.js"
 
 <h2>Report Issues</h2>
 
-<p>Find a bug? Report it on <a href="http://jira.tmp.com/browse/TCDQ-57187">JIRA</a> or <a href="https://github.com/radancy/tmp-tabcordion/issues">Github</a>! You’re so awesome!</p>
+<p>Find a bug? Report it on <a href="http://jira.tmp.com/browse/TCDQ-57187">JIRA</a> or <a href="https://github.com/radancyco/pattern-library/issues">Github</a>! You’re so awesome!</p>
 
 <h2 id="example-1">Example 1: Basic Layout</h2>
 
 <p>Parameter(s): <code>data-tab-breakpoint="(min-width:780px)"</code></p>
+
+<!-- Begin TabCordion -->
 
 <div class="tab-accordion" data-tab-active="4" data-tab-breakpoint="(min-width: 780px)">
 
@@ -112,11 +113,15 @@ localjs: "init.js"
 
 </div>
 
+<!-- End TabCordion -->
+
 <hr aria-hidden="true">
 
 <h2 id="example-2">Example 2: Vertical Layout with Custom Selection</h2>
 
 <p>Parameter(s): <code>data-tab-active="3"</code>, <code>data-tab-breakpoint="(min-width:1200px)"</code>, and <code>data-tab-vertical</code></p>
+
+<!-- Begin TabCordion -->
 
 <div class="tab-accordion" data-tab-active="3" data-tab-breakpoint="(min-width:1200px)" data-tab-vertical>
 
@@ -204,11 +209,15 @@ localjs: "init.js"
 
 </div>
 
+<!-- End TabCordion -->
+
 <hr aria-hidden="true">
 
 <h2 id=example-3>Example 3: Disabled URL</h2>
 
 <p>Parameter(s): <code>data-tab-active="4"</code>, <code>data-tab-breakpoint="(min-width:800px)"</code>, <code>data-tab-disable-url</code>, and <code>data-tab-vertical</code></p>
+
+<!-- Begin TabCordion -->
 
 <div class="tab-accordion" data-tab-active="4" data-tab-breakpoint="(min-width:800px)" data-tab-disable-url data-tab-vertical>
 
@@ -302,11 +311,15 @@ localjs: "init.js"
 
 </div>
 
+<!-- End TabCordion -->
+
 <hr aria-hidden="true">
 
 <h2 id="example-4">Example 4: Advanced Media Query</h2>
 
 <p>Parameter(s): <code>data-tab-breakpoint="(min-width: 800px) and (max-width: 1200px)"</code></p>
+
+<!-- Begin TabCordion -->
 
 <div class="tab-accordion" data-tab-breakpoint="(min-width: 800px) and (max-width: 1200px)">
 
@@ -371,3 +384,5 @@ localjs: "init.js"
   </div>
 
 </div>
+
+<!-- End TabCordion -->
