@@ -1,11 +1,15 @@
-<details class="toc"{% if page.nav %}open{%endif%}>
+{% if page.nav == null %}
 
-  <summary>Table of Contents</summary>
+<details class="nav"{% if page.nav %}open{%endif%}>
 
-  <nav>
+  <summary>Navigation</summary>
+
+{%endif%}
+
+  <nav aria-label="Repo">
 
     <ul>
-      <li><a href="{{ site.baseurl }}/">Pattern Library</a></li>
+      <li><a href="{{ site.baseurl }}/">Home</a></li>
       <li>
 
         <h2>Modules</h2>
@@ -20,4 +24,8 @@
 
   </nav>
 
+{% if page.nav == null %}
+
 </details>
+
+{%endif%}
