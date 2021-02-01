@@ -1,40 +1,24 @@
 ---
-title: "TabCordion v1.3 (Beta)"
-noindex: true
+folder: tabcordion
+jira: TCDQ-57187
 localcss: "init.css"
 localjs: "init.js"
+noindex: true
+title: "TabCordion v1.3 (Beta)"
 ---
 
 <p>This pattern will allow you to easily place and control the presentation of a combined Tab and Accordion (a.k.a "TabCordion") user interface (UI) .</p>
 
+<h2 id="parameters">Parameters</h2>
+
 <ul>
   <li><b>data-tab-active (Number, Optional):</b> Using a number from "1" up, you can specify which tab should be activated on page load. When this attribute is not specified, the first panel will be open. Support for having no panels open coming soon. </li>
   <li><b>data-tab-breakpoint (String, Required):</b> Accepts any valid media query for more granular control over when interface needs to change from accordion to tab. Setting the breakpoint in code also allows us to pass in the required roles and ARIA attributes needed for each type of interface. For example, setting <code>(min-width: 800px) and (max-width: 1200px)</code> would only allow tabs between these two selected breakpoints. See <a href="#tab-accordion-4">example</a> below.</li>
-  <li><b>data-tab-callback (String, Optional):</b> Coming soon!</li>
   <li><b>data-tab-disable-url (Boolean, Optional):</b> By default, the URL will always change to reflect selected page fragment. This is recommended behavior because it allows us to share fragmented content more easily. If this behavior is not desired, you may use this attribute to disable this functionality.</li>
   <li><b>data-tab-vertical (Boolean, Optional) :</b> This attribute will change the tab interface from horizontal, the default, to vertical. When in vertical mode, the interface will behave differently. For example, focus will be placed on selected panel for improved accessibility.</li>
 </ul>
 
-<h2>Dependencies</h2>
-
-<ul>
-  <li><a href="https://github.com/radancyco/pattern-library/blob/main/tabcordion/index.html">HTML</a> - HTML for all variations are the same. Data-attributes drive the transformation.</li>
-  <li><a href="https://github.com/radancyco/pattern-library/blob/main/tabcordion/init.scss">CSS</a> - The CSS is written in Sass, so you will need to <a href="https://sass-lang.com/install">install it</a>. Once installed, command line to the directory where init.scss lives and run: <code>sass --watch init.scss:init.css --style compressed</code></li>
-  <li><a href="https://github.com/radancyco/pattern-library/blob/main/tabcordion/init.js">JavaScript</a> - Only Plain Vanilla here. Look Mom, no jQuery!</li>
-</ul>
-
-<p><a href="https://github.com/radancyco/pattern-library/archive/main.zip">Download Repository</a> - Please note that <a href="https://jekyllrb.com/">Jekyll</a> is a requirement to run the repository locally. Contact <a href="mailto:michael.spellacy@tmp.com">Michael Spellacy (Spell)</a> for further setup instructions.</p>
-
-<h2>Roadmap</h2>
-
-<ul>
-  <li>Arrow key support for more enhanced keyboard operability.</li>
-  <li>Callback feature for scripted functionality within the content areas of the interface.</li>
-</ul>
-
-<h2>Report Issues</h2>
-
-<p>Find a bug? Report it on <a href="http://jira.tmp.com/browse/TCDQ-57187">JIRA</a> or <a href="https://github.com/radancyco/pattern-library/issues">Github</a>! You’re so awesome!</p>
+{% include notes.html %}
 
 <h2 id="example-1">Example 1: Basic Layout</h2>
 
