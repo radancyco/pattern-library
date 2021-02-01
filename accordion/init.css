@@ -1,0 +1,12 @@
+/*!
+
+  TMPattern Library: Accordion
+
+  Contributor(s):
+  Andrew Hill, Email: andrew.hill@tmp.com
+
+  Dependencies: Sass
+  Instructions: To run locally, install Sass (https://sass-lang.com/install), CL to directory this file in and run:
+  sass --watch init.scss:init.css --style compressed
+
+*/.prod-accordion__navigation{text-align:right}.prod-accordion__navigation__button{background-color:#067eb5;border:0;color:#fff;margin-bottom:1em;padding:1em}.prod-accordion__navigation__button:focus,.prod-accordion__navigation__button:hover{opacity:.7}.prod-accordion__list__item{margin-bottom:5px}.prod-accordion__list__item .prod-accordion__content{display:none}.prod-accordion__list__item .prod-accordion__button{background-color:#067eb5;border:0;color:#fff;margin-bottom:1em;padding:1em;text-align:left;width:100%}.prod-accordion__list__item .prod-accordion__button[aria-expanded=true]+.prod-accordion__content{display:block}.prod-accordion__list__item .prod-accordion__button:focus,.prod-accordion__list__item .prod-accordion__button:hover{opacity:.7}/*# sourceMappingURL=init.css.map */

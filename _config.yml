@@ -1,0 +1,25 @@
+charset: utf-8
+company-name: Radancy
+company-url: https://radancy.com
+defaults:
+-
+  values:
+    layout: "default"
+exclude: [
+  README.md,
+  CNAME
+]
+destination: _httpdocs
+git-url: https://tmpworldwide.dev
+highlighter: rouge
+lang: en-US
+markdown: kramdown
+name: Pattern Library
+owner-name: Michael Spellacy
+owner-email: michael.spellacy@radancy.com
+owner-image: https://www.gravatar.com/avatar/89e429d4a3effa9601cd19a851c0003e.jpg
+permalink: /:title/
+repo: https://github.com/radancyco/tmp-tabcordion
+sass:
+  style: :compressed
+theme-color: "#6E00EE"

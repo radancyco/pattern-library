@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang }}" class="no-js">
+<head>
+    <meta charset="{{ site.charset }}">
+    <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">{% if page.noindex %}
+	  <meta content="noindex, nofollow" name="robots">{% endif %}
+    <link href="{{ site.git-url }}/rad-styleguide/favicon.png" rel="icon">
+    <link href="{{ site.git-url }}/rad-styleguide/init.css" rel="stylesheet">{% if page.localcss %}
+    <link href="{{ page.localcss }}" rel="stylesheet">{% endif %}
+    <script>document.getElementsByTagName("html")[0].className = document.getElementsByTagName("html")[0].className.replace("no-js", "js");</script>
+    <title>{{ page.title }} - {{ site.company-name }}</title>
+</head>
+
+<body id="rad-{{page.path | replace:'.html',''| replace: '/', '-' | replace: '.md', ''}}">
+
+  <div id="page">
+
+    <header id="banner">
+
+      <a href="{{ site.company-url }}"><img src="{{ site.git-url }}/rad-styleguide/logo.svg" alt="{{ site.company-name }}"> <span>{{ site.name }}</span></a>
+
+    </header>
+
+    <main id="content">
+
+      {% if page.title %}
+
+      <h1 class="primary-heading">{{ page.title }}</h1>
+
+      {% endif %}
+
+      {% if page.toc %}
+
+      <nav id="toc">
+
+        <details>
+
+          <summary>Table of Contents</summary>
+
+          {% include toc.html html=content h_max=4 ordered=true %}
+
+        </details>
+
+      </nav>
+
+      {% endif %}
+
+      {{ content }}
+
+      <section>
+
+        <h2>Contribute</h2>
+
+        <p><a href="{{ site.repo }}/graphs/contributors">The {{ site.company-name }} UID Team</a></p>
+
+        <p>If you wish to contribute, <a href="https://guides.github.com/activities/forking/">fork</a> this <a href="{{ site.repo }}">project</a>, make some changes, and <a href="https://guides.github.com/activities/forking/#making-a-pull-request">create a pull request</a>.</p>
+
+        <p>New to GitHub? <a href="https://guides.github.com/activities/hello-world/">Learn the basics with the guide</a> and <a href="https://guides.github.com/introduction/flow/">learn the GitHub flow</a>.</p>
+
+        <h2>Quality Assurance</h2>
+
+        <p>All patterns, layouts, and functionality are tested against our <a href="{{site.company-url}}/support/">supported browsers</a>. We also look for accessibility issues via automated and manual testing tools and methods. Radancy is committed to the accessibility of its websites and products and strives to meet as much of WCAG 2.1 Level AA as possible. If you discover any problems with our work, please <a href="{{ site.repo }}/issues/">open up an issue</a> and let us know about it or contact <a href="mailto:{{site.owner-email}}">{{ site.owner-name }}</a>.</p>
+
+      </section>
+
+    </main><!--/#primary-content-->
+
+    <footer id="contentinfo">
+
+      <p><small>&copy; {{ "now" | date: "%Y" }} {{ site.company-name }}. An equal opportunity employer.</small></p>
+
+    </footer>
+
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>{% if page.globaljs %}
+  <script src="{{ page.globaljs }}"></script>{% endif %}{% if page.localjs %}
+  <script src="{{ page.localjs }}"></script>{% endif %}
+
+</body>
+</html>
