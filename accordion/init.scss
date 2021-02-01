@@ -13,7 +13,7 @@
 
 $base-color: #067EB5;
 
-.prod-accordion {
+.simple-accordion {
 
   &__navigation {
   text-align: right;
@@ -38,11 +38,11 @@ $base-color: #067EB5;
     &__item {
     margin-bottom: 5px;
 
-      .prod-accordion__content {
+      .simple-accordion__content {
       display: none;
       }
 
-      .prod-accordion__button {
+      .simple-accordion__button {
       background-color: $base-color;
       border: 0;
       color: white;
@@ -51,7 +51,7 @@ $base-color: #067EB5;
       text-align: left;
       width: 100%;
 
-        &[aria-expanded="true"] + .prod-accordion__content {
+        &[aria-expanded="true"] + .simple-accordion__content {
         display: block;
         }
 

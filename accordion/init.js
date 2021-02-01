@@ -1,6 +1,6 @@
 /*!
 
-  TMPattern Library: Accordion
+  Radancy Pattern Library: Accordion
 
   Contributor(s):
   Andrew Hill, Email: andrew.hill@tmp.com
@@ -18,7 +18,7 @@ var prodAccordion = {
 
     // setup each FAQ to be independent
 
-    $(".prod-accordion").each(function(){
+    $(".simple-accordion").each(function(){
 
       if($(this).attr("id")){
 
@@ -37,14 +37,14 @@ var prodAccordion = {
 
     });
 
-    $(".prod-accordion__button").attr('aria-expanded', 'false').on("click",function(){
+    $(".simple-accordion__button").attr('aria-expanded', 'false').on("click",function(){
 
       var e = $(this);
       prodAccordion.toggleSection(e);
 
     });
 
-    $(".prod-accordion__navigation__button").attr('aria-pressed', 'false').on("click",function(){
+    $(".simple-accordion__navigation__button").attr('aria-pressed', 'false').on("click",function(){
 
       var e = $(this);
       prodAccordion.toggleAll(e);
@@ -58,13 +58,13 @@ var prodAccordion = {
 
     if(expandBtn === "false"){
 
-      $("#" + curID + " .prod-accordion__navigation__button").attr("aria-pressed","true");
-      $("#" + curID + " .prod-accordion__button").attr("aria-expanded","true");
+      $("#" + curID + " .simple-accordion__navigation__button").attr("aria-pressed","true");
+      $("#" + curID + " .simple-accordion__button").attr("aria-expanded","true");
 
     } else{
 
-      $("#" + curID + " .prod-accordion__navigation__button").attr("aria-pressed","false");
-      $("#" + curID + " .prod-accordion__button").attr("aria-expanded","false");
+      $("#" + curID + " .simple-accordion__navigation__button").attr("aria-pressed","false");
+      $("#" + curID + " .simple-accordion__button").attr("aria-expanded","false");
 
     }
 
@@ -88,7 +88,7 @@ var prodAccordion = {
 
     // fire a GA event based on it being opened or closed
 
-    if(!$(e).hasClass('.prod-accordion__navigation__button')){
+    if(!$(e).hasClass('.simple-accordion__navigation__button')){
 
       if($(e).attr("data-custom-label")){
 
@@ -114,7 +114,7 @@ var prodAccordion = {
 
 // FE code
 
-if($(".prod-accordion").length){
+if($(".simple-accordion").length){
 
   prodAccordion.init();
 
