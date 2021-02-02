@@ -1,0 +1,163 @@
+---
+title: "LinkedIn Feed 1.0"
+noindex: true
+---
+
+<div id="linkedin-share">
+
+	<p class="alert"><strong>Please do not use this feed until further notice.</strong></p>
+
+	<p>This application may be used to generate a component that can be used to display a client's LinkedIn feed. The feed is generated via JavaScript and can be placed on any web page.</p>
+
+	<nav class="toc">
+
+		<h2>Table of Contents</h2>
+
+		<ul>
+			<li><a href="../index.html">{{ site.company-name }} Resource Library</a></li>
+			<li><a href="index.html">Feed & Share Components</a>
+
+				<ul>
+					<li><a href="facebook.html">Facebook Feed 1.0</a></li>
+					<li><a href="instagram.html">Instagram Feed 1.0</a></li>
+					<li><a href="linkedin-feed.html"><b>{{ page.title }}</b></a>
+
+						<ul>
+							<li><a href="#implementation">Implementation</a></li>
+							<li><a href="#dependencies">Dependencies</a></li>
+							<li><a href="#parameters">Parameters</a>
+
+								<ul>
+									<li><a href="#userid">userid</a> - Define which client feed to display</li>
+								</ul>
+
+							</li>
+							<li><a href="#feedback">Feedback</a></li>
+						</ul>
+
+					</li>
+					<li><a href="linkedin.html">LinkedIn Share 1.0</a>
+					<li><a href="twitter.html">Twitter Feed 1.5</a></li>
+					<li><a href="youtube-feed-iframe.html">YouTube Feed: Inline Frame Edition 1.0</a></li>
+				</ul>
+
+			</li>
+		</ul>
+
+	</nav>
+
+	<section id="implementation">
+
+		<h2>Implementation</h2>
+
+		<p>The following is an example of a basic implementation:</p>
+
+<pre><code>&lt;div id="tmp-linkedin-feed"&gt;&lt;/div&gt;
+
+&lt;script defer src="https://services.tmpwebeng.com/tmp-share/widget/js/linkedin-feed.js?userid=<strong>1843</strong>"&gt;&lt;/script&gt;
+</code></pre>
+
+		<p>Here, we are pulling in TMP's LinkedIn feed, which renders the following output:</p>
+
+		<div id="tmp-linkedin-feed"></div>
+
+		<script defer src="https://services.tmpwebeng.com/tmp-share/widget/js/linkedin-feed.js?userid=1843&default-css=y"></script>
+
+
+		<p class="back-to-top"><a href="#content">Return to top</a></p>
+
+	</section>
+
+	<section id="dependencies">
+
+		<h2>Dependencies</h2>
+
+		<h3>jQuery</h3>
+
+		<p>jQuery is a dependency for this feed to run successfully, so be sure to include it on your page. TalentBrew has jQuery built in, so this step is not necessary on that platform. The script is deferred so that it may be placed anywhere on the page, but if the <code>defer</code> attribute is removed, then be sure to place the script <em>after</em> the jQuery library has been initialized.</p>
+
+		<p class="back-to-top"><a href="#content">Return to top</a></p>
+
+	</section>
+
+	<section id="parameters">
+
+		<h2>Parameters</h2>
+
+		<p>The following is a list of parameters that can be passed to the component to exhibit more control over the feeds output.</p>
+
+		<section id="userid">
+
+			<h2>userid</h2>
+
+			<p><em>String:</em> Passing in the LinkedIn account id will display feed content from that account. <em>This parameter is mandatory.</em></p>
+
+<pre><code>&lt;script defer src="https://services.tmpwebeng.com/tmp-share/widget/js/linkedin-feed.js<strong>?userid=1843</strong>"&gt;&lt;/script&gt;
+</code></pre>
+
+			<p class="back-to-top"><a href="#content">Return to top</a></p>
+
+		</section>
+
+		<section id="default-css">
+
+			<h2>default-css</h2>
+
+			<p><em>String:</em> When set to <code>y</code>, a link call to ready-made CSS will be appended to the <code>&lt;head&gt;</code> element of the page the script is running on. This is a bare-bones layout for quick implementation. Developers may wish to use their own CSS or <a href="https://services.tmpwebeng.com/tmp-share/widget/css/linkedin-feed.css">copy over these default styles</a> and alter as needed.</p>
+
+<pre><code>&lt;script defer src="https://services.tmpwebeng.com/tmp-share/widget/js/linkedin-feed.js?user=tmpww<strong>&default-css=y</strong>"&gt;&lt;/script&gt;
+</code></pre>
+
+			<h3 id="default-styles">Defaut Styles</h3>
+
+<pre><code>/*! LinkedIn Feed 1.0, UI Developer: Michael "Spell" Spellacy, @spellacy */
+
+#tmp-linkedin-feed * {
+box-sizing: border-box;
+}
+
+#tmp-linkedin-feed ul {
+list-style: none;
+margin: 0;
+padding: 0;
+}
+
+#tmp-linkedin-feed img {
+display: block;
+height: auto !important;
+margin: 1em 0;
+min-width: 100%;
+width: auto !important;
+}
+
+#tmp-linkedin-feed .annotated-body, #tmp-linkedin-feed .share-body, #tmp-linkedin-feed p {
+display: block;
+margin: 1em 0;
+}
+
+#tmp-linkedin-feed .share-source::before {
+content: "Source: ";
+display: inline-block;
+font-weight: bold;
+margin: 0.5em 0.5em 0 0;
+}
+
+#tmp-linkedin-feed .analytics, #tmp-linkedin-feed .feed-item-meta, #tmp-linkedin-feed .comments  {
+display:none;
+}</code></pre>
+
+			<p class="back-to-top"><a href="#content">Return to top</a></p>
+
+		</section>
+
+	</section>
+
+	<section id="feedback">
+
+		<h2>Feedback</h2>
+
+		<p>If you have any question about these feeds, need extra functionality added to them or require a new social feed, please contact <a href="mailto:bobby.kc@radancy.com">Bobby KC</a> or <a href="mailto:{{ site.owner-email }}">{{ site.owner-name }}</a>.</p>
+
+	</section>
+
+</div>

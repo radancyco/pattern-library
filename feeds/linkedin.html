@@ -1,0 +1,94 @@
+---
+title: "LinkedIn Share 1.0"
+noindex: true
+---
+
+<div id="linkedin-share">
+
+	<p>This application may be used to generate a component that can be used to display a client's LinkedIn connections and invite users to view their own connections. This component can be <a href="https://services.tmpwebeng.com/tmp-share/widget/linkedin.aspx?Clientid=1123" class="external">linked to directly</a> or referenced within an inline frame (iframe).</p>
+
+	<nav class="toc">
+
+		<h2>Table of Contents</h2>
+
+		<ul>
+			<li><a href="../index.html">{{ site.company-name }} Resource Library</a></li>
+			<li><a href="index.html">Feed & Share Components</a>
+
+				<ul>
+					<li><a href="facebook.html">Facebook Feed 1.0</a></li>
+					<li><a href="instagram.html">Instagram Feed 1.0</a></li>
+					<li><a href="linkedin-feed.html">LinkedIn Feed 1.0</a>
+					<li><a href="linkedin.html"><b>{{ page.title }}</b></a>
+
+						<ul>
+							<li><a href="#default-layout">Initial Setup</a></li>
+							<li><a href="#parameters">Parameters &amp; Examples</a>
+
+								<ul>
+									<li><a href="#clientid">Clientid</a> - Define which client share to view</li>
+								</ul>
+
+							</li>
+							<li><a href="#feedback">Feedback</a></li>
+						</ul>
+
+					</li>
+					<li><a href="twitter.html">Twitter Feed 1.5</a></li>
+					<li><a href="youtube-feed-iframe.html">YouTube Feed: Inline Frame Edition 1.0</a></li>
+				</ul>
+
+			</li>
+		</ul>
+
+	</nav>
+
+	<section id="initial-setup">
+
+		<h2>Initial Setup</h2>
+
+		<p>While this component can be viewed directly, the most common use case is to load this content within an <code>iframe</code> element by supplying an absolute path to the share application. A <code>title</code> attribute and value must also be provided.</p>
+
+	<pre><code>&lt;iframe loading="lazy" src="<strong>https://services.tmpwebeng.com/tmpshare/widget/linkedin.aspx</strong>" <strong>title="[Company Name] LinkedIn Share"</strong>&gt;&lt;/iframe&gt;</code></pre>
+
+		<p>However, the component will not render usable content until we begin passing <a href="#parameters">parameters</a> to it.</p>
+
+		<aside id="a11y-iframe" class="callout accessibility">
+
+			<h2>Accessibility</h2>
+
+			<p>Please note use of the <code>title</code> attribute in <strong>all</strong> code examples. A brief description of the contents of the <code>iframe</code> element must be provided to assist those who are using assistive technology, such as screen readers, to access the content.</p>
+
+		</aside>
+
+	</section>
+
+	<section id="parameters">
+
+		<h2>Parameters &amp; Examples</h2>
+
+		<p>The following is a list of parameter(s) that can be passed to the component to render content. Code and output examples provided where applicable.</p>
+
+		<section id="clientid">
+
+			<h2>Clientid</h2>
+
+			<p><em>Number:</em> Accepts any valid LinkedIn user ID.</p>
+
+	<pre><code>&lt;iframe loading="lazy" src="https://services.tmpwebeng.com/tmp-share/widget/linkedin.aspx?<strong>Clientid=1123</strong>" title="Bank of America's LinkedIn Share"&gt;&lt;/iframe&gt;</code></pre>
+
+		<p class="new-window"><a href="https://services.tmpwebeng.com/tmp-share/widget/linkedin.aspx?Clientid=1123" class="external">View in new window</a></p>
+
+		<iframe loading="lazy" src="https://services.tmpwebeng.com/tmp-share/widget/linkedin.aspx?Clientid=1123" title="Bank of America's LinkedIn Share"></iframe>
+
+		<p class="back-to-top"><a href="#content">Return to top</a></p>
+
+	</section>
+
+	</section>
+
+	<h2>Feedback</h2>
+
+	<p>If you have any question about these feeds, need extra functionality added to them or require a new social feed, please contact <a href="mailto:bobby.kc@radancy.com">Bobby KC</a> or <a href="mailto:{{ site.owner-email }}">{{ site.owner-name }}</a>.</p>
+
+</div>
