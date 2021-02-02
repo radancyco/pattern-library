@@ -55,13 +55,13 @@ noindex: true
 
 	<p>However, the feed will not render usable content until we begin passing <a href="#parameters">parameters</a> to it.</p>
 
-	<aside id="a11y-iframe" class="callout accessibility">
+	<section id="a11y-iframe" class="a11y-info">
 
 		<h2>Accessibility</h2>
 
 		<p>Please note use of the <code>title</code> attribute in <strong>all</strong> code examples. A brief description of the contents of the iframe element must be provided to assist those who are using assistive technology, such as screen readers, to access the content.</p>
 
-	</aside>
+	</section>
 
 </section>
 
@@ -147,13 +147,13 @@ noindex: true
 
 		<iframe loading="lazy" src="https://services.tmpwebeng.com/tmp-share/widget/youtube-feed-iframe.aspx?PlayListID=PLS8wCS0z7X-Z2sUR3IOMFWM8uodogBiST&amp;css=css/youtube-feed-custom.css" title="RWD School of Rock Sessions"></iframe>
 
-		<aside id="warning-browsers" class="callout warning">
+		<section id="warning-browsers" class="warning-info">
 
 			<h2>Internet Explorer 8 &amp; 9</h2>
 
 			<p>By default, Internet Explorer 8 &amp; 9 will only render content in a single column. If more control is desired, a developer can target <code>.ie8</code> or <code>.ie9</code> in any customized style sheet. Please be reminded that TMP does not officially <a href="http://www.tmp.com/support" target="external">support these browsers</a>.</p>
 
-		</aside>
+		</section>
 
 		<p class="back-to-top"><a href="#content">Return to top</a></p>
 
@@ -237,13 +237,13 @@ noindex: true
 
 		<p class="new-window"><a href="https://services.tmpwebeng.com/tmp-share/widget/youtube-feed-iframe.aspx?PlayListID=PLS8wCS0z7X-Z2sUR3IOMFWM8uodogBiST&amp;lang=zh-hans" class="external">View in new window (view source)</a></p>
 
-		<aside id="a11y-lang" class="callout accessibility">
+		<section id="a11y-lang" class="a11y-info">
 
 			<h2>Accessibility</h2>
 
 			<p>Setting the language of a document is very important in aiding those who use assistive technology, such as screen readers. Defining the  proper language attribute and value (<code>&lt;html lang="en"&gt;</code>, for example) satisfies <abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 2.0 Level A guidelines. Please see <a href="http://www.w3.org/TR/WCAG20/#meaning-doc-lang-id" class="external">3.1.1 Language of a Page</a> for more details.</p>
 
-		</aside>
+		</section>
 
 		<p class="back-to-top"><a href="#content">Return to top</a></p>
 
@@ -383,8 +383,12 @@ noindex: true
 
 	</section>
 
-	<h2>Feedback</h2>
+	<section id="feedback">
 
-	<p>If you have any question about these feeds, need extra functionality added to them or require a new social feed, please contact <a href="mailto:bobby.kc@radancy.com">Bobby KC</a> or <a href="mailto:{{ site.owner-email }}">{{ site.owner-name }}</a>.</p>
+		<h2>Feedback</h2>
+
+		<p>If you have any question about these feeds, need extra functionality added to them or require a new social feed, please contact <a href="mailto:bobby.kc@radancy.com">Bobby KC</a> or <a href="mailto:{{ site.owner-email }}">{{ site.owner-name }}</a>.</p>
+
+	</section>
 
 </div>

@@ -87,18 +87,18 @@ noindex: true
 
 			<h2>show-url</h2>
 
-			<p><em>String:</em> When set to <code>n</code>, the Facebook url associated with each feed image will have special classes append to them. <a href="#a11y-caption">See below for more details.</a> The default is <code>y</code>.</p>
+			<p><em>String:</em> When set to <code>n</code>, the Facebook url associated with each feed image will have special classes append to them. <a href="#a11y-info">See below for more details.</a> The default is <code>y</code>.</p>
 
 <pre><code>&lt;script defer src="https://services.tmpwebeng.com/tmp-share/widget/js/facebook.js?user=radancy<strong>&show-url=n</strong>"&gt;&lt;/script&gt;
 </code></pre>
 
-			<aside id="a11y-caption" class="callout accessibility">
+			<section id="a11y-info" class="a11y-info">
 
 				<h2>Accessibility</h2>
 
 				<p>Please note that when the show-url parameter is set to <code>n</code>, that the Facebbok URL will still appear below each image within the feed, but have a class of "visually-hidden" and "wai" appended to it. It will then be up to the front-end developer to accessibly hide this text from visual users only, as the URL is still required to aid assistive technology users. <em class="alert">Do not use display: none to hide these facebook URL.</em></p>
 
-			</aside>
+			</section>
 
 			<p class="back-to-top"><a href="#content">Return to top</a></p>
 

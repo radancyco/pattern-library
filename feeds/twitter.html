@@ -42,13 +42,13 @@ noindex: true
 
 		<p>However, the feed will not render usable content until we begin passing <a href="#parameters">parameters</a> to it.</p>
 
-		<aside id="a11y-iframe" class="callout accessibility">
+		<section id="a11y-iframe" class="a11y-info">
 
 			<h2>Accessibility</h2>
 
 			<p>Please note use of the <code>title</code> attribute in <strong>all</strong> code examples. A brief description of the contents of the <code>iframe</code> element must be provided to assist those who are using assistive technology, such as screen readers, to access the content.</p>
 
-		</aside>
+		</section>
 
 	</section>
 
@@ -86,7 +86,7 @@ noindex: true
 
 &lt;a  href="http://twitter.com/intent/user?screen_name=radancyco"&gt;
 
-&lt;img src="https://services.tmpwebeng.com/tmp-styleguide/theme/_global/img/hdr-logo-sm.png" alt="{{ site.company-name }}"/&gt;
+&lt;img src="{{ site.git-url }}/styleguide/logo.png" alt="{{ site.company-name }}"/&gt;
 
 &lt;h2&gt;{{ site.company-name }} &lt;b&gt;(@radancyco)&lt;/b&gt;&lt;/h2&gt;
 
@@ -114,12 +114,12 @@ noindex: true
 
 .twtr-feed {
 background-color: #fff;
-border: 1px #ccc solid;
 border-radius: 5px;
+border: 1px #ccc solid;
 
 	img {
-	display: block;
 	border: 0;
+	display: block;
 	}
 
 	a {
@@ -139,21 +139,21 @@ border-radius: 5px;
 		display: inline-block;
 		height: 50px;
 		margin-right: 20px;
-		width: 50px;
 		vertical-align: middle;
+		width: 50px;
 		}
 
 		h2 {
 		display: inline-block;
+		font-size: px(16);
 		margin: 0;
 		padding: 0;
-		font-size: px(16);
 		vertical-align: middle;
 
 			b {
 			display: block;
-			padding-top: 3px;
 			font-weight: normal;
+			padding-top: 3px;
 			}
 
 		}
@@ -162,19 +162,19 @@ border-radius: 5px;
 
 	iframe {
 	border: 0;
-	display: block;
-	width: 100%;
-	height: 450px;
-	border-top: 1px #ccc solid;
 	border-bottom: 1px #ccc solid;
+	border-top: 1px #ccc solid;
+	display: block;
+	height: 450px;
+	width: 100%;
 	}
 
 	.twtr-ftr {
 	padding: 1em;
 
 		p {
-		padding: 0;
 		margin: 0;
+		padding: 0;
 		text-align: right;
 
 			&.twtr-join a {
@@ -202,7 +202,7 @@ border-radius: 5px;
 
 					<a  href="http://twitter.com/intent/user?screen_name=radancyco">
 
-						<img src="https://services.tmpwebeng.com/tmp-styleguide/theme/_global/img/hdr-logo-sm.png" alt="{{ site.company-name }}"/>
+						<img src="{{ site.git-url }}/styleguide/logo.png" alt="{{ site.company-name }}"/>
 
 						<h2>{{ site.company-name }} <b>(@radancyco)</b></h2>
 
@@ -282,8 +282,12 @@ border-radius: 5px;
 
 	</section>
 
-	<h2>Feedback</h2>
+	<section id="feedback">
 
-	<p>If you have any question about these feeds, need extra functionality added to them or require a new social feed, please contact <a href="mailto:bobby.kc@radancy.com">Bobby KC</a> or <a href="mailto:{{ site.owner-email }}">{{ site.owner-name }}</a>.</p>
+		<h2>Feedback</h2>
+
+		<p>If you have any question about these feeds, need extra functionality added to them or require a new social feed, please contact <a href="mailto:bobby.kc@radancy.com">Bobby KC</a> or <a href="mailto:{{ site.owner-email }}">{{ site.owner-name }}</a>.</p>
+
+	</section>
 
 </div>
