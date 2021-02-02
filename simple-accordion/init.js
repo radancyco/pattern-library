@@ -3,7 +3,7 @@
   Radancy Pattern Library: Accordion
 
   Contributor(s):
-  Andrew Hill, Email: andrew.hill@tmp.com
+  Andrew Hill, Email: andrew.hill@radancy.com
 
   Dependencies: jQuery
 
