@@ -3,6 +3,8 @@ title: "YouTube Feed: Inline Frame Edition 1.0"
 noindex: true
 ---
 
+{% include nav.html %}
+
 <div id="youtube-feed-iframe">
 
 	<p>This version of the feed may be used to generate a list of videos or playlists from an individual YouTube account. The feed can be <a href="https://services.tmpwebeng.com/tmp-share/widget/youtube-feed-iframe.aspx?ChannelName=TMPWorldwideNA" class="external">linked to directly</a> or referenced within an inline frame (iframe).</p>
@@ -11,52 +13,34 @@ noindex: true
 
 	<p><strong>Note:</strong> A <em>modal version</em> of this feed will be released at a later date. Should your project require a modal, a custom solution will be needed.</p>
 
-	<nav class="toc">
+	<nav aria-label="Page">
 
 		<h2>Table of Contents</h2>
 
 		<ul>
-			<li><a href="../index.html">{{ site.company-name }} Resource Library</a></li>
-			<li><a href="index.html">Feed & Share Components</a>
+			<li><a href="#default-layout">Initial Setup</a></li>
+			<li><a href="#parameters">Parameters &amp; Examples</a>
 
 				<ul>
-					<li><a href="facebook.html">Facebook Feed 1.0</a></li>
-					<li><a href="instagram.html">Instagram Feed 1.0</a></li>
-					<li><a href="linkedin-feed.html">LinkedIn Feed 1.0</a>
-					<li><a href="linkedin.html">LinkedIn Share 1.0</a></li>
-					<li><a href="twitter.html">Twitter Feed 1.5</a></li>
-					<li><a href="youtube-feed-iframe.html"><b>{{ page.title }}</b></a>
-
-						<ul>
-							<li><a href="#default-layout">Initial Setup</a></li>
-							<li><a href="#parameters">Parameters &amp; Examples</a>
-
-								<ul>
-									<li><a href="#channelname">ChannelName</a> - Define which client channel to view</li>
-									<li><a href="#playlistid">PlayListID</a> - Define which client playlist to view</li>
-									<li><a href="#autoplay">autoplay</a> - Set video to start playing automatically</li>
-									<li><a href="#caption">caption</a> - Hide text captions</li>
-									<li><a href="#css">css</a> - Inject custom <abbr title="Cascading Style Sheets">CSS</abbr> into the feed</li>
-									<li><a href="#embed">embed</a> - Display embedded videos instead of thumbnail images</li>
-									<li><a href="#focus">focus</a> - Set focus on first element</li>
-									<li><a href="#google-analytics">ga</a> - Apply Google Analytics tracking code</li>
-									<li><a href="#image">image</a> - Hide thumbnail images</li>
-									<li><a href="#lang">lang</a> - Set document language</li>
-									<li><a href="#results">results</a> - Set amount of results to be shown</li>
-									<li><a href="#tab">tab</a> - Disable video from playing in new tab/window</li>
-									<li><a href="#target">target</a> - Allow video to play on Youtube.com</li>
-								</ul>
-
-							</li>
-							<li><a href="#default-layout">Default Layout</a></li>
-							<li><a href="#output">Output</a></li>
-							<li><a href="#feedback">Feedback</a></li>
-						</ul>
-
-					</li>
+					<li><a href="#channelname">ChannelName</a> - Define which client channel to view</li>
+					<li><a href="#playlistid">PlayListID</a> - Define which client playlist to view</li>
+					<li><a href="#autoplay">autoplay</a> - Set video to start playing automatically</li>
+					<li><a href="#caption">caption</a> - Hide text captions</li>
+					<li><a href="#css">css</a> - Inject custom <abbr title="Cascading Style Sheets">CSS</abbr> into the feed</li>
+					<li><a href="#embed">embed</a> - Display embedded videos instead of thumbnail images</li>
+					<li><a href="#focus">focus</a> - Set focus on first element</li>
+					<li><a href="#google-analytics">ga</a> - Apply Google Analytics tracking code</li>
+					<li><a href="#image">image</a> - Hide thumbnail images</li>
+					<li><a href="#lang">lang</a> - Set document language</li>
+					<li><a href="#results">results</a> - Set amount of results to be shown</li>
+					<li><a href="#tab">tab</a> - Disable video from playing in new tab/window</li>
+					<li><a href="#target">target</a> - Allow video to play on Youtube.com</li>
 				</ul>
 
 			</li>
+			<li><a href="#default-layout">Default Layout</a></li>
+			<li><a href="#output">Output</a></li>
+			<li><a href="#feedback">Feedback</a></li>
 		</ul>
 
 	</nav>

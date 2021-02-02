@@ -1,0 +1,370 @@
+/*!
+
+  Radancy: Animation Patterns
+
+  Drew Toth (drew.toth[at]radancy.gov)
+  Michael "Spell" Spellacy (michael.spellacy[at]radancy.com)
+
+  Pattern Credits:
+
+  Justin Aguilar
+  www.justinaguilar.com/animations/
+
+  Daniel Eden
+  http://daneden.me/animate Licensed under the MIT license -http://opensource.org/licenses/MIT Copyright (c) 2016 Daniel Eden
+
+  Mauricio Allende
+  github.com/mallendeo
+
+  David Brear
+  http://codepen.io/DavidBrear/
+
+  Hugo Giraudel
+  http://hugogiraudel.com
+
+  Dependencies: Sass
+  Instructions: Install Sass (https://sass-lang.com/install), CL to "css" directory and run:
+  sass --watch local.scss:local.css --style compressed
+
+*/
+
+.animation-container {
+margin: 1.5em 0;
+
+    .js & {
+
+        @media (min-width: 53.75em) {
+
+            display: flex;
+            overflow: hidden;
+
+        }
+
+    }
+
+}
+
+.animation-canvas {
+background: #fff url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAADVJREFUeNpi/P//PwMtwfv37/8zMdABjFoyasmoJaOWjFoyasmoJaOWDG5LWEDtIlpbAhBgAOuECskQ4GEAAAAAAElFTkSuQmCC");
+border: 1px #ccc solid;
+box-shadow: inset 0 0 15px #ccc;
+
+    .active & {
+    top: 0;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 2;
+    transition: all 800ms ease-in-out;
+
+        @media (min-width: 53.75em) {
+
+            position: static;
+
+        }
+
+    }
+
+    img {
+    margin: 0 auto;
+    max-width: 50%;
+
+        @media (min-width: 53.75em) {
+
+            max-width: 100%;
+
+        }
+
+    }
+
+}
+
+.btn-code {
+margin: 1em 0 0;
+
+    &[aria-expanded="true"] + .animation-code {
+    display: block;
+    }
+
+    @media (min-width: 53.75em) {
+
+        display: none;
+
+    }
+
+}
+
+.animation-code {
+background-color: #6E00EE;
+color: #fff;
+display: none;
+margin-top: 1em;
+outline: 0;
+
+    @media (min-width: 53.75em) {
+
+        display: block !important;
+        margin-top: 0;
+
+    }
+
+    pre, p {
+    margin: 0;
+    }
+
+    code {
+    padding: 0;
+
+        @media (min-width: 53.75em) {
+
+            max-height: 255px;
+            overflow-x: hidden;
+            overflow-y: hidden;
+
+        }
+
+    }
+
+    &:focus, &:hover {
+
+        code {
+
+            @media (min-width: 53.75em) {
+
+                overflow-y: scroll;
+
+            }
+
+        }
+
+    }
+
+}
+
+.animation-canvas, .animation-code {
+overflow: hidden;
+padding: 1.5em;
+position: relative;
+
+    .js & {
+
+        @media (min-width: 53.75em) {
+
+            width: 50%;
+
+        }
+
+    }
+
+}
+
+#object {
+margin: 0 auto;
+width: 200px;
+}
+
+.code {
+
+    .js & {
+    display: none;
+    }
+
+}
+
+.container {
+margin-bottom: 1em;
+
+    .js & {
+
+        @media (min-width: 53.75em) {
+
+            border: 1px #ccc solid;
+            height: 300px;
+            overflow-x: hidden;
+            overflow-y: scroll;
+            padding: 1em;
+
+        }
+
+    }
+
+    ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    }
+
+    li {
+    display: inline;
+    }
+
+}
+
+.button {
+background-color: #003a6a;
+border-radius: 3px;
+border: 0;
+color: #fff;
+display: inline-block;
+line-height: normal;
+margin: 0 6px 6px 0;
+min-width: 100%;
+padding: 8px 10px;
+text-align: center;
+transition: background-color 0.2s ease;
+
+    @media (min-width: 35em) {
+
+        min-width: 47.5%;
+
+    }
+
+    @media (min-width: 53.75em) {
+
+        min-width: 18.7%;
+
+    }
+
+    &.style-1 {
+    background-color: #015b85;
+    }
+
+    &.style-2 {
+    background-color: #006a02;
+    }
+
+    &.style-3 {
+    background-color: #861b01;
+    }
+
+    &.style-4 {
+    background-color: #6c4000;
+    }
+
+    &.style-5 {
+    background-color: #713186;
+    }
+
+    &.style-6 {
+    background-color: #454545;
+    }
+
+    &:focus, &:hover, &.active {
+
+        background-color: #0895d3;
+        color: #000;
+        transition: background-color 0.2s ease;
+
+    }
+
+}
+
+@keyframes rollOut {
+
+    0% {
+    left: -120px;
+    }
+
+    50% {
+    transform: rotate(-75deg);
+    }
+
+    100% {
+    left: 0;
+    transform: rotate(0);
+    }
+
+}
+
+.callout.accessibility.active {
+overflow: hidden;
+
+    h2:first-of-type {
+
+        &::before {
+        animation-duration: 0.5s;
+        animation-name: rollOut;
+        animation-timing-function: ease-in;
+        margin-bottom: 0;
+        position: relative;
+        }
+
+    }
+
+}
+
+/* ====== Overwrite Animations ====== */
+
+.pullUp, .pullDown, .stretchLeft, .stretchRight, .reveal {
+background-color: #fff;
+border: 1px #036 solid;
+border-radius: 5px;
+}
+
+@import "pattern/bigEntrance";
+@import "pattern/bounce";
+@import "pattern/bounceOut";
+@import "pattern/bounce1";
+@import "pattern/bounceOutDown";
+@import "pattern/bounceOutLeft";
+@import "pattern/bounceOutRight";
+@import "pattern/bounceOutUp";
+@import "pattern/expandOpen";
+@import "pattern/expandUp";
+@import "pattern/flash";
+@import "pattern/flip";
+@import "pattern/flipInX";
+@import "pattern/flipInY";
+@import "pattern/flipOutX";
+@import "pattern/flipOutY";
+@import "pattern/floating";
+@import "pattern/hinge";
+@import "pattern/jello";
+@import "pattern/lightSpeedIn";
+@import "pattern/lightSpeedOut";
+@import "pattern/pullDown";
+@import "pattern/pullUp";
+@import "pattern/pulse";
+@import "pattern/reveal";
+@import "pattern/rotateIn";
+@import "pattern/rotateInDownLeft";
+@import "pattern/rotateInDownRight";
+@import "pattern/rotateInUpLeft";
+@import "pattern/rotateInUpRight";
+@import "pattern/rotateOut";
+@import "pattern/rotateOutDownLeft";
+@import "pattern/rotateOutDownRight";
+@import "pattern/rotateOutUpLeft";
+@import "pattern/rotateOutUpRight";
+@import "pattern/rubberBand";
+@import "pattern/shake";
+@import "pattern/slideDown";
+@import "pattern/slideExpandUp";
+@import "pattern/slideLeft";
+@import "pattern/slideRight";
+@import "pattern/slideUp";
+@import "pattern/spin";
+@import "pattern/stretchLeft";
+@import "pattern/stretchRight";
+@import "pattern/swing";
+@import "pattern/tada";
+@import "pattern/tinDownIn";
+@import "pattern/tinDownOut";
+@import "pattern/tinLeftIn";
+@import "pattern/tinLeftOut";
+@import "pattern/tinRightIn";
+@import "pattern/tinRightOut";
+@import "pattern/tinUpIn";
+@import "pattern/tinUpOut";
+@import "pattern/tossing";
+@import "pattern/wobble";
+@import "pattern/zoomIn";
+@import "pattern/zoomInDown";
+@import "pattern/zoomInLeft";
+@import "pattern/zoomInRight";
+@import "pattern/zoomInUp";
+@import "pattern/zoomOut";
+@import "pattern/zoomOutDown";
+@import "pattern/zoomOutLeft";
+@import "pattern/zoomOutRight";
+@import "pattern/zoomOutUp";

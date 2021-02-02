@@ -12,6 +12,7 @@ exclude: [
 destination: _httpdocs
 git-url: https://tmpworldwide.dev
 highlighter: rouge
+include: [_*.*]
 lang: en-US
 markdown: kramdown
 name: Pattern Library
