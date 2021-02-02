@@ -3,8 +3,8 @@
   Radancy Pattern Library: TabCordion
 
   Contributor(s):
-  Andrew Hill, Email: andrew.hill@tmp.com
-  Michael "Spell" Spellacy, Email: michael.spellacy@tmp.com, Twitter: @spellacy, GitHub: michaelspellacy
+  Andrew Hill, Email: andrew.hill@radancy.com
+  Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy
 
   Dependencies: None
 
@@ -22,7 +22,7 @@
 
   // Display which TabCordion is in use via console:
 
-  console.log('%c TabCordion v1.3 (Beta) in use. ', 'background: #6e00ee; color: #fff'); 
+  console.log('%c TabCordion v1.3 (Beta) in use. ', 'background: #6e00ee; color: #fff');
 
   // Commonly used Classes, Data Attributes, States, and Strings.
 
