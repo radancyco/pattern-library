@@ -38,12 +38,11 @@ border-right: 4px #6e00ee solid;
     margin-left: -100px;
     }
 
-
-    &:focus-within, &:hover {
-    border: 1px #ccc solid;
-    transform: scale(1.1);
-    z-index: 1;
+    &:hover, &:focus, &:focus-within {
+    margin-right: 110px;
     }
+
+    // Note: If IE11 support is required, then focus-within should be placed in seperate declaration and tabindex=0 should be added to __card in HTML.
 
   }
 
