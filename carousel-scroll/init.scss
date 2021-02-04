@@ -13,6 +13,7 @@
 
 .carousel-scroll {
 position: relative;
+border-right: 4px #6e00ee solid;
 
   &__container {
   display: flex;
@@ -46,15 +47,17 @@ position: relative;
 
   }
 
+  // Fancy Border
+
   /* &::after {
   background-color: red;
   content: "";
   display: block;
   height: 100%;
   position: absolute;
-  right: 0;
-  width: 10px;
+  right: -4px;
   top: 0;
-} */
+  width: 4px;
+  } */
 
 }
