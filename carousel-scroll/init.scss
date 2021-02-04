@@ -20,14 +20,13 @@ border-right: 4px $base-color solid;
   &__container {
   display: flex;
   overflow-x: scroll;
-  padding: 3em;
-  scroll-snap-type: y mandatory;
+  padding: 2em;
   scrollbar-color: $base-color #fff;
   scrollbar-gutter: always;
   -webkit-overflow-scrolling: touch;
 
       // Scrollbar styling may be limited cross-browser. This is NOT a bad thing as majority of browsers are WebKit based.
-      // However, if you require full support, then have a look at http://grsmto.github.io/simplebar/ 
+      // However, if you require full support, then have a look at http://grsmto.github.io/simplebar/
 
       &::-webkit-scrollbar {
       height: 10px;
@@ -54,7 +53,6 @@ border-right: 4px $base-color solid;
   min-width: 300px;
   padding: 1em;
   position: relative;
-  scroll-snap-align: start;
   transition: .2s;
 
     &:not(:first-child) {
