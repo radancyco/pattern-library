@@ -11,15 +11,38 @@
 
 */
 
+$base-color: #6E00EE;
+
 .carousel-scroll {
 position: relative;
-border-right: 4px #6e00ee solid;
+border-right: 4px $base-color solid;
 
   &__container {
   display: flex;
   overflow-x: scroll;
   padding: 3em;
+  scroll-snap-type: y mandatory;
+  scrollbar-color: $base-color #fff;
+  scrollbar-gutter: always;
   -webkit-overflow-scrolling: touch;
+
+      // Scrollbar styling may be limited cross-browser. This is NOT a bad thing as majority of browsers are WebKit based.
+      // However, if you require full support, then have a look at http://grsmto.github.io/simplebar/ 
+
+      &::-webkit-scrollbar {
+      height: 10px;
+      }
+
+      /* Track */
+      &::-webkit-scrollbar-track {
+      background-color: #fff;
+      }
+
+      &::-webkit-scrollbar-thumb {
+      background-color: $base-color;
+      border-radius: 10px;
+      }
+
   }
 
   &__card {
@@ -31,6 +54,7 @@ border-right: 4px #6e00ee solid;
   min-width: 300px;
   padding: 1em;
   position: relative;
+  scroll-snap-align: start;
   transition: .2s;
 
     &:not(:first-child) {
