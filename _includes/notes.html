@@ -2,10 +2,10 @@
 
 <ul>
   <li><a href="{{ site.repo }}/blob/main/{{ page.folder }}/index.html">HTML</a></li>
-  {% if page.css != false %}
+  {% if page.localcss %}
   <li><a href="{{ site.repo }}/blob/main/{{ page.folder }}/init.scss">CSS</a></li>
   {% endif %}
-  {% if page.js != false %}
+  {% if page.localjs %}
   <li><a href="{{ site.repo }}/blob/main/{{ page.folder }}/init.js">JavaScript</a></li>
   {% endif %}
 </ul>
