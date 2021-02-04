@@ -10,3 +10,58 @@
   sass --watch init.scss:init.css --style compressed
 
 */
+
+.carousel-scroll {
+position: relative;
+
+  &__wrapper {
+  display: flex;
+  flex-shrink: 0;
+  overflow-x: scroll;
+  padding: 2em;
+  -webkit-overflow-scrolling: touch;
+  }
+
+  &__card {
+  min-width: 300px;
+  min-height: 350px;
+  position: relative;
+  padding: 1em;
+  overflow: hidden;
+  border-radius: 25px;
+  border: 1px #ccc solid;
+
+    &:not(:first-child) {
+    // margin-left: -130px;
+    box-shadow: -3rem 0 3rem -2rem #000;
+    }
+
+    a {
+    display: block;
+
+      &::before {
+      bottom: 0;
+      content: "";
+      display: block;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      }
+
+    }
+
+  }
+
+  /* &::after {
+  background-color: red;
+  content: "";
+  display: block;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  width: 10px;
+  top: 0;
+} */
+
+}
