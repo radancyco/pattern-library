@@ -16,9 +16,8 @@ position: relative;
 
   &__wrapper {
   display: flex;
-  flex-shrink: 0;
   overflow-x: scroll;
-  padding: 2em;
+  padding: 3em;
   -webkit-overflow-scrolling: touch;
   }
 
@@ -29,11 +28,21 @@ position: relative;
   padding: 1em;
   overflow: hidden;
   border-radius: 25px;
-  border: 1px #ccc solid;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  transition: .2s;
 
     &:not(:first-child) {
-    // margin-left: -130px;
-    box-shadow: -3rem 0 3rem -2rem #000;
+    margin-left: -100px;
+    box-shadow: -2rem 0 3rem -2rem #000;
+    }
+
+
+    &:focus-within, &:hover {
+    transform: scale(1.1);
+    z-index: 1;
+    border: 1px #ccc solid;
     }
 
     a {
