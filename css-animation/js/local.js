@@ -11,7 +11,7 @@
 
 	// Create Animation Code button and container
 
-	$(".animation-container").append("<button class='btn-code' aria-expanded='false'>View Code</button><div class='animation-code' tabindex='0'><pre><code class='slideLeft'/></pre></div>");
+	$(".animation-container").append("<button class='btn btn-code' aria-expanded='false'>View Code</button><div class='animation-code' tabindex='0'><pre><code class='slideLeft'/></pre></div>");
 
 	$(".btn-code").on( "click", function() {
 
