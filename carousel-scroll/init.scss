@@ -14,7 +14,7 @@
 .carousel-scroll {
 position: relative;
 
-  &__wrapper {
+  &__container {
   display: flex;
   overflow-x: scroll;
   padding: 3em;
@@ -22,27 +22,26 @@ position: relative;
   }
 
   &__card {
-  min-width: 300px;
-  min-height: 350px;
-  position: relative;
-  padding: 1em;
-  overflow: hidden;
-  border-radius: 25px;
+  background-color: #fff;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
-  background-color: #fff;
+  min-height: 350px;
+  min-width: 300px;
+  padding: 1em;
+  position: relative;
   transition: .2s;
 
     &:not(:first-child) {
-    margin-left: -100px;
     box-shadow: -2rem 0 3rem -2rem #000;
+    margin-left: -100px;
     }
 
 
     &:focus-within, &:hover {
+    border: 1px #ccc solid;
     transform: scale(1.1);
     z-index: 1;
-    border: 1px #ccc solid;
     }
 
   }

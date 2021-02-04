@@ -2,8 +2,12 @@
 
 <ul>
   <li><a href="{{ site.repo }}/blob/main/{{ page.folder }}/index.html">HTML</a></li>
+  {% if page.css != false %}
   <li><a href="{{ site.repo }}/blob/main/{{ page.folder }}/init.scss">CSS</a></li>
+  {% endif %}
+  {% if page.js != false %}
   <li><a href="{{ site.repo }}/blob/main/{{ page.folder }}/init.js">JavaScript</a></li>
+  {% endif %}
 </ul>
 
 <a class="btn" href="{{ site.repo }}/archive/main.zip">Download Repository</a>
