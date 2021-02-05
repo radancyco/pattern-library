@@ -7,7 +7,7 @@ noindex: true
 
 <div id="twitter-feed">
 
-	<p>This feed may be used to generate a list of tweets (a 140 character or less message) from an individual <a href="https://www.twitter.com/">Twitter</a> account. The feed can then be <a href="https://services1.tmpwebeng.com/tmp-share/widget/twitter.aspx?client=radancyco" class="external">linked to directly</a> or referenced within an inline frame (iframe).</p>
+	<p>This feed may be used to generate a list of tweets (a 140 character or less message) from an individual <a href="https://www.twitter.com/">Twitter</a> account. The feed can then be <a href="https://services1.tmpwebeng.com/widget/twitter?client=radancyco" class="external">linked to directly</a> or referenced within an inline frame (iframe).</p>
 
 	<nav aria-label="Page">
 
@@ -15,7 +15,7 @@ noindex: true
 
 		<ul>
 			<li><a href="#initial-setup">Initial Setup</a></li>
-			<li><a href="#parameters">Parameters &amp; Examples</a>
+			<li><a href="#parameters">Parameters & Examples</a>
 
 				<ul>
 					<li><a href="#clear">clear</a> - Clear cleint's feed cache</li>
@@ -54,7 +54,7 @@ noindex: true
 
 	<section id="parameters">
 
-		<h2>Parameters &amp; Examples</h2>
+		<h2>Parameters & Examples</h2>
 
 		<p>The following is a list of parameters that can be passed to the feed to render content and to allow for better control over its presentation and behavior. All functions must be used with the <a href="#client">client</a> parameter. Code and output examples provided where applicable.</p>
 
@@ -64,7 +64,7 @@ noindex: true
 
 			<p><em>Boolean:</em> When set to <code>true</code>, the server cache for selected client is cleared. The default is <code>false</code>.</p>
 
-<pre><code>&lt;iframe loading="lazy" src="https://services1.tmpwebeng.com/tmp-share/widget/twitter.aspx?client=radancyco&amp;amp;<strong>ga=UA-000000-01</strong>" title="{{ site.company-name }}'s Twitter Feed"&gt;&lt;/iframe&gt;</code></pre>
+<pre><code>&lt;iframe loading="lazy" src="https://services1.tmpwebeng.com/widget/twitter?client=radancyco&<strong>ga=UA-000000-01</strong>" title="{{ site.company-name }}'s Twitter Feed"&gt;&lt;/iframe&gt;</code></pre>
 
 			<p class="back-to-top"><a href="#content">Return to top</a></p>
 
@@ -94,7 +94,7 @@ noindex: true
 
 &lt;/header&gt;&lt;!--/.twtr-hdr--&gt;
 
-<strong>&lt;iframe loading="lazy" src="https://services1.tmpwebeng.com/tmp-share/widget/twitter.aspx?client=radancyco" title="{{ site.company-name }}'s Twitter Feed"&gt;&lt;/iframe&gt;</strong>
+<strong>&lt;iframe loading="lazy" src="https://services1.tmpwebeng.com/widget/twitter?client=radancyco" title="{{ site.company-name }}'s Twitter Feed"&gt;&lt;/iframe&gt;</strong>
 
 &lt;footer class="twtr-ftr"&gt;
 
@@ -104,7 +104,7 @@ noindex: true
 
 &lt;/section&gt;&lt;!--/.twtr-feed--&gt;</code></pre>
 
-			<p class="new-window"><a href="https://services1.tmpwebeng.com/tmp-share/widget/twitter.aspx?client=radancyco" class="external">View in new window</a></p>
+			<p class="new-window"><a href="https://services1.tmpwebeng.com/widget/twitter?client=radancyco" class="external">View in new window</a></p>
 
 			<h3>Sass</h3>
 
@@ -210,7 +210,7 @@ border: 1px #ccc solid;
 
 				</header><!--/.twtr-hdr-->
 
-				<iframe loading="lazy" src="https://services1.tmpwebeng.com/tmp-share/widget/twitter.aspx?client=radancyco" title="[Company Name] Twitter Feed"></iframe>
+				<iframe loading="lazy" src="https://services1.tmpwebeng.com/widget/twitter?client=radancyco" title="[Company Name] Twitter Feed"></iframe>
 
 				<footer class="twtr-ftr">
 
@@ -230,9 +230,9 @@ border: 1px #ccc solid;
 
 		<p><em>String:</em> Accepts a valid <abbr title="Uniform Resource Locator">URL</abbr> to any CSS file. Custom style sheets can be used for more granular control over the default layout. Feel free to review the <a href="css/twitter.css" class="external">default CSS</a> to better help determine your CSS overrides.</p>
 
-<pre><code>&lt;iframe loading="lazy" src="https://services1.tmpwebeng.com/tmp-share/widget/twitter.aspx?client=radancyco&amp;amp;<strong>css=https://services1.tmpwebeng.com/tmp-share/widget/css/twitter-custom.css</strong>" title="{{ site.company-name }}'s Twitter Feed"&gt;&lt;/iframe&gt;</code></pre>
+<pre><code>&lt;iframe loading="lazy" src="https://services1.tmpwebeng.com/widget/twitter?client=radancyco&<strong>css=https://services1.tmpwebeng.com/tmp-share/widget/css/twitter-custom.css</strong>" title="{{ site.company-name }}'s Twitter Feed"&gt;&lt;/iframe&gt;</code></pre>
 
-		<p class="new-window"><a href="https://services1.tmpwebeng.com/tmp-share/widget/twitter.aspx?client=radancyco&amp;css=css/twitter-custom.css" class="external">View in new window</a></p>
+		<p class="new-window"><a href="https://services1.tmpwebeng.com/widget/twitter?client=radancyco&css=css/twitter-custom.css" class="external">View in new window</a></p>
 
 		<p class="back-to-top"><a href="#content">Return to top</a></p>
 
@@ -244,9 +244,9 @@ border: 1px #ccc solid;
 
 			<p><em>String:</em> Supplying a Google Analytics ID will activate tracking functionality.</p>
 
-<pre><code>&lt;iframe loading="lazy" src="https://services1.tmpwebeng.com/tmp-share/widget/twitter.aspx?client=radancyco&amp;amp;<strong>ga=UA-000000-01</strong>" title="{{ site.company-name }}'s Twitter Feed"&gt;&lt;/iframe&gt;</code></pre>
+<pre><code>&lt;iframe loading="lazy" src="https://services1.tmpwebeng.com/widget/twitter?client=radancyco&<strong>ga=UA-000000-01</strong>" title="{{ site.company-name }}'s Twitter Feed"&gt;&lt;/iframe&gt;</code></pre>
 
-			<p class="new-window"><a href="https://services1.tmpwebeng.com/tmp-share/widget/twitter.aspx?client=radancyco&amp;ga=UA-000000-01" class="external">View in new window</a></p>
+			<p class="new-window"><a href="https://services1.tmpwebeng.com/widget/twitter?client=radancyco&ga=UA-000000-01" class="external">View in new window</a></p>
 
 			<p class="back-to-top"><a href="#content">Return to top</a></p>
 
@@ -258,9 +258,9 @@ border: 1px #ccc solid;
 
 			<p><em>Boolean:</em> When set to <code>true</code>, the feed will display images. The default is <code>false</code>.</p>
 
-<pre><code>&lt;iframe loading="lazy" src="https://services1.tmpwebeng.com/tmp-share/widget/twitter.aspx?client=radancyco&amp;amp;<strong>img=true</strong>" title="{{ site.company-name }}'s Twitter Feed"&gt;&lt;/iframe&gt;</code></pre>
+<pre><code>&lt;iframe loading="lazy" src="https://services1.tmpwebeng.com/widget/twitter?client=radancyco&<strong>img=true</strong>" title="{{ site.company-name }}'s Twitter Feed"&gt;&lt;/iframe&gt;</code></pre>
 
-			<p class="new-window"><a href="https://services1.tmpwebeng.com/tmp-share/widget/twitter.aspx?client=radancyco&amp;img=true" class="external">View in new window</a></p>
+			<p class="new-window"><a href="https://services1.tmpwebeng.com/widget/twitter?client=radancyco&img=true" class="external">View in new window</a></p>
 
 			<p class="back-to-top"><a href="#content">Return to top</a></p>
 
@@ -272,9 +272,9 @@ border: 1px #ccc solid;
 
 		<p><em>Boolean:</em> When set to <code>false</code>, links will open within the same tab or window. The default is <code>true</code>.</p>
 
-<pre><code>&lt;iframe loading="lazy" src="https://services1.tmpwebeng.com/tmp-share/widget/twitter.aspx?client=radancyco&amp;amp;<strong>tab=false</strong>" title="{{ site.company-name }}'s Twitter Feed"&gt;&lt;/iframe&gt;</code></pre>
+<pre><code>&lt;iframe loading="lazy" src="https://services1.tmpwebeng.com/widget/twitter?client=radancyco&<strong>tab=false</strong>" title="{{ site.company-name }}'s Twitter Feed"&gt;&lt;/iframe&gt;</code></pre>
 
-		<p class="new-window"><a href="https://services1.tmpwebeng.com/tmp-share/widget/twitter.aspx?client=radancyco&amp;tab=false" class="external">View in new window</a></p>
+		<p class="new-window"><a href="https://services1.tmpwebeng.com/widget/twitter?client=radancyco&tab=false" class="external">View in new window</a></p>
 
 		<p class="back-to-top"><a href="#content">Return to top</a></p>
 
