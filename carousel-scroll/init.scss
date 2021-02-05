@@ -9,6 +9,8 @@
   Instructions: To run locally, install Sass (https://sass-lang.com/install), CL to directory this file in and run:
   sass --watch init.scss:init.css --style compressed
 
+  Special Thanks: CSS-Tricks! 
+
 */
 
 $base-color: #6E00EE;
@@ -20,7 +22,7 @@ border-right: 4px $base-color solid;
   &__container {
   display: flex;
   overflow-x: scroll;
-  padding: 2em;
+  padding: 2em 0;
   scrollbar-color: $base-color #fff;
   scrollbar-gutter: always;
   -webkit-overflow-scrolling: touch;
@@ -45,6 +47,7 @@ border-right: 4px $base-color solid;
 
   &__card {
   background-color: #fff;
+  border: 1px #eee solid;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -52,7 +55,7 @@ border-right: 4px $base-color solid;
   min-width: 300px;
   padding: 1em;
   position: relative;
-  transition: .2s;
+  transition: .6s;
 
     &:not(:first-child) {
     box-shadow: -2rem 0 3rem -2rem #000;
@@ -63,7 +66,7 @@ border-right: 4px $base-color solid;
     margin-right: 110px;
     }
 
-    // Note: If IE11 support is required, then focus-within should be placed in seperate declaration and tabindex=0 should be added to __card in HTML.
+    // Note: If IE11 support is required, then focus-within should be placed in seperate declaration (you'll need to duplicate hover rules here) and tabindex=0 should be added to __card in HTML.
 
   }
 
