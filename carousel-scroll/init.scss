@@ -29,7 +29,7 @@ border-right: 4px $base-color solid;
       // However, if you require full support, then have a look at http://grsmto.github.io/simplebar/
 
       &::-webkit-scrollbar {
-      height: 10px;
+      height: 4px;
       }
 
       /* Track */
@@ -39,7 +39,6 @@ border-right: 4px $base-color solid;
 
       &::-webkit-scrollbar-thumb {
       background-color: $base-color;
-      border-radius: 10px;
       }
 
   }
