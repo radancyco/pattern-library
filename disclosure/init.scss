@@ -1,0 +1,29 @@
+/*!
+
+  Radancy Pattern Library: Disclosure v1.0
+
+  Contributor(s):
+  Andrew Hill, Email: andrew.hill@radancy.com
+
+  Dependencies: Sass
+  Instructions: To run locally, install Sass (https://sass-lang.com/install), CL to directory this file in and run:
+  sass --watch init.scss:init.css --style compressed
+
+*/
+
+$base-color: #6e00ee;
+
+/* Expander Styles */
+.prod-expander {
+    &[aria-expanded="false"] {
+        +.prod-expander--child {
+            display: none;
+        }
+    }
+
+    &[aria-expanded="true"] {
+        +.prod-expander--child {
+            display: block; 
+        }
+    }
+}

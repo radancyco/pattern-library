@@ -1,6 +1,6 @@
 /*!
 
-  Radancy Pattern Library: Accordion
+  Radancy Pattern Library: Multiple Disclosures v1.0
 
   Contributor(s):
   Andrew Hill, Email: andrew.hill@radancy.com
@@ -18,7 +18,7 @@ var prodAccordion = {
 
     // setup each FAQ to be independent
 
-    $(".simple-accordion").each(function(){
+    $(".disclosure-multiple").each(function(){
 
       if($(this).attr("id")){
 
@@ -37,14 +37,14 @@ var prodAccordion = {
 
     });
 
-    $(".simple-accordion__button").attr('aria-expanded', 'false').on("click",function(){
+    $(".disclosure-multiple__button").attr('aria-expanded', 'false').on("click",function(){
 
       var e = $(this);
       prodAccordion.toggleSection(e);
 
     });
 
-    $(".simple-accordion__navigation__button").attr('aria-pressed', 'false').on("click",function(){
+    $(".disclosure-multiple__navigation__button").attr('aria-pressed', 'false').on("click",function(){
 
       var e = $(this);
       prodAccordion.toggleAll(e);
@@ -58,13 +58,13 @@ var prodAccordion = {
 
     if(expandBtn === "false"){
 
-      $("#" + curID + " .simple-accordion__navigation__button").attr("aria-pressed","true");
-      $("#" + curID + " .simple-accordion__button").attr("aria-expanded","true");
+      $("#" + curID + " .disclosure-multiple__navigation__button").attr("aria-pressed","true");
+      $("#" + curID + " .disclosure-multiple__button").attr("aria-expanded","true");
 
     } else{
 
-      $("#" + curID + " .simple-accordion__navigation__button").attr("aria-pressed","false");
-      $("#" + curID + " .simple-accordion__button").attr("aria-expanded","false");
+      $("#" + curID + " .disclosure-multiple__navigation__button").attr("aria-pressed","false");
+      $("#" + curID + " .disclosure-multiple__button").attr("aria-expanded","false");
 
     }
 
@@ -88,7 +88,7 @@ var prodAccordion = {
 
     // fire a GA event based on it being opened or closed
 
-    if(!$(e).hasClass('.simple-accordion__navigation__button')){
+    if(!$(e).hasClass('.disclosure-multiple__navigation__button')){
 
       if($(e).attr("data-custom-label")){
 
@@ -114,7 +114,7 @@ var prodAccordion = {
 
 // FE code
 
-if($(".simple-accordion").length){
+if($(".disclosure-multiple").length){
 
   prodAccordion.init();
 

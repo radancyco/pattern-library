@@ -1,6 +1,6 @@
 /*!
 
-  Radancy Pattern Library: Accordion
+  Radancy Pattern Library: Multiple Disclosure v1.0
 
   Contributor(s):
   Andrew Hill, Email: andrew.hill@radancy.com
@@ -13,7 +13,7 @@
 
 $base-color: #6e00ee;
 
-.simple-accordion {
+.disclosure-multiple {
 
   &__navigation {
   text-align: right;
@@ -38,11 +38,11 @@ $base-color: #6e00ee;
     &__item {
     margin-bottom: 5px;
 
-      .simple-accordion__content {
+      .disclosure-multiple__content {
       display: none;
       }
 
-      .simple-accordion__button {
+      .disclosure-multiple__button {
       background-color: $base-color;
       border: 0;
       color: white;
@@ -51,7 +51,7 @@ $base-color: #6e00ee;
       text-align: left;
       width: 100%;
 
-        &[aria-expanded="true"] + .simple-accordion__content {
+        &[aria-expanded="true"] + .disclosure-multiple__content {
         display: block;
         }
 
