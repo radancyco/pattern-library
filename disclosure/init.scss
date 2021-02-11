@@ -13,17 +13,23 @@
 
 $base-color: #6e00ee;
 
-/* Expander Styles */
-.prod-expander {
-    &[aria-expanded="false"] {
-        +.prod-expander--child {
-            display: none;
-        }
+.disclosure {
+ background-color: $base-color;
+
+  &[aria-expanded="false"] {
+
+    +.disclosure--child {
+    display: none;
     }
 
-    &[aria-expanded="true"] {
-        +.prod-expander--child {
-            display: block; 
-        }
+  }
+
+  &[aria-expanded="true"] {
+
+    +.disclosure--child {
+    display: block;
     }
+
+  }
+
 }
