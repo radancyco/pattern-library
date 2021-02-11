@@ -50,7 +50,7 @@ var simpleExpander = {
 
       if( labelOpen.trim() ) {
 
-        this.innerHTML = labelOpen;
+        this.textContent = labelOpen;
 
       }
 
@@ -62,7 +62,7 @@ var simpleExpander = {
 
       if( labelClose.trim() ) {
 
-        this.innerHTML = labelClose;
+        this.textContent = labelClose;
 
       }
 
