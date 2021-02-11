@@ -10,7 +10,7 @@ exclude: [
   CNAME
 ]
 destination: _httpdocs
-git-url: https://tmpworldwide.dev
+git-url: https://radancy.dev
 highlighter: rouge
 include: [_*.*]
 lang: en-US
