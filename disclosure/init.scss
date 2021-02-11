@@ -14,7 +14,12 @@
 $base-color: #6e00ee;
 
 .disclosure {
- background-color: $base-color;
+background-color: $base-color;
+border: 0;
+color: #fff;
+margin-bottom: 1em;
+padding: 1em;
+text-align: left;
 
   &[aria-expanded="false"] {
 
