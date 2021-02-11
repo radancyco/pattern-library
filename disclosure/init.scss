@@ -13,17 +13,18 @@
 
 $base-color: #6e00ee;
 
-.disclosure {
+.disclosure--btn {
 background-color: $base-color;
 border: 0;
 color: #fff;
 margin-bottom: 1em;
 padding: 1em;
 text-align: left;
+width: 100%;
 
   &[aria-expanded="false"] {
 
-    +.disclosure--child {
+    +.disclosure--content {
     display: none;
     }
 
@@ -31,7 +32,7 @@ text-align: left;
 
   &[aria-expanded="true"] {
 
-    +.disclosure--child {
+    +.disclosure--content {
     display: block;
     }
 

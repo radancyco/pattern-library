@@ -7,7 +7,7 @@
 
 */
 
-var getExpanders = document.getElementsByClassName("disclosure");
+var getExpanders = document.getElementsByClassName("disclosure--btn");
 var simpleExpander = {
 
   init: function(){
@@ -20,8 +20,17 @@ var simpleExpander = {
 
     for (i = 0; i < getExpanders.length; i++) {
 
+      var thisButtonText = getExpanders[i].textContent;
+
       getExpanders[i].setAttribute("aria-expanded", "false");
       getExpanders[i].addEventListener("click", simpleExpander.clicked);
+
+      if(getExpanders[i].hasAttribute("data-label-close")){
+
+        getExpanders[i].setAttribute("aria-label", thisButtonText);
+        getExpanders[i].setAttribute("data-label-open", thisButtonText);
+
+      }
 
     }
 
