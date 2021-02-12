@@ -12,9 +12,9 @@ var simpleExpander = {
 
   init: function(){
 
-    // console.log("got here");
+    console.log('%c Disclosure v1.0 in use. ', 'background: #6e00ee; color: #fff');
 
-    // add listener
+    // Add Listener and other needed attributes
 
     var i = 0;
 
@@ -31,9 +31,9 @@ var simpleExpander = {
 
       }
 
-      if(getExpanders[i].hasAttribute("data-label-icon")){
+      if(getExpanders[i].hasAttribute("data-disclosure-icon")){
 
-        getExpanders[i].insertAdjacentHTML('beforeend', ' <span class="disclosure--ico" aria-hidden="true"></span>');
+        getExpanders[i].insertAdjacentHTML('beforeend', ' <span class="disclosure--icon" aria-hidden="true"></span>');
 
       }
 
@@ -41,7 +41,7 @@ var simpleExpander = {
 
   }, clicked: function(){
 
-    // run click event
+    // Run Event
 
     var isActive = this.getAttribute("aria-expanded");
     var labelOpen = this.getAttribute("aria-label");
@@ -49,7 +49,7 @@ var simpleExpander = {
 
     if (isActive == "true") {
 
-      // active
+      // Active
 
       this.setAttribute("aria-expanded", "false");
 
@@ -61,7 +61,7 @@ var simpleExpander = {
 
     } else {
 
-      // not active
+      // Not Active
 
       this.setAttribute("aria-expanded", "true");
 
