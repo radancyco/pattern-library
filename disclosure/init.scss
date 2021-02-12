@@ -22,7 +22,23 @@ padding: 1em;
 text-align: left;
 width: 100%;
 
+  .disclosure--ico {
+
+    &::after {
+    display: inline-block;
+    }
+
+  }
+
   &[aria-expanded="false"] {
+
+    .disclosure--ico {
+
+      &::after {
+      content: "+";
+      }
+
+    }
 
     +.disclosure--content {
     display: none;
@@ -35,9 +51,7 @@ width: 100%;
     .disclosure--ico {
 
       &::after {
-      display: inline-block;
-      content: "X";
-      vertical-align: middle;
+      content: "-";
       }
 
     }

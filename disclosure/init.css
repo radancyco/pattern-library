@@ -9,4 +9,4 @@
   Instructions: To run locally, install Sass (https://sass-lang.com/install), CL to directory this file in and run:
   sass --watch init.scss:init.css --style compressed
 
-*/.disclosure--btn{background-color:#6e00ee;border:0;color:#fff;margin-bottom:1em;padding:1em;text-align:left;width:100%}.disclosure--btn[aria-expanded=false]+.disclosure--content{display:none}.disclosure--btn[aria-expanded=true] .disclosure--ico::after{display:inline-block;content:"X";vertical-align:middle}.disclosure--btn[aria-expanded=true]+.disclosure--content{display:block}/*# sourceMappingURL=init.css.map */
+*/.disclosure--btn{background-color:#6e00ee;border:0;color:#fff;margin-bottom:1em;padding:1em;text-align:left;width:100%}.disclosure--btn .disclosure--ico::after{display:inline-block}.disclosure--btn[aria-expanded=false] .disclosure--ico::after{content:"+"}.disclosure--btn[aria-expanded=false]+.disclosure--content{display:none}.disclosure--btn[aria-expanded=true] .disclosure--ico::after{content:"-"}.disclosure--btn[aria-expanded=true]+.disclosure--content{display:block}/*# sourceMappingURL=init.css.map */
