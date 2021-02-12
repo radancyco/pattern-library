@@ -12,7 +12,7 @@ var simpleExpander = {
 
   init: function(){
 
-    console.log("got here");
+    // console.log("got here");
 
     // add listener
 
@@ -28,7 +28,12 @@ var simpleExpander = {
       if(getExpanders[i].hasAttribute("data-label-close")){
 
         getExpanders[i].setAttribute("aria-label", thisButtonText);
-        getExpanders[i].setAttribute("data-label-open", thisButtonText);
+
+      }
+
+      if(getExpanders[i].hasAttribute("data-label-icon")){
+
+        getExpanders[i].insertAdjacentHTML('beforeend', ' <span class="disclosure--ico" aria-hidden="true"></span>');
 
       }
 
@@ -39,7 +44,7 @@ var simpleExpander = {
     // run click event
 
     var isActive = this.getAttribute("aria-expanded");
-    var labelOpen = this.getAttribute("data-label-open");
+    var labelOpen = this.getAttribute("aria-label");
     var labelClose = this.getAttribute("data-label-close");
 
     if (isActive == "true") {

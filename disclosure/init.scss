@@ -32,6 +32,16 @@ width: 100%;
 
   &[aria-expanded="true"] {
 
+    .disclosure--ico {
+
+      &::after {
+      display: inline-block;
+      content: "X";
+      vertical-align: middle;
+      }
+
+    }
+
     +.disclosure--content {
     display: block;
     }

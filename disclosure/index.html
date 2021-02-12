@@ -10,17 +10,11 @@ title: "Disclosure v1.0"
 
 <p>This pattern will allow you to easily place and control the presentation of a single disclosure user interface (UI).</p>
 
-<h2>Example</h2>
+<h2>Example 1</h2>
 
-<button class="disclosure--btn" data-label-close="Close">Dynamic Text</button>
+<!-- Begin Disclosure -->
 
-<div class="disclosure--content">
-
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam congue, urna eu efficitur accumsan, massa sem rhoncus elit, eu mattis erat metus gravida dolor. Maecenas imperdiet sodales dolor, sit amet malesuada lorem tincidunt in. Nunc a risus augue. Sed pellentesque pharetra iaculis. Donec gravida risus ut placerat venenatis. Integer sed erat eget risus rutrum condimentum. Curabitur tincidunt nisl ornare, viverra est eget, condimentum lectus. Integer pretium justo ac odio vestibulum ornare. Nullam mi risus, faucibus lacinia justo et, auctor vehicula lectus.</p>
-
-</div>
-
-<button class="disclosure--btn">Static Text</button>
+<button class="disclosure--btn">Read More</button>
 
 <div class="disclosure--content">
 
@@ -30,6 +24,38 @@ title: "Disclosure v1.0"
 
 </div>
 
-<!-- End Accordion -->
+<!-- End Disclosure -->
+
+<h2>Example 2: Visual Affordance</h2>
+
+<!-- Begin Disclosure -->
+
+<button class="disclosure--btn" data-label-icon>Read More</button>
+
+<div class="disclosure--content">
+
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam congue, urna eu efficitur accumsan, massa sem rhoncus elit, eu mattis erat metus gravida dolor. Maecenas imperdiet sodales dolor, sit amet malesuada lorem tincidunt in. Nunc a risus augue. Sed pellentesque pharetra iaculis. Donec gravida risus ut placerat venenatis. Integer sed erat eget risus rutrum condimentum. Curabitur tincidunt nisl ornare, viverra est eget, condimentum lectus. Integer pretium justo ac odio vestibulum ornare. Nullam mi risus, faucibus lacinia justo et, auctor vehicula lectus.</p>
+
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam congue, urna eu efficitur accumsan, massa sem rhoncus elit, eu mattis erat metus gravida dolor. Maecenas imperdiet sodales dolor, sit amet malesuada lorem tincidunt in. Nunc a risus augue. Sed pellentesque pharetra iaculis. Donec gravida risus ut placerat venenatis. Integer sed erat eget risus rutrum condimentum. Curabitur tincidunt nisl ornare, viverra est eget, condimentum lectus. Integer pretium justo ac odio vestibulum ornare. Nullam mi risus, faucibus lacinia justo et, auctor vehicula lectus.</p>
+
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam congue, urna eu efficitur accumsan, massa sem rhoncus elit, eu mattis erat metus gravida dolor. Maecenas imperdiet sodales dolor, sit amet malesuada lorem tincidunt in. Nunc a risus augue. Sed pellentesque pharetra iaculis. Donec gravida risus ut placerat venenatis. Integer sed erat eget risus rutrum condimentum. Curabitur tincidunt nisl ornare, viverra est eget, condimentum lectus. Integer pretium justo ac odio vestibulum ornare. Nullam mi risus, faucibus lacinia justo et, auctor vehicula lectus.</p>
+
+</div>
+
+<!-- End Disclosure -->
+
+<div id="a11y-info" class="a11y-info">
+
+	<h2>Accessibility & UX</h2>
+
+  <p>Toggling text in a control to indicate a state change or another action to be taken should be avoided:</p>
+
+  <ul>
+    <li>Changing the text removes the inital purpose/context of the control, which can be confusing, especially for assistive technology users.</li>
+    <li>Instead of changing text, consider using visual affordance to convey that toggling behavior exists, which is a well known and quickly understood convention. For example, up and down arrows, check mark, or close ("X") indicators.</li>
+    <li>Users are well-adept at using such interfaces. Afterall, if they knew how to open it, a text instruction to close it is really unnecessary.</li>
+  </ul>
+
+</div>
 
 {% include notes.html %}
