@@ -1,0 +1,294 @@
+---
+title: "Twitter Feed 1.5"
+localcss: "init.css"
+noindex: true
+---
+
+{% include nav.html %}
+
+<div id="twitter-feed">
+
+	<p>This feed may be used to generate a list of tweets (a 140 character or less message) from an individual <a href="https://www.twitter.com/">Twitter</a> account. The feed can then be <a href="https://services1.tmpwebeng.com/widget/twitter?client=radancyco" class="external">linked to directly</a> or referenced within an inline frame (iframe).</p>
+
+	<nav aria-label="Page">
+
+		<h2>Table of Contents</h2>
+
+		<ul>
+			<li><a href="#initial-setup">Initial Setup</a></li>
+			<li><a href="#parameters">Parameters & Examples</a>
+
+				<ul>
+					<li><a href="#clear">clear</a> - Clear cleint's feed cache</li>
+					<li><a href="#client">client</a> - Define which client feed to view</li>
+					<li><a href="#css">css</a> - Inject custom <abbr title="Cascading Style Sheets">CSS</abbr> into the feed</li>
+					<li><a href="#google-analytics">ga</a> - Apply Google Analytics tracking code</li>
+					<li><a href="#img">img</a> - Allow images to load in feed</li>
+					<li><a href="#tab">tab</a> - Disable links from opening in new tab/window</li>
+				</ul>
+
+			</li>
+			<li><a href="#feedback">Feedback</a></li>
+		</ul>
+
+	</nav>
+
+	<section id="initial-setup">
+
+		<h2>Initial Setup</h2>
+
+		<p>While the feed can be viewed directly, the most common use case is to load this content within an <code>iframe</code> element by supplying an absolute path to the feed application. A <code>title</code> attribute and value must also be provided.</p>
+
+<pre><code>&lt;iframe loading="lazy" src="<strong>https://services1.tmpwebeng.com/widget/twitter</strong>" <strong>title="[Company Name] Twitter Feed"</strong>&gt;&lt;/iframe&gt;</code></pre>
+
+		<p>However, the feed will not render usable content until we begin passing <a href="#parameters">parameters</a> to it.</p>
+
+		<section id="a11y-iframe" class="a11y-info">
+
+			<h2>Accessibility</h2>
+
+			<p>Please note use of the <code>title</code> attribute in <strong>all</strong> code examples. A brief description of the contents of the <code>iframe</code> element must be provided to assist those who are using assistive technology, such as screen readers, to access the content.</p>
+
+		</section>
+
+	</section>
+
+	<section id="parameters">
+
+		<h2>Parameters & Examples</h2>
+
+		<p>The following is a list of parameters that can be passed to the feed to render content and to allow for better control over its presentation and behavior. All functions must be used with the <a href="#client">client</a> parameter. Code and output examples provided where applicable.</p>
+
+		<section id="clear">
+
+			<h2>clear</h2>
+
+			<p><em>Boolean:</em> When set to <code>true</code>, the server cache for selected client is cleared. The default is <code>false</code>.</p>
+
+<pre><code>&lt;iframe loading="lazy" src="https://services1.tmpwebeng.com/widget/twitter?client=radancyco&<strong>ga=UA-000000-01</strong>" title="{{ site.company-name }}'s Twitter Feed"&gt;&lt;/iframe&gt;</code></pre>
+
+			<p class="back-to-top"><a href="#content">Return to top</a></p>
+
+		</section>
+
+		<section id="client">
+
+			<h2>client</h2>
+
+			<p><em>String:</em> Accepts any valid Twitter username value.</p>
+
+			<h3>HTML</h3>
+
+			<p>A typical markup example. The <code>header</code> and <code>footer</code> elements are optional.</p>
+
+<pre><code>&lt;section class="twtr-feed"&gt;
+
+&lt;header class="twtr-hdr"&gt;
+
+&lt;a  href="http://twitter.com/intent/user?screen_name=radancyco"&gt;
+
+&lt;img src="{{ site.git-url }}/styleguide/logo.png" alt="{{ site.company-name }}"/&gt;
+
+&lt;h2&gt;{{ site.company-name }} &lt;b&gt;(@radancyco)&lt;/b&gt;&lt;/h2&gt;
+
+&lt;/a&gt;
+
+&lt;/header&gt;&lt;!--/.twtr-hdr--&gt;
+
+<strong>&lt;iframe loading="lazy" src="https://services1.tmpwebeng.com/widget/twitter?client=radancyco" title="{{ site.company-name }}'s Twitter Feed"&gt;&lt;/iframe&gt;</strong>
+
+&lt;footer class="twtr-ftr"&gt;
+
+&lt;p class="twtr-join"&gt;&lt;a href="http://twitter.com/radancyco"&gt;Join the conversation&lt;/a&gt;&lt;/p&gt;
+
+&lt;/footer&gt;&lt;!--/.twtr-ftr--&gt;
+
+&lt;/section&gt;&lt;!--/.twtr-feed--&gt;</code></pre>
+
+			<p class="new-window"><a href="https://services1.tmpwebeng.com/widget/twitter?client=radancyco" class="external">View in new window</a></p>
+
+			<h3>Sass</h3>
+
+			<p>An example of the <a href="http://sass-lang.com/">Sass</a> (CSS) a developer might use to style up this module.</p>
+
+<pre><code>// Twitter Feed 1.5
+
+.twtr-feed {
+background-color: #fff;
+border-radius: 5px;
+border: 1px #ccc solid;
+
+	img {
+	border: 0;
+	display: block;
+	}
+
+	a {
+	text-decoration: none;
+	}
+
+	.twtr-hdr {
+	display: block;
+	padding: 1em;
+
+		a {
+		display: block;
+		}
+
+		img {
+		border-radius: 3px;
+		display: inline-block;
+		height: 50px;
+		margin-right: 20px;
+		vertical-align: middle;
+		width: 50px;
+		}
+
+		h2 {
+		display: inline-block;
+		font-size: px(16);
+		margin: 0;
+		padding: 0;
+		vertical-align: middle;
+
+			b {
+			display: block;
+			font-weight: normal;
+			padding-top: 3px;
+			}
+
+		}
+
+	}
+
+	iframe {
+	border: 0;
+	border-bottom: 1px #ccc solid;
+	border-top: 1px #ccc solid;
+	display: block;
+	height: 450px;
+	width: 100%;
+	}
+
+	.twtr-ftr {
+	padding: 1em;
+
+		p {
+		margin: 0;
+		padding: 0;
+		text-align: right;
+
+			&.twtr-join a {
+			background-position: left center;
+			background-repeat: no-repeat;
+			background-image: url(data:image/png;base64,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);
+			// Light: background-image: url(data:image/png;base64,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);
+			display: inline-block;
+			padding-left: 45px;
+			}
+
+		}
+
+	}
+
+}</code></pre>
+
+			<h3>Example</h3>
+
+			<p>Code output. A beautiful working example.</p>
+
+			<section class="twtr-feed">
+
+				<header class="twtr-hdr">
+
+					<a  href="http://twitter.com/intent/user?screen_name=radancyco">
+
+						<img src="{{ site.git-url }}/img/logo.png" alt="{{ site.company-name }}">
+
+						<h2>{{ site.company-name }} <b>(@radancyco)</b></h2>
+
+					</a>
+
+				</header><!--/.twtr-hdr-->
+
+				<iframe loading="lazy" src="https://services1.tmpwebeng.com/widget/twitter?client=radancyco" title="{{ site.company-name }} Twitter Feed"></iframe>
+
+				<footer class="twtr-ftr">
+
+					<p class="twtr-join"><a href="http://twitter.com/radancyco">Join the conversation</a></p>
+
+				</footer><!--/.twtr-ftr-->
+
+			</section><!--/.twtr-feed-->
+
+			<p class="back-to-top"><a href="#content">Return to top</a></p>
+
+		</section>
+
+		<section id="css">
+
+		<h2>css</h2>
+
+		<p><em>String:</em> Accepts a valid <abbr title="Uniform Resource Locator">URL</abbr> to any CSS file. Custom style sheets can be used for more granular control over the default layout. Feel free to review the <a href="css/twitter.css" class="external">default CSS</a> to better help determine your CSS overrides.</p>
+
+<pre><code>&lt;iframe loading="lazy" src="https://services1.tmpwebeng.com/widget/twitter?client=radancyco&<strong>css=https://services1.tmpwebeng.com/tmp-share/widget/css/twitter-custom.css</strong>" title="{{ site.company-name }}'s Twitter Feed"&gt;&lt;/iframe&gt;</code></pre>
+
+		<p class="new-window"><a href="https://services1.tmpwebeng.com/widget/twitter?client=radancyco&css=css/twitter-custom.css" class="external">View in new window</a></p>
+
+		<p class="back-to-top"><a href="#content">Return to top</a></p>
+
+	</section>
+
+		<section id="google-analytics">
+
+			<h2>ga</h2>
+
+			<p><em>String:</em> Supplying a Google Analytics ID will activate tracking functionality.</p>
+
+<pre><code>&lt;iframe loading="lazy" src="https://services1.tmpwebeng.com/widget/twitter?client=radancyco&<strong>ga=UA-000000-01</strong>" title="{{ site.company-name }}'s Twitter Feed"&gt;&lt;/iframe&gt;</code></pre>
+
+			<p class="new-window"><a href="https://services1.tmpwebeng.com/widget/twitter?client=radancyco&ga=UA-000000-01" class="external">View in new window</a></p>
+
+			<p class="back-to-top"><a href="#content">Return to top</a></p>
+
+		</section>
+
+		<section id="img">
+
+			<h2>img</h2>
+
+			<p><em>Boolean:</em> When set to <code>true</code>, the feed will display images. The default is <code>false</code>.</p>
+
+<pre><code>&lt;iframe loading="lazy" src="https://services1.tmpwebeng.com/widget/twitter?client=radancyco&<strong>img=true</strong>" title="{{ site.company-name }}'s Twitter Feed"&gt;&lt;/iframe&gt;</code></pre>
+
+			<p class="new-window"><a href="https://services1.tmpwebeng.com/widget/twitter?client=radancyco&img=true" class="external">View in new window</a></p>
+
+			<p class="back-to-top"><a href="#content">Return to top</a></p>
+
+		</section>
+
+		<section id="tab">
+
+		<h2>tab</h2>
+
+		<p><em>Boolean:</em> When set to <code>false</code>, links will open within the same tab or window. The default is <code>true</code>.</p>
+
+<pre><code>&lt;iframe loading="lazy" src="https://services1.tmpwebeng.com/widget/twitter?client=radancyco&<strong>tab=false</strong>" title="{{ site.company-name }}'s Twitter Feed"&gt;&lt;/iframe&gt;</code></pre>
+
+		<p class="new-window"><a href="https://services1.tmpwebeng.com/widget/twitter?client=radancyco&tab=false" class="external">View in new window</a></p>
+
+		<p class="back-to-top"><a href="#content">Return to top</a></p>
+
+	</section>
+
+	</section>
+
+	<section id="feedback">
+
+		<h2>Feedback</h2>
+
+		<p>If you have any question about these feeds, need extra functionality added to them or require a new social feed, please contact <a href="mailto:bobby.kc@radancy.com">Bobby KC</a> or <a href="mailto:{{ site.owner-email }}">{{ site.owner-name }}</a>.</p>
+
+	</section>
+
+</div>

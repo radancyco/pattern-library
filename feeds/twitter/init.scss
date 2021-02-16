@@ -1,116 +1,15 @@
----
-title: "Twitter Feed 1.5"
-noindex: true
----
+/*!
 
-{% include nav.html %}
+  Radancy Pattern Library: Twitter Feed 1.3
 
-<div id="twitter-feed">
+  Contributor(s):
+  Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy
 
-	<p>This feed may be used to generate a list of tweets (a 140 character or less message) from an individual <a href="https://www.twitter.com/">Twitter</a> account. The feed can then be <a href="https://services1.tmpwebeng.com/widget/twitter?client=radancyco" class="external">linked to directly</a> or referenced within an inline frame (iframe).</p>
+  Dependencies: Sass
+  Instructions: To run locally, install Sass (https://sass-lang.com/install), CL to directory this file in and run:
+  sass --watch init.scss:init.css --style compressed
 
-	<nav aria-label="Page">
-
-		<h2>Table of Contents</h2>
-
-		<ul>
-			<li><a href="#initial-setup">Initial Setup</a></li>
-			<li><a href="#parameters">Parameters & Examples</a>
-
-				<ul>
-					<li><a href="#clear">clear</a> - Clear cleint's feed cache</li>
-					<li><a href="#client">client</a> - Define which client feed to view</li>
-					<li><a href="#css">css</a> - Inject custom <abbr title="Cascading Style Sheets">CSS</abbr> into the feed</li>
-					<li><a href="#google-analytics">ga</a> - Apply Google Analytics tracking code</li>
-					<li><a href="#img">img</a> - Allow images to load in feed</li>
-					<li><a href="#tab">tab</a> - Disable links from opening in new tab/window</li>
-				</ul>
-
-			</li>
-			<li><a href="#feedback">Feedback</a></li>
-		</ul>
-
-	</nav>
-
-	<section id="initial-setup">
-
-		<h2>Initial Setup</h2>
-
-		<p>While the feed can be viewed directly, the most common use case is to load this content within an <code>iframe</code> element by supplying an absolute path to the feed application. A <code>title</code> attribute and value must also be provided.</p>
-
-<pre><code>&lt;iframe loading="lazy" src="<strong>https://services1.tmpwebeng.com/widget/twitter</strong>" <strong>title="[Company Name] Twitter Feed"</strong>&gt;&lt;/iframe&gt;</code></pre>
-
-		<p>However, the feed will not render usable content until we begin passing <a href="#parameters">parameters</a> to it.</p>
-
-		<section id="a11y-iframe" class="a11y-info">
-
-			<h2>Accessibility</h2>
-
-			<p>Please note use of the <code>title</code> attribute in <strong>all</strong> code examples. A brief description of the contents of the <code>iframe</code> element must be provided to assist those who are using assistive technology, such as screen readers, to access the content.</p>
-
-		</section>
-
-	</section>
-
-	<section id="parameters">
-
-		<h2>Parameters & Examples</h2>
-
-		<p>The following is a list of parameters that can be passed to the feed to render content and to allow for better control over its presentation and behavior. All functions must be used with the <a href="#client">client</a> parameter. Code and output examples provided where applicable.</p>
-
-		<section id="clear">
-
-			<h2>clear</h2>
-
-			<p><em>Boolean:</em> When set to <code>true</code>, the server cache for selected client is cleared. The default is <code>false</code>.</p>
-
-<pre><code>&lt;iframe loading="lazy" src="https://services1.tmpwebeng.com/widget/twitter?client=radancyco&<strong>ga=UA-000000-01</strong>" title="{{ site.company-name }}'s Twitter Feed"&gt;&lt;/iframe&gt;</code></pre>
-
-			<p class="back-to-top"><a href="#content">Return to top</a></p>
-
-		</section>
-
-		<section id="client">
-
-			<h2>client</h2>
-
-			<p><em>String:</em> Accepts any valid Twitter username value.</p>
-
-			<h3>HTML</h3>
-
-			<p>A typical markup example. The <code>header</code> and <code>footer</code> elements are optional.</p>
-
-<pre><code>&lt;section class="twtr-feed"&gt;
-
-&lt;header class="twtr-hdr"&gt;
-
-&lt;a  href="http://twitter.com/intent/user?screen_name=radancyco"&gt;
-
-&lt;img src="{{ site.git-url }}/styleguide/logo.png" alt="{{ site.company-name }}"/&gt;
-
-&lt;h2&gt;{{ site.company-name }} &lt;b&gt;(@radancyco)&lt;/b&gt;&lt;/h2&gt;
-
-&lt;/a&gt;
-
-&lt;/header&gt;&lt;!--/.twtr-hdr--&gt;
-
-<strong>&lt;iframe loading="lazy" src="https://services1.tmpwebeng.com/widget/twitter?client=radancyco" title="{{ site.company-name }}'s Twitter Feed"&gt;&lt;/iframe&gt;</strong>
-
-&lt;footer class="twtr-ftr"&gt;
-
-&lt;p class="twtr-join"&gt;&lt;a href="http://twitter.com/radancyco"&gt;Join the conversation&lt;/a&gt;&lt;/p&gt;
-
-&lt;/footer&gt;&lt;!--/.twtr-ftr--&gt;
-
-&lt;/section&gt;&lt;!--/.twtr-feed--&gt;</code></pre>
-
-			<p class="new-window"><a href="https://services1.tmpwebeng.com/widget/twitter?client=radancyco" class="external">View in new window</a></p>
-
-			<h3>Sass</h3>
-
-			<p>An example of the <a href="http://sass-lang.com/">Sass</a> (CSS) a developer might use to style up this module.</p>
-
-<pre><code>// Twitter Feed 1.5
+*/
 
 .twtr-feed {
 background-color: #fff;
@@ -161,11 +60,11 @@ border: 1px #ccc solid;
 	}
 
 	iframe {
-	border: 0;
 	border-bottom: 1px #ccc solid;
 	border-top: 1px #ccc solid;
+	border: 0;
 	display: block;
-	height: 450px;
+	height: 375px;
 	width: 100%;
 	}
 
@@ -190,104 +89,4 @@ border: 1px #ccc solid;
 
 	}
 
-}</code></pre>
-
-			<h3>Example</h3>
-
-			<p>Code output. A beautiful working example.</p>
-
-			<section class="twtr-feed">
-
-				<header class="twtr-hdr">
-
-					<a  href="http://twitter.com/intent/user?screen_name=radancyco">
-
-						<img src="{{ site.git-url }}/img/logo.png" alt="{{ site.company-name }}">
-
-						<h2>{{ site.company-name }} <b>(@radancyco)</b></h2>
-
-					</a>
-
-				</header><!--/.twtr-hdr-->
-
-				<iframe loading="lazy" src="https://services1.tmpwebeng.com/widget/twitter?client=radancyco" title="{{ site.company-name }} Twitter Feed"></iframe>
-
-				<footer class="twtr-ftr">
-
-					<p class="twtr-join"><a href="http://twitter.com/radancyco">Join the conversation</a></p>
-
-				</footer><!--/.twtr-ftr-->
-
-			</section><!--/.twtr-feed-->
-
-			<p class="back-to-top"><a href="#content">Return to top</a></p>
-
-		</section>
-
-		<section id="css">
-
-		<h2>css</h2>
-
-		<p><em>String:</em> Accepts a valid <abbr title="Uniform Resource Locator">URL</abbr> to any CSS file. Custom style sheets can be used for more granular control over the default layout. Feel free to review the <a href="css/twitter.css" class="external">default CSS</a> to better help determine your CSS overrides.</p>
-
-<pre><code>&lt;iframe loading="lazy" src="https://services1.tmpwebeng.com/widget/twitter?client=radancyco&<strong>css=https://services1.tmpwebeng.com/tmp-share/widget/css/twitter-custom.css</strong>" title="{{ site.company-name }}'s Twitter Feed"&gt;&lt;/iframe&gt;</code></pre>
-
-		<p class="new-window"><a href="https://services1.tmpwebeng.com/widget/twitter?client=radancyco&css=css/twitter-custom.css" class="external">View in new window</a></p>
-
-		<p class="back-to-top"><a href="#content">Return to top</a></p>
-
-	</section>
-
-		<section id="google-analytics">
-
-			<h2>ga</h2>
-
-			<p><em>String:</em> Supplying a Google Analytics ID will activate tracking functionality.</p>
-
-<pre><code>&lt;iframe loading="lazy" src="https://services1.tmpwebeng.com/widget/twitter?client=radancyco&<strong>ga=UA-000000-01</strong>" title="{{ site.company-name }}'s Twitter Feed"&gt;&lt;/iframe&gt;</code></pre>
-
-			<p class="new-window"><a href="https://services1.tmpwebeng.com/widget/twitter?client=radancyco&ga=UA-000000-01" class="external">View in new window</a></p>
-
-			<p class="back-to-top"><a href="#content">Return to top</a></p>
-
-		</section>
-
-		<section id="img">
-
-			<h2>img</h2>
-
-			<p><em>Boolean:</em> When set to <code>true</code>, the feed will display images. The default is <code>false</code>.</p>
-
-<pre><code>&lt;iframe loading="lazy" src="https://services1.tmpwebeng.com/widget/twitter?client=radancyco&<strong>img=true</strong>" title="{{ site.company-name }}'s Twitter Feed"&gt;&lt;/iframe&gt;</code></pre>
-
-			<p class="new-window"><a href="https://services1.tmpwebeng.com/widget/twitter?client=radancyco&img=true" class="external">View in new window</a></p>
-
-			<p class="back-to-top"><a href="#content">Return to top</a></p>
-
-		</section>
-
-		<section id="tab">
-
-		<h2>tab</h2>
-
-		<p><em>Boolean:</em> When set to <code>false</code>, links will open within the same tab or window. The default is <code>true</code>.</p>
-
-<pre><code>&lt;iframe loading="lazy" src="https://services1.tmpwebeng.com/widget/twitter?client=radancyco&<strong>tab=false</strong>" title="{{ site.company-name }}'s Twitter Feed"&gt;&lt;/iframe&gt;</code></pre>
-
-		<p class="new-window"><a href="https://services1.tmpwebeng.com/widget/twitter?client=radancyco&tab=false" class="external">View in new window</a></p>
-
-		<p class="back-to-top"><a href="#content">Return to top</a></p>
-
-	</section>
-
-	</section>
-
-	<section id="feedback">
-
-		<h2>Feedback</h2>
-
-		<p>If you have any question about these feeds, need extra functionality added to them or require a new social feed, please contact <a href="mailto:bobby.kc@radancy.com">Bobby KC</a> or <a href="mailto:{{ site.owner-email }}">{{ site.owner-name }}</a>.</p>
-
-	</section>
-
-</div>
+}
