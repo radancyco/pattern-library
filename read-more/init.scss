@@ -1,0 +1,77 @@
+/*!
+
+  Radancy Pattern Library: Read More v1.0
+
+  Contributor(s):
+  Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy
+
+  Dependencies: Sass
+  Instructions: To run locally, install Sass (https://sass-lang.com/install), CL to directory this file in and run:
+  sass --watch init.scss:init.css --style compressed
+
+*/
+
+$base-color: #6F00EF;
+
+.read-more {
+ padding-bottom: 1em;
+
+  &__content {
+  position: relative;
+  max-height: 200px;
+  overflow: hidden;
+  border: 1px #ccc solid;
+  margin-bottom: 1em;
+  padding: 1em;
+
+    &[aria-hidden] * {
+    outline: 0;
+    }
+
+    &[tabindex] {
+    max-height: none;
+
+      &::after {
+      display: none;
+      }
+
+    }
+
+    &::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background-image: linear-gradient( rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 1) 100%);
+    content: "";
+    }
+
+  }
+
+    &__btn {
+    background-color: $base-color;
+    border: 0;
+    color: #fff;
+    padding: 1em;
+
+      &--icon {
+
+        &::after {
+        display: inline-block;
+        content: "-";
+        }
+
+        &[aria-expanded="true"] {
+
+          &::after {
+          content: "+";
+          }
+
+        }
+
+      }
+
+  }
+
+}
