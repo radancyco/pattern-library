@@ -5,13 +5,13 @@
   Contributor(s):
   Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy
 
-  Dependencies: jQuery 
+  Dependencies: jQuery
 
 */
 
 $(".read-more").append("<button class='read-more__btn' aria-expanded='true'>Read More <span class='read-more__btn--icon' aria-hidden='true'></span></button>");
 
-var $focusElms = "a, button, input";
+var $focusElms = "a, button, input, video, iframe, audio, select";
 
 $(".read-more .content").attr("aria-hidden", "true").find($focusElms).attr("tabindex", "-1");
 
