@@ -9,7 +9,7 @@
 
 */
 
-$(".read-more").append("<button class='read-more__btn' aria-expanded='true'>Read More <span class='read-more__btn--icon' aria-hidden='true'></span></button>");
+$(".read-more").append("<button class='read-more__btn' aria-expanded='false'>Read More <span class='read-more__btn--icon' aria-hidden='true'></span></button>");
 
 var $focusElms = "a, button, input";
 
