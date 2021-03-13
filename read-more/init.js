@@ -23,17 +23,20 @@ $(".read-more__btn").on("click", function() {
 
   });
 
-  var targetAttr = $(this).prev().attr("tabindex");
+  var $parentTarget = $(this).prev();
+  var $parentTargetAttr = $(this).prev().attr("tabindex");
 
-  if (typeof targetAttr !== typeof undefined && targetAttr !== false) {
+  if (typeof $parentTargetAttr !== typeof undefined && $parentTargetAttr !== false) {
 
-    $(this).prev().removeAttr("tabindex").attr("aria-hidden", "true");
-    $(this).prev().find($focusElms).attr("tabindex", "-1");
+    $("html, body").animate({scrollTop: $parentTarget.offset().top}, 0); // needs work. 
+
+    $parentTarget.removeAttr("tabindex").attr("aria-hidden", "true");
+    $parentTarget.find($focusElms).attr("tabindex", "-1");
 
   } else {
 
-    $(this).prev().removeAttr("aria-hidden").attr("tabindex", "-1").focus();
-    $(this).prev().find($focusElms).removeAttr("tabindex");
+    $parentTarget.removeAttr("aria-hidden").attr("tabindex", "-1").focus();
+    $parentTarget.find($focusElms).removeAttr("tabindex");
 
   }
 
