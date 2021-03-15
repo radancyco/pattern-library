@@ -28,7 +28,7 @@ $(".read-more__btn").on("click", function() {
 
   if (typeof $parentTargetAttr !== typeof undefined && $parentTargetAttr !== false) {
 
-    $("html, body").animate({scrollTop: $parentTarget.offset().top}, 0).delay(600); 
+    $("html, body").delay(800).animate({scrollTop: $parentTarget.offset().top}, 0); 
 
     $parentTarget.removeAttr("tabindex").attr("aria-hidden", "true");
     $parentTarget.find($focusElms).attr("tabindex", "-1");
