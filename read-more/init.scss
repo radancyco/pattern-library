@@ -45,6 +45,7 @@ $base-color: #6F00EF;
     height: 100px;
     background-image: linear-gradient( rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 1) 100%);
     content: "";
+    pointer-events: none;
     }
 
   }
