@@ -11,7 +11,7 @@
 
 $(".read-more").append("<button class='read-more__btn' aria-expanded='false'>Read More <span class='read-more__btn--icon' aria-hidden='true'></span></button>");
 
-var $focusElms = "a, button, input";
+var $focusElms = "a, audio, button, input, select, video";
 
 $(".read-more__content").attr("aria-hidden", "true").find($focusElms).attr("tabindex", "-1");
 
@@ -28,10 +28,10 @@ $(".read-more__btn").on("click", function() {
 
   if (typeof $parentTargetAttr !== typeof undefined && $parentTargetAttr !== false) {
 
-    $("html, body").delay(800).animate({scrollTop: $parentTarget.offset().top}, 0); 
-
     $parentTarget.removeAttr("tabindex").attr("aria-hidden", "true");
     $parentTarget.find($focusElms).attr("tabindex", "-1");
+
+    $("html, body").animate({scrollTop: $parentTarget.offset().top}, 0);
 
   } else {
 
