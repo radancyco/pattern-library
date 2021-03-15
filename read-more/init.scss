@@ -17,12 +17,12 @@ $base-color: #6F00EF;
  padding-bottom: 1em;
 
   &__content {
-  position: relative;
-  max-height: 200px;
-  overflow: hidden;
   border: 1px #ccc solid;
   margin-bottom: 1em;
+  max-height: 200px;
+  overflow: hidden;
   padding: 1em;
+  position: relative;
 
     &[aria-hidden] * {
     outline: 0;
@@ -37,15 +37,17 @@ $base-color: #6F00EF;
 
     }
 
+    // Fade effect
+
     &::after {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100px;
     background-image: linear-gradient( rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 1) 100%);
+    bottom: 0;
     content: "";
+    height: 100px;
+    left: 0;
     pointer-events: none;
+    position: absolute;
+    width: 100%;
     }
 
   }
