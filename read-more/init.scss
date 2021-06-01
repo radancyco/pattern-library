@@ -62,13 +62,13 @@ $base-color: #6F00EF;
 
         &::after {
         display: inline-block;
-        content: "-";
+        content: "+";
         }
 
-        &[aria-expanded="true"] {
+        [aria-expanded="true"] & {
 
           &::after {
-          content: "+";
+          content: "-";
           }
 
         }
