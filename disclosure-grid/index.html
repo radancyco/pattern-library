@@ -1,0 +1,100 @@
+---
+folder: disclosure-grid
+jira: TCDQ-57187
+localcss: "init.css"
+localjs: "init.js"
+noindex: true
+slick: true
+title: "Grid Disclosure v1.0 (Beta)"
+---
+
+{% include nav.html %}
+
+<p>This pattern will allow you to easily place and control the presentation of a grid with multiple disclosures.</p>
+
+<h2 id="parameters">Parameters</h2>
+
+<ul>
+  <li><b>data-tab-active (Number, Optional):</b> Using a number from "1" up, you can specify which tab should be activated on page load. When this attribute is not specified, the first panel will be open. Support for having no panels open coming soon. </li>
+  <li><b>data-tab-breakpoint (String, Required):</b> Accepts any valid media query for more granular control over when interface needs to change from accordion to tab. Setting the breakpoint in code also allows us to pass in the required roles and ARIA attributes needed for each type of interface. For example, setting <code>(min-width: 800px) and (max-width: 1200px)</code> would only allow tabs between these two selected breakpoints. See <a href="#tab-accordion-4">example</a> below.</li>
+  <li><b>data-tab-callback (Boolean, Optional):</b> Not sure what this will do yet or how it will be built.</li>
+  <li><b>data-tab-disable-url (Boolean, Optional):</b> By default, the URL will always change to reflect selected page fragment. This is recommended behavior because it allows us to share fragmented content more easily. If this behavior is not desired, you may use this attribute to disable this functionality.</li>
+  <li><b>data-tab-vertical (Boolean, Optional) :</b> This attribute will change the tab interface from horizontal, the default, to vertical. When in vertical mode, the interface will behave differently. For example, focus will be placed on selected panel for improved accessibility.</li>
+</ul>
+
+<div class="disclosure-grid" data-grid-active="2" data-grid-breakpoint="(min-width: 780px)" >
+
+    <button class="disclosure-grid__button">Section 1</button>
+
+    <div class="disclosure-grid__content">
+
+      <h2>Section 1</h2>
+
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod, tortor nec pharetra ultricies, ante erat imperdiet velit, nec laoreet enim lacus a velit. <a href="#">Nam luctus</a>, enim in interdum condimentum, nisl diam iaculis lorem, vel volutpat mi leo sit amet lectus. Praesent non odio bibendum magna bibendum accumsan.</p>
+
+    </div><!--/.responsive-content-->
+
+    <button class="disclosure-grid__button">Section 2</button>
+
+    <div class="disclosure-grid__content">
+
+      <h2>Section 2</h2>
+
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod, tortor nec pharetra ultricies, ante erat imperdiet velit, nec laoreet enim lacus a velit. <a href="#">Nam luctus</a>, enim in interdum condimentum, nisl diam iaculis lorem, vel volutpat mi leo sit amet lectus. Praesent non odio bibendum magna bibendum accumsan.</p>
+
+    </div><!--/.responsive-content-->
+
+    <button class="disclosure-grid__button">Section 3</button>
+
+    <div class="disclosure-grid__content active">
+
+      <h2>Section 3</h2>
+
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod, tortor nec pharetra ultricies, ante erat imperdiet velit, nec laoreet enim lacus a velit. <a href="#">Nam luctus</a>, enim in interdum condimentum, nisl diam iaculis lorem, vel volutpat mi leo sit amet lectus. Praesent non odio bibendum magna bibendum accumsan.</p>
+
+    </div><!--/.responsive-content-->
+
+    <button class="disclosure-grid__button">Section 4</button>
+
+    <div class="disclosure-grid__content">
+
+      <h2>Section 4</h2>
+
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod, tortor nec pharetra ultricies, ante erat imperdiet velit, nec laoreet enim lacus a velit. <a href="#">Nam luctus</a>, enim in interdum condimentum, nisl diam iaculis lorem, vel volutpat mi leo sit amet lectus. Praesent non odio bibendum magna bibendum accumsan.</p>
+
+    </div><!--/.responsive-content-->
+
+    <button class="disclosure-grid__button">Section 5</button>
+
+    <div class="disclosure-grid__content">
+
+      <h2>Section 5</h2>
+
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod, tortor nec pharetra ultricies, ante erat imperdiet velit, nec laoreet enim lacus a velit. <a href="#">Nam luctus</a>, enim in interdum condimentum, nisl diam iaculis lorem, vel volutpat mi leo sit amet lectus. Praesent non odio bibendum magna bibendum accumsan.</p>
+
+    </div><!--/.responsive-content-->
+
+    <button class="disclosure-grid__button">Section 6</button>
+
+    <div class="disclosure-grid__content">
+
+      <h2>Section 6</h2>
+
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod, tortor nec pharetra ultricies, ante erat imperdiet velit, nec laoreet enim lacus a velit. <a href="#">Nam luctus</a>, enim in interdum condimentum, nisl diam iaculis lorem, vel volutpat mi leo sit amet lectus. Praesent non odio bibendum magna bibendum accumsan.</p>
+
+    </div><!--/.responsive-content-->
+
+    <button class="disclosure-grid__button">Section 7</button>
+
+    <div class="disclosure-grid__content active">
+
+      <h2>Section 7</h2>
+
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod, tortor nec pharetra ultricies, ante erat imperdiet velit, nec laoreet enim lacus a velit. <a href="#">Nam luctus</a>, enim in interdum condimentum, nisl diam iaculis lorem, vel volutpat mi leo sit amet lectus. Praesent non odio bibendum magna bibendum accumsan.</p>
+
+    </div><!--/.responsive-content-->
+
+</div><!--/.responsive-tab-->
+
+
+{% include notes.html %}
