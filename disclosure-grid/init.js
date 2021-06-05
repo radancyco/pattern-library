@@ -19,7 +19,7 @@
 
   }
 
-  // Display which TabCordion is in use via console:
+  // Display which Grid is in use via console:
 
   console.log('%c Grid Disclosure v1.0 (Beta) in use. ', 'background: #6e00ee; color: #fff');
 
@@ -32,20 +32,20 @@
 
   var URLFragment = window.location.hash.substr(1);
 
-  // Get all TabCordions on the page...
+  // Get all Grids on the page...
 
   var disclosureGrids = document.querySelectorAll(grid);
 
-  // Create an array to store each TabCordions breakpoint in,
+  // Create an array to store each Grid breakpoint in,
   // which we will loop through later...
 
   var disclosureGridBreakpoints = [];
 
-  // loop through each TabCordion...
+  // loop through each Grid...
 
   disclosureGrids.forEach(function(gridItem){
 
-    // Get each TabCordion breakpoint...
+    // Get each Grid breakpoint...
 
     var disclosureBreakpoint = gridItem.getAttribute(gridBreakpoint);
 
@@ -55,11 +55,9 @@
 
   });
 
-  function viewPortChange() {
+  function gridViewPort() {
 
-    // Loop through each TabCordion
-
-    // Loop through each TabCordion
+    // Loop through each Grid...
 
     disclosureGrids.forEach(function(gridItem, i){
 
@@ -68,45 +66,48 @@
 
       if (disclosureGridBreakpoints[i].matches) {
 
+        $(".disclosure-grid").addClass("grid-pattern");
+
         // loop though button
 
-        $(".disclosure-grid").addClass("stacked");
+        var gridButtonCount = 1;
+        var gridContentCount = 5; // WHEN SCREEN SIZE CHANGES, CHANGE THIS NUMBER TO 3
 
-        var btnCounter = 1;
-        var divCounter = 4; // WHEN SCREEN SIZE CHANGES, CHANGE THIS NUMBER TO 3
+        // Button Order
 
-        $(".disclosure-grid__button").each(function (index) {
+        $(".disclosure-grid__button").each(function(e) {
 
-          $(this).attr("style", "order: " + btnCounter)
+          $(this).attr("style", "order: " + gridButtonCount)
 
-          if (btnCounter % 3 == 0) { // WHEN SCREEN SIZE CHANGES, CHANGE THIS NUMBER TO 2
+          if (gridButtonCount % 4 == 0) { // WHEN SCREEN SIZE CHANGES, CHANGE THIS NUMBER TO 2
 
-            btnCounter += 3; // WHEN SCREEN SIZE CHANGES, CHANGE THIS NUMBER TO 2
+            gridButtonCount += 4; // WHEN SCREEN SIZE CHANGES, CHANGE THIS NUMBER TO 2
 
           }
 
-          btnCounter++
+          gridButtonCount++
 
         });
 
-        $(".disclosure-grid__content").each(function (index) {
+        // Content Order
 
-          $(this).attr("style", "order: " + divCounter)
+        $(".disclosure-grid__content").each(function(e) {
 
-          if (divCounter % 3 == 0) { // WHEN SCREEN SIZE CHANGES, CHANGE THIS NUMBER TO 2
+          $(this).attr("style", "order: " + gridContentCount)
 
-            divCounter += 3; // WHEN SCREEN SIZE CHANGES, CHANGE THIS NUMBER TO 2
+          if (gridContentCount % 4 == 0) { // WHEN SCREEN SIZE CHANGES, CHANGE THIS NUMBER TO 2
+
+            gridContentCount += 4; // WHEN SCREEN SIZE CHANGES, CHANGE THIS NUMBER TO 2
 
           }
 
-          divCounter++
+          gridContentCount++
 
         });
 
       } else {
 
-        $(".disclosure-grid").removeClass("stacked");
-
+        $(".disclosure-grid").removeClass("grid-pattern");
         $(".disclosure-grid__button, .disclosure-grid__content").removeAttr("style");
 
       }
@@ -115,9 +116,20 @@
 
   }
 
-  $(".disclosure-grid__button").each(function (index) {
+  $(".disclosure-grid__button").each(function(e) {
 
-    $(this).attr("aria-expanded", "false");
+    var gridCount = e + 1;
+    var gridActive = $(this).parent().data("grid-active");
+
+    if (gridCount === gridActive) {
+
+        $(this).attr("aria-expanded", "true");
+
+    } else {
+
+        $(this).attr("aria-expanded", "false");
+
+    }
 
   }).on("click", function() {
 
@@ -131,7 +143,7 @@
 
   });
 
-  $(".disclosure-grid__content").each(function (index) {
+  $(".disclosure-grid__content").each(function(e) {
 
     $(this).prepend("<button class='disclosure-grid__close' aria-label='Close'></button>");
 
@@ -147,12 +159,12 @@
 
   disclosureGridBreakpoints.forEach(function(breakpoints){
 
-    breakpoints.addListener(viewPortChange);
+    breakpoints.addListener(gridViewPort);
 
   });
 
-  // Initiate tabCordions on page load.
+  // Initiate Grids on page load.
 
-  viewPortChange();
+  gridViewPort();
 
 })();

@@ -1,6 +1,6 @@
 /*!
 
-  Radancy Pattern Library: TabCordion
+  Radancy Pattern Library: Grid Disclosure
 
   Contributor(s):
   Andrew Hill, Email: andrew.hill@radancy.com
@@ -36,31 +36,49 @@ html {
 
 // Grid Disclosure
 
+
 .disclosure-grid {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: center;
+
+  // $test: attr(data-grid-active);
 
     &__button {
     border: 0;
     display: block;
     margin: 0;
-    padding: 1em;
+    padding: 2em;
+    position: relative;
     text-align: center;
     width: 100%;
 
-      .stacked & {
+      .grid-pattern & {
 
-        width: calc(100% / 3);
+        width: calc(100% / 4);
 
       }
 
-
-
       &[aria-expanded="true"] {
-      background-color: $base-color;
-      color: $base-color-active;
+      background-color: #fff;
+
+
+        // Arrow
+
+        &::after {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        display: block;
+        width: 0;
+        height: 0;
+        margin-left: -20px;
+        border-color: transparent transparent $base-color transparent;
+        border-style: solid;
+        border-width: 0 20px 20px 20px;
+        content: "";
+        }
 
         + .disclosure-grid__content {
         display: block;
@@ -71,9 +89,9 @@ html {
     }
 
     &__content {
-    display: none;
     background-color: $base-color;
     color: $base-color-active;
+    display: none;
     padding: 1em;
     position: relative;
 
@@ -91,11 +109,11 @@ html {
     height: 40px;
     padding: 0;
     position: absolute;
-    width: 40px;
-    top: 1em;
     right: 1em;
+    top: 1em;
+    width: 40px;
 
-      .stacked & {
+      .grid-pattern & {
       display: block;
       }
 
@@ -112,260 +130,14 @@ html {
 
     }
 
-}
+    &__close {
 
+      &:focus {
 
-
-
-
-/* &__item {
-width: 33.3%;
-
-  &:last-child {
-  flex-basis: 100%;
-
-    .responsive-tab__content {
-
-      width: 100%;
-
-    }
-
-
-  }
-
-
-  .responsive-tab__content {
-  //display: none;
-width: 300%;
-  }
-
-
-
-    &:nth-child(3n+1) {
-
-      .responsive-tab__content {
-
-
-        outline: 1px red solid;
-
-      }
-
-
-    }
-
-
-    &:nth-child(3n+2) {
-
-      .responsive-tab__content {
-
-
-        outline: 1px blue solid;
-        margin-left: -100%;
-
-      }
-
-
-    }
-
-    &:nth-child(3n+3) {
-
-      .responsive-tab__content {
-
-
-        outline: 1px green solid;
-        margin-left: -200%;
-
-      }
-
-
-    }
-
-
-
-   &:not(:nth-child(3n+1)) {
-
-      .responsive-tab__content {
-
-
-      outline: 1px green solid;
-
-    }
-
-
-  }
-
-    &:last-child {
-
-      .responsive-tab__content {
-
-        outline: 1px purple solid;
+        outline-offset: 5px;
 
       }
 
     }
-
-}
-
-// Button
-
-&__button {
-border: 0;
-display: block;
-margin: 0;
-padding: 1em;
-width: 100%;
-
-  [data-tab-vertical] & {
-  width: 100%;
-  }
-
-  &.active {
-  background-color: $base-color;
-  color: $base-color-active;
-  }
-
-} */
-
-// TabAccordion
-
-.tab-accordion {
-overflow: hidden;
-
-  &[data-tab-vertical][role="tablist"] {
-  display: flex;
-  }
-
-  &__container {
-
-    [role="tablist"] & {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    }
-
-  }
-
-  // Button
-
-  &__button {
-  border: 0;
-  display: block;
-  margin: 0;
-  padding: 1em;
-  width: 100%;
-
-    [role="tablist"] & {
-    background-color: $base-color-neutral;
-    color: inherit;
-    width: auto;
-    }
-
-    [data-tab-vertical] & {
-    width: 100%;
-    }
-
-    &.active {
-    background-color: $base-color;
-    color: $base-color-active;
-    }
-
-  }
-
-// Accordion & Layout Panel: Shared
-
-  &__panel, &__dynamic  {
-  background-color: $base-color;
-  color: $base-color-active;
-  display: none;
-  padding: 1em;
-  position: relative;
-
-    [role="tablist"] & {
-    flex-basis: 100%;
-    order: 1;
-    }
-
-    a {
-    color: inherit;
-    }
-
-  }
-
-  // Expanded Rules
-
-  &__panel {
-
-    &.expanded {
-    display: block;
-
-      [data-tab-vertical][role="tablist"] & {
-      display: none;
-      }
-
-    }
-
-  }
-
-  &__dynamic {
-
-      [data-tab-vertical][role="tablist"] & {
-      display: block;
-      }
-
-  }
-
-  // Content Area
-
-  &__content {
-  position: relative;
-  }
-
-  // Focus State
-  // Accessibility: NEVER remove focus outlines! Either redesign them or design an alternative focus state. Learn: https://webaim.org/articles/contrast/
-
-  &__button, &__panel, &__dynamic {
-
-    &:focus {
-    outline-color: currentColor;
-    outline-offset: -5px;
-    outline-style: solid;
-    outline-width: 1px;
-    }
-
-  }
-
-  // Return to Navigation
-
-  &__return {
-  background-color: $base-color;
-  font-size: .9rem;
-  padding: 0 .5em;
-  position: absolute;
-  right: 10px;
-  top: -80px;
-
-    &:focus {
-    top: 10px;
-    }
-
-  }
-
-  // Animation Example
-  // Note: Remove if not needed from your site
-
-  &__content {
-
-    @media (prefers-reduced-motion: no-preference) {
-
-      bottom: -100px;
-      transition: all 300ms ease-in;
-
-        .expanded & {
-        bottom: 0;
-        }
-
-    }
-
-  }
 
 }
