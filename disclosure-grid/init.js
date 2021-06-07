@@ -4,7 +4,6 @@
 
   Contributor(s):
   Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy
-  Bobby KC, Email: bobby.kc@radancy.com
   Dependencies: jQuery
 
 */
@@ -26,7 +25,8 @@
   // Commonly used Classes, Data Attributes, States, and Strings.
 
   var grid = ".disclosure-grid";
-  var gridBreakpoint = "data-grid-breakpoint";
+  var gridLarge = "data-grid-large";
+  var gridMedium = "data-grid-medium";
 
   // Grab the hash (fragment) from the URL.
 
@@ -39,7 +39,8 @@
   // Create an array to store each Grid breakpoint in,
   // which we will loop through later...
 
-  var disclosureGridBreakpoints = [];
+  var disclosureGridsLarge = [];
+  var disclosureGridsMedium = [];
 
   // loop through each Grid...
 
@@ -47,11 +48,13 @@
 
     // Get each Grid breakpoint...
 
-    var disclosureBreakpoint = gridItem.getAttribute(gridBreakpoint);
+    var disclosureLargeBreakpoint = gridItem.getAttribute(gridLarge);
+    var disclosureMediumBreakpoint = gridItem.getAttribute(gridMedium);
 
     // Store each breakpoint in array (above) for later use by matchMedia.
 
-    disclosureGridBreakpoints.push(window.matchMedia(disclosureBreakpoint));
+    disclosureGridsLarge.push(window.matchMedia(disclosureLargeBreakpoint));
+    disclosureGridsMedium.push(window.matchMedia(disclosureMediumBreakpoint));
 
   });
 
@@ -61,54 +64,131 @@
 
     disclosureGrids.forEach(function(gridItem, i){
 
-      // Begin looping though breakpoints and altering DOM as each of
-      // those viewports are resized/loaded.
+      var gridItemCount = i + 1;
 
-      if (disclosureGridBreakpoints[i].matches) {
+      gridItem.classList.add("grid-pattern");
 
-        $(".disclosure-grid").addClass("grid-pattern");
+      var gridButton = gridItem.querySelectorAll(".disclosure-grid__button");
+      var gridContent = gridItem.querySelectorAll(".disclosure-grid__content");
 
-        // loop though button
+      // Begin looping though grids and altering DOM as each viewport is met.
+
+      if (disclosureGridsMedium[i].matches) {
+
+        var gridSize = parseInt(gridItem.dataset.gridMin);
+
+      } else if (disclosureGridsLarge[i].matches) {
+
+        var gridSize = parseInt(gridItem.dataset.gridMax);
+
+      } else {
+
+        // Small Screen
+
+        gridItem.classList.remove("grid-pattern");
+
+        gridButton.forEach(function(button, e){
+
+          button.removeAttribute("style");
+
+        });
+
+        gridContent.forEach(function(content, e){
+
+          content.removeAttribute("style");
+
+        });
+
+      }
+
+      if (disclosureGridsLarge[i].matches || disclosureGridsMedium[i].matches) {
 
         var gridButtonCount = 1;
-        var gridContentCount = 5; // WHEN SCREEN SIZE CHANGES, CHANGE THIS NUMBER TO 3
+        var gridContentCount = gridSize + 1; // WHEN SCREEN SIZE CHANGES, CHANGE THIS NUMBER TO 3
 
         // Button Order
 
-        $(".disclosure-grid__button").each(function(e) {
+        gridButton.forEach(function(button, e){
 
-          $(this).attr("style", "order: " + gridButtonCount)
+          button.setAttribute("style", "order: " + gridButtonCount + "; width: calc(100%/" + gridSize + ")");
 
-          if (gridButtonCount % 4 == 0) { // WHEN SCREEN SIZE CHANGES, CHANGE THIS NUMBER TO 2
+          if (gridButtonCount % gridSize == 0) { // WHEN SCREEN SIZE CHANGES, CHANGE THIS NUMBER TO 2
 
-            gridButtonCount += 4; // WHEN SCREEN SIZE CHANGES, CHANGE THIS NUMBER TO 2
+            gridButtonCount += gridSize; // WHEN SCREEN SIZE CHANGES, CHANGE THIS NUMBER TO 2
 
           }
 
           gridButtonCount++
 
+          // Set Active Content
+
+          var gridCount = e + 1;
+          var gridSelected = parseInt(gridItem.dataset.gridActive);
+
+          if (gridCount === gridSelected) {
+
+              button.setAttribute("aria-expanded", "true");
+
+          } else {
+
+              button.setAttribute("aria-expanded", "false");
+
+          }
+
+          // Button Toggle
+          // TODO: Allow mobile to have multiple opens.
+
+          button.addEventListener("click", function () {
+
+            var gridItemButtons = gridItem.querySelectorAll(".disclosure-grid__button");
+
+            gridItemButtons.forEach(function(test){
+
+              test.setAttribute("aria-expanded", "false");
+
+            });
+
+            this.setAttribute("aria-expanded", "true");
+            this.nextElementSibling.setAttribute("tabindex", "-1");
+            this.nextElementSibling.focus();
+
+          });
+
         });
 
         // Content Order
 
-        $(".disclosure-grid__content").each(function(e) {
+        gridContent.forEach(function(content, e){
 
-          $(this).attr("style", "order: " + gridContentCount)
+          var contentCount = e + 1;
 
-          if (gridContentCount % 4 == 0) { // WHEN SCREEN SIZE CHANGES, CHANGE THIS NUMBER TO 2
+          content.setAttribute("style", "order: " + gridContentCount);
 
-            gridContentCount += 4; // WHEN SCREEN SIZE CHANGES, CHANGE THIS NUMBER TO 2
+          if (gridContentCount % gridSize == 0) { // WHEN SCREEN SIZE CHANGES, CHANGE THIS NUMBER TO 2
+
+            gridContentCount += gridSize; // WHEN SCREEN SIZE CHANGES, CHANGE THIS NUMBER TO 2
 
           }
 
           gridContentCount++
 
+          content.setAttribute ("id", "content-" + gridItemCount + "-" + contentCount);
+
+          // Close Button
+
+          var gridCloseButton = document.createElement("button");
+          gridCloseButton.setAttribute("aria-label", "Close");
+          gridCloseButton.classList.add("disclosure-grid__close");
+
+          gridCloseButton.addEventListener("click", function () {
+
+             this.parentNode.previousElementSibling.setAttribute("aria-expanded", "false");
+
+          });
+
+          content.prepend(gridCloseButton);
+
         });
-
-      } else {
-
-        $(".disclosure-grid").removeClass("grid-pattern");
-        $(".disclosure-grid__button, .disclosure-grid__content").removeAttr("style");
 
       }
 
@@ -116,48 +196,17 @@
 
   }
 
-  $(".disclosure-grid__button").each(function(e) {
+  // Initiate viewPortWidth function when viewport is resized.
 
-    var gridCount = e + 1;
-    var gridActive = $(this).parent().data("grid-active");
+  disclosureGridsLarge.forEach(function(breakpoints){
 
-    if (gridCount === gridActive) {
-
-        $(this).attr("aria-expanded", "true");
-
-    } else {
-
-        $(this).attr("aria-expanded", "false");
-
-    }
-
-  }).on("click", function() {
-
-    $(".disclosure-grid__button").attr("aria-expanded", "false");
-
-    $(this).attr("aria-expanded", function (i, attr) {
-
-      return attr == "true" ? "false" : "true"
-
-    }).next().attr("tabindex", "-1").focus();
-
-  });
-
-  $(".disclosure-grid__content").each(function(e) {
-
-    $(this).prepend("<button class='disclosure-grid__close' aria-label='Close'></button>");
-
-  });
-
-  $(".disclosure-grid__close").on("click", function() {
-
-    $(this).parent().prev().attr("aria-expanded", "false");
+    breakpoints.addListener(gridViewPort);
 
   });
 
   // Initiate viewPortWidth function when viewport is resized.
 
-  disclosureGridBreakpoints.forEach(function(breakpoints){
+  disclosureGridsMedium.forEach(function(breakpoints){
 
     breakpoints.addListener(gridViewPort);
 
