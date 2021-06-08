@@ -45,7 +45,11 @@
 
   // loop through each Grid...
 
-  disclosureGrids.forEach(function(gridItem){
+  disclosureGrids.forEach(function(gridItem, i){
+
+    var gridItemCount = i + 1;
+    gridItem.setAttribute("id", "disclosure-grid-" + gridItemCount);
+
 
     // Get each Grid breakpoint...
 
@@ -59,6 +63,22 @@
 
   });
 
+  if(URLFragment.indexOf("grid-content") > -1) {
+
+    // Parse fragment and pull grid and content ID number.
+    // We will then target specific grid and reset data-grid-active with open value.
+
+    var gridFragment = URLFragment.split(/-/g).slice(2);
+    var gridSelected = parseInt(gridFragment[0]);
+    var gridContentSelected = gridFragment[1];
+    var grid = document.getElementById("disclosure-grid-" + gridSelected);
+
+    // Reset data-grid-active
+
+    grid.setAttribute("data-grid-active", gridContentSelected);
+
+  }
+
   function gridViewPort() {
 
     // Loop through each Grid...
@@ -68,7 +88,6 @@
       var gridItemCount = i + 1;
 
       gridItem.classList.add("grid-pattern");
-      gridItem.setAttribute("id", "disclosure-grid-" + gridItemCount);
 
       var gridButton = gridItem.querySelectorAll(".disclosure-grid__button");
       var gridContent = gridItem.querySelectorAll(".disclosure-grid__content");
@@ -129,7 +148,7 @@
         var gridID = gridItemCount + "-" + buttonCount;
 
         button.setAttribute ("id", "grid-button-" + gridID);
-        button.setAttribute ("aria-controls", "content-" + gridID);
+        button.setAttribute ("aria-controls", "grid-content-" + gridID);
 
         // Set Active Content
 
@@ -169,6 +188,12 @@
           var gridURLBypass = gridItem.getAttribute(gridDisableURL);
           var selectedGridContentID = this.nextElementSibling.getAttribute("id");
           var targetContent = document.getElementById(selectedGridContentID);
+
+          // On click, add or change data-grid-active value.
+
+          var gridFragment = selectedGridContentID.split(/-/g).slice(2);
+          var gridContentSelected = gridFragment[1];
+          this.parentNode.setAttribute("data-grid-active", gridContentSelected)
 
           // Call Callback Function
 
@@ -216,7 +241,7 @@
         var gridID = gridItemCount + "-" + contentCount;
 
         content.setAttribute ("aria-labelledby", "grid-button-" + gridID);
-        content.setAttribute ("id", "content-" + gridID);
+        content.setAttribute ("id", "grid-content-" + gridID);
 
         // Close Button
 
@@ -227,6 +252,7 @@
         gridCloseButton.addEventListener("click", function () {
 
             this.parentNode.previousElementSibling.setAttribute("aria-expanded", "false");
+            this.parentNode.parentNode.removeAttribute("data-grid-active");
 
         });
 
@@ -258,23 +284,13 @@
 
   gridViewPort();
 
-  // Check if URL has fragment with "content" in it. Open and scroll to content if it does.
+  if(URLFragment.indexOf("grid-content") > -1) {
 
-  if(URLFragment.indexOf("content") > -1) {
+    // Focus and scroll to target content.
 
     var selectedGridContent = document.getElementById(URLFragment);
 
-    var selectedGrid = selectedGridContent.parentNode.querySelectorAll(".disclosure-grid__button");
-
-    selectedGrid.forEach(function(button, e){
-
-      button.setAttribute("aria-expanded", "false");
-
-    });
-
-    selectedGridContent.previousElementSibling.setAttribute("aria-expanded", "true")
     selectedGridContent.setAttribute("tabindex", "-1");
-
     selectedGridContent.scrollIntoView({
 
       block: "end"
