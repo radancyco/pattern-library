@@ -27,6 +27,7 @@
   var grid = ".disclosure-grid";
   var gridLarge = "data-grid-large";
   var gridMedium = "data-grid-medium";
+  var gridDisableURL = "data-grid-disable-url";
 
   // Grab the hash (fragment) from the URL.
 
@@ -67,6 +68,7 @@
       var gridItemCount = i + 1;
 
       gridItem.classList.add("grid-pattern");
+      gridItem.setAttribute("id", "disclosure-grid-" + gridItemCount);
 
       var gridButton = gridItem.querySelectorAll(".disclosure-grid__button");
       var gridContent = gridItem.querySelectorAll(".disclosure-grid__content");
@@ -82,8 +84,6 @@
         var gridSize = parseInt(gridItem.dataset.gridMax);
 
       } else {
-
-        // Small Screen
 
         gridItem.classList.remove("grid-pattern");
 
@@ -101,14 +101,16 @@
 
       }
 
-      if (disclosureGridsLarge[i].matches || disclosureGridsMedium[i].matches) {
+      var gridButtonCount = 1;
+      var gridContentCount = gridSize + 1; // WHEN SCREEN SIZE CHANGES, CHANGE THIS NUMBER TO 3
 
-        var gridButtonCount = 1;
-        var gridContentCount = gridSize + 1; // WHEN SCREEN SIZE CHANGES, CHANGE THIS NUMBER TO 3
+      // Button Order
 
-        // Button Order
+      gridButton.forEach(function(button, e){
 
-        gridButton.forEach(function(button, e){
+        var buttonCount = e + 1;
+
+        if (disclosureGridsLarge[i].matches || disclosureGridsMedium[i].matches) {
 
           button.setAttribute("style", "order: " + gridButtonCount + "; width: calc(100%/" + gridSize + ")");
 
@@ -120,47 +122,82 @@
 
           gridButtonCount++
 
-          // Set Active Content
+        }
 
-          var gridCount = e + 1;
-          var gridSelected = parseInt(gridItem.dataset.gridActive);
+        // Add ID
 
-          if (gridCount === gridSelected) {
+        var gridID = gridItemCount + "-" + buttonCount;
 
-              button.setAttribute("aria-expanded", "true");
+        button.setAttribute ("id", "grid-button-" + gridID);
+        button.setAttribute ("aria-controls", "content-" + gridID);
 
-          } else {
+        // Set Active Content
 
-              button.setAttribute("aria-expanded", "false");
+        var gridCount = e + 1;
+        var gridSelected = parseInt(gridItem.dataset.gridActive);
 
-          }
+        if (gridCount === gridSelected) {
 
-          // Button Toggle
-          // TODO: Allow mobile to have multiple opens.
+          button.setAttribute("aria-expanded", "true");
 
-          button.addEventListener("click", function () {
+        } else {
 
-            var gridItemButtons = gridItem.querySelectorAll(".disclosure-grid__button");
+          button.setAttribute("aria-expanded", "false");
 
-            gridItemButtons.forEach(function(test){
+        }
 
-              test.setAttribute("aria-expanded", "false");
+        // Button Toggle
+        // TODO: Allow mobile to have multiple opens.
 
-            });
+        button.addEventListener("click", function () {
 
-            this.setAttribute("aria-expanded", "true");
-            this.nextElementSibling.setAttribute("tabindex", "-1");
-            this.nextElementSibling.focus();
+          var gridItemButtons = gridItem.querySelectorAll(".disclosure-grid__button");
+
+          gridItemButtons.forEach(function(buttons){
+
+            buttons.setAttribute("aria-expanded", "false");
 
           });
 
+          this.setAttribute("aria-expanded", "true");
+          this.nextElementSibling.setAttribute("tabindex", "-1");
+          this.nextElementSibling.focus();
+
+          // Append fragment to URL if data-tab-disable-url not present.
+          // TODO: Investagte possible performance issue with History API.
+
+          var gridURLBypass = gridItem.getAttribute(gridDisableURL);
+          var selectedGridContentID = this.nextElementSibling.getAttribute("id");
+          var targetContent = document.getElementById(selectedGridContentID);
+
+          // Call Callback Function
+
+          var gridCallBack = this.parentNode.dataset.gridCallback;
+
+          if(gridCallBack !== undefined) {
+
+            contentTarget = this.nextElementSibling.getAttribute("id");
+            customCallback(contentTarget, gridCallBack);
+
+          }
+
+          if(gridURLBypass === null) {
+
+            history.replaceState(null, null, "#" + selectedGridContentID);
+
+          }
+
         });
 
-        // Content Order
+      });
 
-        gridContent.forEach(function(content, e){
+      // Content Order
 
-          var contentCount = e + 1;
+      gridContent.forEach(function(content, e){
+
+        var contentCount = e + 1;
+
+        if (disclosureGridsLarge[i].matches || disclosureGridsMedium[i].matches) {
 
           content.setAttribute("style", "order: " + gridContentCount);
 
@@ -172,25 +209,30 @@
 
           gridContentCount++
 
-          content.setAttribute ("id", "content-" + gridItemCount + "-" + contentCount);
+        }
 
-          // Close Button
+        // Add ID
 
-          var gridCloseButton = document.createElement("button");
-          gridCloseButton.setAttribute("aria-label", "Close");
-          gridCloseButton.classList.add("disclosure-grid__close");
+        var gridID = gridItemCount + "-" + contentCount;
 
-          gridCloseButton.addEventListener("click", function () {
+        content.setAttribute ("aria-labelledby", "grid-button-" + gridID);
+        content.setAttribute ("id", "content-" + gridID);
 
-             this.parentNode.previousElementSibling.setAttribute("aria-expanded", "false");
+        // Close Button
 
-          });
+        var gridCloseButton = document.createElement("button");
+        gridCloseButton.setAttribute("aria-label", "Close");
+        gridCloseButton.classList.add("disclosure-grid__close");
 
-          content.prepend(gridCloseButton);
+        gridCloseButton.addEventListener("click", function () {
+
+            this.parentNode.previousElementSibling.setAttribute("aria-expanded", "false");
 
         });
 
-      }
+        content.prepend(gridCloseButton);
+
+      });
 
     });
 
@@ -216,4 +258,78 @@
 
   gridViewPort();
 
+  // Check if URL has fragment with "content" in it. Open and scroll to content if it does.
+
+  if(URLFragment.indexOf("content") > -1) {
+
+    var selectedGridContent = document.getElementById(URLFragment);
+
+    var selectedGrid = selectedGridContent.parentNode.querySelectorAll(".disclosure-grid__button");
+
+    selectedGrid.forEach(function(button, e){
+
+      button.setAttribute("aria-expanded", "false");
+
+    });
+
+    selectedGridContent.previousElementSibling.setAttribute("aria-expanded", "true")
+    selectedGridContent.setAttribute("tabindex", "-1");
+
+    selectedGridContent.scrollIntoView({
+
+      block: "end"
+
+    });
+
+    selectedGridContent.focus({
+
+      preventScroll: true
+
+    });
+
+  }
+
+  // Callback
+
+  var gridCallBack = document.querySelectorAll(".disclosure-grid[data-grid-callback]");
+
+  gridCallBack.forEach(function(grid){
+
+    var callBackFunction = grid.dataset.gridCallback;
+    var callBackContent = grid.querySelectorAll(".disclosure-grid__button[aria-expanded=true] + .disclosure-grid__content");
+
+    callBackContent.forEach(function(content){
+
+      contentTarget = content.getAttribute("id");
+      customCallback(contentTarget, callBackFunction);
+
+    });
+
+  });
+
+  // Custom callback with variable name. Accepts ID of content you will target.
+
+  function customCallback(contentTarget, customCallBackName) {
+
+    if (customCallBackName !== null) {
+
+      window[customCallBackName](contentTarget);
+
+    }
+
+  }
+
 })();
+
+// Example Function
+
+function helloWorld(id) {
+
+  var targetContent = document.getElementById(id);
+
+  var para = document.createElement("p");
+  para.classList.add("hello-world");
+  para.innerHTML = "ID of content area is " + id + ". You can use this ID to reinitiate dynamic functionality within disclosed content.";
+  targetContent.append(para);
+
+}
