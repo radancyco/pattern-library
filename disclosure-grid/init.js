@@ -4,7 +4,7 @@
 
   Contributor(s):
   Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy
-  Dependencies: jQuery
+  Dependencies: None
 
 */
 
@@ -18,52 +18,62 @@
 
   }
 
-  // Display which Grid is in use via console:
+  // Display which Grid version in use via console:
 
   console.log('%c Grid Disclosure v1.0 (Beta) in use. ', 'background: #6e00ee; color: #fff');
 
   // Commonly used Classes, Data Attributes, States, and Strings.
 
-  var grid = ".disclosure-grid";
-  var gridLarge = "data-grid-large";
-  var gridMedium = "data-grid-medium";
-  var gridDisableURL = "data-grid-disable-url";
+  var gridButtonClass = ".disclosure-grid__button";
+  var gridButtonId = "grid-button";
+  var gridClass = ".disclosure-grid";
+  var gridCloseClass = "disclosure-grid__close"
+  var gridCloseText = "Close";
+  var gridContentAreaId = "grid-content";
+  var gridContentClass = ".disclosure-grid__content";
+  var gridDataActive = "data-grid-active";
+  var gridDataClose = "data-grid-close";
+  var gridDataDisableURL = "data-grid-disable-url";
+  var gridDataLarge = "data-grid-large";
+  var gridDataMedium = "data-grid-medium";
+  var gridDisclosureId = "grid-disclosure";
+  var gridFormatClass = "grid-format";
+  var gridButtonAll = document.querySelectorAll(gridButtonClass);
+  var gridCallBackAll = document.querySelectorAll(".disclosure-grid[data-grid-callback]");
+  var gridContentAll = document.querySelectorAll(gridContentClass);
+  var gridDisclosuresAll = document.querySelectorAll(gridClass);
 
-  // Grab the hash (fragment) from the URL.
+  // Grab the hash (fragment) from the URL, which we may need later.
 
   var URLFragment = window.location.hash.substr(1);
 
-  // Get all Grids on the page...
+  // Create an array to store each Grid breakpoint in, which we will loop through later...
 
-  var disclosureGrids = document.querySelectorAll(grid);
-
-  // Create an array to store each Grid breakpoint in,
-  // which we will loop through later...
-
-  var disclosureGridsLarge = [];
-  var disclosureGridsMedium = [];
+  var gridDisclosureLarge = [];
+  var gridDisclosureMedium = [];
 
   // loop through each Grid...
 
-  disclosureGrids.forEach(function(gridItem, i){
+  gridDisclosuresAll.forEach(function(gridItem, i){
 
     var gridItemCount = i + 1;
-    gridItem.setAttribute("id", "disclosure-grid-" + gridItemCount);
+    gridItem.setAttribute("id", gridDisclosureId + "-" + gridItemCount);
 
+    // Get each Grids medium and large breakpoints...
 
-    // Get each Grid breakpoint...
+    var disclosureLargeBreakpoint = gridItem.getAttribute(gridDataLarge);
+    var disclosureMediumBreakpoint = gridItem.getAttribute(gridDataMedium);
 
-    var disclosureLargeBreakpoint = gridItem.getAttribute(gridLarge);
-    var disclosureMediumBreakpoint = gridItem.getAttribute(gridMedium);
+    // Store each breakpoint in array (created above) for later use by matchMedia.
 
-    // Store each breakpoint in array (above) for later use by matchMedia.
-
-    disclosureGridsLarge.push(window.matchMedia(disclosureLargeBreakpoint));
-    disclosureGridsMedium.push(window.matchMedia(disclosureMediumBreakpoint));
+    gridDisclosureLarge.push(window.matchMedia(disclosureLargeBreakpoint));
+    gridDisclosureMedium.push(window.matchMedia(disclosureMediumBreakpoint));
 
   });
 
-  if(URLFragment.indexOf("grid-content") > -1) {
+  // If URL fragment present with "grid-content"...
+
+  if(URLFragment.indexOf(gridContentAreaId) > -1) {
 
     // Parse fragment and pull grid and content ID number.
     // We will then target specific grid and reset data-grid-active with open value.
@@ -71,11 +81,11 @@
     var gridFragment = URLFragment.split(/-/g).slice(2);
     var gridSelected = parseInt(gridFragment[0]);
     var gridContentSelected = gridFragment[1];
-    var grid = document.getElementById("disclosure-grid-" + gridSelected);
+    var grid = document.getElementById(gridDisclosureId + "-" + gridSelected);
 
     // Reset data-grid-active
 
-    grid.setAttribute("data-grid-active", gridContentSelected);
+    grid.setAttribute(gridDataActive, gridContentSelected);
 
   }
 
@@ -83,74 +93,107 @@
 
     // Loop through each Grid...
 
-    disclosureGrids.forEach(function(gridItem, i){
+    gridDisclosuresAll.forEach(function(gridItem, i){
 
       var gridItemCount = i + 1;
 
-      gridItem.classList.add("grid-pattern");
+      // Add Unique class to medium and large viewport widths.
 
-      var gridButton = gridItem.querySelectorAll(".disclosure-grid__button");
-      var gridContent = gridItem.querySelectorAll(".disclosure-grid__content");
+      gridItem.classList.add(gridFormatClass);
+
+      // Get each Grids child buttons and content
+
+      var gridButtonChild = gridItem.querySelectorAll(gridButtonClass);
+      var gridContentChild = gridItem.querySelectorAll(gridContentClass);
 
       // Begin looping though grids and altering DOM as each viewport is met.
 
-      if (disclosureGridsMedium[i].matches) {
+      if (gridDisclosureMedium[i].matches) {
+
+        // Here we match the medium breakpoint with the min amount of grid items we want displayed...
 
         var gridSize = parseInt(gridItem.dataset.gridMin);
 
-      } else if (disclosureGridsLarge[i].matches) {
+      } else if (gridDisclosureLarge[i].matches) {
+
+        // Here we match the large breakpoint with the max amount of grid items we want displayed...
 
         var gridSize = parseInt(gridItem.dataset.gridMax);
 
       } else {
 
-        gridItem.classList.remove("grid-pattern");
+        // It's a small viewport (mobile), so we can remove the special class.
 
-        gridButton.forEach(function(button, e){
-
-          button.removeAttribute("style");
-
-        });
-
-        gridContent.forEach(function(content, e){
-
-          content.removeAttribute("style");
-
-        });
+        gridItem.classList.remove(gridFormatClass);
 
       }
 
       var gridButtonCount = 1;
       var gridContentCount = gridSize + 1; // WHEN SCREEN SIZE CHANGES, CHANGE THIS NUMBER TO 3
 
-      // Button Order
+      // Button Child
 
-      gridButton.forEach(function(button, e){
+      gridButtonChild.forEach(function(button, e){
 
         var buttonCount = e + 1;
 
-        if (disclosureGridsLarge[i].matches || disclosureGridsMedium[i].matches) {
+        // Rather than manipulate the DOM bu copying, creating, and appending elements, we can instead "reorder"
+        // the layout via use of the CSS order property when conditions are met.
 
-          button.setAttribute("style", "order: " + gridButtonCount + "; width: calc(100%/" + gridSize + ")");
+        // Buttons will contain an order of 1, 2, 3, 4 and so on.
+        // To address accessibility concerns, we simply manage focus when button clicked.
+        // Tabbing should be just fine, though we may need to include arrow functions in future release.
 
-          if (gridButtonCount % gridSize == 0) { // WHEN SCREEN SIZE CHANGES, CHANGE THIS NUMBER TO 2
+        /*
 
-            gridButtonCount += gridSize; // WHEN SCREEN SIZE CHANGES, CHANGE THIS NUMBER TO 2
+          Example:
+
+          <button stle="order: 1"> ... </button>
+
+          <div style="order: 3"> ... </div>
+
+          <button stle="order: 2"> ... </button>
+
+          <div style="order: 4"> ... </div>
+
+          ...
+
+        */
+
+        if (gridDisclosureLarge[i].matches || gridDisclosureMedium[i].matches) {
+
+          // var itemSize = parseInt(100 / gridSize);
+          // button.setAttribute("style", "order: " + gridButtonCount + "; width: calc(100%/" + gridSize + "); flex: 0 0 " + itemSize + "%;");
+
+          // TODO: Spacing around grids proving to be a problem. Need to come up with a solution that allows dev to have margins, without breaking the grid.
+          // As goofy as this sounds, adding borders to button, with same color as background, may solve the issue. 
+
+          button.setAttribute("style", "order: " + gridButtonCount + "; width: calc(100%/" + gridSize + ");");
+
+          if (gridButtonCount % gridSize === 0) {
+
+            gridButtonCount += gridSize;
 
           }
 
           gridButtonCount++
 
+        } else {
+
+          // If it's a small (mobile) viewport, then all elements are simply stacked, so need for inline style.
+
+          button.removeAttribute("style");
+
         }
 
-        // Add ID
+        // Add additional attributes for accessibility, etc.
 
         var gridID = gridItemCount + "-" + buttonCount;
 
-        button.setAttribute ("id", "grid-button-" + gridID);
-        button.setAttribute ("aria-controls", "grid-content-" + gridID);
+        button.setAttribute ("id", gridButtonId + "-" + gridID);
+        button.setAttribute ("aria-controls", gridContentAreaId + "-" + gridID);
 
-        // Set Active Content
+        // Set active content
 
         var gridCount = e + 1;
         var gridSelected = parseInt(gridItem.dataset.gridActive);
@@ -165,98 +208,45 @@
 
         }
 
-        // Button Toggle
-        // TODO: Allow mobile to have multiple opens.
-
-        button.addEventListener("click", function () {
-
-          var gridItemButtons = gridItem.querySelectorAll(".disclosure-grid__button");
-
-          gridItemButtons.forEach(function(buttons){
-
-            buttons.setAttribute("aria-expanded", "false");
-
-          });
-
-          this.setAttribute("aria-expanded", "true");
-          this.nextElementSibling.setAttribute("tabindex", "-1");
-          this.nextElementSibling.focus();
-
-          // Append fragment to URL if data-tab-disable-url not present.
-          // TODO: Investagte possible performance issue with History API.
-
-          var gridURLBypass = gridItem.getAttribute(gridDisableURL);
-          var selectedGridContentID = this.nextElementSibling.getAttribute("id");
-          var targetContent = document.getElementById(selectedGridContentID);
-
-          // On click, add or change data-grid-active value.
-
-          var gridFragment = selectedGridContentID.split(/-/g).slice(2);
-          var gridContentSelected = gridFragment[1];
-          this.parentNode.setAttribute("data-grid-active", gridContentSelected)
-
-          // Call Callback Function
-
-          var gridCallBack = this.parentNode.dataset.gridCallback;
-
-          if(gridCallBack !== undefined) {
-
-            contentTarget = this.nextElementSibling.getAttribute("id");
-            customCallback(contentTarget, gridCallBack);
-
-          }
-
-          if(gridURLBypass === null) {
-
-            history.replaceState(null, null, "#" + selectedGridContentID);
-
-          }
-
-        });
-
       });
 
-      // Content Order
+      // Content Child
 
-      gridContent.forEach(function(content, e){
+      gridContentChild.forEach(function(content, e){
+
+        // Rather than manipulate the DOM bu copying, creating, and appending elements, we can instead "reorder"
+        // the layout via use of the CSS order property when conditions are met.
+
+        // Content will contain an order of 5, 6, 7, 8 and so on, making content appear as if they are under the buttons.
 
         var contentCount = e + 1;
 
-        if (disclosureGridsLarge[i].matches || disclosureGridsMedium[i].matches) {
+        if (gridDisclosureLarge[i].matches || gridDisclosureMedium[i].matches) {
 
           content.setAttribute("style", "order: " + gridContentCount);
 
-          if (gridContentCount % gridSize == 0) { // WHEN SCREEN SIZE CHANGES, CHANGE THIS NUMBER TO 2
+          if (gridContentCount % gridSize === 0) {
 
-            gridContentCount += gridSize; // WHEN SCREEN SIZE CHANGES, CHANGE THIS NUMBER TO 2
+            gridContentCount += gridSize;
 
           }
 
           gridContentCount++
 
+        } else {
+
+          // If it's a small (mobile) viewport, then all elements are simply stacked, so need for inline style.
+
+          content.removeAttribute("style");
+
         }
 
-        // Add ID
+        // Add additional attributes for accessibility, etc.
 
         var gridID = gridItemCount + "-" + contentCount;
 
-        content.setAttribute ("aria-labelledby", "grid-button-" + gridID);
-        content.setAttribute ("id", "grid-content-" + gridID);
-
-        // Close Button
-
-        var gridCloseButton = document.createElement("button");
-        gridCloseButton.setAttribute("aria-label", "Close");
-        gridCloseButton.classList.add("disclosure-grid__close");
-
-        gridCloseButton.addEventListener("click", function () {
-
-            this.parentNode.previousElementSibling.setAttribute("aria-expanded", "false");
-            this.parentNode.parentNode.removeAttribute("data-grid-active");
-
-        });
-
-        content.prepend(gridCloseButton);
+        content.setAttribute ("aria-labelledby", gridButtonId + "-" + gridID);
+        content.setAttribute ("id", gridContentAreaId + "-" + gridID);
 
       });
 
@@ -264,27 +254,29 @@
 
   }
 
-  // Initiate viewPortWidth function when viewport is resized.
+  // Add listner and initiate gridViewPort function when viewport is resized.
 
-  disclosureGridsLarge.forEach(function(breakpoints){
-
-    breakpoints.addListener(gridViewPort);
-
-  });
-
-  // Initiate viewPortWidth function when viewport is resized.
-
-  disclosureGridsMedium.forEach(function(breakpoints){
+  gridDisclosureLarge.forEach(function(breakpoints){
 
     breakpoints.addListener(gridViewPort);
 
   });
 
-  // Initiate Grids on page load.
+  // Add listner and initiate gridViewPort function when viewport is resized.
+
+  gridDisclosureMedium.forEach(function(breakpoints){
+
+    breakpoints.addListener(gridViewPort);
+
+  });
+
+  // Initiate Grids on initial page load.
 
   gridViewPort();
 
-  if(URLFragment.indexOf("grid-content") > -1) {
+  // If hash exists, focus and scroll to it.
+
+  if(URLFragment.indexOf(gridContentAreaId) > -1) {
 
     // Focus and scroll to target content.
 
@@ -305,14 +297,93 @@
 
   }
 
-  // Callback
+  // Button Event
 
-  var gridCallBack = document.querySelectorAll(".disclosure-grid[data-grid-callback]");
+  gridButtonAll.forEach(function(button, e){
 
-  gridCallBack.forEach(function(grid){
+    // Button Toggle
+    // TODO: Allow mobile to have multiple opens.
+
+    button.addEventListener("click", function () {
+
+      if (this.getAttribute("aria-expanded") === "false") {
+
+        var gridItemButtons = this.parentNode.querySelectorAll(gridButtonClass);
+
+        gridItemButtons.forEach(function(buttons){
+
+          buttons.setAttribute("aria-expanded", "false");
+
+        });
+
+        this.setAttribute("aria-expanded", "true");
+        this.nextElementSibling.setAttribute("tabindex", "-1");
+        this.nextElementSibling.focus();
+
+        // Append fragment to URL if data-tab-disable-url not present.
+
+        var gridURLBypass = this.parentNode.getAttribute(gridDataDisableURL);
+        var selectedGridContentID = this.nextElementSibling.getAttribute("id");
+        var targetContent = document.getElementById(selectedGridContentID);
+
+        // On click, add or change data-grid-active value. Better to just add/change a data attribute script already lookig for.
+
+        var gridFragment = selectedGridContentID.split(/-/g).slice(2);
+        var gridContentSelected = gridFragment[1];
+        this.parentNode.setAttribute(gridDataActive, gridContentSelected)
+
+        // if callback is present, then fire it off.
+
+        var gridCallBack = this.parentNode.dataset.gridCallback;
+
+        if(gridCallBack !== undefined) {
+
+          contentTarget = this.nextElementSibling.getAttribute("id");
+          customCallback(contentTarget, gridCallBack);
+
+        }
+
+        if(gridURLBypass === null) {
+
+          history.replaceState(null, null, "#" + selectedGridContentID);
+
+        }
+
+      }
+
+    });
+
+  });
+
+  // Content Order
+
+  gridContentAll.forEach(function(content, e){
+
+    // Close Button
+
+    if(!content.parentNode.hasAttribute(gridDataClose)) {
+
+      var gridCloseButton = document.createElement("button");
+      gridCloseButton.setAttribute("aria-label", gridCloseText);
+      gridCloseButton.classList.add(gridCloseClass);
+
+      gridCloseButton.addEventListener("click", function () {
+
+        this.parentNode.previousElementSibling.setAttribute("aria-expanded", "false");
+        this.parentNode.parentNode.removeAttribute(gridDataActive);
+
+      });
+
+      content.prepend(gridCloseButton);
+
+    }
+
+  });
+
+  gridCallBackAll.forEach(function(grid){
 
     var callBackFunction = grid.dataset.gridCallback;
-    var callBackContent = grid.querySelectorAll(".disclosure-grid__button[aria-expanded=true] + .disclosure-grid__content");
+    var callBackContent = grid.querySelectorAll(gridButtonClass + "[aria-expanded=true] + " + gridContentClass);
 
     callBackContent.forEach(function(content){
 
@@ -342,10 +413,8 @@
 function helloWorld(id) {
 
   var targetContent = document.getElementById(id);
-
-  var para = document.createElement("p");
-  para.classList.add("hello-world");
-  para.innerHTML = "ID of content area is " + id + ". You can use this ID to reinitiate dynamic functionality within disclosed content.";
-  targetContent.append(para);
+  var message = document.createElement("p");
+  message.innerHTML = "<strong>Hello! The ID of this content area is <em> " + id + "</em>. You can use a callback to initiate a function within the disclosed content area on page load, or reinitiate the same function on button click.</strong>";
+  targetContent.append(message);
 
 }

@@ -38,9 +38,8 @@ html {
 
 .disclosure-grid {
 display: flex;
-flex-direction: row;
 flex-wrap: wrap;
-justify-content: center;
+justify-content: center; // Remove if you want grid to justify left.
 
     &__button {
     border: 0;
@@ -117,7 +116,7 @@ justify-content: center;
       filter: invert(1);
       }
 
-      .grid-pattern & {
+      .grid-format & {
       display: block;
       }
 
