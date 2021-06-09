@@ -10,6 +10,10 @@
 
 (function() {
 
+  // IE11 Detection
+
+  var isIE11 = !!window.MSInputMethodContext && !!document.documentMode;
+
   // forEach Polyfill for IE11.
 
   if (window.NodeList && !NodeList.prototype.forEach) {
@@ -163,12 +167,27 @@
         if (gridDisclosureLarge[i].matches || gridDisclosureMedium[i].matches) {
 
           // var itemSize = parseInt(100 / gridSize);
-          // button.setAttribute("style", "order: " + gridButtonCount + "; width: calc(100%/" + gridSize + "); flex: 0 0 " + itemSize + "%;");
+          // button.setAttribute("style", "order: " + gridButtonCount + "; width: " + itemSize + "%;");
 
-          // TODO: Spacing around grids proving to be a problem. Need to come up with a solution that allows dev to have margins, without breaking the grid.
-          // As goofy as this sounds, adding borders to button, with same color as background, may solve the issue. 
+          // Note: Because spacing with margins is a problem for a dynamic l;ayout such of this, we have to pull in
+          // the computed margin value from CSS and apply calculation for inline style.
 
-          button.setAttribute("style", "order: " + gridButtonCount + "; width: calc(100%/" + gridSize + ");");
+          var buttonStyle = window.getComputedStyle(button);
+          var buttonMarginLeft = parseInt(buttonStyle.getPropertyValue("margin-left").replace("px", ""));
+          var buttonMarginRight = parseInt(buttonStyle.getPropertyValue("margin-right").replace("px", ""));
+          var buttonMarginTotal = buttonMarginLeft + buttonMarginRight;
+
+          button.setAttribute("style", "margin-right: " + buttonMarginRight + "px; margin-left: " + buttonMarginLeft + "px; order: " + gridButtonCount + "; width: calc(100%/" + gridSize + " - " + buttonMarginTotal + "px);");
+
+          if(!isIE11) {
+
+            button.setAttribute("style", "margin-right: " + buttonMarginRight + "px; margin-left: " + buttonMarginLeft + "px; order: " + gridButtonCount + "; width: calc(100%/" + gridSize + " - " + buttonMarginTotal + "px);");
+
+          } else {
+
+            button.setAttribute("style", "margin-right: " + buttonMarginRight + "px; margin-left: " + buttonMarginLeft + "px; order: " + gridButtonCount + "; width: calc(99.9%/" + gridSize + " - " + buttonMarginTotal + "px);");
+
+          }
 
           if (gridButtonCount % gridSize === 0) {
 
@@ -414,7 +433,7 @@ function helloWorld(id) {
 
   var targetContent = document.getElementById(id);
   var message = document.createElement("p");
-  message.innerHTML = "<strong>Hello! The ID of this content area is <em> " + id + "</em>. You can use a callback to initiate a function within the disclosed content area on page load, or reinitiate the same function on button click.</strong>";
+  message.innerHTML = "<strong>Hello! The ID of this content area is <em> " + id + "</em>. You can use a callback to initiate a function within the disclosed content area on page load and reinitiate the same function on button click.</strong>";
   targetContent.append(message);
 
 }
