@@ -16,7 +16,7 @@
 
   // forEach Polyfill for IE11.
 
-  if (window.NodeList && !NodeList.prototype.forEach) {
+  if(isIE11) {
 
     NodeList.prototype.forEach = Array.prototype.forEach;
 
@@ -176,8 +176,6 @@
           var buttonMarginLeft = parseInt(buttonStyle.getPropertyValue("margin-left").replace("px", ""));
           var buttonMarginRight = parseInt(buttonStyle.getPropertyValue("margin-right").replace("px", ""));
           var buttonMarginTotal = buttonMarginLeft + buttonMarginRight;
-
-          button.setAttribute("style", "margin-right: " + buttonMarginRight + "px; margin-left: " + buttonMarginLeft + "px; order: " + gridButtonCount + "; width: calc(100%/" + gridSize + " - " + buttonMarginTotal + "px);");
 
           if(!isIE11) {
 
