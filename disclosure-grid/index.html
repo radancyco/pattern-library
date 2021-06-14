@@ -10,7 +10,7 @@ title: "Grid Disclosure v1.0 (Beta)"
 
 {% include nav.html %}
 
-<p>This pattern will allow you to easily place and control the presentation of a button grid with multiple disclosures.</p>
+<p>This pattern will allow you to easily implement and control the presentation of a button grid with multiple disclosures.</p>
 
 <h2 id="parameters">Parameters</h2>
 
@@ -18,11 +18,17 @@ title: "Grid Disclosure v1.0 (Beta)"
   <li><b>data-grid-active (Number, Optional):</b> Using a number from "1" up, you can specify which content area should be open on page load. When this attribute is not specified, no panels will be open.</li>
   <li><b>data-grid-callback (String, Optional):</b> You can use a callback to initiate a function within the disclosed content area on page load and reinitiate the same function on button click. The function will fire when any button in the grid disclosure is engaged with. The value of this data attribute should, of course, be the same as the function you wish to call.</li>
   <li><b>data-grid-close (Boolean, Optional):</b> Removes all close buttons from content area.</li>
-  <li><b>data-grid-disable-url (Boolean, Optional):</b> By default, the URL will always change to reflect selected content area. This is recommended behavior because it allows one to share fragmented content more easily. If this behavior is not desired, you may use this attribute to disable this functionality.</li>
-  <li><b>data-grid-large (String, Optional): </b> Your "large" viewport breakpoint. At this breakpoint, your layout will be thrown into grid mode.</li>
+  <li><b>data-grid-disable-url (Boolean, Optional):</b> By default, the URL will always change to reflect selected content area. This is recommended behavior because it allows one to share fragmented content more easily. If this behavior is not desired, you may use this attribute to disable this behavior.</li>
+  <li><b>data-grid-large (String, Optional): </b> Your "large" viewport breakpoint. At this breakpoint, your layout will be thrown into "grid mode".</li>
   <li><b>data-grid-max (Number, Mandatory):</b> Specifies the number of grid items to display per row in "large" viewport. This attribute is mandatory when <code>data-grid-large</code> is in use.</li>
   <li><b>data-grid-medium (String, Optional):</b> Your "medium" viewport breakpoint. At this breakpoint, your layout will be thrown into grid mode. </li>
   <li><b>data-grid-min (Number, Mandatory):</b> Specifies the number of grid items to display per row in "medium" viewport. This attribute is mandatory when <code>data-grid-medium</code> is in use.</li>
+</ul>
+
+<h2 id="coming-soon">Coming Soon</h2>
+
+<ul>
+  <li>Ability to include placeholder content to fill in empty grid spaces. Some clients (and designers) do not like uneven space in desktop design.</li>
 </ul>
 
 <h2 id="example-1">Example 1: Basic Layout</h2>
