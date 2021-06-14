@@ -146,7 +146,7 @@
 
         // Buttons will contain an order of 1, 2, 3, 4 and so on.
         // To address accessibility concerns, we simply manage focus when button clicked.
-        // Tabbing should be just fine, though we may need to include arrow functions in future release.
+        // Tabbing should be just fine, though we may need to include keyboard arrow function in future release.
 
         /*
 
@@ -425,13 +425,13 @@
 
 })();
 
-// Example Function
+// Example Callback Function
 
-function helloWorld(id) {
+function helloWorld(contentID) {
 
-  var targetContent = document.getElementById(id);
+  var targetContent = document.getElementById(contentID);
   var message = document.createElement("p");
-  message.innerHTML = "<strong>Hello! The ID of this content area is <em> " + id + "</em>. You can use a callback to initiate a function within the disclosed content area on page load and reinitiate the same function on button click.</strong>";
+  message.innerHTML = "<strong>Hello World! The ID of this content area is <em> " + contentID + "</em>. You can use a callback to initiate a function within the disclosed content area on page load and reinitiate the same function on button click.</strong>";
   targetContent.append(message);
 
 }
