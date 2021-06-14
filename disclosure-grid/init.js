@@ -177,15 +177,15 @@
           var buttonMarginRight = parseInt(buttonStyle.getPropertyValue("margin-right").replace("px", ""));
           var buttonMarginTotal = buttonMarginLeft + buttonMarginRight;
 
-          if(!isIE11) {
+          // if(!isIE11) {
 
             button.setAttribute("style", "margin-right: " + buttonMarginRight + "px; margin-left: " + buttonMarginLeft + "px; order: " + gridButtonCount + "; width: calc(100%/" + gridSize + " - " + buttonMarginTotal + "px);");
 
-          } else {
+          // } else {
 
-            button.setAttribute("style", "margin-right: " + buttonMarginRight + "px; margin-left: " + buttonMarginLeft + "px; order: " + gridButtonCount + "; width: calc(99.9%/" + gridSize + " - " + buttonMarginTotal + "px);");
+            // button.setAttribute("style", "margin-right: " + buttonMarginRight + "px; margin-left: " + buttonMarginLeft + "px; order: " + gridButtonCount + "; width: calc(99.9%/" + gridSize + " - " + buttonMarginTotal + "px);");
 
-          }
+          // }
 
           if (gridButtonCount % gridSize === 0) {
 
