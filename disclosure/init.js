@@ -53,7 +53,7 @@ var simpleExpander = {
 
       this.setAttribute("aria-expanded", "false");
 
-      if( labelOpen.trim() ) {
+      if(labelOpen) {
 
         this.textContent = labelOpen;
 
@@ -65,7 +65,7 @@ var simpleExpander = {
 
       this.setAttribute("aria-expanded", "true");
 
-      if( labelClose.trim() ) {
+      if(labelClose) {
 
         this.textContent = labelClose;
 
