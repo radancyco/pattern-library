@@ -1,0 +1,199 @@
+/*!
+
+  Radancy Pattern Library: Floating Labels
+
+  Contributor(s):
+  Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy
+
+  Dependencies: Sass
+  Instructions: To run locally, install Sass (https://sass-lang.com/install), CL to directory this file in and run:
+  sass --watch init.scss:init.css --style compressed
+
+*/
+
+$base-color: #6F00EF;
+
+// Example 1: Inner Float
+
+.inner-float {
+padding: 1em 0;
+
+  @media (min-width: 900px) {
+
+    display: flex;
+    margin: 0 -10px;
+
+  }
+
+  .input-container {
+  border: 1px $base-color solid;
+  flex: 1 1 0;
+  margin-bottom: 10px;
+  position: relative;
+
+    @media (min-width: 900px) {
+
+      margin: 0 10px;
+
+    }
+
+  }
+
+  label {
+  display: inline-block;
+  font-size: 1rem;
+  left: 10px;
+  line-height: normal;
+  position: absolute;
+  top: 30px;
+  transition: all .2s ease;
+  z-index: 10;
+  }
+
+  input, select {
+  background-color: transparent;
+  border: 0;
+  display: block;
+  font-size: 1.25rem;
+  height: 75px;
+  margin: 0;
+  outline: 0;
+  padding: 0 10px;
+  position: relative;
+  width: 100%;
+
+    &:focus ~ label, &:valid ~ label {
+    top: 5px;
+    font-size: .8rem;
+    }
+
+    &:focus {
+    background-color: lightgoldenrodyellow;
+    }
+
+    &[type="submit"] {
+    background-color: $base-color;
+    color: #fff;
+
+      &:focus, &:hover {
+
+        background-color: gainsboro;
+        color: #000;
+
+      }
+
+    }
+
+  }
+
+}
+
+// Example 2: Outer Float
+
+.search-form {
+background-color: #eee;
+border-radius: 5px;
+border: 1px #666 solid;
+padding: 4em 0;
+}
+
+.search-form-fields {
+
+  @media (min-width: 63.75em) {
+
+    display: flex;
+
+  }
+
+  div {
+  flex: 1 1 0;
+  margin: 0 10px;
+  position: relative;
+  }
+
+  label {
+  display: block;
+  font-size: 1.1em;
+  left: 10px;
+  line-height: normal;
+  overflow: hidden;
+  position: absolute;
+  text-overflow: ellipsis;
+  top: 30px;
+  transition: all 150ms ease-in-out;
+  white-space: nowrap;
+  width: 85%;
+  }
+
+  input, select {
+  background-color: #fff;
+  border: 1px $base-color solid;
+  display: block;
+  font-size: 1.25rem;
+  height: 75px;
+  outline: 0;
+  padding: 0 10px;
+  position: relative;
+  width: 100%;
+
+    &:not([type=submit]), select {
+    color: transparent; // HACK: This is so that the select text does not show up _behind_ the label. Hacky hack is hacky. Wondering if SEO red flag?
+
+      &[disabled], &[disabled] ~ label {
+      cursor: not-allowed;
+      }
+
+      &[disabled] {
+      border-color: #808080;
+
+          ~ label {
+          color: #808080;
+          }
+
+      }
+
+      &.has-text, &.has-focus {
+      color: inherit;
+
+        // Mobile behavior only
+
+        @media (max-width: 63.75em) {
+
+          height: auto;
+          padding: 40px 10px 10px;
+
+        }
+
+        ~ label {
+          font-size: .9em;
+
+          @media (min-width: 63.75em) {
+
+            top: -30px;
+
+          }
+
+        }
+
+      }
+
+    }
+
+    // Submit Button
+
+    &[type="submit"] {
+    background-color: $base-color;
+    color: #fff;
+
+      &:focus, &:hover {
+
+        background-color: gainsboro;
+        color: #000;
+
+      }
+
+    }
+
+  }
+
+}

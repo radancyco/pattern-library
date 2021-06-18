@@ -1,0 +1,105 @@
+---
+folder: floating-labels
+localcss: "init.css"
+localjs: "init.js"
+noindex: true
+title: "Floating Labels"
+---
+
+{% include nav.html %}
+
+<p>This pattern will allow you to easily implement a form with floating labels.</p>
+
+<h2 id="example-1">Example 1: Inner Float (CSS Only)</h2>
+
+<!-- Begin Form -->
+
+<form class="inner-float">
+
+  <div class="input-container">
+
+    <input id="item-1" required>
+
+    <label for="item-1">Enter a Keyword</label>
+
+  </div>
+
+  <div class="input-container">
+
+    <input id="item-2" required>
+
+    <label for="item-2">City, State</label>
+
+  </div>
+
+  <div class="input-container">
+
+    <select id="item-3" required>
+      <option></option>
+      <option>10 Miles</option>
+      <option>75 Miles</option>
+      <option>500 Miles</option>
+    </select>
+
+    <label for="item-3">Radius</label>
+
+  </div>
+
+  <div class="input-container">
+
+    <input type="submit" value="Submit">
+
+  </div>
+
+</form>
+
+<!-- End Form -->
+
+<h2>Example 2: Outer Float (CSS and JavaScript)</h2>
+
+<form class="search-form">
+
+  <div class="search-form-fields">
+
+    <div>
+
+      <input id="search-item-1" class="search-keyword" required>
+
+      <label for="search-item-1">Keyword</label>
+
+    </div>
+
+    <div>
+
+      <input id="search-item-2" class="search-location">
+
+      <label for="search-item-2">Country, City, State or Zip Code</label>
+
+    </div>
+
+    <div>
+
+      <select id="search-item-3" class="search-radius" disabled>
+        <option value>Please Select</option>
+        <option value="10">10 Miles</option>
+        <option value="75">75 Miles</option>
+        <option value="500">500 Miles</option>
+      </select>
+
+      <label for="search-item-3">Radius</label>
+
+    </div>
+
+    <div>
+
+      <input type="submit" value="Submit">
+
+    </div>
+
+  </div>
+
+</form>
+
+{% include floating-labels.html %}
+
+{% include notes.html %}
