@@ -9,10 +9,8 @@
 
 // Example 2: Outer Float
 
-var searchFormField = document.querySelectorAll(".search-form-fields input:not([type=submit]), .search-form-fields select");
+var searchFormField = document.querySelectorAll(".outer-float-js input:not([type=submit]), .outer-float-js select");
 var locationField = document.getElementsByClassName("search-location");
-var radiusField = document.getElementsByClassName("search-radius");
-var searchForm = document.getElementsByClassName("search-form");
 
 for (var i = 0; i < searchFormField.length; i++) {
 
@@ -46,11 +44,13 @@ for (var i = 0; i < locationField.length; i++) {
 
     if(this.value !== "") {
 
-      this.parentNode.nextElementSibling.querySelector("select").classList.add("has-text");
+      this.parentNode.nextElementSibling.querySelector("select").classList.add("has-text")
+      this.parentNode.nextElementSibling.querySelector("select").removeAttribute("disabled");
 
     } else {
 
       this.parentNode.nextElementSibling.querySelector("select").classList.remove("has-text");
+      this.parentNode.nextElementSibling.querySelector("select").setAttribute("disabled", "");
 
     }
 

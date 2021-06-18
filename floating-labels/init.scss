@@ -25,7 +25,7 @@ padding: 1em 0;
 
   }
 
-  .input-container {
+  .field-container {
   border: 1px $base-color solid;
   flex: 1 1 0;
   margin-bottom: 10px;
@@ -47,7 +47,7 @@ padding: 1em 0;
   position: absolute;
   top: 30px;
   transition: all .2s ease;
-  z-index: 10;
+  z-index: 2;
   }
 
   input, select {
@@ -90,39 +90,112 @@ padding: 1em 0;
 
 // Example 2: Outer Float
 
-.search-form {
-background-color: #eee;
-border-radius: 5px;
-border: 1px #666 solid;
-padding: 4em 0;
-}
+.outer-float {
+padding: 2em 0 1em;
 
-.search-form-fields {
-
-  @media (min-width: 63.75em) {
+  @media (min-width: 900px) {
 
     display: flex;
+    margin: 0 -10px;
 
   }
 
-  div {
+  .field-container {
+  border: 1px $base-color solid;
   flex: 1 1 0;
-  margin: 0 10px;
+  margin-bottom: 50px;
   position: relative;
+
+    @media (min-width: 900px) {
+
+      margin: 0 10px;
+
+    }
+
   }
 
   label {
-  display: block;
-  font-size: 1.1em;
+  display: inline-block;
+  font-size: 1rem;
   left: 10px;
   line-height: normal;
-  overflow: hidden;
   position: absolute;
-  text-overflow: ellipsis;
   top: 30px;
-  transition: all 150ms ease-in-out;
-  white-space: nowrap;
-  width: 85%;
+  transition: all .2s ease;
+  z-index: 2;
+  }
+
+  input, select {
+  background-color: transparent;
+  border: 0;
+  display: block;
+  font-size: 1.25rem;
+  height: 75px;
+  margin: 0;
+  outline: 0;
+  padding: 0 10px;
+  position: relative;
+  width: 100%;
+
+    &:focus ~ label, &:valid ~ label {
+    top: -30px;
+    }
+
+    &:focus, &:focus {
+    background-color: lightgoldenrodyellow;
+    }
+
+    &[type="submit"] {
+    background-color: $base-color;
+    color: #fff;
+
+      &:focus, &:hover {
+
+        background-color: gainsboro;
+        color: #000;
+
+      }
+
+    }
+
+  }
+
+}
+
+// Example 3: Outer Float (JS)
+
+.outer-float-js {
+padding: 2em 0 1em;
+
+  @media (min-width: 900px) {
+
+    display: flex;
+    margin: 0 -10px;
+
+  }
+
+  .field-container {
+  flex: 1 1 0;
+  margin-bottom: 50px;
+  position: relative;
+
+    @media (min-width: 900px) {
+
+      margin: 0 10px;
+
+    }
+
+  }
+
+  label {
+  display: inline-block;
+  font-size: 1rem;
+  left: 10px;
+  line-height: normal;
+  position: absolute;
+  top: 30px;
+  transition: all .2s ease;
+  z-index: 2;
   }
 
   input, select {
@@ -131,6 +204,7 @@ padding: 4em 0;
   display: block;
   font-size: 1.25rem;
   height: 75px;
+  margin: 0;
   outline: 0;
   padding: 0 10px;
   position: relative;
@@ -155,23 +229,9 @@ padding: 4em 0;
       &.has-text, &.has-focus {
       color: inherit;
 
-        // Mobile behavior only
-
-        @media (max-width: 63.75em) {
-
-          height: auto;
-          padding: 40px 10px 10px;
-
-        }
-
         ~ label {
           font-size: .9em;
-
-          @media (min-width: 63.75em) {
-
-            top: -30px;
-
-          }
+          top: -30px;
 
         }
 
