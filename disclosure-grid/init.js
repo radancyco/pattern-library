@@ -262,7 +262,7 @@
 
         var gridID = gridItemCount + "-" + contentCount;
 
-        content.setAttribute ("aria-labelledby", gridButtonId + "-" + gridID);
+        // content.setAttribute ("aria-labelledby", gridButtonId + "-" + gridID); Axe reporting that aria-labelledby on div not well supported. Removing for now.
         content.setAttribute ("id", gridContentAreaId + "-" + gridID);
 
       });
