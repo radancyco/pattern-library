@@ -299,16 +299,9 @@
 
     var selectedGridContent = document.getElementById(URLFragment);
 
-    selectedGridContent.setAttribute("tabindex", "-1");
     selectedGridContent.scrollIntoView({
 
       block: "end"
-
-    });
-
-    selectedGridContent.focus({
-
-      preventScroll: true
 
     });
 
