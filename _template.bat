@@ -1,3 +1,5 @@
+xcopy /y _layouts\default.html ..\a11y\_layouts\
+xcopy /y _layouts\default.html ..\a11y-extension\_layouts\
 xcopy /y _layouts\default.html ..\pattern-library\_layouts\
 xcopy /y _layouts\default.html ..\radancyco.github.io\_layouts\
 xcopy /y _layouts\default.html ..\career-path-generator\_layouts\
