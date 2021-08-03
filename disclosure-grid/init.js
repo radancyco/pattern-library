@@ -20,7 +20,7 @@
 
     NodeList.prototype.forEach = Array.prototype.forEach;
 
-  }
+  };
 
   // Display which Grid version in use via console:
 
@@ -40,6 +40,7 @@
   var gridDataDisableURL = "data-grid-disable-url";
   var gridDataLarge = "data-grid-large";
   var gridDataMedium = "data-grid-medium";
+  var gridDataSticky = "data-grid-sticky";
   var gridDisclosureId = "grid-disclosure";
   var gridFormatClass = "grid-format";
   var gridButtonAll = document.querySelectorAll(gridButtonClass);
@@ -91,7 +92,7 @@
 
     grid.setAttribute(gridDataActive, gridContentSelected);
 
-  }
+  };
 
   function gridViewPort() {
 
@@ -130,7 +131,7 @@
 
         gridItem.classList.remove(gridFormatClass);
 
-      }
+      };
 
       var gridButtonCount = 1;
       var gridContentCount = gridSize + 1; // WHEN SCREEN SIZE CHANGES, CHANGE THIS NUMBER TO 3
@@ -191,7 +192,7 @@
 
             gridButtonCount += gridSize;
 
-          }
+          };
 
           gridButtonCount++
 
@@ -201,7 +202,7 @@
 
           button.removeAttribute("style");
 
-        }
+        };
 
         // Add additional attributes for accessibility, etc.
 
@@ -223,7 +224,7 @@
 
           button.setAttribute("aria-expanded", "false");
 
-        }
+        };
 
       });
 
@@ -246,7 +247,7 @@
 
             gridContentCount += gridSize;
 
-          }
+          };
 
           gridContentCount++
 
@@ -256,7 +257,7 @@
 
           content.removeAttribute("style");
 
-        }
+        };
 
         // Add additional attributes for accessibility, etc.
 
@@ -269,7 +270,7 @@
 
     });
 
-  }
+  };
 
   // Add listner and initiate gridViewPort function when viewport is resized.
 
@@ -298,14 +299,17 @@
     // Focus and scroll to target content.
 
     var selectedGridContent = document.getElementById(URLFragment);
+    var selectedGridButton = selectedGridContent.previousElementSibling;
 
-    selectedGridContent.scrollIntoView({
+    // Adding setTimeout here so DOM has opportunity to create everthing it needs before scrolling to selection.
 
-      block: "end"
+    setTimeout(function(){
 
-    });
+      scrollIntoPosition(selectedGridButton);
 
-  }
+    }, 500);
+
+  };
 
   // Button Event
 
@@ -351,15 +355,17 @@
           contentTarget = this.nextElementSibling.getAttribute("id");
           customCallback(contentTarget, gridCallBack);
 
-        }
+        };
 
         if(gridURLBypass === null) {
 
-          history.replaceState(null, null, "#" + selectedGridContentID);
+          history.pushState(null, null, "#" + selectedGridContentID);
 
-        }
+        };
 
-      }
+        scrollIntoPosition(this);
+
+      };
 
     });
 
@@ -386,7 +392,7 @@
 
       content.prepend(gridCloseButton);
 
-    }
+    };
 
   });
 
@@ -412,9 +418,101 @@
 
       window[customCallBackName](contentTarget);
 
-    }
+    };
 
-  }
+  };
+
+  // Get Offset
+  // TODO: Remove this when scroll-margin-top is better supported in iOS
+
+  function getOffset(el) {
+
+    var rect = el.getBoundingClientRect();
+    return {
+
+      left: rect.left + window.scrollX,
+      top: rect.top + window.scrollY
+
+    };
+
+  };
+
+  function scrollIntoPosition(button) {
+
+    // Scroll to grid position
+    // TODO: Possibly remove this when scroll-margin-top is better supported in iOS
+
+    // Get the element being accessed, in this case the button:
+
+    var gridContentTarget = button;
+
+    // Get Sticky Element Offset
+
+    if (button.parentNode.getAttribute(gridDataSticky) !== null) {
+
+      var stickyTargetID = button.parentNode.dataset.gridSticky;
+      var stickyTarget = document.getElementById(stickyTargetID).offsetHeight;
+
+      if(URLFragment.indexOf(gridContentAreaId) > -1) {
+
+        button.nextElementSibling.setAttribute("tabindex", "-1");
+        button.nextElementSibling.focus();
+
+      };
+
+      window.scrollTo({
+
+        top: getOffset(gridContentTarget).top - stickyTarget
+
+      });
+
+    } else {
+
+      window.scrollTo({
+
+        top: getOffset(gridContentTarget).top
+
+      });
+
+    };
+
+  };
+
+  // Back Button
+
+  window.onpopstate = function() {
+
+    var contentFragment = window.location.hash.substr(1);
+
+    if(contentFragment.indexOf(gridContentAreaId) > -1) {
+
+      // Parse fragment and pull grid and content ID number.
+      // We will then target specific grid and reset data-grid-active with open value.
+
+      var gridFragment = contentFragment.split(/-/g).slice(2);
+      var gridSelected = parseInt(gridFragment[0]);
+      var gridContentSelected = gridFragment[1];
+      var grid = document.getElementById(gridDisclosureId + "-" + gridSelected);
+
+      // Reset data-grid-active
+
+      grid.setAttribute(gridDataActive, gridContentSelected);
+
+      gridViewPort(); // HACK: Firing off entire grid again until we can build a small function to turn section on and off more simply.
+
+      var selectedGridContent = document.getElementById(URLFragment);
+
+      var selectedGridButton = selectedGridContent.previousElementSibling;
+
+      setTimeout(function(){
+
+        scrollIntoPosition(selectedGridButton);
+
+      }, 800);
+
+    };
+
+  };
 
 })();
 
@@ -427,4 +525,4 @@ function helloWorld(contentID) {
   message.innerHTML = "<strong>Hello World! The ID of this content area is <em> " + contentID + "</em>. You can use a callback to initiate a function within the disclosed content area on page load and reinitiate the same function on button click.</strong>";
   targetContent.append(message);
 
-}
+};

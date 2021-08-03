@@ -17,21 +17,7 @@ $base-color: #6F00EF;
 $base-color-active: white;
 $base-color-neutral: lightgrey;
 
-html {
-
-  &:focus-within {
-
-    @media (prefers-reduced-motion: no-preference) {
-
-      scroll-behavior: smooth;
-
-    }
-
-  }
-
-}
-
-// Note: Consider using a CSS scroll rather than a JavaScript one, when possible. Learn: https://michaelspellacy.com/pushing-buttons/
+// Note: Consider using a CSS scroll-behavior: smooth rather than a JavaScript scroll, moving forward. Learn: https://michaelspellacy.com/pushing-buttons/
 
 // Grid Disclosure
 
@@ -91,7 +77,7 @@ flex-wrap: wrap;
     margin: 0 0 2.5px;
     padding: 1em;
     position: relative;
-    // scroll-margin-top: 300px; Adjust and include if sticky header present. 
+    // scroll-margin-top: 275px;
 
       a {
       color: inherit;
