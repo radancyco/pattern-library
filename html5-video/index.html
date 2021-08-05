@@ -1,0 +1,45 @@
+---
+folder: html5-video
+jira: TCDQ-57187
+externalcss: "https://radancy.dev/pattern-library/disclosure/init.css"
+externaljs: "https://radancy.dev/pattern-library/disclosure/init.js"
+noindex: true
+title: "HTML5 Video with Captions & Transcript"
+---
+
+{% include nav.html %}
+
+<p>This pattern illustrates how to implement HTML5 video, captions, and transcripts.</p>
+
+<h2 id="example-1">Example 1</h2>
+
+<!-- Begin Code -->
+
+<video aria-label="The Empire Strikes Back: Trailer A" controls crossorigin poster="https://michaelspellacy.com/upload/the-empire-strikes-back-trailer.png" preload="none">
+  <source src="https://radancy.dev/media/the-empire-strikes-back-trailer.mp4" type="video/mp4">
+  <track default kind="captions" src="https://radancy.dev/media/the-empire-strikes-back-trailer.vtt" srclang="en">
+</video>
+
+<button class="disclosure--btn" data-disclosure-icon>Transcript</button>
+
+<div class="disclosure--content">
+
+  <p><strong>Narrator:</strong> Luke Skywalker and Han Solo rescue the princess, destroy the Death Star, but their story didn't end there.</p>
+
+  <p>Now, the creators of the biggest smash hit of all time, bring you the next episode in the "Star Wars" saga, "The Empire Strikes Back."</p>
+
+  <p>The continuing story of our band of heroes. Luke Skywalker, Princess Leia, Han Solo, C3PO, R2D2 and Chewbacca and introducing Lando Calrissian.</p>
+
+  <p>It's an epic of romance. Of heroes and villains. They cross trackless voids to unknown worlds.</p>
+
+  <p>A galactic odyssey against oppression.
+
+  <p>A big new sprawling space adventure in the "Star Wars" saga, "The Empire Strikes Back."</p>
+
+  <p>Coming to your galaxy next summer.</p>
+
+</div>
+
+<!-- End Code -->
+
+{% include notes.html %}
