@@ -4,6 +4,7 @@ jira: TCDQ-57187
 localcss: "init.css"
 localjs: "init.js"
 noindex: true
+slick: true
 title: "TabCordion v1.3 (Beta)"
 ---
 
@@ -16,6 +17,7 @@ title: "TabCordion v1.3 (Beta)"
 <ul>
   <li><b>data-tab-active (Number, Optional):</b> Using a number from "1" up, you can specify which tab should be activated on page load. When this attribute is not specified, the first panel will be open. Support for having no panels open coming soon. </li>
   <li><b>data-tab-breakpoint (String, Required):</b> Accepts any valid media query for more granular control over when interface needs to change from accordion to tab. Setting the breakpoint in code also allows us to pass in the required roles and ARIA attributes needed for each type of interface. For example, setting <code>(min-width: 800px) and (max-width: 1200px)</code> would only allow tabs between these two selected breakpoints. See <a href="#tab-accordion-4">example</a> below.</li>
+  <li><b>data-tab-callback (Boolean, Optional):</b> Not sure what this will do yet or how it will be built.</li>
   <li><b>data-tab-disable-url (Boolean, Optional):</b> By default, the URL will always change to reflect selected page fragment. This is recommended behavior because it allows us to share fragmented content more easily. If this behavior is not desired, you may use this attribute to disable this functionality.</li>
   <li><b>data-tab-vertical (Boolean, Optional) :</b> This attribute will change the tab interface from horizontal, the default, to vertical. When in vertical mode, the interface will behave differently. For example, focus will be placed on selected panel for improved accessibility.</li>
 </ul>
@@ -26,7 +28,7 @@ title: "TabCordion v1.3 (Beta)"
 
 <!-- Begin TabCordion -->
 
-<div class="tab-accordion" data-tab-active="4" data-tab-breakpoint="(min-width: 780px)">
+<div class="tab-accordion" data-tab-active="4" data-tab-breakpoint="(min-width: 780px)" data-tab-callback="runMe">
 
   <div class="tab-accordion__container">
 
@@ -35,7 +37,7 @@ title: "TabCordion v1.3 (Beta)"
     <!--
 
       TODO: Consider wrting buttons in with JavaScript instead. However, care will need to be taken to accomodate Radancy's tracking attributes, etc.
-      Note: Maybe consider dynamically creating buttons off an HTML table on content list, which is more PE friendly and resilient.
+      Note: Maybe consider dynamically creating buttons off an HTML TOC list, which is more PE friendly and resilient.
 
     -->
 
@@ -67,7 +69,7 @@ title: "TabCordion v1.3 (Beta)"
 
     <button class="tab-accordion__button">Section 3</button>
 
-    <div class="tab-accordion__panel">
+    <div class="tab-accordion__panel" data-grid-button="Section 3">
 
       <div class="tab-accordion__content">
 
@@ -107,7 +109,7 @@ title: "TabCordion v1.3 (Beta)"
 
 <!-- Begin TabCordion -->
 
-<div class="tab-accordion" data-tab-active="3" data-tab-breakpoint="(min-width:1200px)" data-tab-vertical>
+<div class="tab-accordion" data-tab-active="3" data-tab-breakpoint="(min-width:1200px)" data-tab-vertical data-tab-callback="runMe">
 
   <div class="tab-accordion__container">
 

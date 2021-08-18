@@ -38,6 +38,7 @@
   var gridDataActive = "data-grid-active";
   var gridDataClose = "data-grid-close";
   var gridDataDisableURL = "data-grid-disable-url";
+  var gridDataExclude = "data-grid-exclude";
   var gridDataLarge = "data-grid-large";
   var gridDataMedium = "data-grid-medium";
   var gridDataSticky = "data-grid-sticky";
@@ -140,91 +141,95 @@
 
       gridButtonChild.forEach(function(button, e){
 
-        var buttonCount = e + 1;
+        if (!button.hasAttribute(gridDataExclude)) {
 
-        // Rather than manipulate the DOM bu copying, creating, and appending elements, we can instead "reorder"
-        // the layout via use of the CSS order property when conditions are met.
+          var buttonCount = e + 1;
 
-        // Buttons will contain an order of 1, 2, 3, 4 and so on.
-        // To address accessibility concerns, we simply manage focus when button clicked.
-        // Tabbing should be just fine, though we may need to include keyboard arrow function in future release.
+          // Rather than manipulate the DOM bu copying, creating, and appending elements, we can instead "reorder"
+          // the layout via use of the CSS order property when conditions are met.
 
-        /*
+          // Buttons will contain an order of 1, 2, 3, 4 and so on.
+          // To address accessibility concerns, we simply manage focus when button clicked.
+          // Tabbing should be just fine, though we may need to include keyboard arrow function in future release.
 
-          Example:
+          /*
 
-          <button stle="order: 1"> ... </button>
+            Example:
 
-          <div style="order: 3"> ... </div>
+            <button style="order: 1"> ... </button>
 
-          <button stle="order: 2"> ... </button>
+            <div style="order: 3"> ... </div>
 
-          <div style="order: 4"> ... </div>
+            <button stle="order: 2"> ... </button>
 
-          ...
+            <div style="order: 4"> ... </div>
 
-        */
+            ...
 
-        if (gridDisclosureLarge[i].matches || gridDisclosureMedium[i].matches) {
+          */
 
-          // var itemSize = parseInt(100 / gridSize);
-          // button.setAttribute("style", "order: " + gridButtonCount + "; width: " + itemSize + "%;");
+          if (gridDisclosureLarge[i].matches || gridDisclosureMedium[i].matches) {
 
-          // Note: Because spacing with margins is a problem for a dynamic l;ayout such of this, we have to pull in
-          // the computed margin value from CSS and apply calculation for inline style.
+            // var itemSize = parseInt(100 / gridSize);
+            // button.setAttribute("style", "order: " + gridButtonCount + "; width: " + itemSize + "%;");
 
-          var buttonStyle = window.getComputedStyle(button);
-          var buttonMarginLeft = parseInt(buttonStyle.getPropertyValue("margin-left").replace("px", ""));
-          var buttonMarginRight = parseInt(buttonStyle.getPropertyValue("margin-right").replace("px", ""));
-          var buttonMarginTotal = buttonMarginLeft + buttonMarginRight;
+            // Note: Because spacing with margins is a problem for a dynamic l;ayout such of this, we have to pull in
+            // the computed margin value from CSS and apply calculation for inline style.
 
-          // if(!isIE11) {
+            var buttonStyle = window.getComputedStyle(button);
+            var buttonMarginLeft = parseInt(buttonStyle.getPropertyValue("margin-left").replace("px", ""));
+            var buttonMarginRight = parseInt(buttonStyle.getPropertyValue("margin-right").replace("px", ""));
+            var buttonMarginTotal = buttonMarginLeft + buttonMarginRight;
+
+            // if(!isIE11) {
 
             button.setAttribute("style", "margin-right: " + buttonMarginRight + "px; margin-left: " + buttonMarginLeft + "px; order: " + gridButtonCount + "; width: calc(100%/" + gridSize + " - " + buttonMarginTotal + "px);");
 
-          // } else {
+            // } else {
 
             // button.setAttribute("style", "margin-right: " + buttonMarginRight + "px; margin-left: " + buttonMarginLeft + "px; order: " + gridButtonCount + "; width: calc(99.9%/" + gridSize + " - " + buttonMarginTotal + "px);");
 
-          // }
+            // }
 
-          if (gridButtonCount % gridSize === 0) {
+            if (gridButtonCount % gridSize === 0) {
 
-            gridButtonCount += gridSize;
+              gridButtonCount += gridSize;
+
+            };
+
+            gridButtonCount++
+
+          } else {
+
+            // If it's a small (mobile) viewport, then all elements are simply stacked, so need for inline style.
+
+            button.removeAttribute("style");
 
           };
 
-          gridButtonCount++
+          // Add additional attributes for accessibility, etc.
 
-        } else {
+          var gridID = gridItemCount + "-" + buttonCount;
 
-          // If it's a small (mobile) viewport, then all elements are simply stacked, so need for inline style.
+          button.setAttribute ("id", gridButtonId + "-" + gridID);
+          button.setAttribute ("aria-controls", gridContentAreaId + "-" + gridID);
 
-          button.removeAttribute("style");
+          // Set active content
 
-        };
+          var gridCount = e + 1;
+          var gridSelected = parseInt(gridItem.dataset.gridActive);
 
-        // Add additional attributes for accessibility, etc.
+          if (gridCount === gridSelected) {
 
-        var gridID = gridItemCount + "-" + buttonCount;
+            button.setAttribute("aria-expanded", "true");
 
-        button.setAttribute ("id", gridButtonId + "-" + gridID);
-        button.setAttribute ("aria-controls", gridContentAreaId + "-" + gridID);
+          } else {
 
-        // Set active content
+            button.setAttribute("aria-expanded", "false");
 
-        var gridCount = e + 1;
-        var gridSelected = parseInt(gridItem.dataset.gridActive);
+          };
 
-        if (gridCount === gridSelected) {
-
-          button.setAttribute("aria-expanded", "true");
-
-        } else {
-
-          button.setAttribute("aria-expanded", "false");
-
-        };
+        } // End gridDataExclude
 
       });
 
@@ -232,39 +237,43 @@
 
       gridContentChild.forEach(function(content, e){
 
-        // Rather than manipulate the DOM bu copying, creating, and appending elements, we can instead "reorder"
-        // the layout via use of the CSS order property when conditions are met.
+        if (!content.hasAttribute(gridDataExclude)) {
 
-        // Content will contain an order of 5, 6, 7, 8 and so on, making content appear as if they are under the buttons.
+          // Rather than manipulate the DOM bu copying, creating, and appending elements, we can instead "reorder"
+          // the layout via use of the CSS order property when conditions are met.
 
-        var contentCount = e + 1;
+          // Content will contain an order of 5, 6, 7, 8 and so on, making content appear as if they are under the buttons.
 
-        if (gridDisclosureLarge[i].matches || gridDisclosureMedium[i].matches) {
+          var contentCount = e + 1;
 
-          content.setAttribute("style", "order: " + gridContentCount);
+          if (gridDisclosureLarge[i].matches || gridDisclosureMedium[i].matches) {
 
-          if (gridContentCount % gridSize === 0) {
+            content.setAttribute("style", "order: " + gridContentCount);
 
-            gridContentCount += gridSize;
+            if (gridContentCount % gridSize === 0) {
+
+              gridContentCount += gridSize;
+
+            };
+
+            gridContentCount++
+
+          } else {
+
+            // If it's a small (mobile) viewport, then all elements are simply stacked, so need for inline style.
+
+            content.removeAttribute("style");
 
           };
 
-          gridContentCount++
+          // Add additional attributes for accessibility, etc.
 
-        } else {
+          var gridID = gridItemCount + "-" + contentCount;
 
-          // If it's a small (mobile) viewport, then all elements are simply stacked, so need for inline style.
+          // content.setAttribute ("aria-labelledby", gridButtonId + "-" + gridID); Axe reporting that aria-labelledby on div not well supported. Removing for now.
+          content.setAttribute ("id", gridContentAreaId + "-" + gridID);
 
-          content.removeAttribute("style");
-
-        };
-
-        // Add additional attributes for accessibility, etc.
-
-        var gridID = gridItemCount + "-" + contentCount;
-
-        // content.setAttribute ("aria-labelledby", gridButtonId + "-" + gridID); Axe reporting that aria-labelledby on div not well supported. Removing for now.
-        content.setAttribute ("id", gridContentAreaId + "-" + gridID);
+        } // End gridDataExclude
 
       });
 
@@ -299,15 +308,18 @@
     // Focus and scroll to target content.
 
     var selectedGridContent = document.getElementById(URLFragment);
-    var selectedGridButton = selectedGridContent.previousElementSibling;
 
-    // Adding setTimeout here so DOM has opportunity to create everthing it needs before scrolling to selection.
+    if (selectedGridContent) {
 
-    setTimeout(function(){
+      var selectedGridButton = selectedGridContent.previousElementSibling;
 
-      scrollIntoPosition(selectedGridButton);
+      setTimeout(function(){
 
-    }, 500);
+        scrollIntoPosition(selectedGridButton);
+
+      }, 800);
+
+    }
 
   };
 
@@ -326,7 +338,11 @@
 
         gridItemButtons.forEach(function(buttons){
 
-          buttons.setAttribute("aria-expanded", "false");
+          if (!buttons.hasAttribute(gridDataExclude)) {
+
+            buttons.setAttribute("aria-expanded", "false");
+
+          }
 
         });
 
@@ -502,17 +518,23 @@
 
       var selectedGridContent = document.getElementById(URLFragment);
 
-      var selectedGridButton = selectedGridContent.previousElementSibling;
+      if (selectedGridContent) {
 
-      setTimeout(function(){
+        var selectedGridButton = selectedGridContent.previousElementSibling;
 
-        scrollIntoPosition(selectedGridButton);
+        setTimeout(function(){
 
-      }, 800);
+          scrollIntoPosition(selectedGridButton);
+
+        }, 800);
+
+      }
 
     };
 
   };
+
+  window.gridViewPort = gridViewPort;
 
 })();
 

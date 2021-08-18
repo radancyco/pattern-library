@@ -124,6 +124,22 @@
     var tabVertical = thisButton.parentNode.parentNode.getAttribute(tabCordionDataVertical);
     var tabListActive = thisButton.parentNode.parentNode.getAttribute(tabCordionDataActive);
 
+    // Callback
+
+    if (thisButton.classList.contains(tabCordionActiveState)) {
+
+      var tabPanelCallback = thisButton.parentNode.parentNode.getAttribute("data-tab-callback");
+
+      if(tabPanelCallback !== null) {
+
+        tabTargetDynamic = thisButton.getAttribute("id").replace("tab-button-", "");
+
+        customCallback(tabTargetDynamic, tabPanelCallback);
+
+      }
+
+    }
+
     if(tabVertical !== null) {
 
       var thisButtonID = thisButton.getAttribute("id");
@@ -131,9 +147,8 @@
       var tabSelected = document.getElementById(thisPanelID);
       var tabTarget = tabSelected.parentNode.parentNode.querySelector(tabCordionDynamicClass);
 
-      tabTarget.setAttribute("id", thisPanelID);
       tabTarget.setAttribute("aria-labelledby", thisButtonID);
-      tabTarget.classList.remove(tabCordionExpandedState);
+      // tabTarget.classList.remove(tabCordionExpandedState);
       tabTarget.innerHTML = tabSelected.innerHTML;
       tabTarget.setAttribute("tabindex", -1);
 
@@ -145,7 +160,7 @@
 
         // Fix: Add class here on delay so we can animate content if needed.
 
-        tabTarget.classList.add(tabCordionExpandedState);
+        // tabTarget.classList.add(tabCordionExpandedState);
 
       }, 100);
 
@@ -213,6 +228,7 @@
      tabCordions.forEach(function(tabCordion, i){
 
         var tabListButton = tabCordion.querySelectorAll(tabCordionButtonClass);
+        var tabListButton = tabCordion.querySelectorAll(tabCordionButtonClass);
         var tabListPanel = tabCordion.querySelectorAll(tabCordionPanelClass);
         var tabVertical = tabCordion.getAttribute(tabCordionDataVertical);
         var tabListActive = tabCordion.getAttribute(tabCordionDataActive);
@@ -268,6 +284,7 @@
           var tabListItemCount = j + 1;
 
           panel.setAttribute("id", "tab-panel-" + tabListCount + "-" + tabListItemCount);
+          panel.setAttribute("data-tab-panel-id", tabListCount + "-" + tabListItemCount);
 
         });
 
@@ -322,7 +339,7 @@
         }
 
         // Begin looping though breakpoints and altering DOM as each of
-        // those viewports is resized/loaded.
+        // those viewports are resized/loaded.
 
         if (tabListBreakPoints[i].matches) {
 
@@ -371,18 +388,12 @@
                 var tabSelected = document.getElementById(thisPanelID);
                 var thisButtonID = tabSelected.previousElementSibling.getAttribute("id");
                 var tabTarget = tabSelected.parentNode.parentNode.querySelector(tabCordionDynamicClass);
+                var tabItemCount = tabTarget.previousElementSibling.childElementCount / 2 + 1;
 
-                tabTarget.setAttribute("id", thisPanelID);
+                tabTarget.setAttribute("data-tab-panel-id", tabListCount + "-" + tabItemCount);
                 tabTarget.setAttribute("aria-labelledby", thisButtonID);
                 tabTarget.innerHTML = tabSelected.innerHTML;
-
-                setTimeout(function(){
-
-                  // Fix: Add class here on delay so we can animate content if needed.
-
-                  tabTarget.classList.add(tabCordionExpandedState);
-
-                }, 100);
+                //tabTarget.classList.add(tabCordionExpandedState);
 
                 // Fix: Page cannot jump to fragment created on the fly,
                 // so we need jump to it programtically, via scrollIntoView.
@@ -428,6 +439,7 @@
 
             var tabListItemCount = j + 1;
 
+            button.setAttribute("id", "tab-button-" + tabListCount + "-" + tabListItemCount);
             button.setAttribute("aria-expanded", "false");
             button.removeAttribute("aria-controls");
             button.removeAttribute("aria-selected");
@@ -469,3 +481,78 @@
   viewPortChange();
 
 })();
+
+// Callback
+
+var tabCordionCallBack = document.querySelectorAll(".tab-accordion[data-tab-callback]");
+
+tabCordionCallBack.forEach(function(accordion){
+
+  var tabCallBack = accordion.getAttribute("data-tab-callback");
+  var tabCordionCallBackPanel = accordion.querySelectorAll(".expanded");
+
+  tabCordionCallBackPanel.forEach(function(child){
+
+    tabTargetDynamic = child.getAttribute("data-tab-panel-id");
+
+    customCallback(tabTargetDynamic, tabCallBack);
+
+  });
+
+});
+
+// Custom callback with variable name. Acceps ID of panel you wish to target.
+
+function customCallback(panelTarget, customCallbackName) {
+
+  if (customCallbackName !== null) {
+
+    window[customCallbackName](panelTarget);
+
+  }
+
+}
+
+/* $(".slider-example").slick({
+  dots: true,
+  infinite: false,
+  speed: 300,
+  slidesToShow: 4,
+  slidesToScroll: 4,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        infinite: true,
+        dots: true
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+    // You can unslick at a given breakpoint now by adding:
+    // settings: "unslick"
+    // instead of a settings object
+  ]
+}); */
+
+// *** Your custom callback. Do whatever your heart desires here. ***
+
+function runMe(id) {
+
+alert("moofmilker");
+
+}

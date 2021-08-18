@@ -106,6 +106,14 @@ flex-wrap: wrap;
 
     }
 
+    &__button, &__content {
+
+      &[data-grid-exclude] {
+      display: none;
+      }
+
+    }
+
     &__button, &__content, &__close {
 
       &:focus {

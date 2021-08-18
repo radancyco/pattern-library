@@ -27,6 +27,7 @@ warning: true
   <li><b>data-grid-medium (String, Optional):</b> Your "medium" viewport breakpoint. At this breakpoint, your layout will be thrown into "grid mode". </li>
   <li><b>data-grid-min (Number, Mandatory):</b> Specifies the number of grid items to display per row in "medium" viewport. This attribute is mandatory when <code>data-grid-medium</code> is in use.</li>
   <li><b>data-grid-sticky (String, Optional):</b> Accepts a single parameter; the ID value of the fixed position element, such as your header, that you may wish to offset the grid layout from. <span class="alert">New!</span></li>
+  <li><b>data-grid-exclude (Boolean, Optional):</b> To be placed on both the button and content you wish to not be included in the grid. This is particulary useful in situations where you may wish to dynamically hide content. Please note that if you are dynamically adding or removing a grid item, that the <code>gridViewPort()</code> function will need to be reinitiated.</li>
 </ul>
 
 <h2 id="coming-soon">Coming Soon</h2>
@@ -38,7 +39,7 @@ warning: true
   <li>Ability to customize URL fragments. For example, <code>#about-us-1-1</code> instead of the generic <code>#grid-panel-1-1</code>.</li>
 </ul>
 
-<h2 id="example-1">Example 1: Basic Layout</h2>
+<h2 id="basic-layout">Example 1: Basic Layout</h2>
 
 <p class="param">Parameter(s): <code>data-grid-large="(min-width:780px)"</code> <code>data-grid-max="3"</code></p>
 
@@ -98,7 +99,7 @@ warning: true
 
 <hr aria-hidden="true">
 
-<h2 id="example-2">Example 2: Large and Medium Breakpoints</h2>
+<h2 id="breakpoints">Example 2: Large and Medium Breakpoints</h2>
 
 <p class="param">Parameter(s): <code>data-grid-large="(min-width: 1201px)"</code> <code>data-grid-max="5"</code> <code>data-grid-medium="(min-width: 800px) and (max-width: 1200px)"</code> <code>data-grid-min="3"</code></p>
 
@@ -188,7 +189,7 @@ warning: true
 
 <hr aria-hidden="true">
 
-<h2 id="example-3">Example 3: Sticky Offset</h2>
+<h2 id="sticky-offset">Example 3: Sticky Offset</h2>
 
 <p class="param">Parameter(s): <code>data-grid-large="(min-width:780px)"</code> <code>data-grid-max="3"</code> <code>data-grid-sticky="banner"</code></p>
 
@@ -250,7 +251,7 @@ warning: true
 
 <hr aria-hidden="true">
 
-<h2 id="example-4">Example 4: Active Content Area</h2>
+<h2 id="active-content-area">Example 4: Active Content Area</h2>
 
 <p class="param">Parameter(s): <code>data-grid-active="2"</code> <code>data-grid-large="(min-width:780px)"</code> <code>data-grid-max="3"</code></p>
 
@@ -310,7 +311,7 @@ warning: true
 
 <hr aria-hidden="true">
 
-<h2 id="example-5">Example 5: Callback Function</h2>
+<h2 id="callback-function">Example 5: Callback Function</h2>
 
 <p class="param">Parameter(s): <code>data-grid-active="1"</code> <code>data-grid-callback="helloWorld"</code> <code>data-grid-large="(min-width:780px)"</code> <code>data-grid-max="4"</code></p>
 
@@ -380,7 +381,7 @@ warning: true
 
 <hr aria-hidden="true">
 
-<h2 id="example-6">Example 6: Disable URL</h2>
+<h2 id="disable-url">Example 6: Disable URL</h2>
 
 <p class="param">Parameter(s): <code>data-grid-disable-url</code> <code>data-grid-large="(min-width:780px)"</code> <code>data-grid-max="4"</code></p>
 
@@ -428,7 +429,65 @@ warning: true
 
 </div><!--/.disclosure-grid_-->
 
-<h2 id="example-7">Example 7: Kitchen Sink</h2>
+<h2 id="grid-exclude">Example: Grid Exclusion</h2>
+
+<p class="param">Parameter(s): The third and fourth button (disclosure-grid__button) and content (disclosure-grid__content) elements include <code>data-grid-exclude</code>. Only grids one, two, and five will be visible.</p>
+
+<div class="disclosure-grid" data-grid-large="(min-width: 780px)" data-grid-max="3">
+
+    <button class="disclosure-grid__button">Section 1</button>
+
+    <div class="disclosure-grid__content">
+
+      <h2>Section 1</h2>
+
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod, <a href="https://radancy.dev">Radancy.dev</a> ante erat imperdiet velit, nec laoreet enim lacus a velit. <a href="#">Nam luctus</a>, enim in interdum condimentum, nisl diam iaculis lorem, vel volutpat mi leo sit amet lectus. Praesent non odio bibendum magna bibendum accumsan.</p>
+
+    </div><!--/.disclosure-grid__content-->
+
+    <button class="disclosure-grid__button">Section 2</button>
+
+    <div class="disclosure-grid__content">
+
+      <h2>Section 2</h2>
+
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod, tortor nec pharetra ultricies, ante erat imperdiet velit, nec laoreet enim lacus a velit. <a href="#">Nam luctus</a>, enim in interdum condimentum, nisl diam iaculis lorem, vel volutpat mi leo sit amet lectus. Praesent non odio bibendum magna bibendum accumsan.</p>
+
+    </div><!--/.disclosure-grid__content-->
+
+    <button class="disclosure-grid__button" data-grid-exclude>Section 3</button>
+
+    <div class="disclosure-grid__content" data-grid-exclude>
+
+      <h2>Section 3</h2>
+
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod, tortor nec pharetra ultricies, ante erat imperdiet velit, nec laoreet enim lacus a velit. <a href="#">Nam luctus</a>, enim in interdum condimentum, nisl diam iaculis lorem, vel volutpat mi leo sit amet lectus. Praesent non odio bibendum magna bibendum accumsan.</p>
+
+    </div><!--/.disclosure-grid__content-->
+
+    <button class="disclosure-grid__button" data-grid-exclude>Section 4</button>
+
+    <div class="disclosure-grid__content" data-grid-exclude>
+
+      <h2>Section 4</h2>
+
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod, tortor nec pharetra ultricies, ante erat imperdiet velit, nec laoreet enim lacus a velit. <a href="#">Nam luctus</a>, enim in interdum condimentum, nisl diam iaculis lorem, vel volutpat mi leo sit amet lectus. Praesent non odio bibendum magna bibendum accumsan.</p>
+
+    </div><!--/.disclosure-grid__content-->
+
+    <button class="disclosure-grid__button">Section 5</button>
+
+    <div class="disclosure-grid__content">
+
+      <h2>Section 5</h2>
+
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod, tortor nec pharetra ultricies, ante erat imperdiet velit, nec laoreet enim lacus a velit. <a href="#">Nam luctus</a>, enim in interdum condimentum, nisl diam iaculis lorem, vel volutpat mi leo sit amet lectus. Praesent non odio bibendum magna bibendum accumsan.</p>
+
+    </div><!--/.disclosure-grid__content-->
+
+</div><!--/.disclosure-grid_-->
+
+<h2 id="kitchen-sink">Example: Kitchen Sink</h2>
 
 <p class="param">Parameter(s): <code>data-grid-active="4"</code> <code>data-grid-close</code> <code>data-grid-callback="helloWorld"</code> <code>data-grid-disable-url</code> <code>data-grid-large="(min-width: 1201px)"</code> <code>data-grid-max="4"</code> <code>data-grid-medium="(min-width: 800px) and (max-width: 1200px)"</code> <code>data-grid-min="2"</code> <code>data-grid-sticky="banner"</code></p>
 
