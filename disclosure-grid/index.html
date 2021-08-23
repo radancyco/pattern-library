@@ -11,6 +11,8 @@ warning: true
 
 {% include nav.html %}
 
+<div id="hello" style="height: 150px; outline: 1px red solid;"></div>
+
 <p>This pattern will allow you to easily implement and control the presentation of a button grid with multiple disclosures.</p>
 
 <p><strong>Note:</strong> Do not use this if you are looking for a simple, tabbed interface. Instead, use the <a href="../tabcordion/">TabCordion</a> pattern.</p>
@@ -26,7 +28,7 @@ warning: true
   <li><b>data-grid-max (Number, Mandatory):</b> Specifies the number of grid items to display per row in "large" viewport. This attribute is mandatory when <code>data-grid-large</code> is in use.</li>
   <li><b>data-grid-medium (String, Optional):</b> Your "medium" viewport breakpoint. At this breakpoint, your layout will be thrown into "grid mode". </li>
   <li><b>data-grid-min (Number, Mandatory):</b> Specifies the number of grid items to display per row in "medium" viewport. This attribute is mandatory when <code>data-grid-medium</code> is in use.</li>
-  <li><b>data-grid-sticky (String, Optional):</b> Accepts a single parameter; the ID value of the fixed position element, such as your header, that you may wish to offset the grid layout from. <span class="alert">New!</span></li>
+  <li><b>data-grid-sticky (String, Optional):</b> Accepts a single or comma-delimited list of ID values of the fixed position element(s), such as your header, that you may wish to offset the grid layout from. <span class="alert">New!</span></li>
   <li><b>data-grid-exclude (Boolean, Optional):</b> To be placed on both the button and content you wish to not be included in the grid. This is particulary useful in situations where you may wish to dynamically hide content. Please note that if you are dynamically adding or removing a grid item, that the <code>gridViewPort()</code> function will need to be reinitiated. <span class="alert">New!</span></li>
 </ul>
 

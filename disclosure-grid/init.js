@@ -467,7 +467,20 @@
     if (button.parentNode.getAttribute(gridDataSticky) !== null) {
 
       var stickyTargetID = button.parentNode.dataset.gridSticky;
-      var stickyTarget = document.getElementById(stickyTargetID).offsetHeight;
+
+      // Single or multiple target offsets
+
+      var stickyTargetArray = stickyTargetID.replace(" ", "").split(",");
+
+      // Get total outer height of all elements.
+
+      var stickyTargetHeight = 0;
+
+      stickyTargetArray.forEach(function(stickyTargetElement, e){
+
+        stickyTargetHeight += document.getElementById(stickyTargetElement).offsetHeight;
+
+      });
 
       if(URLFragment.indexOf(gridContentAreaId) > -1) {
 
@@ -478,7 +491,7 @@
 
       window.scrollTo({
 
-        top: getOffset(gridContentTarget).top - stickyTarget
+        top: getOffset(gridContentTarget).top - stickyTargetHeight
 
       });
 
