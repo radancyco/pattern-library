@@ -13,11 +13,9 @@
 
 // Variables
 
-$base-color: #6F00EF;
-$base-color-active: white;
-$base-color-neutral: lightgrey;
-
-// Note: Consider using a CSS scroll-behavior: smooth rather than a JavaScript scroll, moving forward. Learn: https://michaelspellacy.com/pushing-buttons/
+$grid-color: #6F00EF;
+$grid-color-active: #fff;
+$grid-color-neutral: #eee;
 
 // Grid Disclosure
 
@@ -28,7 +26,7 @@ flex-wrap: wrap;
 // justify-content: center;
 
     &__button {
-    background-color: #eee;
+    background-color: $grid-color-neutral;
     border: 0;
     color: inherit;
     display: block;
@@ -38,8 +36,11 @@ flex-wrap: wrap;
     text-align: center;
     width: 100%;
 
+    // Note: Focus and hover states must meet a 3:1 color ratio between background color and foreground text.
+    // The project designer should be providing this state. When received, please ensure it is meeting correct ratio.
+
       &:focus, &:hover {
-      background-color: $base-color;
+      background-color: $grid-color;
       color: #fff;
       }
 
@@ -47,20 +48,20 @@ flex-wrap: wrap;
       background-color: #fff;
       color: #000;
 
-        // Accent
+        // Accent (Arrow)
 
         &::after {
-        position: absolute;
-        bottom: -5px;
-        left: 50%;
-        display: block;
-        width: 0;
-        height: 0;
-        margin-left: -20px;
-        border-color: transparent transparent $base-color transparent;
+        border-color: transparent transparent $grid-color transparent;
         border-style: solid;
         border-width: 0 20px 20px 20px;
+        bottom: -5px;
         content: "";
+        display: block;
+        height: 0;
+        left: 50%;
+        margin-left: -20px;
+        position: absolute;
+        width: 0;
         }
 
         + .disclosure-grid__content {
@@ -72,8 +73,8 @@ flex-wrap: wrap;
     }
 
     &__content {
-    background-color: $base-color;
-    color: $base-color-active;
+    background-color: $grid-color;
+    color: $grid-color-active;
     display: none;
     margin: 0 0 2.5px;
     padding: 1em;
@@ -112,8 +113,9 @@ flex-wrap: wrap;
 
     }
 
-    // Note: Below focus styling should never be removed unless an adequate focus state (background color) is present.
-    // Any new state must meet a 3:1 color ratio between background color and foreground text. 
+    // Note: Below focus outline should never be removed unless an alternative and adequate focus state is provided.
+    // A new outline must meet a 3:1 color ratio between background color and foreground color.
+    // The project designer should be providing this alternative state. When received, please ensure it is meeting correct ratio.
 
     &__button, &__content, &__close {
 
@@ -121,7 +123,7 @@ flex-wrap: wrap;
       outline: 0;
       }
 
-      &:focus-visible, &:target {
+      &:focus-visible {
       box-shadow: inset 0 0 0 1px #fff, inset 0 0 0 2px #000;
       }
 
