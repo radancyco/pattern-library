@@ -347,6 +347,8 @@
         });
 
         this.setAttribute("aria-expanded", "true");
+        this.nextElementSibling.setAttribute("tabindex", "-1");
+        this.nextElementSibling.focus();
 
         // Append fragment to URL if data-tab-disable-url not present.
 
@@ -496,8 +498,12 @@
 
     };
 
-    button.nextElementSibling.setAttribute("tabindex", "-1");
-    button.nextElementSibling.focus();
+    if(URLFragment.indexOf(gridContentAreaId) > -1) {
+
+      button.nextElementSibling.setAttribute("tabindex", "-1");
+      button.nextElementSibling.focus();
+
+    };
 
   };
 
