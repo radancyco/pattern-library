@@ -113,7 +113,7 @@ flex-wrap: wrap;
 
     }
 
-    // Note: Below focus outline should never be removed unless an alternative and adequate focus state is provided.
+    // Note: Below focus outline should never be removed unless an alternative and adequate outline is provided.
     // A new outline must meet a 3:1 color ratio between background color and foreground color.
     // The project designer should be providing this alternative state. When received, please ensure it is meeting correct ratio.
 
@@ -121,12 +121,18 @@ flex-wrap: wrap;
 
       &:focus {
       outline: 0;
+      box-shadow: inset 0 0 0 1px #fff, inset 0 0 0 2px #000;
+      }
+
+      &:focus:not(:focus-visible) {
+      outline: 0;
+      box-shadow: none;
       }
 
       &:focus-visible {
       box-shadow: inset 0 0 0 1px #fff, inset 0 0 0 2px #000;
       }
 
-    }
+   }
 
 }
