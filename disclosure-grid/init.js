@@ -503,6 +503,8 @@
       button.nextElementSibling.setAttribute("tabindex", "-1");
       button.nextElementSibling.focus();
 
+      // TODO: Determine whether focus should be placed on content area or button. For now, it's content.
+
     };
 
   };
