@@ -48,6 +48,7 @@
   var gridCallBackAll = document.querySelectorAll(".disclosure-grid[data-grid-callback]");
   var gridContentAll = document.querySelectorAll(gridContentClass);
   var gridDisclosuresAll = document.querySelectorAll(gridClass);
+  var gridDelay = 500;
 
   // Grab the hash (fragment) from the URL, which we may need later.
 
@@ -229,7 +230,7 @@
 
           };
 
-        } // End gridDataExclude
+        }; // End gridDataExclude
 
       });
 
@@ -273,7 +274,7 @@
           // content.setAttribute ("aria-labelledby", gridButtonId + "-" + gridID); Axe reporting that aria-labelledby on div not well supported. Removing for now.
           content.setAttribute ("id", gridContentAreaId + "-" + gridID);
 
-        } // End gridDataExclude
+        }; // End gridDataExclude
 
       });
 
@@ -301,28 +302,6 @@
 
   gridViewPort();
 
-  // If hash exists, focus and scroll to it.
-
-  if(URLFragment.indexOf(gridContentAreaId) > -1) {
-
-    // Focus and scroll to target content.
-
-    var selectedGridContent = document.getElementById(URLFragment);
-
-    if (selectedGridContent) {
-
-      var selectedGridButton = selectedGridContent.previousElementSibling;
-
-      setTimeout(function(){
-
-        scrollIntoPosition(selectedGridButton);
-
-      }, 800);
-
-    }
-
-  };
-
   // Button Event
 
   gridButtonAll.forEach(function(button, e){
@@ -342,13 +321,13 @@
 
             buttons.setAttribute("aria-expanded", "false");
 
-          }
+          };
 
         });
 
         this.setAttribute("aria-expanded", "true");
-        this.nextElementSibling.setAttribute("tabindex", "-1");
-        this.nextElementSibling.focus();
+        //this.nextElementSibling.setAttribute("tabindex", "-1");
+        //this.nextElementSibling.focus();
 
         // Append fragment to URL if data-tab-disable-url not present.
 
@@ -455,57 +434,61 @@
 
   function scrollIntoPosition(button) {
 
-    // Scroll to grid position
-    // TODO: Possibly remove this when scroll-margin-top is better supported in iOS
+    setTimeout(function(){
 
-    // Get the element being accessed, in this case the button:
+      // Scroll to grid position
+      // TODO: Possibly remove this when scroll-margin-top is better supported in iOS
 
-    var gridContentTarget = button;
+      // Get the element being accessed, in this case the button:
 
-    // Get Sticky Element Offset
+      var gridContentTarget = button;
 
-    if (button.parentNode.getAttribute(gridDataSticky) !== null) {
+      setTimeout(function(){
 
-      var stickyTargetID = button.parentNode.dataset.gridSticky;
+        gridContentTarget.focus();
 
-      // Single or multiple target offsets
+      }, gridDelay * 2);
 
-      var stickyTargetArray = stickyTargetID.replace(" ", "").split(",");
+      // Get Sticky Element Offset
 
-      // Get total outer height of all elements.
+      if (button.parentNode.getAttribute(gridDataSticky) !== null) {
 
-      var stickyTargetHeight = 0;
+        var stickyTargetID = button.parentNode.dataset.gridSticky;
 
-      stickyTargetArray.forEach(function(stickyTargetElement, e){
+        // Single or multiple target offsets
 
-        stickyTargetHeight += document.getElementById(stickyTargetElement).offsetHeight;
+        var stickyTargetArray = stickyTargetID.replace(" ", "").split(",");
 
-      });
+        // Get total outer height of all elements.
 
-      window.scrollTo({
+        var stickyTargetHeight = 0;
 
-        top: getOffset(gridContentTarget).top - stickyTargetHeight
+        stickyTargetArray.forEach(function(stickyTargetElement, e){
 
-      });
+          stickyTargetHeight += document.getElementById(stickyTargetElement).offsetHeight + 16;
 
-    } else {
+          // 16 is an arbitrary number to add a slight amount of space between top of grid button and target(s).
+          // TODO: Make a data-* so dev an offset however they wish.
 
-      window.scrollTo({
+        });
 
-        top: getOffset(gridContentTarget).top
+        window.scrollTo({
 
-      });
+          top: getOffset(gridContentTarget).top - stickyTargetHeight
 
-    };
+        });
 
-    if(URLFragment.indexOf(gridContentAreaId) > -1) {
+      } else {
 
-      button.nextElementSibling.setAttribute("tabindex", "-1");
-      button.nextElementSibling.focus();
+        window.scrollTo({
 
-      // TODO: Determine whether focus should be placed on content area or button. For now, it's content.
+          top: getOffset(gridContentTarget).top
 
-    };
+        });
+
+      };
+
+    }, gridDelay);
 
   };
 
@@ -537,17 +520,33 @@
 
         var selectedGridButton = selectedGridContent.previousElementSibling;
 
-        setTimeout(function(){
+        scrollIntoPosition(selectedGridButton);
 
-          scrollIntoPosition(selectedGridButton);
-
-        }, 800);
-
-      }
+      };
 
     };
 
   };
+
+  // If hash exists, focus and scroll to it.
+
+  if(URLFragment.indexOf(gridContentAreaId) > -1) {
+
+    // Focus and scroll to target content.
+
+    var selectedGridContent = document.getElementById(URLFragment);
+
+    if (selectedGridContent) {
+
+      var selectedGridButton = selectedGridContent.previousElementSibling;
+
+      scrollIntoPosition(selectedGridButton);
+
+    };
+
+  };
+
+  // Add Grid Disclosure to Window Object so that it can be called again if needed.
 
   window.gridViewPort = gridViewPort;
 
