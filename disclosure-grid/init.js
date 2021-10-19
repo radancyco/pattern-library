@@ -36,7 +36,7 @@
   var gridContentAreaId = "grid-content";
   var gridContentClass = ".disclosure-grid__content";
   var gridDataActive = "data-grid-active";
-  var gridDataClose = "data-grid-close";
+  var gridDataClose = "data-grid-disable-close-btn";
   var gridDataDisableURL = "data-grid-disable-url";
   var gridDataExclude = "data-grid-exclude";
   var gridDataLarge = "data-grid-large";
