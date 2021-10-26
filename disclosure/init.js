@@ -12,7 +12,7 @@ var simpleExpander = {
 
   init: function(){
 
-    console.log('%c Disclosure v1.0 in use. ', 'background: #6e00ee; color: #fff');
+    console.log('%c Disclosure v1.1 in use. ', 'background: #6e00ee; color: #fff');
 
     // Add Listener and other needed attributes
 
@@ -39,7 +39,7 @@ var simpleExpander = {
 
     }
 
-    // Show content if URL has matched button ID
+    // Show content if hash in URL matches ID on button.
 
     var url = document.location.href;
     var hash = url.split("#");
