@@ -14,13 +14,6 @@ var simpleExpander = {
 
     console.log('%c Disclosure v1.0 in use. ', 'background: #6e00ee; color: #fff');
 
-    // Show content if URL has matched button ID
-
-    var url = document.location.href;
-    var hash = url.split("#");
-
-    $("#" + hash[1]).attr("aria-expanded", "true");
-
     // Add Listener and other needed attributes
 
     var i = 0;
@@ -79,6 +72,12 @@ var simpleExpander = {
       }
 
     }
+
+    // Show content if URL has matched button ID
+
+    var url = document.location.href;
+    var hash = url.split("#");
+    $("#" + hash[1]).attr("aria-expanded", "true");
 
   }
 
