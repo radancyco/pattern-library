@@ -75,6 +75,13 @@ var simpleExpander = {
 
   }
 
+  // Show content if URL has matched button ID
+
+  var url = document.location.href;
+  var hash = url.split("#");
+
+  $("#" + hash[1]).attr("aria-expanded", "true");
+
 }
 
 if(getExpanders){
