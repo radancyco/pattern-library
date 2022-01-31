@@ -1,0 +1,129 @@
+---
+folder: floating-labels
+noindex: true
+title: "Map Example"
+---
+
+{% include nav.html %}
+
+<div class="wrapper-full-bleed standard-padding accent">
+
+  <div class="wrapper">
+
+    <h1>Jobs by Map</h1>
+
+    <p>Use the search by zip code, "use my location" button, or dropdown state and city functionality below to access a list of stores in your desired area. Then click on the individual store listing below the search criteria for more job location details and opportunities.</p>
+
+    <p>Once you enter your zip code and the mapped locations are presented, hover or click on your desired W for more information on location address and amount of openings.</p>
+
+    <div class="community-content location-map-wrapper">
+
+      <h3><b>Work for The World’s Largest Salon Brand</b></h3>
+
+      <p class="intro">With over 4,500 locations in the United States and Canada, there’s bound to be a Great Clips location near you. Use the search by zip/postal code, "use my location" button, or dropdown state/province and city functionality below to access a list of salons in your desired area. You’ll then be presented with a more focused map that shows Great Clips salon locations near you. Then click on the individual salon listing below the search criteria for more job location details and opportunities.</p>
+
+      <div class="map-search-googleapi-edition" id="map-search-google">
+
+        <h2 class="heading">Job Search</h2>
+
+        <div id="google-job-map">
+
+          <span>Loading.....</span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="wrapper standard-padding">
+
+</div>
+
+<div class="wrapper standard-padding">
+
+  <div class="map-list">
+
+  </div>
+
+</div>
+
+<div class="wrapper">
+
+</div>
+
+<style>
+
+#google-job-map, .map-search__initial-state{
+background: transparent !important;
+}
+
+.map-search__list-and-map-wrapper {
+margin-left: auto !important;
+margin-right: auto !important;
+max-width: 1220px;
+width: 100%;
+}
+
+#locations-list {
+margin-top: 0;
+padding-top: 20px;
+}
+
+#location-list-ul a {
+font-size: 1.1rem;
+}
+
+#locations-list h2 {
+font-size: 2.6rem;
+}
+
+.map-info-window h3 {
+color: #323264;
+max-width: 300px;
+}
+
+@media screen and (min-width: 800px) {
+
+.map-search__filters {
+margin: 20px auto;
+padding: 40px 0;
+}
+
+}
+
+</style>
+
+<script>
+
+// Google Map configuration
+
+var googleMapConfig = {
+
+  pop_ups: true,
+  maxZoom: 16,
+  minZoom: 6,
+  linkText: "View all Jobs",
+  url_new_tab: "no",
+  backgroundColor: '#A2C1DE',
+  defaultMyLocaiton: false,
+  client: "wallgreen",
+  showCategoryInfo:true,
+  markerImage: "https://tbcdn.talentbrew.com/company/1242/v2_0/img/logos/red-flag.png",
+  label: { "locationCount": "location(s) found", "state": "State/Province", "country": "Country", "city": "City", "zip": "Zip/Postal Code", "search": "Search map", "reset": "Reset all", "select": "Select", "useMyLocation": "Use my location", "showRemote": "Show remote jobs", "or": "or" },
+  searchCustomFieldName: "custom_fields.Shift",
+  searchDomain: "https://jobs.walgreens.com/" //For demo purpose only
+  //styles : [{ "featureType": "administrative", "elementType": "all", "stylers": [{ "saturation": "-100"}] }, { "featureType": "administrative.province", "elementType": "all", "stylers": [{ "visibility": "off"}] }, { "featureType": "landscape", "elementType": "all", "stylers": [{ "saturation": -100 }, { "lightness": 65 }, { "visibility": "on"}] }, { "featureType": "poi", "elementType": "all", "stylers": [{ "saturation": -100 }, { "lightness": "50" }, { "visibility": "simplified"}] }, { "featureType": "road", "elementType": "all", "stylers": [{ "saturation": "-100"}] }, { "featureType": "road.highway", "elementType": "all", "stylers": [{ "visibility": "simplified"}] }, { "featureType": "road.arterial", "elementType": "all", "stylers": [{ "lightness": "30"}] }, { "featureType": "road.local", "elementType": "all", "stylers": [{ "lightness": "40"}] }, { "featureType": "transit", "elementType": "all", "stylers": [{ "saturation": -100 }, { "visibility": "simplified"}] }, { "featureType": "water", "elementType": "geometry", "stylers": [{ "hue": "#ffff00" }, { "lightness": -25 }, { "saturation": -97}] }, { "featureType": "water", "elementType": "labels", "stylers": [{ "lightness": -25 }, { "saturation": -100}]}];
+
+};
+
+</script>
+
+<link href="https://services1-tmpwebeng-com.tmpqa.com/js/google-jobs-map.css" rel="stylesheet">
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places&client=gme-tmpworldwideadvertising&sensor=false&language=EN"></script>
+<script src="https://clientfiles.tmpwebeng.com/js/lib/bootstrap-combobox.js"></script>
+<script src="https://services1-tmpwebeng-com.tmpqa.com/js/google-jobs-map.js"></script>
