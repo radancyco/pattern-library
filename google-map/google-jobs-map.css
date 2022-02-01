@@ -32,31 +32,29 @@ text-align: center;
 }
 
 .map-search__initial-state span {
-display:block;
-font-size:1.5rem;
-font-weight:bold;
-margin-top:100px;
-text-align:center;
+display: block;
+font-size: 1.5rem;
+font-weight: bold;
+margin-top: 100px;
+text-align: center;
 }
 
 .map-search__initial-state .map-search__button {
-position:absolute;
-left:50%;
-transform: translate(-50%,0) ;
+position: absolute;
+left: 50%;
+transform: translate(-50%, 0);
 }
 
 .map-search__initial-state .map-search__button--my-location {
 top:20%;
 }
 .map-search__initial-state .map-search__button--remote-jobs {
-
 bottom:20%;
 }
 
 #location-match {
 font-weight:bold;
 }
-
 
 #location-list-ul {
 counter-reset: job-list-counter;
@@ -105,7 +103,7 @@ margin-top: .5em;
 }
 
 #location-list-ul  li.active, #location-list-ul  li:hover, #location-list-ul  li:focus-within {
-background-color:#F5F5F0;
+background-color: #eee;
 border-radius: 5px;
 }
 
@@ -113,19 +111,15 @@ border-radius: 5px;
 .map-search__filters input,
 .map-search__filters select {
 width: 100%;
-max-width: none;
 border: 1px solid #000 !important;
 height: 40px;
 padding-left: 4px
 }
 
-.map-search__fields {
-margin-bottom:10px;
-}
 
 .map-search__fields label {
-padding-bottom:4px;
 display:block;
+padding-bottom: .4em;
 }
 
 .map-search__cta button {
@@ -151,71 +145,43 @@ left:0;
 
 @media screen and (min-width: 800px) {
 
-.map-search__cta {
+  .map-search__cta {
+  display:flex;
+  }
 
-display:flex;
-}
+  .map-search__filters input, .map-search__filters select {
+  min-width: 200px;
+  }
 
-.map-search__fields  {
+  .map-search__initial-state .map-search__button {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  }
 
-min-width:200px;
-}
-.map-search__filters input,
-.map-search__filters select {
+  .map-search__initial-state .map-search__button--my-location {
+  left: 20%;
+  }
 
-min-width:200px;
-}
+  .map-search__initial-state .map-search__button--remote-jobs {
+  right: 20%;
+  left: auto;
+  bottom: initial;
+  }
 
-.map-search__initial-state .map-search__button {
+  .map-search__filters, .map-search__list-and-map-wrapper {
+  align-items: flex-end;
+  display: flex;
+  flex-flow: nowrap;
+  /* flex-wrap: wrap; might need this for just .map-search__filters */
+  justify-content: center;
+  width: 100%;
+  }
 
-position:absolute;
-top:50%;
-transform: translate(0, -50%);
-
-}
-
-.map-search__initial-state .map-search__button--my-location {
-left:20%;
-}
-.map-search__initial-state .map-search__button--remote-jobs {
-
-right:20%;
-left:auto;
-bottom:initial;
-}
-
-
-.map-search__fields {
-margin-bottom:0px;
-}
-.map-search__filters,
-.map-search__list-and-map-wrapper
-{
-display: -webkit-box;
-display: -moz-box;
-display: -ms-flexbox;
-display: -webkit-flex;
-display: flex;
--ms-flex-flow: row wrap;
--webkit-flex-flow: row wrap;
-flex-flow: nowrap;
--ms-justify-content: center;
--webkit-justify-content: center;
-justify-content: center;
--ms-align-items: flex-end;
--webkit-align-items: flex-end;
-width: 100%
-}
-
-.map-search__filters>div:nth-child(1),
-.map-search__filters>div:nth-child(2),
-.map-search__filters>div:nth-child(3) {
+.map-search__filters > div:not(:last-child) {
 margin-right: 1%
 }
 
-.map-search__filters>div:nth-child(4) {
-
-}
 }
 
 /* Google Map */
@@ -294,123 +260,93 @@ position: relative;
 /* Map Info Window */
 
 
-.map-info-window h3 {
+.map-info-dialog h3 {
 color: #c00;
-margin: 0;
+margin: 0 1.5em 0 0;
 font-size: 1rem;
 }
 
-.map-info-window {
-text-align: left;
-width: 100%;
-
+.map-info-dialog {
+    max-width: 0;
 }
 
-.map-info-window  ul{
-
+.map-info-dialog  ul {
 display:none;
 }
 
-.map-info-window .button {
-cursor: pointer;
-line-height: 100%;
-padding: 10px 36px 10px 24px;
+.map-info-dialog .map-info-btn {
+background-color: #c00;
+color: #fff;
+font-weight: bold;
+line-height: normal;
+margin: 2em 1em 1em;
+padding: 1em;
+position: relative;
 text-align: center;
 text-decoration: none;
-font-size: 1rem;
-font-weight: bold;
-border: 0;
-color: #fff;
-background: #c00;
-position: relative;
-text-transform: lowercase;
-transition: all .3s ease-in-out;
 }
 
-
-.map-info-window-wrapper button:last-child  {
-
-width:40px !important;
+.map-info-dialog button  {
 height:40px !important;
-
-cursor:pointer !important;
+right: 4px !important;
+top: 4px !important;
+width:40px !important;
+transition: none;
 }
 
-.map-info-window-wrapper button:last-child img {
-width:25px !important;
+.map-info-dialog button img {
 height:25px !important;
+width:25px !important;
 }
 
-.map-info-window,
-.map-info-window p {
-color: #000 !important;
+.map-info-content {
+color: inherit !important;
 }
 
-.map-info-window b,
-.map-info-window a:not(.button) {
+.map-info-content b,
+.map-info-content a:not(.map-info-btn) {
 color: #cc0000 !important;
 }
 
-.map-info-window span {
+.map-info-content span {
 display: block;
 margin: 8px 0 0;
 }
 
-.map-info-window a {
+.map-info-content p:empty {
+display: none;
+}
+
+.map-info-content a {
 display: block;
 font-weight: bold;
 padding: 2px 0;
 }
 
-.map-info-window img {
+.map-info-content img {
 display: none;
 }
 
-.map-info-window button {
-position: absolute;
-top: 0;
-right: 0;
-position: absolute;
-top: 0;
-right: 0px;
-color: #fff;
-width: 21px;
-margin: 0;
-padding: 0;
-z-index: 999999;
-height: 20px;
-background: #c00;
-}
-
-.map-info-window .button {
-margin: 3px 0;
-padding: 11px 20px;
-line-height:normal;
-}
-
-.map-info-window p {
+.map-info-content p {
 font-size:0.9rem !important;
 }
 
 @media screen and (min-width: 800px) {
 
-.map-info-window ul {
+.map-info-content ul {
 display:block;
 }
 
-.map-info-window a {
+.map-info-content a {
 padding: 6px 0;
 }
-.map-info-window {
+.map-info-content {
 max-width: none;
 }
-.map-info-window h3 {
+.map-info-content h3 {
 font-size: 1.2rem;
 }
 
-.map-info-window a.button:hover {
-color: #fff;
-}
 }
 
 

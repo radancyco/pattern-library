@@ -1,900 +1,1170 @@
+
 var clientHandle = googleMapConfig.client;
 var feedURL = "https://services1-tmpwebeng-com.tmpqa.com/location/GoogleMap/";
 var map;
 var geocoder = new google.maps.Geocoder();
 
 var JobsGoogleMap = JobsGoogleMap || {};
-JobsGoogleMap.Util = {}; //
-JobsGoogleMap.Var = {//Define global veriables for Location Feature
 
-    marker1: {},
-    markerPlaces: {},
-    infowindow: new google.maps.InfoWindow({}),
-    latlng1: null,
-    scrolled: 0,
-    currentMarker: null,
-    refreshMarker: false,
-    directionsDisplay: null
+JobsGoogleMap.Util = {};
+
+JobsGoogleMap.Var = {
+
+  // Define global veriables for Location Feature
+
+  marker1: {},
+  markerPlaces: {},
+  infowindow: new google.maps.InfoWindow({}),
+  latlng1: null,
+  scrolled: 0,
+  currentMarker: null,
+  refreshMarker: false,
+  directionsDisplay: null
+
 }
 
 JobsGoogleMap.Util.init = function () {
 
-    //Set All Util Functions
-    this.formatName = function (vname) {
+  // Set All Util Functions
 
-        //var rName = vname.toLowerCase().replace(/ /g, '-');
-        var rName = vname.replace('#', '');
-        rName = rName.replace(',', '');
-        return rName;
-    }
+  this.formatName = function (vname) {
 
-    this.setIsMobile = function () {
+    // var rName = vname.toLowerCase().replace(/ /g, '-');
 
-        var viewportWith = $(window).width();
-        var mobileBreakpoint = 768;
-        if (viewportWith < mobileBreakpoint) {
+    var rName = vname.replace('#', '');
+    rName = rName.replace(',', '');
+    return rName;
 
-            return true;
-        }
-        return false;
-    }
+  }
 
-    this.log = function (vmsg) {
+  this.setIsMobile = function () {
 
-        console.log(vmsg);
-    }
-    this.scrollto = function (vElement) {
+    var viewportWith = $(window).width();
+    var mobileBreakpoint = 768;
 
-        JobsGoogleMap.Util.log("scroll to " + vElement + "-" + $(vElement).offset().top)
-        setTimeout(function () {
-            $('html, body').animate({ scrollTop: $(vElement).offset().top - 10 }, 1000);
-        }, 200);
-    }
+    if (viewportWith < mobileBreakpoint) {
 
-    this.setHash = function (vhash) {
-
-        if (location.hash == "#" + vhash) {
-
-            return false;
-        }
-
-        JobsGoogleMap.Util.log(location.hash + "setting hash-" + vhash);
-
-
-        if (history.pushState) {
-            history.pushState(null, null, '#' + vhash);
-        }
-        else {
-            location.hash = '#' + vhash;
-        }
-    }
-
-    this.fillHash = function (hashVal) {
-
-        if (hashVal.length == 0) {
-            return "all";
-        }
-        else {
-            return hashVal;
-        }
-    }
-
-    this.setStateActive = function (vstate) {
-
-        $('#location-list h3').find("a[href=#" + vstate + "]").trigger("click");
+      return true;
 
     }
 
-    this.scollToLocation = function (elm) {
+    return false;
 
-        JobsGoogleMap.Var.scrolled = $("#location-list").offset().top;
-        $("#location-list-wrapper").animate({
-            scrollTop: scrolled
-        });
+  }
+
+  this.log = function (vmsg) {
+
+    console.log(vmsg);
+
+  }
+
+  this.scrollto = function (vElement) {
+
+    JobsGoogleMap.Util.log("scroll to " + vElement + "-" + $(vElement).offset().top)
+
+    setTimeout(function () {
+
+      $('html, body').animate({ scrollTop: $(vElement).offset().top - 10 }, 1000);
+
+    }, 200);
+
+  }
+
+  this.setHash = function (vhash) {
+
+    if (location.hash == "#" + vhash) {
+
+      return false;
 
     }
 
+    JobsGoogleMap.Util.log(location.hash + "setting hash-" + vhash);
 
-    this.initPopup = function () {
+    if (history.pushState) {
 
-        JobsGoogleMap.Util.log("initPopup called ");
+      history.pushState(null, null, '#' + vhash);
 
-        $(".gm-style-iw").addClass("map-info-window-wrapper");
+    } else {
 
-        $('.map-info-window-wrapper').attr('aria-labelledby','map-dialog-title');
-        $('.map-info-window').attr("tabindex", "-1").focus();
-        $('.map-info-window-wrapper button').click(function () {
-
-            //JobsGoogleMap.Var.infowindow.close();
-            $('#location-list-ul li:nth-child(' + JobsGoogleMap.Var.currentFocusIndex + ') a').focus();
-        });
+      location.hash = '#' + vhash;
 
     }
 
+  }
+
+  this.fillHash = function (hashVal) {
+
+    if (hashVal.length == 0) {
+
+      return "all";
+
+    } else {
+
+      return hashVal;
+
+    }
+
+  }
+
+  this.setStateActive = function (vstate) {
+
+    $('#location-list h3').find("a[href=#" + vstate + "]").trigger("click");
+
+  }
+
+  this.scollToLocation = function (elm) {
+
+    JobsGoogleMap.Var.scrolled = $("#location-list").offset().top;
+
+    $("#location-list-wrapper").animate({
+
+      scrollTop: scrolled
+
+    });
+
+  }
+
+  this.initPopup = function () {
+
+    JobsGoogleMap.Util.log("initPopup called ");
+
+    $(".gm-style-iw").addClass("map-info-dialog");
+    $('.map-info-dialog').attr("aria-labelledby", "map-info-title");
+
+    // Since we are trapping focus, no need for following anymore:
+
+    /* $('.map-info-dialog').attr({
+
+      "aria-labelledby": "map-info-title",
+      "tabindex": "-1"
+
+    }).focus(); */
+
+    // Close Button
+
+    $('.map-info-dialog button').removeAttr("title").click(function () {
+
+      // JobsGoogleMap.Var.infowindow.close();
+
+      $('#location-list-ul li:nth-child(' + JobsGoogleMap.Var.currentFocusIndex + ') a').focus();
+
+    });
+
+    // Escape Key
+
+    $(document).keyup(function(e) {
+
+      if (e.key === "27") {
+
+        $('#location-list-ul li:nth-child(' + JobsGoogleMap.Var.currentFocusIndex + ') a').focus();
+
+      }
+
+    });
+
+    $('.map-info-btn').removeAttr("tabindex");
+
+    // Trap Focus within dialog
+
+    // add all the elements inside modal which you want to make focusable
+
+    const  focusableElements = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+    const modal = document.querySelector('.map-info-dialog'); // select the modal by it's id
+    const firstFocusableElement = modal.querySelectorAll(focusableElements)[0]; // get first element to be focused inside modal
+    const focusableContent = modal.querySelectorAll(focusableElements);
+    const lastFocusableElement = focusableContent[focusableContent.length - 1]; // get last element to be focused inside modal
+
+    document.addEventListener('keydown', function(e) {
+
+      let isTabPressed = e.key === 'Tab' || e.keyCode === 9;
+
+      if (!isTabPressed) {
+
+        return;
+
+      }
+
+      if (e.shiftKey) { // if shift key pressed for shift + tab combination
+
+        if (document.activeElement === firstFocusableElement) {
+
+          lastFocusableElement.focus(); // add focus for the last focusable element
+          e.preventDefault();
+
+      }
+
+    } else { // if tab key is pressed
+
+      if (document.activeElement === lastFocusableElement) { // if focused has reached to last focusable element then focus first focusable element after pressing tab
+
+        firstFocusableElement.focus(); // add focus for the first focusable element
+        e.preventDefault();
+
+      }
+
+    }
+
+  });
+
+  firstFocusableElement.focus();
+
+  }
 
 }
+
 JobsGoogleMap.Util.Loading = {
-    city: function (isLoading) {
-        if (isLoading) {
-            JobsGoogleMap.Selector.$selCity.css("visibility","hidden");
-            $('#loading-city').show();
 
-        }
-        else {
-            $('#loading-city').fadeOut(500, function () {
-                JobsGoogleMap.Selector.$selCity.css("visibility", "visible");
-            });
+  city: function (isLoading) {
 
-        }
-    },
-    state: function (isLoading) {
-        if (isLoading) {
-            JobsGoogleMap.Selector.$selState.css("visibility", "hidden");
-            $('#loading-state').show();
+    if (isLoading) {
 
-        }
-        else {
-            $('#loading-state').fadeOut(500, function () {
-                JobsGoogleMap.Selector.$selState.css("visibility", "visible");
-            });
+      JobsGoogleMap.Selector.$selCity.css("visibility","hidden");
 
-        }
-    },
-    map: function (isLoading) {
-        if (isLoading) {
-            $('#map-overlay-default').show();
-            $('#map-wrapper').hide();
-            $('#locations-list').hide();
-        }
-        else {
-            $('#map-overlay-default').hide();
-            $('#map-wrapper').show();
-            $('#locations-list').show();
-            $('#search-clear').show();
-        }
+      $('#loading-city').show();
+
+    } else {
+
+      $('#loading-city').fadeOut(500, function () {
+
+        JobsGoogleMap.Selector.$selCity.css("visibility", "visible");
+
+      });
+
     }
+
+  }, state: function (isLoading) {
+
+    if (isLoading) {
+
+      JobsGoogleMap.Selector.$selState.css("visibility", "hidden");
+
+      $('#loading-state').show();
+
+    } else {
+
+      $('#loading-state').fadeOut(500, function () {
+
+        JobsGoogleMap.Selector.$selState.css("visibility", "visible");
+
+      });
+
+    }
+
+  }, map: function (isLoading) {
+
+    if (isLoading) {
+
+      $('#map-overlay-default').show();
+      $('#map-wrapper').hide();
+      $('#locations-list').hide();
+
+    } else {
+
+      $('#map-overlay-default').hide();
+      $('#map-wrapper').show();
+      $('#locations-list').show();
+      $('#search-clear').show();
+
+    }
+
+  }
+
 };
 
-JobsGoogleMap.Util.init();//Initialize  all util methids
-
+JobsGoogleMap.Util.init(); // Initialize  all util methids
 JobsGoogleMap.Selector = {};
+
 JobsGoogleMap.Selector.init = function () {
-    this.$searchClear = $("#search-clear");
-    this.$locationList = $("#location-list-ul");
-    this.$searchMap = $("#search-submit-location");
-    this.$myLocation = $("#my-location");
-    this.$selState = $("#map-search-state");
-    this.$selCity = $("#map-search-city");
-    this.$txtZip = $("#map-search-zip");
+
+  this.$searchClear = $("#search-clear");
+  this.$locationList = $("#location-list-ul");
+  this.$searchMap = $("#search-submit-location");
+  this.$myLocation = $("#my-location");
+  this.$selState = $("#map-search-state");
+  this.$selCity = $("#map-search-city");
+  this.$txtZip = $("#map-search-zip");
+
 }
 
 JobsGoogleMap.Location = {};
 JobsGoogleMap.Location.Map = {}; //Core Google Map routine
 
-//Location specific Var
+// Location specific Var
+
 JobsGoogleMap.Location.deepHashLink = JobsGoogleMap.Util.formatName(location.hash);
 JobsGoogleMap.Util.isMobile = JobsGoogleMap.Util.setIsMobile();
 
-
 $(document).ready(function () {
 
-    //Only execute if googel map container exists
-    if ($("#google-job-map").length) {
+  // Only execute if googel map container exists
 
-        if (!googleMapConfig.searchDomain)
-        {
-            googleMapConfig.searchDomain = "";
-        }
-        if (!googleMapConfig.searchCustomFieldName) {
+  if ($("#google-job-map").length) {
 
-            googleMapConfig.searchCustomFieldName = "custom_fields.Shift";
-        }
+    if (!googleMapConfig.searchDomain) {
 
-        //initDOM
-        JobsGoogleMap.Location.Map.DOM.init();
+      googleMapConfig.searchDomain = "";
 
-        //init all selectors
-        JobsGoogleMap.Selector.init();
-
-        //Map Event Handler
-        JobsGoogleMap.Location.Map.Events.init();
-
-
-        if (JobsGoogleMap.Util.isMobile) {
-
-            $('#locations-list').insertAfter($('#google-api-wrapper'));
-        }
     }
+
+    if (!googleMapConfig.searchCustomFieldName) {
+
+      googleMapConfig.searchCustomFieldName = "custom_fields.Shift";
+
+    }
+
+    // initDOM
+
+    JobsGoogleMap.Location.Map.DOM.init();
+
+    // init all selectors
+
+    JobsGoogleMap.Selector.init();
+
+    // Map Event Handler
+
+    JobsGoogleMap.Location.Map.Events.init();
+
+    if (JobsGoogleMap.Util.isMobile) {
+
+      $('#locations-list').insertAfter($('#google-api-wrapper'));
+
+    }
+
+  }
 
 });
 
-
-//DOM rendering
+// DOM rendering
 
 JobsGoogleMap.Location.Map.DOM = {
 
-    init: function () {
+  init: function () {
 
-        var mapDOM = '<div class="map-search__filters">'+
-                        '<div class="map-search__fields">'+
-                            '<label for="map-search-state">' + googleMapConfig.label.state + '</label>' +
-                            ' <img id="loading-state" src="https://tbcdn.talentbrew.com/company/1242/v2_0/img/logos/spinner.svg" width="50px" alt="">'+
-                            ' <select id="map-search-state" style="visibility:hidden">' +
-                            '    <option value=""> ' + googleMapConfig.label.select + ' </option>' +
-                            '  </select>'+
-                        '</div>'+
-                         '<div class="map-search__fields">'+
-                            ' <label for="map-search-city">' + googleMapConfig.label.city + '</label>' +
-                            '<img id="loading-city" src="https://tbcdn.talentbrew.com/company/1242/v2_0/img/logos/spinner.svg" width="50px" alt="">'+
-                            '<select id="map-search-city" style="visibility:hidden">' +
-                            '   <option value=""> ' + googleMapConfig.label.select + ' </option>' +
-                            ' </select>' +
-                        ' </div>'+
-                        ' <div class="map-search__fields">'+
-                            ' <label for="map-search-zip">' + googleMapConfig.label.zip + '</label>' +
-                            '  <input type="text" id="map-search-zip">'+
-                        '</div>'+
-                        '<div class="map-search__cta">'+
-                        '   <button class="button button-grad-blue" id="search-submit-location" type="submit" aria-label=' + JSON.stringify(googleMapConfig.label.search) + '><span>' + googleMapConfig.label.search + '</span></button>' +
-                        '   <button class="button button-grad-blue" id="search-clear" type="button" aria-label=' + JSON.stringify(googleMapConfig.label.reset) + '><span>' + googleMapConfig.label.reset + '</span></button>' +
-                        '</div>'+
-                     '  </div>'+
-                      '<div class="map-search__render-area">'+
-                      '<div id="map-overlay-default" class="map-search__initial-state">'+
-                        ' <button id="my-location" class="map-search__button map-search__button--my-location" type="button">' + googleMapConfig.label.useMyLocation + '</button>' +
-                        ' <span>' + googleMapConfig.label.or + '</span>' +
-                        ' <a href="/remote-jobs-vanity-url" class="map-search__button map-search__button--remote-jobs">' + googleMapConfig.label.showRemote + '</a>' +
-                        '</div>'+
-                       '<div id="map-wrapper" class="map-search__list-and-map-wrapper" style="display:none">'+
-                        ' <div id="locations-list" style="display:none;">'+
-                        '   <h2>Locations</h2>' +
-                        '   <p class="job-match-status" id="location-match"></p>' +
-                        '   <ol id="location-list-ul"></ol>'+
-                        '  </div>'+
-                        ' <div id="google-api-wrapper">'+
-                        '   <div id="google-api">'+
-                        '      <p>Please enable Javascript for Google render Map</p>'+
-                        '     </div>'+
-                        '   </div>'+
-                        ' </div> <!-- END map-search__list-and-map-wrapper -->'+
-                        '  </div>';
+    var mapDOM = '<div class="map-search__filters">'+
+    ' <div class="map-search__fields">'+
+    '   <label for="map-search-state">' + googleMapConfig.label.state + '</label>' +
+    '   <img id="loading-state" src="https://tbcdn.talentbrew.com/company/1242/v2_0/img/logos/spinner.svg" width="50px" alt="">'+
+    '   <select id="map-search-state" style="visibility:hidden">' +
+    '     <option value=""> ' + googleMapConfig.label.select + ' </option>' +
+    '   </select>'+
+    ' </div>'+
+    ' <div class="map-search__fields">'+
+    '   <label for="map-search-city">' + googleMapConfig.label.city + '</label>' +
+    '   <img id="loading-city" src="https://tbcdn.talentbrew.com/company/1242/v2_0/img/logos/spinner.svg" width="50px" alt="">'+
+    '   <select id="map-search-city" style="visibility:hidden">' +
+    '     <option value=""> ' + googleMapConfig.label.select + ' </option>' +
+    '   </select>' +
+    ' </div>'+
+    ' <div class="map-search__fields">'+
+    '   <label for="map-search-zip">' + googleMapConfig.label.zip + '</label>' +
+    '   <input autocomplete="postal-code" id="map-search-zip" type="text">'+
+    ' </div>'+
+    ' <div class="map-search__cta">'+
+    '   <button class="button button-grad-blue" id="search-submit-location" aria-label=' + JSON.stringify(googleMapConfig.label.search) + '><span>' + googleMapConfig.label.search + '</span></button>' +
+    '   <button class="button button-grad-blue" id="search-clear" aria-label=' + JSON.stringify(googleMapConfig.label.reset) + '><span>' + googleMapConfig.label.reset + '</span></button>' +
+    ' </div>'+
+    '</div>'+
+    '<div class="map-search__render-area">'+
+    ' <div id="map-overlay-default" class="map-search__initial-state">'+
+    '   <button id="my-location" class="map-search__button map-search__button--my-location">' + googleMapConfig.label.useMyLocation + '</button>' +
+    '   <span>' + googleMapConfig.label.or + '</span>' +
+    '   <a href="/remote-jobs-vanity-url" class="map-search__button map-search__button--remote-jobs">' + googleMapConfig.label.showRemote + '</a>' +
+    ' </div>'+
+    ' <div id="map-wrapper" class="map-search__list-and-map-wrapper" style="display:none">'+
+    '   <div id="locations-list" style="display:none;">'+
+    '   <h2>Locations</h2>' +
+    '   <p class="job-match-status" id="location-match"></p>' +
+    '   <ol id="location-list-ul"></ol>'+
+    ' </div>'+
+    ' <div id="google-api-wrapper">'+
+    '   <div id="google-api">'+
+    '     <p>Please enable Javascript for Google render Map</p>'+
+    '   </div>'+
+    '  </div>'+
+    ' </div> <!-- END map-search__list-and-map-wrapper -->'+
+    '</div>';
 
-        $('#google-job-map').html(mapDOM);
-        $('#search-clear').hide();
-    }
+    $('#google-job-map').html(mapDOM);
+    $('#search-clear').hide();
+
+  }
+
 }
 
-//Event Handlers
+// Event Handlers
+
 JobsGoogleMap.Location.Map.Events = {
 
-    init: function () {
+  init: function () {
 
-        //This will be JobsGoogleMap.Location.Map.Events
-        this.locatoinInit()
-    },
-    locatoinInit: function () {
+    // This will be JobsGoogleMap.Location.Map.Events
 
+    this.locatoinInit()
 
-        //Load States
-        $.getJSON(feedURL + "/GetState?handle=" + clientHandle, null, function (data) {
-            $.each(data, function (i, item) {
+  }, locatoinInit: function () {
 
-                if (item.length > 0) {
-                    JobsGoogleMap.Selector.$selState.append('<option value="' + item + '">' + item + '</option>');
-                }
-            });
+    // Load States
 
-            JobsGoogleMap.Util.Loading.state(false);
-            JobsGoogleMap.Util.Loading.city(false);
+    $.getJSON(feedURL + "/GetState?handle=" + clientHandle, null, function (data) {
 
-            //DeepHash
-            JobsGoogleMap.Location.Map.deepHash();
-        });
+      $.each(data, function (i, item) {
 
-        //State Selection
-        JobsGoogleMap.Selector.$selState.change(function () {
-            JobsGoogleMap.Util.Loading.city(true);
-            var selState = JobsGoogleMap.Selector.$selState.find(":selected").val();
+        if (item.length > 0) {
 
-            $.getJSON(feedURL + "/GetCity?state=" + selState + "&handle=" + clientHandle, null, function (data) {
-                $.each(data, function (i, item) {
-                    JobsGoogleMap.Selector.$selCity.append('<option value="' + item + '">' + item + '</option>');
-                });
+          JobsGoogleMap.Selector.$selState.append('<option value="' + item + '">' + item + '</option>');
 
-                JobsGoogleMap.Util.Loading.city(false);
+        }
 
-            });
-        });
+      });
 
-        //Infographic click
-        JobsGoogleMap.Selector.$searchMap.click(function (e) {
+      JobsGoogleMap.Util.Loading.state(false);
+      JobsGoogleMap.Util.Loading.city(false);
 
-            if (JobsGoogleMap.Util.isMobile && !$('#google-api-wrapper #google-api').length) {
+      // DeepHash
 
-                $('#google-api-wrapper').append($('#google-api'));
-            }
+      JobsGoogleMap.Location.Map.deepHash();
 
-            //var selCity = JobsGoogleMap.Selector.$selCity.find(":selected").val();
-            var selCity = JobsGoogleMap.Selector.$selCity.find(":selected").val();
-            var selState = JobsGoogleMap.Selector.$selState.find(":selected").val();
-            var selZip = JobsGoogleMap.Selector.$txtZip.val();
+    });
 
-            JobsGoogleMap.Util.log("citi=" + selCity + "|state=" + selState + "|zip=" + selZip);
+    // State Selection
 
-            if (selCity == "" && selState == "" && selZip == "") {
-                alert("Please select City/State or Zip Code");
-                return false;
-            }
+    JobsGoogleMap.Selector.$selState.change(function () {
 
-            if (selZip.length > 0) {
+      JobsGoogleMap.Util.Loading.city(true);
 
+      var selState = JobsGoogleMap.Selector.$selState.find(":selected").val();
 
-                geocoder.geocode({ 'address': selZip }, function (results, status) {
-                    if (status == google.maps.GeocoderStatus.OK) {
-                        lat = results[0].geometry.location.lat();
-                        lng = results[0].geometry.location.lng();
-                        JobsGoogleMap.Location.Map.CreateMarkers("", "", selZip + "," + lat + "," + lng);
-                    }
-                    else {
-                        alert("Geocode was not successful for the following reason: " + status);
+      $.getJSON(feedURL + "/GetCity?state=" + selState + "&handle=" + clientHandle, null, function (data) {
 
-                    }
-                });
+        $.each(data, function (i, item) {
 
-            }
-            else {
-
-                JobsGoogleMap.Location.Map.CreateMarkers(selState, selCity, selZip);
-            }
-
-            JobsGoogleMap.Util.setHash(JobsGoogleMap.Util.fillHash(selState) + "/" + JobsGoogleMap.Util.fillHash(selCity) + "/" + JobsGoogleMap.Util.fillHash(selZip));
+          JobsGoogleMap.Selector.$selCity.append('<option value="' + item + '">' + item + '</option>');
 
         });
 
-        JobsGoogleMap.Selector.$myLocation.click(function (e) {
+        JobsGoogleMap.Util.Loading.city(false);
 
+      });
 
-            e.preventDefault();
-            getGeoLocation();
-            //Get GEOLocation city.
+    });
+
+    // Infographic click
+
+    JobsGoogleMap.Selector.$searchMap.click(function (e) {
+
+      if (JobsGoogleMap.Util.isMobile && !$('#google-api-wrapper #google-api').length) {
+
+        $('#google-api-wrapper').append($('#google-api'));
+
+      }
+
+      // var selCity = JobsGoogleMap.Selector.$selCity.find(":selected").val();
+      var selCity = JobsGoogleMap.Selector.$selCity.find(":selected").val();
+      var selState = JobsGoogleMap.Selector.$selState.find(":selected").val();
+      var selZip = JobsGoogleMap.Selector.$txtZip.val();
+
+      JobsGoogleMap.Util.log("citi=" + selCity + "|state=" + selState + "|zip=" + selZip);
+
+      if (selCity == "" && selState == "" && selZip == "") {
+
+        // alert("Please select City/State or Zip Code");
+
+        if (!$('#map-search-error').length){
+
+          $('<p id="map-search-error" class="alert">Please select City/State or Zip Code</p>').insertAfter( ".map-search__cta" );
+
+        }
+
+        $("#map-search-state").attr("aria-describedby", "map-search-error").focus();
+
+        return false;
+
+      } else {
+
+        $('#map-search-error').remove();
+        $("#map-search-state").removeAttr("aria-describedby")
+
+      }
+
+      if (selZip.length > 0) {
+
+        geocoder.geocode({ 'address': selZip }, function (results, status) {
+
+          if (status == google.maps.GeocoderStatus.OK) {
+
+            lat = results[0].geometry.location.lat();
+            lng = results[0].geometry.location.lng();
+            JobsGoogleMap.Location.Map.CreateMarkers("", "", selZip + "," + lat + "," + lng);
+
+          } else {
+
+            alert("Geocode was not successful for the following reason: " + status);
+
+          }
+
         });
 
-        JobsGoogleMap.Selector.$searchClear.click(function (e) {
+      } else {
 
-            JobsGoogleMap.Selector.$selState.val(['']);
-            JobsGoogleMap.Selector.$selCity.val(['']);
-            JobsGoogleMap.Selector.$txtZip.val("");
-            if ($("#google-api-wrapper").length > 0) {
-                JobsGoogleMap.Location.Map.InItMap();
-            }
-            $('#map-wrapper').hide();
-        });
+        JobsGoogleMap.Location.Map.CreateMarkers(selState, selCity, selZip);
 
+      }
 
+      JobsGoogleMap.Util.setHash(JobsGoogleMap.Util.fillHash(selState) + "/" + JobsGoogleMap.Util.fillHash(selCity) + "/" + JobsGoogleMap.Util.fillHash(selZip));
+
+    });
+
+    JobsGoogleMap.Selector.$myLocation.click(function (e) {
+
+      e.preventDefault();
+      getGeoLocation();
+
+      // Get GEOLocation city.
+
+    });
+
+    JobsGoogleMap.Selector.$searchClear.click(function (e) {
+
+      JobsGoogleMap.Selector.$selState.val(['']);
+      JobsGoogleMap.Selector.$selCity.val(['']);
+      JobsGoogleMap.Selector.$txtZip.val("");
+
+      if ($("#google-api-wrapper").length > 0) {
+
+        JobsGoogleMap.Location.Map.InItMap();
+
+      }
+
+      $('#map-wrapper').hide();
+
+    });
+
+  }
+
+}
+
+// End Locatoin Event Handlers
+
+JobsGoogleMap.Location.Map.ListLocations = function (data) {
+
+  $('#location-list-ul').empty();
+
+  var count = 0;
+
+  $.each(data, function (i, item) {
+
+    count++;
+
+    var address = item.address;
+    var state = item.state;
+    var eCity = item.city;
+    var jobCount = item.count;
+    var searcURL = googleMapConfig.searchDomain + "/search-jobs?ascf=[{'key':'" + googleMapConfig.searchCustomFieldName + "','value':'" + address + "'}]&orgIds=1242";
+
+    $('#location-list-ul').append('<li><button class="job-list-btn" data-job-count=' + count + ' data-href="' + searcURL + '">' + address + ', ' + eCity + ', ' + state + ' <span class="job-list-count">(' + jobCount + ') jobs in this location</span></button></li>');
+
+  });
+
+  $('#location-match').text(data.length + '  ' + googleMapConfig.label.locationCount);
+  $('#map-search-results').text(data.length + '  ' + googleMapConfig.label.locationCount);
+
+  JobsGoogleMap.Selector.$locationList.find('li .job-list-btn').click(function (e) {
+
+    var index = $(this).data("job-count");
+    var sMarker = JobsGoogleMap.Var.marker1[index];
+    map.setZoom(17);
+    map.panTo(sMarker.position);
+
+    new google.maps.event.trigger(sMarker, 'click');
+
+    if (sMarker.getAnimation() != google.maps.Animation.BOUNCE) {
+
+      sMarker.setAnimation(google.maps.Animation.BOUNCE);
+
+    } else {
+
+      sMarker.setAnimation(null);
 
     }
 
-}
-//End Locatoin Event Handlers
-JobsGoogleMap.Location.Map.ListLocations = function (data) {
+    if (JobsGoogleMap.Util.isMobile) {
 
+      $('#google-api-wrapper').hide();
 
-    $('#location-list-ul').empty();
-    var count = 0;
-    $.each(data, function (i, item) {
+      $that = $(this);
 
-        count++;
-        var address = item.address;
-        var state = item.state;
-        var eCity = item.city;
-        var jobCount = item.count;
-        var searcURL = googleMapConfig.searchDomain + "/search-jobs?ascf=[{'key':'" + googleMapConfig.searchCustomFieldName + "','value':'" + address + "'}]&orgIds=1242";
-        $('#location-list-ul').append('<li><button class="job-list-btn" data-job-count=' + count + ' data-href="' + searcURL + '">' + address + ', ' + eCity + ', ' + state + ' <span class="job-list-count">(' + jobCount + ') jobs in this location</span></button></li>');
-    });
+      setTimeout(function () {
 
-    $('#location-match').text(data.length + '  ' + googleMapConfig.label.locationCount);
-    $('#map-search-results').text(data.length + '  ' + googleMapConfig.label.locationCount);
+        $('#google-api-wrapper').append($('#google-api'));
 
-    JobsGoogleMap.Selector.$locationList.find('li .job-list-btn').click(function (e) {
+        var container = $('#location-list-ul'),
 
+        scrollTo = $('#location-list-ul li').eq(parseInt(index) - 1);
 
-            var index = $(this).data("job-count");
-            var sMarker = JobsGoogleMap.Var.marker1[index];
-            map.setZoom(17);
-            map.panTo(sMarker.position);
+        container.animate({
 
-            new google.maps.event.trigger(sMarker, 'click');
+          scrollTop: scrollTo.offset().top - container.offset().top + container.scrollTop()
 
+        }, function () { $that.parent().append($('#google-api')); });
 
-            if (sMarker.getAnimation() != google.maps.Animation.BOUNCE) {
-                sMarker.setAnimation(google.maps.Animation.BOUNCE);
-            } else {
-                sMarker.setAnimation(null);
-            }
+      }, 200);
 
+    }
 
-            if (JobsGoogleMap.Util.isMobile) {
+    e.preventDefault();
 
-                $('#google-api-wrapper').hide();
-                $that = $(this);
-
-                setTimeout(function () {
-
-                    $('#google-api-wrapper').append($('#google-api'));
-
-                    var container = $('#location-list-ul'),
-                    scrollTo = $('#location-list-ul li').eq(parseInt(index) - 1);
-
-
-
-                    container.animate({
-                        scrollTop: scrollTo.offset().top - container.offset().top + container.scrollTop()
-                    }, function () { $that.parent().append($('#google-api')); });
-                }, 200);
-
-
-
-            }
-
-            e.preventDefault();
-
-    });
-
+  });
 
 }
-
 
 JobsGoogleMap.Location.Map.InItMap = function () {
-    $('#map-overlay-default ').show();
-};
 
+  $('#map-overlay-default ').show();
+
+};
 
 JobsGoogleMap.Location.Map.CreateMarkers = function (state, city, zip) {
 
-    //Initial Setup
-    JobsGoogleMap.Util.Loading.map(true);
-   // $('#map-overlay-default ').hide();
-    JobsGoogleMap.Location.Map.clearOverlays();
-    //End Initial Setup
+  // Initial Setup
 
+  JobsGoogleMap.Util.Loading.map(true);
 
-    JobsGoogleMap.Util.log("state=" + state);
-    JobsGoogleMap.Util.log("cit=" + city);
+  // $('#map-overlay-default ').hide();
 
+  JobsGoogleMap.Location.Map.clearOverlays();
 
+  // End Initial Setup
 
-    var locURL = "";
+  JobsGoogleMap.Util.log("state=" + state);
+  JobsGoogleMap.Util.log("cit=" + city);
 
-    if (typeof zip != 'undefined' && zip.length > 0) {
-        locURL = feedURL + "/GetLocationByZip?zipcode=" + zip;
-        JobsGoogleMap.Util.log("feed url " + locURL);
+  var locURL = "";
 
-        $.getJSON(locURL + "&handle=" + clientHandle, null, function (data) {
+  if (typeof zip != 'undefined' && zip.length > 0) {
+
+    locURL = feedURL + "/GetLocationByZip?zipcode=" + zip;
+    JobsGoogleMap.Util.log("feed url " + locURL);
+
+    $.getJSON(locURL + "&handle=" + clientHandle, null, function (data) {
+
+      JobsGoogleMap.Location.Map.LoadLocation(data);
+
+    });
+
+  } else {
+
+    var zip = "";
+
+    if (city.length > 0) {
+
+      var findLatLonAddr = city;
+
+      if (typeof state !== 'undefined' && state.length > 0) {
+
+        findLatLonAddr = findLatLonAddr + ", " + state;
+
+      }
+
+      geocoder.geocode({ 'address': findLatLonAddr }, function (results, status) {
+
+        if (status == google.maps.GeocoderStatus.OK) {
+
+          var lat = results[0].geometry.location.lat();
+          var lng = results[0].geometry.location.lng();
+
+          JobsGoogleMap.Util.log("Geo Add: " + city + " Lat:" + lat + " Lng:" + lng);
+
+          zip = "00000" + "," + lat + "," + lng;
+          locURL = feedURL + "/GetLocation?city=" + city + "&state=" + state + "&zipcode=" + zip;
+
+          JobsGoogleMap.Util.log("feed url " + locURL);
+
+          $.getJSON(locURL+"&handle="+clientHandle, null, function (data) {
 
             JobsGoogleMap.Location.Map.LoadLocation(data);
 
-        });
-    }
-    else {
-        var zip = "";
-        if (city.length > 0)
-        {
-            var findLatLonAddr = city;
-            if (typeof state !== 'undefined' && state.length > 0)
-            {
-                findLatLonAddr = findLatLonAddr + ", " + state;
-            }
+          });
 
-            geocoder.geocode({ 'address': findLatLonAddr }, function (results, status) {
-                if (status == google.maps.GeocoderStatus.OK) {
-                   var lat = results[0].geometry.location.lat();
-                   var lng = results[0].geometry.location.lng();
-                   JobsGoogleMap.Util.log("Geo Add: " + city + " Lat:" + lat + " Lng:" + lng);
-                   zip = "00000" + "," + lat + "," + lng;
+        } else {
 
-                   locURL = feedURL + "/GetLocation?city=" + city + "&state=" + state + "&zipcode=" + zip;
-
-                   JobsGoogleMap.Util.log("feed url " + locURL);
-
-                   $.getJSON(locURL+"&handle="+clientHandle, null, function (data) {
-
-                       JobsGoogleMap.Location.Map.LoadLocation(data);
-
-                   });
-
-                }
-                else {
-                    console.log("Geocode was not successful for the following reason: " + status);
-
-
-                }
-            });
-
+          console.log("Geocode was not successful for the following reason: " + status);
 
         }
-        else {
-            locURL = feedURL + "/GetLocation?city=" + city + "&state=" + state + "&zipcode=" + zip;
-            JobsGoogleMap.Util.log("feed url " + locURL);
 
-            $.getJSON(locURL + "&handle=" + clientHandle, null, function (data) {
+      });
 
-                JobsGoogleMap.Location.Map.LoadLocation(data);
+    } else {
 
-            });
-        }
+      locURL = feedURL + "/GetLocation?city=" + city + "&state=" + state + "&zipcode=" + zip;
 
+      JobsGoogleMap.Util.log("feed url " + locURL);
+
+      $.getJSON(locURL + "&handle=" + clientHandle, null, function (data) {
+
+        JobsGoogleMap.Location.Map.LoadLocation(data);
+
+      });
 
     }
 
+  }
 
 }
 
 JobsGoogleMap.Location.Map.LoadLocation = function (data) {
 
-    JobsGoogleMap.Var.latlng1 = new Array();
+  JobsGoogleMap.Var.latlng1 = new Array();
 
-    var myLatlng = new google.maps.LatLng(16.186543, 4.125001);
+  var myLatlng = new google.maps.LatLng(16.186543, 4.125001);
 
-    var mapStyle = "";
-    if (googleMapConfig.styles)
-    {
-        mapStyle = googleMapConfig.styles;
+  var mapStyle = "";
+
+  if (googleMapConfig.styles) {
+
+    mapStyle = googleMapConfig.styles;
+
+  }
+
+  var myOptions = {
+
+    maxZoom: googleMapConfig.maxZoom,
+    minZoom: googleMapConfig.minZoom,
+    center: myLatlng,
+    styles: mapStyle,
+    mapTypeControlOptions: {
+      mapTypeIds: []
+
+    }, // here�s the array of controls
+    backgroundColor: googleMapConfig.backgroundColor,
+    animation: google.maps.Animation.DROP,
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    panControl: true,
+    zoomControl: true,
+    streetViewControl: false
+
+  }
+
+  if (map == null || typeof map === 'undefined') {
+
+    map = new google.maps.Map(document.getElementById("google-api"), myOptions);
+
+    if (typeof ga !== 'undefined') {
+
+      console.log("Sending Map Load Event to GA ");
+
+      //ga('send', 'event', 'Map API', 'load', 'Google Map API Load');
+
+      APP.MODELS.GoogleBot.sendCustomDimensions('Custom Event', 'Load', "Google Map API Load", 'event');
+
     }
 
-    var myOptions = {
-        maxZoom: googleMapConfig.maxZoom,
-        minZoom: googleMapConfig.minZoom,
-        center: myLatlng,
-        styles: mapStyle,
-        mapTypeControlOptions: {
-            mapTypeIds: []
-        }, // here�s the array of controls
-        backgroundColor: googleMapConfig.backgroundColor,
-        animation: google.maps.Animation.DROP,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        panControl: true,
-        zoomControl: true,
-        streetViewControl: false
-    }
+  }
 
-    if (map == null || typeof map === 'undefined') {
+  var marker, i;
+  var counter = 1;
 
-        map = new google.maps.Map(document.getElementById("google-api"), myOptions);
-
-        if (typeof ga !== 'undefined') {
-            console.log("Sending Map Load Event to GA ");
-            //ga('send', 'event', 'Map API', 'load', 'Google Map API Load');
-            APP.MODELS.GoogleBot.sendCustomDimensions('Custom Event', 'Load', "Google Map API Load", 'event');
-        }
-    }
-
-    var marker, i;
-    var counter = 1;
-    JobsGoogleMap.Location.Map.ListLocations(data);
+  JobsGoogleMap.Location.Map.ListLocations(data);
 
     $.each(data, function (i, item) {
 
-        var lat = item.lat;
-        var lon = item.lng;
-        var name = $(this).find("a").text();
-        var address = item.address;
-        var state = item.state;
-        var eCity = item.city;
-        var zip = item.zip;
+      var lat = item.lat;
+      var lon = item.lng;
+      var name = $(this).find("a").text();
+      var address = item.address;
+      var state = item.state;
+      var eCity = item.city;
+      var zip = item.zip;
 
-        // Define Marker properties
-        var image = new google.maps.MarkerImage(googleMapConfig.markerImage);
-        var shadowImg = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_shadow", null, null, new google.maps.Point(9, 37));
+      // Define Marker properties
 
-        var locLatLng = new google.maps.LatLng(lat, lon);
-        var infowindowHover = new google.maps.InfoWindow({
-            content: '<span>' + address + ' (' + item.count + ' job(s) )</span>',
-            position: locLatLng
+      var image = new google.maps.MarkerImage(googleMapConfig.markerImage);
+      var shadowImg = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_shadow", null, null, new google.maps.Point(9, 37));
+      var locLatLng = new google.maps.LatLng(lat, lon);
+      var infowindowHover = new google.maps.InfoWindow({
+
+        content: '<span>' + address + ' (' + item.count + ' job(s) )</span>',
+        position: locLatLng
+
+      });
+
+      var marker = new google.maps.Marker({
+
+        position: locLatLng,
+        map: map,
+        icon: image,
+        shadow: shadowImg,
+        zoom: 10,
+        center: locLatLng
+
+      });
+
+      JobsGoogleMap.Var.latlng1.push(new google.maps.LatLng(lat, lon));
+      JobsGoogleMap.Var.marker1[counter] = marker;
+
+      var searchURL = googleMapConfig.searchDomain+"/search-jobs?ascf=[{'key':'" + googleMapConfig.searchCustomFieldName + "','value':'" + address + "'}]&orgIds=1242";
+      var categoryInfoContent = "";
+
+      if (googleMapConfig.showCategoryInfo) {
+
+        var $categoryInfo = $("<ul>");
+
+        $.each(item.category.split('|'), function (index, categoryName) {
+
+          if (categoryName.length > 0) {
+
+            $categoryInfo.append("<li>" + categoryName + "</li>");
+
+          }
+
         });
 
-        var marker = new google.maps.Marker({
-            position: locLatLng,
-            map: map,
-            icon: image,
-            shadow: shadowImg,
-            zoom: 10,
-            center: locLatLng
-        });
+        categoryInfoContent = $('<p>').append($categoryInfo).prop('outerHTML');
 
-        JobsGoogleMap.Var.latlng1.push(new google.maps.LatLng(lat, lon));
-        JobsGoogleMap.Var.marker1[counter] = marker;
+      }
 
-        var searchURL = googleMapConfig.searchDomain+"/search-jobs?ascf=[{'key':'" + googleMapConfig.searchCustomFieldName + "','value':'" + address + "'}]&orgIds=1242";
+      var content = '<div class="map-info-content"><h3 id="map-info-title">' + address + '</h3><p>' + item.count + ' available positions at this location:</p>' + categoryInfoContent;
+      content += '<a class="map-info-btn" href="' + searchURL + '" target="_blank" rel="noopener">' + googleMapConfig.linkText + ' <span class="visually-hidden">(opens in new tab)</span></a></div>';
 
-        var categoryInfoContent = "";
-        if (googleMapConfig.showCategoryInfo)
-        {
-            var $categoryInfo = $("<ul>");
-            $.each(item.category.split('|'), function (index, categoryName) {
-                if (categoryName.length > 0)
-                    $categoryInfo.append("<li>" + categoryName + "</li>");
+      google.maps.event.addListener(marker, 'click', (function (marker, i) {
+
+        return function () {
+
+          infowindowHover.close();
+
+          JobsGoogleMap.Var.currentMarker = marker;
+
+          if (JobsGoogleMap.Var.infowindow) {
+
+            JobsGoogleMap.Var.infowindow.close();
+
+          }
+
+          JobsGoogleMap.Var.infowindow.setContent(content);
+          JobsGoogleMap.Var.infowindow.open(map, marker);
+
+          google.maps.event.addListener(JobsGoogleMap.Var.infowindow, 'domready', JobsGoogleMap.Util.initPopup);
+
+
+          // Scroll to list
+
+          $('#location-list-ul li').removeClass('active');
+          $('#location-list-ul li').eq(i).addClass('active');
+
+          if (!JobsGoogleMap.Util.isMobile) {
+
+            var container = $('#location-list-ul'),
+            scrollTo = $('#location-list-ul li').eq(i);
+
+            container.animate({
+
+              scrollTop: scrollTo.offset().top - container.offset().top + container.scrollTop()
+
             });
-            categoryInfoContent = $('<p>').append($categoryInfo).prop('outerHTML');
+
+          }
+
         }
 
+      })(marker, i));
 
+      google.maps.event.addListener(marker, 'mouseover', function () {
 
-        var content = '<div class="map-info-window"><h3 id="map-dialog-title">' + address + '</h3><p>' + item.count + ' available positions at this location:</p>' + categoryInfoContent;
-        content += '<a class="button" href="' + searchURL + '" target="_blank" rel="noopener">' + googleMapConfig.linkText + ' <span class="visually-hidden">(opens in new tab)</span></a></div>';
+        infowindowHover.open(map, marker);
 
+      });
 
+      google.maps.event.addListener(marker, 'mouseout', function () {
 
-        google.maps.event.addListener(marker, 'click', (function (marker, i) {
-            return function () {
+        infowindowHover.close();
 
-                infowindowHover.close();
-                JobsGoogleMap.Var.currentMarker = marker;
+      });
 
+      google.maps.event.addListener(map, 'idle', function () {
 
-                if (JobsGoogleMap.Var.infowindow) {
-                    JobsGoogleMap.Var.infowindow.close();
-                }
+        if (!this.get('dragging') && this.get('oldCenter') && this.get('oldCenter') !== this.getCenter()) {
 
-                JobsGoogleMap.Var.infowindow.setContent(content);
-                JobsGoogleMap.Var.infowindow.open(map, marker);
+          // do what you want to
 
-                google.maps.event.addListener(JobsGoogleMap.Var.infowindow, 'domready', JobsGoogleMap.Util.initPopup);
+          // alert("a");
 
+        }
 
-                //scroll to list
+        if (!this.get('dragging')) {
 
-                $('#location-list-ul li').removeClass('active');
-                $('#location-list-ul li').eq(i).addClass('active');
+          this.set('oldCenter', this.getCenter())
 
-                if (!JobsGoogleMap.Util.isMobile)
-                {
-                    var container = $('#location-list-ul'),
-                    scrollTo = $('#location-list-ul li').eq(i);
+        }
 
-                    container.animate({
-                        scrollTop: scrollTo.offset().top - container.offset().top + container.scrollTop()
-                    });
+      });
 
-                }
+      google.maps.event.addListener(map, 'dragstart', function () {
 
+        this.set('dragging', true);
 
-            }
-        })(marker, i));
+      });
 
-        google.maps.event.addListener(marker, 'mouseover', function () {
-            infowindowHover.open(map, marker);
-        });
+      google.maps.event.addListener(map, 'dragend', function () {
 
-        google.maps.event.addListener(marker, 'mouseout', function () {
-            infowindowHover.close();
-        });
+        this.set('dragging', false);
+        google.maps.event.trigger(this, 'idle', {});
 
-        google.maps.event.addListener(map, 'idle', function () {
-            if (!this.get('dragging') && this.get('oldCenter') && this.get('oldCenter') !== this.getCenter()) {
-                //do what you want to
-                //alert("a");
-            }
-            if (!this.get('dragging')) {
-                this.set('oldCenter', this.getCenter())
-            }
+      });
 
-        });
-
-        google.maps.event.addListener(map, 'dragstart', function () {
-            this.set('dragging', true);
-        });
-
-        google.maps.event.addListener(map, 'dragend', function () {
-            this.set('dragging', false);
-            google.maps.event.trigger(this, 'idle', {});
-        });
-
-
-
-        counter++;
+      counter++;
 
     });
 
-
-
     setTimeout(function () {
-        JobsGoogleMap.Location.Map.zoomtoAllMarkers(map);
+
+      JobsGoogleMap.Location.Map.zoomtoAllMarkers(map);
 
     }, 250);
+
     JobsGoogleMap.Util.Loading.map(false);
 
-}
+  }
 
-JobsGoogleMap.Location.Map.deepHash = function () {
+  JobsGoogleMap.Location.Map.deepHash = function () {
 
     if (JobsGoogleMap.Location.deepHashLink.length > 0) {
 
-        var hashState = JobsGoogleMap.Location.deepHashLink.split('/')[0];
-        var hashCity = JobsGoogleMap.Location.deepHashLink.split('/')[1];
-        var hashZip = JobsGoogleMap.Location.deepHashLink.split('/')[2];
-        var hashLatLog = JobsGoogleMap.Location.deepHashLink.split('/')[3];
+      var hashState = JobsGoogleMap.Location.deepHashLink.split('/')[0];
+      var hashCity = JobsGoogleMap.Location.deepHashLink.split('/')[1];
+      var hashZip = JobsGoogleMap.Location.deepHashLink.split('/')[2];
+      var hashLatLog = JobsGoogleMap.Location.deepHashLink.split('/')[3];
 
-        JobsGoogleMap.Util.log("Deep Hash " + hashState + "|" + hashCity + "|" + hashZip + "|" + hashLatLog);
+      JobsGoogleMap.Util.log("Deep Hash " + hashState + "|" + hashCity + "|" + hashZip + "|" + hashLatLog);
 
-        if (hashZip != "all" && hashZip.length > 0) {
-            JobsGoogleMap.Selector.$txtZip.val(hashZip);
-        }
+      if (hashZip != "all" && hashZip.length > 0) {
 
-        if (hashState != "all" && hashState.length > 0) {
+        JobsGoogleMap.Selector.$txtZip.val(hashZip);
 
-            JobsGoogleMap.Selector.$selState.val(hashState);
+      }
 
+      if (hashState != "all" && hashState.length > 0) {
 
-            $.getJSON(feedURL + "/GetCity?state=" + hashState + "&handle=" + clientHandle, null, function (data) {
-                $.each(data, function (i, item) {
-                    JobsGoogleMap.Selector.$selCity.append('<option value="' + item + '">' + item + '</option>');
-                });
+        JobsGoogleMap.Selector.$selState.val(hashState);
 
-                JobsGoogleMap.Util.Loading.city(false);
-                $('.glyphicon-remove').replaceWith('<button class="glyphicon glyphicon-remove" aria-label="Remove City Selection"></button>');
+        $.getJSON(feedURL + "/GetCity?state=" + hashState + "&handle=" + clientHandle, null, function (data) {
 
-                if (hashCity != "all" && hashCity.length > 0) {
-                    JobsGoogleMap.Selector.$selCity.val(hashCity);
-                }
-                JobsGoogleMap.Selector.$searchMap.trigger("click");
-            });
+          $.each(data, function (i, item) {
 
-        }
-        else if (typeof hashLatLog !== "undefined" && hashLatLog.length > 0) {
+            JobsGoogleMap.Selector.$selCity.append('<option value="' + item + '">' + item + '</option>');
 
-            JobsGoogleMap.Location.Map.CreateMarkers("", "", "00000" + "," + hashLatLog.split('x')[0] + "," + hashLatLog.split('x')[1]);
-        }
+          });
+
+          JobsGoogleMap.Util.Loading.city(false);
+
+          $('.glyphicon-remove').replaceWith('<button class="glyphicon glyphicon-remove" aria-label="Remove City Selection"></button>');
+
+          if (hashCity != "all" && hashCity.length > 0) {
+
+            JobsGoogleMap.Selector.$selCity.val(hashCity);
+
+          }
+
+          JobsGoogleMap.Selector.$searchMap.trigger("click");
+
+        });
+
+      } else if (typeof hashLatLog !== "undefined" && hashLatLog.length > 0) {
+
+        JobsGoogleMap.Location.Map.CreateMarkers("", "", "00000" + "," + hashLatLog.split('x')[0] + "," + hashLatLog.split('x')[1]);
+
+      }
+
+    } else {
+
+      // getGeoLocation();
 
     }
-    else {
 
-       // getGeoLocation();
+  }
 
-    }
+  JobsGoogleMap.Location.Map.clearOverlays = function () {
+
+ // Reset everything
+
+ JobsGoogleMap.Var.latlng1 = new Array();
+
+ if (JobsGoogleMap.Var.marker1) {
+
+   for (i in JobsGoogleMap.Var.marker1) {
+
+     try {
+
+       JobsGoogleMap.Var.marker1[i].setMap(null);
+
+     }
+
+     catch (err) {
+
+     }
+
+   }
+
+ }
+
+ JobsGoogleMap.Var.marker1 = new Array();
 
 }
-
-
-
-
-JobsGoogleMap.Location.Map.clearOverlays = function () {
-
-    //Reset everything
-    JobsGoogleMap.Var.latlng1 = new Array();
-    if (JobsGoogleMap.Var.marker1) {
-        for (i in JobsGoogleMap.Var.marker1) {
-            try {
-
-                JobsGoogleMap.Var.marker1[i].setMap(null);
-            }
-            catch (err) {
-
-            }
-        }
-    }
-    JobsGoogleMap.Var.marker1 = new Array();
-
-}
-
 
 JobsGoogleMap.Location.Map.zoomtoAllMarkers = function (vmap) {
 
-    var bounds = new google.maps.LatLngBounds();
+  var bounds = new google.maps.LatLngBounds();
 
-    for (var i = 0, LtLgLen = JobsGoogleMap.Var.latlng1.length; i < LtLgLen; i++) {
-        //  And increase the bounds to take this point
-        bounds.extend(JobsGoogleMap.Var.latlng1[i]);
-    }
+  for (var i = 0, LtLgLen = JobsGoogleMap.Var.latlng1.length; i < LtLgLen; i++) {
 
-    vmap.fitBounds(bounds);
+    //  And increase the bounds to take this point
+
+    bounds.extend(JobsGoogleMap.Var.latlng1[i]);
+
+  }
+
+  vmap.fitBounds(bounds);
 
 }
-
-
 
 $(window).on('hashchange', function () {
 
-    //Nothign now
+  // Nothing now
+
 });
+
+// TODO
+
+// Bobby, instead of using resize, we may wish to explore window.matchMedia in the future.
+// This is more more effecient and can allow dev to pass desired breakpoints
+// to script, if necessary.
+
+// Spell
 
 $(window).resize(function () {
-    console.log('RESIZING...');
+
+  console.log('RESIZING...');
+
     waitForResize(function () {
-        console.log('RESIZING.Done.');
-        JobsGoogleMap.Util.isMobile = JobsGoogleMap.Util.setIsMobile();
 
+      console.log('RESIZING.Done.');
 
-        if (!JobsGoogleMap.Util.isMobile) {
+      JobsGoogleMap.Util.isMobile = JobsGoogleMap.Util.setIsMobile();
 
-            $('#locations-list').insertAfter($('#search-filter-fields'));
-            $('#google-api-wrapper').append($('#google-api'));
+      if (!JobsGoogleMap.Util.isMobile) {
 
-        }
-        else {
-            $('#locations-list').insertBefore($('#google-api-wrapper'));
-        }
+        $('#locations-list').insertAfter($('#search-filter-fields'));
+        $('#google-api-wrapper').append($('#google-api'));
+
+      } else {
+
+        $('#locations-list').insertBefore($('#google-api-wrapper'));
+
+      }
 
     }, 500, "tda-resizse");
-});
 
-var waitForResize = (function () {
+  });
+
+  var waitForResize = (function () {
+
     var timers = {};
+
     return function (callback, ms, uniqueId) {
-        if (!uniqueId) {
-            uniqueId = "Don't call this twice without a uniqueId";
-        }
-        if (timers[uniqueId]) {
-            clearTimeout(timers[uniqueId]);
-        }
-        timers[uniqueId] = setTimeout(callback, ms);
+
+      if (!uniqueId) {
+
+        uniqueId = "Don't call this twice without a uniqueId";
+
+      }
+
+      if (timers[uniqueId]) {
+
+        clearTimeout(timers[uniqueId]);
+
+      }
+
+      timers[uniqueId] = setTimeout(callback, ms);
+
     };
-})();
 
+  }
 
-
+)();
 
 function getGeoLocation() {
 
-    if (navigator.geolocation) {
-        return navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
+  if (navigator.geolocation) {
+
+    return navigator.geolocation.getCurrentPosition(showPosition);
+
+  } else {
+
+    x.innerHTML = "Geolocation is not supported by this browser.";
+
+  }
+
 }
+
 function showPosition(position) {
 
-    var lat = position.coords.latitude;
-    var lng = position.coords.longitude;
-    JobsGoogleMap.Location.Map.CreateMarkers("", "", "00000" + "," + lat + "," + lng);
+  var lat = position.coords.latitude;
+  var lng = position.coords.longitude;
 
-    if (typeof ga !== 'undefined') {
-        console.log("Sending Map Load Event to GA ");
-       // ga('send', 'event', 'Map API Geocode', 'load', 'Google Map API Geocode');
-        APP.MODELS.GoogleBot.sendCustomDimensions('Custom Event', 'Load', "Google Map API Geocode", 'event');
-    }
+  JobsGoogleMap.Location.Map.CreateMarkers("", "", "00000" + "," + lat + "," + lng);
 
-    JobsGoogleMap.Util.setHash("all/all/all/" + lat + "x" + lng);
+  if (typeof ga !== 'undefined') {
 
-    var latlng = new google.maps.LatLng(lat, lng);
-    var city = "";
-    geocoder.geocode({ 'latLng': latlng }, function (results, status) {
-        if (status == google.maps.GeocoderStatus.OK) {
+    console.log("Sending Map Load Event to GA ");
 
-            if (results[1]) {
-                //formatted address
+    // ga('send', 'event', 'Map API Geocode', 'load', 'Google Map API Geocode');
 
-                //find country name
+    APP.MODELS.GoogleBot.sendCustomDimensions('Custom Event', 'Load', "Google Map API Geocode", 'event');
 
-                for (var i = 0; i < results[0].address_components.length; i++) {
-                    for (var b = 0; b < results[0].address_components[i].types.length; b++) {
+  }
 
+  JobsGoogleMap.Util.setHash("all/all/all/" + lat + "x" + lng);
 
+  var latlng = new google.maps.LatLng(lat, lng);
+  var city = "";
+  geocoder.geocode({ 'latLng': latlng }, function (results, status) {
 
-                        if (results[0].address_components[i].types[b] == "locality") {
+    if (status == google.maps.GeocoderStatus.OK) {
 
-                            city = results[0].address_components[i].short_name;
+      if (results[1]) {
 
-                            JobsGoogleMap.Selector.$selCity.val(city);
-                            break;
-                        }
-                    }
-                }
+        // Formatted address
+
+        // Find country name
+
+        for (var i = 0; i < results[0].address_components.length; i++) {
+
+          for (var b = 0; b < results[0].address_components[i].types.length; b++) {
+
+            if (results[0].address_components[i].types[b] == "locality") {
+
+              city = results[0].address_components[i].short_name;
+
+              JobsGoogleMap.Selector.$selCity.val(city);
+
+              break;
 
             }
-            else {
 
-                alert("No results found");
-            }
-
-
-        } else {
-
-            alert("Geocoder failed due to: " + status);
+          }
 
         }
-    });
 
+      } else {
 
+        alert("No results found");
 
+      }
+
+    } else {
+
+      alert("Geocoder failed due to: " + status);
+
+    }
+
+  });
 
 }
