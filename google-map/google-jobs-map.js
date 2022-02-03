@@ -1,3 +1,12 @@
+/*!
+
+  Radancy Pattern Library: Google Map for Jobs
+
+  Contributor(s):
+  Bobby KC, Email: bobby.kc@radancy.com
+  Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy
+
+*/
 
 var clientHandle = googleMapConfig.client;
 var feedURL = "https://services1-tmpwebeng-com.tmpqa.com/location/GoogleMap/";
@@ -144,25 +153,29 @@ JobsGoogleMap.Util.init = function () {
 
     $('.map-info-dialog button').removeAttr("title").click(function () {
 
-      // JobsGoogleMap.Var.infowindow.close();
+    // $('#location-list-ul li:nth-child(' + JobsGoogleMap.Var.currentFocusIndex + ') button').focus();
+    // We don't need appear to need this as Google already doing it for us.
 
-      $('#location-list-ul li:nth-child(' + JobsGoogleMap.Var.currentFocusIndex + ') a').focus();
+     $('#location-list-ul li').removeClass("active");
 
     });
 
     // Escape Key
 
-    $(document).keyup(function(e) {
+    $(document).on("keyup", function(e) {
 
-      if (e.key === "27") {
+    if (e.key == "Escape") {
 
-        $('#location-list-ul li:nth-child(' + JobsGoogleMap.Var.currentFocusIndex + ') a').focus();
+        // $('#location-list-ul li:nth-child(' + JobsGoogleMap.Var.currentFocusIndex + ') button').focus();
+        // We don't need appear to need this as Google already doing it for us.
+
+        $('#location-list-ul li').removeClass("active");
 
       }
 
     });
 
-    $('.map-info-btn').removeAttr("tabindex");
+    $('.map-info-dialog, .map-info-btn').removeAttr("tabindex");
 
     // Trap Focus within dialog
 
@@ -254,15 +267,13 @@ JobsGoogleMap.Util.Loading = {
 
     if (isLoading) {
 
-      $('#map-overlay-default').show();
+      $('.map-search__initial-state').show();
       $('#map-wrapper').hide();
-      $('#locations-list').hide();
 
     } else {
 
-      $('#map-overlay-default').hide();
+      $('.map-search__initial-state').hide();
       $('#map-wrapper').show();
-      $('#locations-list').show();
       $('#search-clear').show();
 
     }
@@ -326,7 +337,7 @@ $(document).ready(function () {
 
     if (JobsGoogleMap.Util.isMobile) {
 
-      $('#locations-list').insertAfter($('#google-api-wrapper'));
+      $('.map-search__list-and-map-wrapper').prepend($('#google-api-wrapper'));
 
     }
 
@@ -340,40 +351,44 @@ JobsGoogleMap.Location.Map.DOM = {
 
   init: function () {
 
-    var mapDOM = '<div class="map-search__filters">'+
-    ' <div class="map-search__fields">'+
-    '   <label for="map-search-state">' + googleMapConfig.label.state + '</label>' +
-    '   <img id="loading-state" src="https://tbcdn.talentbrew.com/company/1242/v2_0/img/logos/spinner.svg" width="50px" alt="">'+
-    '   <select id="map-search-state" style="visibility:hidden">' +
-    '     <option value=""> ' + googleMapConfig.label.select + ' </option>' +
-    '   </select>'+
-    ' </div>'+
-    ' <div class="map-search__fields">'+
-    '   <label for="map-search-city">' + googleMapConfig.label.city + '</label>' +
-    '   <img id="loading-city" src="https://tbcdn.talentbrew.com/company/1242/v2_0/img/logos/spinner.svg" width="50px" alt="">'+
-    '   <select id="map-search-city" style="visibility:hidden">' +
-    '     <option value=""> ' + googleMapConfig.label.select + ' </option>' +
-    '   </select>' +
-    ' </div>'+
-    ' <div class="map-search__fields">'+
-    '   <label for="map-search-zip">' + googleMapConfig.label.zip + '</label>' +
-    '   <input autocomplete="postal-code" id="map-search-zip" type="text">'+
-    ' </div>'+
-    ' <div class="map-search__cta">'+
-    '   <button class="button button-grad-blue" id="search-submit-location" aria-label=' + JSON.stringify(googleMapConfig.label.search) + '><span>' + googleMapConfig.label.search + '</span></button>' +
-    '   <button class="button button-grad-blue" id="search-clear" aria-label=' + JSON.stringify(googleMapConfig.label.reset) + '><span>' + googleMapConfig.label.reset + '</span></button>' +
-    ' </div>'+
-    '</div>'+
+    var mapDOM = '<div class="map-search" role="search" aria-label='+ JSON.stringify(googleMapConfig.label.a11yFormName) + '>'+
+    ' <div class="map-search__filters">'+
+    '   <div class="map-search__field">'+
+    '     <label for="map-search-state">' + googleMapConfig.label.state + '</label>' +
+    '     <img id="loading-state" src="https://tbcdn.talentbrew.com/company/1242/v2_0/img/logos/spinner.svg" alt="">'+
+    '     <select id="map-search-state" required style="visibility: hidden">' +
+    '       <option value=""> ' + googleMapConfig.label.select + ' </option>' +
+    '     </select>'+
+    '   </div>'+
+    '   <div class="map-search__field">'+
+    '     <label for="map-search-city">' + googleMapConfig.label.city + '</label>' +
+    '     <img id="loading-city" src="https://tbcdn.talentbrew.com/company/1242/v2_0/img/logos/spinner.svg" alt="">'+
+    '     <select id="map-search-city" style="visibility:hidden">' +
+    '       <option value=""> ' + googleMapConfig.label.select + ' </option>' +
+    '     </select>' +
+    '   </div>'+
+    '   <div class="map-search__field">'+
+    '     <label for="map-search-zip">' + googleMapConfig.label.zip + '</label>' +
+    '     <input autocomplete="postal-code" id="map-search-zip" type="text">'+
+    '   </div>'+
+    '   <div class="map-search__cta">'+
+    '     <button id="search-submit-location" type="submit" aria-label=' + JSON.stringify(googleMapConfig.label.search) + '><span>' + googleMapConfig.label.search + '</span></button>' +
+    '     <button id="search-clear" type="reset" aria-label=' + JSON.stringify(googleMapConfig.label.reset) + '><span>' + googleMapConfig.label.reset + '</span></button>' +
+    '   </div>'+
+    ' </div><!-- /.map-search__filters -->'+
+    '</div><!-- /.map-search -->'+
     '<div class="map-search__render-area">'+
-    ' <div id="map-overlay-default" class="map-search__initial-state">'+
+    ' <div class="map-search__initial-state">'+
     '   <button id="my-location" class="map-search__button map-search__button--my-location">' + googleMapConfig.label.useMyLocation + '</button>' +
     '   <span>' + googleMapConfig.label.or + '</span>' +
     '   <a href="/remote-jobs-vanity-url" class="map-search__button map-search__button--remote-jobs">' + googleMapConfig.label.showRemote + '</a>' +
     ' </div>'+
-    ' <div id="map-wrapper" class="map-search__list-and-map-wrapper" style="display:none">'+
-    '   <div id="locations-list" style="display:none;">'+
-    '   <h2>Locations</h2>' +
-    '   <p class="job-match-status" id="location-match"></p>' +
+    ' <div id="map-wrapper" style="display:none">'+
+    '   <h2 class="job-match-heading">Locations</h2>' +
+    '   <p class="job-match-status"></p>' +
+    ' <div class="map-search__list-and-map-wrapper">'+
+    '   <button id="btn-show-locations" aria-expanded="false">Show Locations List</button>'+
+    '   <div id="locations-list">'+
     '   <ol id="location-list-ul"></ol>'+
     ' </div>'+
     ' <div id="google-api-wrapper">'+
@@ -381,11 +396,22 @@ JobsGoogleMap.Location.Map.DOM = {
     '     <p>Please enable Javascript for Google render Map</p>'+
     '   </div>'+
     '  </div>'+
-    ' </div> <!-- END map-search__list-and-map-wrapper -->'+
+    ' </div> <!-- /.map-search__list-and-map-wrapper -->'+
+    ' </div> <!-- /#map-wrapper -->'+
     '</div>';
 
     $('#google-job-map').html(mapDOM);
     $('#search-clear').hide();
+
+    $("#btn-show-locations").click(function(e) {
+
+      $(this).attr('aria-expanded', function (i, attr) {
+
+        return attr == 'true' ? 'false' : 'true';
+
+      });
+
+    });
 
   }
 
@@ -471,7 +497,7 @@ JobsGoogleMap.Location.Map.Events = {
 
         if (!$('#map-search-error').length){
 
-          $('<p id="map-search-error" class="alert">Please select City/State or Zip Code</p>').insertAfter( ".map-search__cta" );
+          $('.map-search').append( '<p id="map-search-error" class="alert">Please select City/State or Zip Code</p>');
 
         }
 
@@ -561,12 +587,26 @@ JobsGoogleMap.Location.Map.ListLocations = function (data) {
     var jobCount = item.count;
     var searcURL = googleMapConfig.searchDomain + "/search-jobs?ascf=[{'key':'" + googleMapConfig.searchCustomFieldName + "','value':'" + address + "'}]&orgIds=1242";
 
-    $('#location-list-ul').append('<li><button class="job-list-btn" data-job-count=' + count + ' data-href="' + searcURL + '">' + address + ', ' + eCity + ', ' + state + ' <span class="job-list-count">(' + jobCount + ') jobs in this location</span></button></li>');
+    if (jobCount > 1) {
+
+      var jobTerm = "jobs";
+
+    } else {
+
+      var jobTerm = "job";
+
+    }
+
+    $('#location-list-ul').append('<li><button class="job-list-btn" data-job-count=' + count + ' data-href="' + searcURL + '"><span class="job-list-address">' + address + '<br> ' + eCity + ', ' + state + '</span> <strong class="job-list-count">' + jobCount + ' ' + jobTerm + ' in this location</strong></button></li>');
 
   });
 
-  $('#location-match').text(data.length + '  ' + googleMapConfig.label.locationCount);
-  $('#map-search-results').text(data.length + '  ' + googleMapConfig.label.locationCount);
+  // Job Status Message
+
+  var jobStatusMessage = data.length + '  ' + googleMapConfig.label.locationCount;
+
+  $('.job-match-status').text(jobStatusMessage); // Visual Message
+  $('#map-search-results').text(jobStatusMessage); // Assistive Technology
 
   JobsGoogleMap.Selector.$locationList.find('li .job-list-btn').click(function (e) {
 
@@ -619,7 +659,7 @@ JobsGoogleMap.Location.Map.ListLocations = function (data) {
 
 JobsGoogleMap.Location.Map.InItMap = function () {
 
-  $('#map-overlay-default ').show();
+  $('.map-search__initial-state').show();
 
 };
 
@@ -629,7 +669,7 @@ JobsGoogleMap.Location.Map.CreateMarkers = function (state, city, zip) {
 
   JobsGoogleMap.Util.Loading.map(true);
 
-  // $('#map-overlay-default ').hide();
+  // $('.map-search__initial-state').hide();
 
   JobsGoogleMap.Location.Map.clearOverlays();
 
@@ -732,6 +772,7 @@ JobsGoogleMap.Location.Map.LoadLocation = function (data) {
     center: myLatlng,
     styles: mapStyle,
     mapTypeControlOptions: {
+
       mapTypeIds: []
 
     }, // here�s the array of controls
@@ -782,7 +823,7 @@ JobsGoogleMap.Location.Map.LoadLocation = function (data) {
       var locLatLng = new google.maps.LatLng(lat, lon);
       var infowindowHover = new google.maps.InfoWindow({
 
-        content: '<span>' + address + ' (' + item.count + ' job(s) )</span>',
+        content: '<span>' + address + ' (' + item.count + ' jobs)</span>',
         position: locLatLng
 
       });
@@ -823,7 +864,9 @@ JobsGoogleMap.Location.Map.LoadLocation = function (data) {
       }
 
       var content = '<div class="map-info-content"><h3 id="map-info-title">' + address + '</h3><p>' + item.count + ' available positions at this location:</p>' + categoryInfoContent;
-      content += '<a class="map-info-btn" href="' + searchURL + '" target="_blank" rel="noopener">' + googleMapConfig.linkText + ' <span class="visually-hidden">(opens in new tab)</span></a></div>';
+      content += '<a class="map-info-btn" href="' + searchURL + '" target="_blank" rel="noopener">' + googleMapConfig.linkText + ' <span class="map-new-window">(opens in new tab)</span></a></div>';
+
+      // TODO: Bobby to add switch to disable new window if not desired. Default behavior is always a new window.
 
       google.maps.event.addListener(marker, 'click', (function (marker, i) {
 

@@ -1,3 +1,18 @@
+/*!
+
+  Radancy Pattern Library: Google Map for Jobs
+
+  Contributor(s):
+  Bobby KC, Email: bobby.kc@radancy.com
+  Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy
+
+*/
+
+:root {
+
+  --base-color: 111, 0, 239;
+
+}
 
 .visually-hidden:not(:focus):not(:active) {
 clip: rect(0 0 0 0);
@@ -9,51 +24,56 @@ white-space: nowrap;
 width: 1px;
 }
 
-.map-search__initial-state {
-background-image: url("https://tbcdn.talentbrew.com/company/1242/v2_0/img/content/default-map.jpg");
-background-position-y: -200px;
-background-size: cover;
-padding-bottom: 56.25%;
-position: relative;
-}
-
-.map-search__render-area {
-margin: 20px auto;
-}
-
 .map-search__initial-state .map-search__button {
-background-color: #d5232f;
-border: 0;
+background-color: rgb(var(--base-color));
+border: none;
 color: #fff;
+font-size: inherit;
 font-weight: bold;
+line-height: normal;
 margin-right: 10px;
-padding: 12px 15px;
+padding: 12px;
 text-align: center;
+text-decoration: none;
+display: inline-block;
+max-width: 200px;
 }
 
-.map-search__initial-state span {
-display: block;
-font-size: 1.5rem;
-font-weight: bold;
-margin-top: 100px;
-text-align: center;
-}
 
-.map-search__initial-state .map-search__button {
-position: absolute;
-left: 50%;
-transform: translate(-50%, 0);
-}
-
-.map-search__initial-state .map-search__button--my-location {
-top:20%;
-}
-.map-search__initial-state .map-search__button--remote-jobs {
-bottom:20%;
-}
 
 #location-match {
 font-weight:bold;
+}
+
+#btn-show-locations {
+background-color: rgb(var(--base-color));
+border: 0;
+color:#fff;
+font-weight: bold;
+margin: 1em 0 0;
+padding: 12px 15px;
+text-align: center;
+width: 100%;
+}
+
+#locations-list {
+display: none;
+}
+
+#btn-show-locations[aria-expanded="true"] + #locations-list {
+display: block !important;
+}
+
+@media screen and (min-width: 800px) {
+
+  #btn-show-locations {
+  display: none;
+  }
+
+  #locations-list {
+  display: block !important;
+  }
+
 }
 
 #location-list-ul {
@@ -65,46 +85,62 @@ padding: 0;
 
 #location-list-ul li {
 counter-increment: job-list-counter;
-margin: .5em;
+margin-top: .5em;
 padding: .5em;
 display: block;
+position: relative;
 }
 
 #location-list-ul li::before {
-content: counter(job-list-counter);
-background: #d90000;
-width: 25px;
-height: 25px;
+background-color: rgb(var(--base-color));
 border-radius: 50%;
-display: block;
-line-height: 25px;
+border: 1px #fff solid;
 color: #fff;
-text-align: center;
-position: absolute;
+content: counter(job-list-counter);
+display: block;
 font-size: .8rem;
-top: 1em;
-left: .5em;
+height: 25px;
+left: .8em;
+line-height: 22.5px;
+position: absolute;
+text-align: center;
+top: 1.3em;
+width: 25px;
 }
 
 #location-list-ul .job-list-btn {
-display: block;
+background-color: transparent;
+border: 0;
+color: inherit;
 font-size: inherit;
 line-height:normal;
-text-align:left;
-background-color:transparent;
-border: 0;
 margin: 0 1em 0 2em;
 padding: .5em;
+text-align:left;
+transition: none;
 }
 
-#location-list-ul .job-list-btn span {
+.job-list-address {
+line-height: 1.5;
+}
+
+#location-list-ul .job-list-btn .job-list-count {
 display: block;
 margin-top: .5em;
 }
 
 #location-list-ul  li.active, #location-list-ul  li:hover, #location-list-ul  li:focus-within {
-background-color: #eee;
 border-radius: 5px;
+transition: all 100ms ease-in;
+}
+
+#location-list-ul  li:hover, #location-list-ul  li:focus-within {
+background-color: #eee;
+}
+
+#location-list-ul  li.active {
+background-color: rgba(var(--base-color), .8);
+color: #fff;
 }
 
 
@@ -117,30 +153,33 @@ padding-left: 4px
 }
 
 
-.map-search__fields label {
+.map-search__field label {
 display:block;
 padding-bottom: .4em;
 }
 
 .map-search__cta button {
-background-color: #d5232f;
+background-color: rgb(var(--base-color));
 padding: 12px 15px;
 border: 0;
 font-weight: bold;
+font-size: inherit;
 text-align: center;
-margin-right: 10px;
-color:#fff;
-line-height:normal;
+margin-right: 1em;
+color: #fff;
+line-height: normal;
 }
 
-.map-search__fields {
-position:relative;
+.map-search__field {
+position: relative;
 }
 
-.map-search__fields img {
+.map-search__field img {
+bottom: -5px;
+height: 50px;
+left: 0;
 position:absolute;
-top:30px;
-left:0;
+width :50px;
 }
 
 @media screen and (min-width: 800px) {
@@ -153,35 +192,23 @@ left:0;
   min-width: 200px;
   }
 
-  .map-search__initial-state .map-search__button {
-  position: absolute;
-  top: 50%;
-  transform: translate(0, -50%);
-  }
-
-  .map-search__initial-state .map-search__button--my-location {
-  left: 20%;
-  }
-
-  .map-search__initial-state .map-search__button--remote-jobs {
-  right: 20%;
-  left: auto;
-  bottom: initial;
-  }
-
   .map-search__filters, .map-search__list-and-map-wrapper {
   align-items: flex-end;
   display: flex;
-  flex-flow: nowrap;
-  /* flex-wrap: wrap; might need this for just .map-search__filters */
-  justify-content: center;
-  width: 100%;
   }
 
 .map-search__filters > div:not(:last-child) {
 margin-right: 1%
 }
 
+}
+
+#map-wrapper .job-match-heading {
+margin-bottom: 0;
+}
+
+#map-wrapper .job-match-status {
+margin-top: .5em;
 }
 
 /* Google Map */
@@ -206,6 +233,10 @@ height: 360px
 width:30%;
 }
 
+#location-list-ul li {
+margin: .5em;
+}
+
 #google-api-wrapper #google-api {
 height: 760px
 }
@@ -222,202 +253,121 @@ height: 760px
 
 /* Location List */
 
-
-
-
-#location-list-ul #google-api {
-margin: 10px 0;
-height: 250px;
+#locations-list #google-api {
+border: 1px #666 solid;
+height: 240px;
+margin-top: .5em;
 }
 
-#locations-list {
-margin: 10px 0 4px;
-position: relative
+/* Map Content when child of Location List. No need to show all details that are ALREADY in button, so just show "View All Jobs" */
+
+#locations-list .map-info-dialog button, #locations-list .map-info-content h3, #locations-list .map-info-content p, #locations-list .map-info-content ul {
+display: none !important;
 }
 
-#locations-list #location-list-ul {
-overflow: auto;
-z-index: 0
-}
-
-#locations-list #location-list-ul {
-height: 400px
-}
 
 @media screen and (min-width: 800px) {
-#locations-list #location-list-ul {
-height: 710px
-}
-}
 
-#locations-list #location-list-ul li {
-position: relative;
+  #location-list-ul {
+  height: 760px;
+  overflow: auto;
+  }
+
 }
 
 /* End Location List */
 
 
-/* Map Info Window */
+/* Map Dialog */
 
-
-.map-info-dialog h3 {
-color: #c00;
-margin: 0 1.5em 0 0;
-font-size: 1rem;
-}
-
-.map-info-dialog {
-    max-width: 0;
-}
-
-.map-info-dialog  ul {
-display:none;
-}
-
-.map-info-dialog .map-info-btn {
-background-color: #c00;
-color: #fff;
-font-weight: bold;
-line-height: normal;
-margin: 2em 1em 1em;
-padding: 1em;
-position: relative;
-text-align: center;
-text-decoration: none;
-}
+/* Close Button */
 
 .map-info-dialog button  {
-height:40px !important;
+height: 40px !important;
 right: 4px !important;
 top: 4px !important;
-width:40px !important;
 transition: none;
+width: 40px !important;
 }
 
 .map-info-dialog button img {
-height:25px !important;
-width:25px !important;
+height: 25px !important;
+width: 25px !important;
 }
+
+/* Map Content */
 
 .map-info-content {
 color: inherit !important;
-}
-
-.map-info-content b,
-.map-info-content a:not(.map-info-btn) {
-color: #cc0000 !important;
-}
-
-.map-info-content span {
-display: block;
-margin: 8px 0 0;
-}
-
-.map-info-content p:empty {
-display: none;
-}
-
-.map-info-content a {
-display: block;
-font-weight: bold;
-padding: 2px 0;
 }
 
 .map-info-content img {
 display: none;
 }
 
-.map-info-content p {
-font-size:0.9rem !important;
-}
-
-@media screen and (min-width: 800px) {
-
-.map-info-content ul {
-display:block;
-}
-
-.map-info-content a {
-padding: 6px 0;
-}
-.map-info-content {
-max-width: none;
-}
 .map-info-content h3 {
-font-size: 1.2rem;
+color: rgb(var(--base-color));
+font-size: 1rem;
+margin: 0 1.8em 0 0;
 }
 
+.map-info-content p {
+font-size: .9rem;
 }
 
-
-
-/* End Map Info Window */
-
-
-
-
-
-
-
-
-
-
-/*Custom Client Specific styles*/
-
-#google-job-map {
-background:#F5F5F0;
+.map-info-content p:empty {
+display: none;
 }
 
-.map-search__cta button {
-border-radius:10px;
-background:#E62600;
-color:#fff;
+.map-info-btn {
+background-color: rgb(var(--base-color));
+color: #fff;
+display: block;
+font-weight: bold;
+line-height: normal;
+padding: 1em;
+text-align: center;
+text-decoration: none;
 }
 
-.map-search__initial-state {
-padding-bottom: 52.25%;
-background:#F5F5F0;
+.map-info-content a:not(.map-info-btn) {
+color: rgb(var(--base-color)) !important;
 }
 
-.map-search__initial-state .map-search__button--my-location,
-.map-search__initial-state .map-search__button--remote-jobs {
-padding-left: 50px;
-background: transparent;
-color: #323264;
-}
-
-.map-search__initial-state .map-search__button--my-location:before,
-.map-search__initial-state .map-search__button--remote-jobs:before {
-content:'';
-
-
-background:url(https://services1-tmpwebeng-com.tmpqa.com/img/walgreen-my-loc.png);
-position:absolute;
-left:0;
-top:0;
-}
-
-.map-search__initial-state .map-search__button--my-location:before {
-
-background:url(https://services1-tmpwebeng-com.tmpqa.com/img/walgreen-my-loc.png);
-width:32px;
-height:47px;
-}
-
-.map-search__initial-state .map-search__button--remote-jobs:before {
-width:40px;
-height:40px;
-background:url(https://services1-tmpwebeng-com.tmpqa.com/img/walgreen-remote-jobs.png);
-background-size:cover;
-
+.map-new-window {
+background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDAyIDc5LjE2NDQ2MCwgMjAyMC8wNS8xMi0xNjowNDoxNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIxLjIgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjZDQkVDNEE3ODM3RjExRUNBMjc0OTcwNEVBNTU1M0QwIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjZDQkVDNEE4ODM3RjExRUNBMjc0OTcwNEVBNTU1M0QwIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NkNCRUM0QTU4MzdGMTFFQ0EyNzQ5NzA0RUE1NTUzRDAiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NkNCRUM0QTY4MzdGMTFFQ0EyNzQ5NzA0RUE1NTUzRDAiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4Q5npKAAAB9UlEQVR42uyZv07DMBDGkzYFBFQsbLAyMvAULFA2JP4MdOqI2BFTxQwDqLAwILFCxcRboE48AGxIoKZJKSqYO3RJjZU0aWI7QeonfVXsOO6vPjvxpSZjzCAdgbfAC8ZoegXvg+8j2lXAJ+D5Ufo1CbBJHaTRFLgXcm4S/JGgz24BPqoS4FRpwoKPg4ATdoIQ94a06dEgnAohxvo38FLIdS6GuAMHM1SB8d6NMZ+S/hhUmYP7BF/Tdwb3DYAOG8jGOanRdTZcbQzxF0f8TaPpaJhfDXAtqlFBKJsBdTrhbsBPwwCNDOGOwTvceqBVAXHmYw4uK5xzjZC5dsG16fI8OgHjwM2JPLoA48B5gH3ufF8HYFw4dAnscm0c1YCjwHleB7+Q11QCJoHzbJGVreI0cH+sAlAanApAqXCyAc9lw8kEXFUBh5b1LF4MqLuMs1uJlKQRxGseuX7OUo6cf5uxJI0g7qpXwJvgd/BDir4qtONB1czfB/JgG25T2mkb2agEblOG6Gd1edI0QfpZXd4AMeVw+awub4CROckYcAw4BvzvgIzuRVneB5kIWBTKToaAjjBoRUsgnqVXYc2MADeIwY8obhZacLCc8p2fLJWFcgsB9+DgKqdrpOptEO9Y/nSLbCb3N8QheDtk+65Tz/SesI6FHwEGAD6kmgYXamcIAAAAAElFTkSuQmCC");
+background-position: center;
+background-repeat: no-repeat;
+background-size: contain;
+display: inline-block;
+height: 14px;
+margin-left: .5em;
+overflow: hidden;
+text-indent: -999em;
+vertical-align: middle;
+width: 14px;
 }
 
 @media screen and (min-width: 800px) {
 
-.map-search__initial-state {
-padding-bottom: 16.25%;
+  .map-info-dialog {
+  max-width: 500px !important;
+  }
+
+  .map-info-dialog button, .map-info-content h3, .map-info-content p, .map-info-content ul {
+  display: block !important;
+  }
+
+  .map-info-btn {
+  margin: 2em 1em 1em;
+  }
 
 }
-}
 
-/*End Custom Client Specific styles*/
+/* Google Overrides */
+
+/* Dialog arrow has small space in it */
+
+.gm-style .gm-style-iw-t::after {
+top: -1px;
+}
