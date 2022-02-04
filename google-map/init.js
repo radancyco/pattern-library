@@ -269,12 +269,12 @@ JobsGoogleMap.Util.Loading = {
 
     if (isLoading) {
 
-      $('.map-search__initial-state').show();
+      $('.map-search-alternative').show();
       $('#map-wrapper').hide();
 
     } else {
 
-      $('.map-search__initial-state').hide();
+      $('.map-search-alternative').hide();
       $('#map-wrapper').show();
       $('#search-clear').show();
 
@@ -354,51 +354,88 @@ JobsGoogleMap.Location.Map.DOM = {
   init: function () {
 
     var mapDOM = '<div class="map-search" role="search" aria-label='+ JSON.stringify(googleMapConfig.label.a11yFormName) + '>'+
+
     ' <div class="map-search__filters">'+
+
     '   <div class="map-search__field">'+
+
     '     <label for="map-search-state">' + googleMapConfig.label.state + '</label>' +
-    '     <img id="loading-state" src="https://tbcdn.talentbrew.com/company/1242/v2_0/img/logos/spinner.svg" alt="">'+
+
+    '     <span class="map-search__spinner" id="loading-state"></span>'+
+
     '     <select id="map-search-state" required style="visibility: hidden">' +
     '       <option value=""> ' + googleMapConfig.label.select + ' </option>' +
     '     </select>'+
+
     '   </div>'+
+
     '   <div class="map-search__field">'+
+
     '     <label for="map-search-city">' + googleMapConfig.label.city + '</label>' +
-    '     <img id="loading-city" src="https://tbcdn.talentbrew.com/company/1242/v2_0/img/logos/spinner.svg" alt="">'+
+
+    '     <span class="map-search__spinner" id="loading-city"></span>'+
+
     '     <select id="map-search-city" style="visibility:hidden">' +
     '       <option value=""> ' + googleMapConfig.label.select + ' </option>' +
     '     </select>' +
+
     '   </div>'+
+
     '   <div class="map-search__field">'+
+
     '     <label for="map-search-zip">' + googleMapConfig.label.zip + '</label>' +
-    '     <input autocomplete="postal-code" id="map-search-zip" type="text">'+
+
+    '     <input autocomplete="postal-code" id="map-search-zip" type="text" inputmode="numeric" pattern="^(?(^00000(|-0000))|(\d{5}(|-\d{4})))$">'+
+
     '   </div>'+
+
     '   <div class="map-search__cta">'+
+
     '     <button id="search-submit-location" type="submit" aria-label=' + JSON.stringify(googleMapConfig.label.search) + '><span>' + googleMapConfig.label.search + '</span></button>' +
+
     '     <button id="search-clear" type="reset" aria-label=' + JSON.stringify(googleMapConfig.label.reset) + '><span>' + googleMapConfig.label.reset + '</span></button>' +
+
     '   </div>'+
+
     ' </div><!-- /.map-search__filters -->'+
+
     '</div><!-- /.map-search -->'+
-    '<div class="map-search__render-area">'+
-    ' <div class="map-search__initial-state">'+
-    '   <button id="my-location" class="map-search__button map-search__button--my-location" aria-label=' + JSON.stringify(googleMapConfig.label.useMyLocation) + '><span>' + googleMapConfig.label.useMyLocation + '</span></button>' +
-    '   <span>' + googleMapConfig.label.or + '</span>' +
-    '   <a href="/remote-jobs-vanity-url" class="map-search__button map-search__button--remote-jobs" aria-label=' + JSON.stringify(googleMapConfig.label.showRemote) + '><span>' + googleMapConfig.label.showRemote + '</span></a>' +
-    ' </div>'+
-    ' <div id="map-wrapper" style="display:none">'+
-    '   <h2 class="job-match-heading">' + googleMapConfig.label.locationsHeading + '</h2>' +
-    '   <p class="job-match-status"></p>' +
-    ' <div class="map-search__list-and-map-wrapper">'+
+
+    '<div class="map-search-alternative">'+
+
+    '  <button id="my-location" class="map-search-alternative__button map-search-alternative__button--my-location" aria-label=' + JSON.stringify(googleMapConfig.label.useMyLocation) + '><span>' + googleMapConfig.label.useMyLocation + '</span></button>' +
+
+    '  <span class="map-search-alternative__or">' + googleMapConfig.label.or + '</span>' +
+
+    '  <button href="/remote-jobs-vanity-url" class="map-search-alternative__button map-search-alternative__button--remote-jobs" aria-label=' + JSON.stringify(googleMapConfig.label.showRemote) + '><span>' + googleMapConfig.label.showRemote + '</span></button>' +
+
+    '</div>'+
+
+    '<div id="map-wrapper" style="display:none">'+
+
+    '  <h2 class="job-match-heading">' + googleMapConfig.label.locationsHeading + '</h2>' +
+
+    '  <p class="job-match-status"></p>' +
+
+    '  <div class="map-search__list-and-map-wrapper">'+
+
     '   <button id="btn-show-locations" aria-expanded="false" aria-label=' + JSON.stringify(googleMapConfig.label.showLocations) + '>' + googleMapConfig.label.showLocations + '</button>'+
+
     '   <div id="locations-list">'+
-    '   <ol id="location-list-ul"></ol>'+
-    ' </div>'+
-    ' <div id="google-api-wrapper">'+
-    '   <div id="google-api"></div>'+
-    '  </div>'+
-    ' </div> <!-- /.map-search__list-and-map-wrapper -->'+
-    ' </div> <!-- /#map-wrapper -->'+
-    '</div>';
+
+    '     <ol id="location-list-ul"></ol>'+
+
+    '   </div>'+
+
+    '   <div id="google-api-wrapper">'+
+
+    '     <div id="google-api"></div>'+
+
+    '   </div>'+
+
+    '  </div> <!-- /.map-search__list-and-map-wrapper -->'+
+
+    ' </div> <!-- /#map-wrapper -->'
 
     $('#google-job-map').html(mapDOM);
     $('#search-clear').hide();
@@ -497,7 +534,7 @@ JobsGoogleMap.Location.Map.Events = {
 
         if (!$('#map-search-error').length){
 
-          $('.map-search').append( '<p id="map-search-error" class="alert">' + googleMapConfig.label.errorMessage + '</p>');
+          $('.map-search').prepend( '<p id="map-search-error" class="alert">' + googleMapConfig.label.errorMessage + '</p>');
 
         }
 
@@ -673,7 +710,7 @@ JobsGoogleMap.Location.Map.ListLocations = function (data) {
 
 JobsGoogleMap.Location.Map.InItMap = function () {
 
-  $('.map-search__initial-state').show();
+  $('.map-search-alternative').show();
 
 };
 
@@ -683,7 +720,7 @@ JobsGoogleMap.Location.Map.CreateMarkers = function (state, city, zip) {
 
   JobsGoogleMap.Util.Loading.map(true);
 
-  // $('.map-search__initial-state').hide();
+  // $('.map-search-alternative').hide();
 
   JobsGoogleMap.Location.Map.clearOverlays();
 
@@ -1214,7 +1251,7 @@ function showPosition(position) {
 
         alert("No results found");
 
-        // Bobby, I never this message, so not sure if we should tokenize it. Also, if it is related to interface, I may want to send it to HTML instead of using an alert. 
+        // Bobby, I never this message, so not sure if we should tokenize it. Also, if it is related to interface, I may want to send it to HTML instead of using an alert.
 
       }
 

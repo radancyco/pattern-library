@@ -11,12 +11,17 @@
 :root {
 
   --base-color: 111, 0, 239;
+  --map-search-elmn-border: 1px solid #666;
+  --map-search-elmn-height: 50px;
+  --map-search-elmn-width: 100%;
 
 }
 
+/* Use to inclusively hide content for assistive tech users */
+
 .visually-hidden:not(:focus):not(:active) {
-clip: rect(0 0 0 0);
 clip-path: inset(50%);
+clip: rect(0 0 0 0);
 height: 1px;
 overflow: hidden;
 position: absolute;
@@ -24,21 +29,128 @@ white-space: nowrap;
 width: 1px;
 }
 
-.map-search__initial-state .map-search__button {
-background-color: rgb(var(--base-color));
-border: none;
-color: #fff;
-font-size: inherit;
-font-weight: bold;
-line-height: normal;
-margin-right: 10px;
-padding: 12px;
-text-align: center;
-text-decoration: none;
-display: inline-block;
-max-width: 200px;
+/* Map Search Form */
+
+.map-search__field label {
+display: block;
 }
 
+.map-search__field {
+position: relative;
+}
+
+.map-search__field input, .map-search__field select {
+border: var(--map-search-elmn-border);
+height: var(--map-search-elmn-height);
+margin-bottom: .5em;
+padding-left: 1em;
+width: var(--map-search-elmn-width);
+}
+
+.map-search__spinner {
+background-image: url("https://tbcdn.talentbrew.com/company/1242/v2_0/img/logos/spinner.svg");
+background-position: left;
+background-repeat: no-repeat;
+background-size: var(--map-search-elmn-height);;
+border: var(--map-search-elmn-border);
+bottom: 0;
+display: block;
+height: var(--map-search-elmn-height);
+left: 0;
+position: absolute;
+width: var(--map-search-elmn-width);
+}
+
+.map-search__cta {
+display: flex;
+}
+
+.map-search__cta button {
+background-color: rgb(var(--base-color));
+border: 0;
+color: #fff;
+flex: 1;
+font-size: inherit;
+height: var(--map-search-elmn-height);
+margin-top: .5em;
+text-align: center;
+}
+
+.map-search__cta button:last-child {
+margin-left: 1.3em;
+}
+
+.map-search__field input, .map-search__field select, .map-search__cta button {
+font-size: inherit;
+line-height: normal;
+}
+
+@media (min-width: 800px) {
+
+  .map-search__filters {
+  align-items: flex-end;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  }
+
+  .map-search__field input, .map-search__field select {
+  margin-bottom: 0;
+  }
+
+  .map-search__field, .map-search__cta {
+  width: 49%;
+  }
+
+}
+
+@media (min-width: 980px) {
+
+  /* .map-search__list-and-map-wrapper */
+
+  .map-search__filters {
+  flex-wrap: nowrap;
+  }
+
+  .map-search__field, .map-search__cta {
+  width: 24%;
+  }
+
+}
+
+/* Map - Alternative Search */
+
+.map-search-alternative {
+display: flex;
+margin: 1em 0;
+}
+
+.map-search-alternative__button {
+background-color: rgb(var(--base-color));
+border: 0;
+color: #fff;
+flex: 1;
+font-size: inherit;
+height: var(--map-search-elmn-height);
+line-height: normal;
+text-align: center;
+text-decoration: none;
+}
+
+.map-search-alternative__button:last-child {
+margin-left: 1.3em;
+}
+
+.map-search-alternative__button span {
+line-height: var(--map-search-elmn-height);
+}
+
+.map-search-alternative__or {
+display: none;
+}
+
+
+/* to be continued ... */
 
 
 #location-match {
@@ -143,70 +255,6 @@ background-color: rgba(var(--base-color), .8);
 color: #fff;
 }
 
-
-.map-search__filters input,
-.map-search__filters select {
-width: 100%;
-border: 1px solid #000 !important;
-height: 40px;
-padding-left: 1em;
-font-size: inherit;
-}
-
-
-.map-search__field label {
-display:block;
-}
-
-.map-search__cta {
-display: flex;
-justify-content: space-between;
-}
-
-.map-search__cta button {
-background-color: rgb(var(--base-color));
-border: 0;
-color: #fff;
-font-size: inherit;
-height: 40px;
-line-height: normal;
-text-align: center;
-white-space: nowrap;
-width: 47%;
-margin-top: 1em;
-}
-
-.map-search__field {
-position: relative;
-}
-
-.map-search__field img {
-bottom: -5px;
-height: 50px;
-left: 0;
-position:absolute;
-width: 50px;
-}
-
-@media screen and (min-width: 800px) {
-
-
-  .map-search__cta button:not(:last-child) {
-
-  }
-
-  .map-search__list-and-map-wrapper, .map-search__filters {
-  align-items: flex-end;
-  display: flex;
-  justify-content: space-between;
-  }
-
-  .map-search__field, .map-search__cta{
-  width: 24%;
-  }
-
-
-}
 
 #map-wrapper .job-match-heading {
 margin-bottom: 0;

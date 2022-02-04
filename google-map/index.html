@@ -1,7 +1,7 @@
 ---
-folder: floating-labels
-localcss: "google-jobs-map.css"
-localjs: "google-jobs-map.js"
+folder: google-map
+localcss: "init.css"
+localjs: "init.js"
 noindex: true
 title: "Map Search"
 jquery: false
@@ -9,7 +9,7 @@ jquery: false
 
 {% include nav.html %}
 
-<p>Use the search by zip code, "use my location" button, or dropdown state and city functionality below to access a list of stores in your desired area. Then click on the individual store listing below the search criteria for more job location details and opportunities.</p>
+<p>Use the search form below to find job opportunities in your desired area.</p>
 
 <div aria-live="polite" class="visually-hidden" id="map-search-results"></div>
 
@@ -18,154 +18,6 @@ jquery: false
   <span>Loading...</span>
 
 </div>
-
-<style>
-
-.map-search__render-area {
-/* margin: 20px auto; */
-}
-
-.map-search__initial-state span {
-/* display: block;
-font-size: 1.5rem;
-font-weight: bold;
-margin-top: 100px;
-text-align: center; */
-}
-
-.map-search__initial-state .map-search__button {
-/* position: absolute;
-left: 50%;
-transform: translate(-50%, 0); */
-}
-
-.map-search__initial-state .map-search__button--my-location {
-/* top:20%; */
-}
-.map-search__initial-state .map-search__button--remote-jobs {
-/* bottom:20%; */
-}
-
-.map-search__initial-state .map-search__button {
-/* position: absolute;
-top: 50%;
-transform: translate(0, -50%); */
-}
-
-.map-search__initial-state .map-search__button--my-location {
-/* left: 20%; */
-}
-
-.map-search__initial-state .map-search__button--remote-jobs {
-/*   right: 20%;
-left: auto;
-bottom: initial; */
-}
-
-.map-search__filters, .map-search__list-and-map-wrapper {
-
-/* flex-flow: nowrap; */
-/* flex-wrap: wrap; might need this for just .map-search__filters */
-/* justify-content: center; */
-/* width: 100%; */
-}
-
-/* #google-job-map, .map-search__initial-state {
-background: transparent !important;
-}
-
-.map-search__list-and-map-wrapper {
-margin-left: auto !important;
-margin-right: auto !important;
-max-width: 1220px;
-width: 100%;
-}
-
-#locations-list {
-margin-top: 0;
-padding-top: 20px;
-}
-
-#location-list-ul a {
-font-size: 1.1rem;
-}
-
-#locations-list h2 {
-font-size: 2.6rem;
-}
-
-.map-info-content h3 {
-max-width: 300px;
-}
-
-@media screen and (min-width: 800px) {
-
-.map-search__filters {
-margin: 20px auto;
-padding: 40px 0;
-}
-
-} */
-
-/*Custom Client Specific styles*/
-
-/*
-
-.map-search__cta button {
-border-radius:10px;
-background:#E62600;
-color:#fff;
-}
-
-.map-search__initial-state {
-padding-bottom: 52.25%;
-background:#F5F5F0;
-}
-
-.map-search__initial-state .map-search__button--my-location,
-.map-search__initial-state .map-search__button--remote-jobs {
-padding-left: 50px;
-background: transparent;
-color: #323264;
-}
-
-.map-search__initial-state .map-search__button--my-location:before,
-.map-search__initial-state .map-search__button--remote-jobs:before {
-content:'';
-
-
-background:url(https://services1-tmpwebeng-com.tmpqa.com/img/walgreen-my-loc.png);
-position:absolute;
-left:0;
-top:0;
-}
-
-.map-search__initial-state .map-search__button--my-location:before {
-
-background:url(https://services1-tmpwebeng-com.tmpqa.com/img/walgreen-my-loc.png);
-width:32px;
-height:47px;
-}
-
-.map-search__initial-state .map-search__button--remote-jobs:before {
-width:40px;
-height:40px;
-background:url(https://services1-tmpwebeng-com.tmpqa.com/img/walgreen-remote-jobs.png);
-background-size:cover;
-
-}
-
-@media screen and (min-width: 800px) {
-
-.map-search__initial-state {
-padding-bottom: 16.25%;
-
-}
-}
-
-*/
-
-</style>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
@@ -185,9 +37,37 @@ var googleMapConfig = {
   client: "wallgreen",
   showCategoryInfo:true,
   markerImage: "https://tbcdn.talentbrew.com/company/1242/v2_0/img/logos/red-flag.png",
-  label: {"glyphRemoveCityLocation" : "Remove City Selection", "mapInfoAvailablePositions" : "available position(s) at this location:", "mapInfoNewWindow" : "opens in new tab", "markerTooltipJobs" : "job(s)", "jobCountMsgPlaural" : "jobs in this location", "jobCountMsgSingular" : "job in this location", "locationCount": "locations found", "locationCountSingular" : "location found", "locationsHeading" : "Locations", "showLocations" : "Show Locations", "state": "State/Province", "country": "Country", "city": "City", "zip": "Zip/Postal Code", "search": "Search map", "reset": "Reset all", "select": "Select", "useMyLocation": "Use my location", "showRemote": "Show remote jobs", "or": "or", "a11yFormName" : "Map Search", "errorMessage" : "Please select City, State or Zip/Postal Code" },
+  label: {
+
+    "a11yFormName" : "Map Search",
+    "city": "City",
+    "country": "Country",
+    "errorMessage" : "Please select City, State or Zip/Postal Code",
+    "glyphRemoveCityLocation" : "Remove City Selection",
+    "jobCountMsgPlaural" : "jobs in this location",
+    "jobCountMsgSingular" : "job in this location",
+    "locationCount": "locations found",
+    "locationCountSingular" : "location found",
+    "locationsHeading" : "Locations",
+    "mapInfoAvailablePositions" : "available position(s) at this location:",
+    "mapInfoNewWindow" : "opens in new tab",
+    "markerTooltipJobs" : "job(s)",
+    "or": "or",
+    "reset": "Reset all",
+    "search": "Search map",
+    "select": "Select",
+    "showLocations" : "Show Locations",
+    "showRemote": "Show remote jobs",
+    "state": "State/Province",
+    "useMyLocation": "Use my location",
+    "zip": "Zip/Postal Code",
+
+  },
   searchCustomFieldName: "custom_fields.Shift",
-  searchDomain: "https://jobs.walgreens.com/" //For demo purpose only
+  searchDomain: "https://jobs.walgreens.com/"
+
+  //For demo purpose only
+
   //styles : [{ "featureType": "administrative", "elementType": "all", "stylers": [{ "saturation": "-100"}] }, { "featureType": "administrative.province", "elementType": "all", "stylers": [{ "visibility": "off"}] }, { "featureType": "landscape", "elementType": "all", "stylers": [{ "saturation": -100 }, { "lightness": 65 }, { "visibility": "on"}] }, { "featureType": "poi", "elementType": "all", "stylers": [{ "saturation": -100 }, { "lightness": "50" }, { "visibility": "simplified"}] }, { "featureType": "road", "elementType": "all", "stylers": [{ "saturation": "-100"}] }, { "featureType": "road.highway", "elementType": "all", "stylers": [{ "visibility": "simplified"}] }, { "featureType": "road.arterial", "elementType": "all", "stylers": [{ "lightness": "30"}] }, { "featureType": "road.local", "elementType": "all", "stylers": [{ "lightness": "40"}] }, { "featureType": "transit", "elementType": "all", "stylers": [{ "saturation": -100 }, { "visibility": "simplified"}] }, { "featureType": "water", "elementType": "geometry", "stylers": [{ "hue": "#ffff00" }, { "lightness": -25 }, { "saturation": -97}] }, { "featureType": "water", "elementType": "labels", "stylers": [{ "lightness": -25 }, { "saturation": -100}]}];
 
 };
@@ -195,4 +75,5 @@ var googleMapConfig = {
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?libraries=places&client=gme-tmpworldwideadvertising&sensor=false&language=EN"></script>
-<script src="https://clientfiles.tmpwebeng.com/js/lib/bootstrap-combobox.js"></script>
+
+{% include notes.html %}
