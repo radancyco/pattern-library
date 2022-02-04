@@ -149,25 +149,31 @@ color: #fff;
 width: 100%;
 border: 1px solid #000 !important;
 height: 40px;
-padding-left: 4px
+padding-left: 1em;
+font-size: inherit;
 }
 
 
 .map-search__field label {
 display:block;
-padding-bottom: .4em;
+}
+
+.map-search__cta {
+display: flex;
+justify-content: space-between;
 }
 
 .map-search__cta button {
 background-color: rgb(var(--base-color));
-padding: 12px 15px;
 border: 0;
-font-weight: bold;
-font-size: inherit;
-text-align: center;
-margin-right: 1em;
 color: #fff;
+font-size: inherit;
+height: 40px;
 line-height: normal;
+text-align: center;
+white-space: nowrap;
+width: 47%;
+margin-top: 1em;
 }
 
 .map-search__field {
@@ -179,27 +185,26 @@ bottom: -5px;
 height: 50px;
 left: 0;
 position:absolute;
-width :50px;
+width: 50px;
 }
 
 @media screen and (min-width: 800px) {
 
-  .map-search__cta {
-  display:flex;
+
+  .map-search__cta button:not(:last-child) {
+
   }
 
-  .map-search__filters input, .map-search__filters select {
-  min-width: 200px;
-  }
-
-  .map-search__filters, .map-search__list-and-map-wrapper {
+  .map-search__list-and-map-wrapper, .map-search__filters {
   align-items: flex-end;
   display: flex;
+  justify-content: space-between;
   }
 
-.map-search__filters > div:not(:last-child) {
-margin-right: 1%
-}
+  .map-search__field, .map-search__cta{
+  width: 24%;
+  }
+
 
 }
 

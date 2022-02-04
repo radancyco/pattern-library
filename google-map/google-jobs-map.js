@@ -119,6 +119,8 @@ JobsGoogleMap.Util.init = function () {
 
     $('#location-list h3').find("a[href=#" + vstate + "]").trigger("click");
 
+    // Bobby, is this still needed?
+
   }
 
   this.scollToLocation = function (elm) {
@@ -154,7 +156,7 @@ JobsGoogleMap.Util.init = function () {
     $('.map-info-dialog button').removeAttr("title").click(function () {
 
     // $('#location-list-ul li:nth-child(' + JobsGoogleMap.Var.currentFocusIndex + ') button').focus();
-    // We don't need appear to need this as Google already doing it for us.
+    // Bobby, we don't appear to need this as Google already setting focus for us.
 
      $('#location-list-ul li').removeClass("active");
 
@@ -167,7 +169,7 @@ JobsGoogleMap.Util.init = function () {
     if (e.key == "Escape") {
 
         // $('#location-list-ul li:nth-child(' + JobsGoogleMap.Var.currentFocusIndex + ') button').focus();
-        // We don't need appear to need this as Google already doing it for us.
+        // Bobby, we don't appear to need this as Google already setting focus for us.
 
         $('#location-list-ul li').removeClass("active");
 
@@ -179,7 +181,7 @@ JobsGoogleMap.Util.init = function () {
 
     // Trap Focus within dialog
 
-    // add all the elements inside modal which you want to make focusable
+    // Add all the elements inside modal which you want to make focusable
 
     const  focusableElements = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
     const modal = document.querySelector('.map-info-dialog'); // select the modal by it's id
@@ -197,20 +199,20 @@ JobsGoogleMap.Util.init = function () {
 
       }
 
-      if (e.shiftKey) { // if shift key pressed for shift + tab combination
+      if (e.shiftKey) { // If shift key pressed for shift + tab combination
 
         if (document.activeElement === firstFocusableElement) {
 
-          lastFocusableElement.focus(); // add focus for the last focusable element
+          lastFocusableElement.focus(); // Add focus for the last focusable element
           e.preventDefault();
 
       }
 
-    } else { // if tab key is pressed
+    } else { // If tab key is pressed
 
-      if (document.activeElement === lastFocusableElement) { // if focused has reached to last focusable element then focus first focusable element after pressing tab
+      if (document.activeElement === lastFocusableElement) { // If focused has reached to last focusable element then focus first focusable element after pressing tab
 
-        firstFocusableElement.focus(); // add focus for the first focusable element
+        firstFocusableElement.focus(); // Add focus for the first focusable element
         e.preventDefault();
 
       }
@@ -379,22 +381,20 @@ JobsGoogleMap.Location.Map.DOM = {
     '</div><!-- /.map-search -->'+
     '<div class="map-search__render-area">'+
     ' <div class="map-search__initial-state">'+
-    '   <button id="my-location" class="map-search__button map-search__button--my-location">' + googleMapConfig.label.useMyLocation + '</button>' +
+    '   <button id="my-location" class="map-search__button map-search__button--my-location" aria-label=' + JSON.stringify(googleMapConfig.label.useMyLocation) + '><span>' + googleMapConfig.label.useMyLocation + '</span></button>' +
     '   <span>' + googleMapConfig.label.or + '</span>' +
-    '   <a href="/remote-jobs-vanity-url" class="map-search__button map-search__button--remote-jobs">' + googleMapConfig.label.showRemote + '</a>' +
+    '   <a href="/remote-jobs-vanity-url" class="map-search__button map-search__button--remote-jobs" aria-label=' + JSON.stringify(googleMapConfig.label.showRemote) + '><span>' + googleMapConfig.label.showRemote + '</span></a>' +
     ' </div>'+
     ' <div id="map-wrapper" style="display:none">'+
-    '   <h2 class="job-match-heading">Locations</h2>' +
+    '   <h2 class="job-match-heading">' + googleMapConfig.label.locationsHeading + '</h2>' +
     '   <p class="job-match-status"></p>' +
     ' <div class="map-search__list-and-map-wrapper">'+
-    '   <button id="btn-show-locations" aria-expanded="false">Show Locations List</button>'+
+    '   <button id="btn-show-locations" aria-expanded="false" aria-label=' + JSON.stringify(googleMapConfig.label.showLocations) + '>' + googleMapConfig.label.showLocations + '</button>'+
     '   <div id="locations-list">'+
     '   <ol id="location-list-ul"></ol>'+
     ' </div>'+
     ' <div id="google-api-wrapper">'+
-    '   <div id="google-api">'+
-    '     <p>Please enable Javascript for Google render Map</p>'+
-    '   </div>'+
+    '   <div id="google-api"></div>'+
     '  </div>'+
     ' </div> <!-- /.map-search__list-and-map-wrapper -->'+
     ' </div> <!-- /#map-wrapper -->'+
@@ -497,7 +497,7 @@ JobsGoogleMap.Location.Map.Events = {
 
         if (!$('#map-search-error').length){
 
-          $('.map-search').append( '<p id="map-search-error" class="alert">Please select City/State or Zip Code</p>');
+          $('.map-search').append( '<p id="map-search-error" class="alert">' + googleMapConfig.label.errorMessage + '</p>');
 
         }
 
@@ -589,21 +589,35 @@ JobsGoogleMap.Location.Map.ListLocations = function (data) {
 
     if (jobCount > 1) {
 
-      var jobTerm = "jobs";
+      var jobTerm = googleMapConfig.label.jobCountMsgPlaural;
 
     } else {
 
-      var jobTerm = "job";
+      var jobTerm = googleMapConfig.label.jobCountMsgSingular;
 
     }
 
-    $('#location-list-ul').append('<li><button class="job-list-btn" data-job-count=' + count + ' data-href="' + searcURL + '"><span class="job-list-address">' + address + '<br> ' + eCity + ', ' + state + '</span> <strong class="job-list-count">' + jobCount + ' ' + jobTerm + ' in this location</strong></button></li>');
+    $('#location-list-ul').append('<li><button class="job-list-btn" data-job-count=' + count + ' data-href="' + searcURL + '"><span class="job-list-address">' + address + '<br> ' + eCity + ', ' + state + '</span> <strong class="job-list-count">' + jobCount + ' ' + jobTerm + '</strong></button></li>');
 
   });
 
   // Job Status Message
 
-  var jobStatusMessage = data.length + '  ' + googleMapConfig.label.locationCount;
+  var dataCount = data.length;
+
+  // Note: Using "location(s)" sounds "off" in some screen readers, so handling it this way. Doing similar in location list buttons.
+
+  if (dataCount > 1) {
+
+    var resultsMsg = dataCount + ' ' + googleMapConfig.label.locationCount;
+
+  } else {
+
+    var resultsMsg = dataCount + ' ' + googleMapConfig.label.locationCountSingular;
+
+  }
+
+  var jobStatusMessage = resultsMsg;
 
   $('.job-match-status').text(jobStatusMessage); // Visual Message
   $('#map-search-results').text(jobStatusMessage); // Assistive Technology
@@ -823,7 +837,7 @@ JobsGoogleMap.Location.Map.LoadLocation = function (data) {
       var locLatLng = new google.maps.LatLng(lat, lon);
       var infowindowHover = new google.maps.InfoWindow({
 
-        content: '<span>' + address + ' (' + item.count + ' jobs)</span>',
+        content: '<span>' + address + ' - ' + item.count + ' ' + googleMapConfig.label.markerTooltipJobs + '</span>',
         position: locLatLng
 
       });
@@ -863,8 +877,8 @@ JobsGoogleMap.Location.Map.LoadLocation = function (data) {
 
       }
 
-      var content = '<div class="map-info-content"><h3 id="map-info-title">' + address + '</h3><p>' + item.count + ' available positions at this location:</p>' + categoryInfoContent;
-      content += '<a class="map-info-btn" href="' + searchURL + '" target="_blank" rel="noopener">' + googleMapConfig.linkText + ' <span class="map-new-window">(opens in new tab)</span></a></div>';
+      var content = '<div class="map-info-content"><h3 id="map-info-title">' + address + '</h3><p>' + item.count + ' ' + googleMapConfig.label.mapInfoAvailablePositions + '</p>' + categoryInfoContent;
+      content += '<a class="map-info-btn" href="' + searchURL + '" target="_blank" rel="noopener">' + googleMapConfig.linkText + ' <span class="map-new-window">(' + googleMapConfig.label.mapInfoNewWindow + ')</span></a></div>';
 
       // TODO: Bobby to add switch to disable new window if not desired. Default behavior is always a new window.
 
@@ -998,7 +1012,7 @@ JobsGoogleMap.Location.Map.LoadLocation = function (data) {
 
           JobsGoogleMap.Util.Loading.city(false);
 
-          $('.glyphicon-remove').replaceWith('<button class="glyphicon glyphicon-remove" aria-label="Remove City Selection"></button>');
+          $('.glyphicon-remove').replaceWith('<button class="glyphicon glyphicon-remove" aria-label="' + JSON.stringify(googleMapConfig.label.glyphRemoveCitySelection) + '">' + googleMapConfig.label.glyphRemoveCitySelection + '</button>');
 
           if (hashCity != "all" && hashCity.length > 0) {
 
@@ -1077,14 +1091,14 @@ $(window).on('hashchange', function () {
 // TODO
 
 // Bobby, instead of using resize, we may wish to explore window.matchMedia in the future.
-// This is more more effecient and can allow dev to pass desired breakpoints
-// to script, if necessary.
+// This is more effecient and can allow dev to pass desired breakpoints
+// to script, if they wish.
 
 // Spell
 
 $(window).resize(function () {
 
-  console.log('RESIZING...');
+  console.log('Resizing...');
 
     waitForResize(function () {
 
@@ -1199,6 +1213,8 @@ function showPosition(position) {
       } else {
 
         alert("No results found");
+
+        // Bobby, I never this message, so not sure if we should tokenize it. Also, if it is related to interface, I may want to send it to HTML instead of using an alert. 
 
       }
 
