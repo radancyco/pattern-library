@@ -270,12 +270,12 @@ JobsGoogleMap.Util.Loading = {
     if (isLoading) {
 
       $('.map-search-alternative').show();
-      $('#map-wrapper').hide();
+      $('.map-search-container').hide();
 
     } else {
 
       $('.map-search-alternative').hide();
-      $('#map-wrapper').show();
+      $('.map-search-container').show();
       $('#search-clear').show();
 
     }
@@ -339,7 +339,7 @@ $(document).ready(function () {
 
     if (JobsGoogleMap.Util.isMobile) {
 
-      $('.map-search__list-and-map-wrapper').prepend($('#google-api-wrapper'));
+      $('.map-search__content').prepend($('#google-api-wrapper'));
 
     }
 
@@ -363,7 +363,7 @@ JobsGoogleMap.Location.Map.DOM = {
 
     '     <span class="map-search__spinner" id="loading-state"></span>'+
 
-    '     <select id="map-search-state" required style="visibility: hidden">' +
+    '     <select id="map-search-state" required style="visibility: hidden;">' +
     '       <option value=""> ' + googleMapConfig.label.select + ' </option>' +
     '     </select>'+
 
@@ -375,7 +375,7 @@ JobsGoogleMap.Location.Map.DOM = {
 
     '     <span class="map-search__spinner" id="loading-city"></span>'+
 
-    '     <select id="map-search-city" style="visibility:hidden">' +
+    '     <select id="map-search-city" style="visibility: hidden;">' +
     '       <option value=""> ' + googleMapConfig.label.select + ' </option>' +
     '     </select>' +
 
@@ -409,15 +409,15 @@ JobsGoogleMap.Location.Map.DOM = {
 
     '  <button href="/remote-jobs-vanity-url" class="map-search-alternative__button map-search-alternative__button--remote-jobs" aria-label=' + JSON.stringify(googleMapConfig.label.showRemote) + '><span>' + googleMapConfig.label.showRemote + '</span></button>' +
 
-    '</div>'+
+    '</div><!-- /.map-search-alternative -->'+
 
-    '<div id="map-wrapper" style="display:none">'+
+    '<div class="map-search-container" style="display: none;">'+
 
-    '  <h2 class="job-match-heading">' + googleMapConfig.label.locationsHeading + '</h2>' +
+    '  <h2 class="map-search-container__heading">' + googleMapConfig.label.locationsHeading + '</h2>' +
 
-    '  <p class="job-match-status"></p>' +
+    '  <p class="map-search-container__status"></p>' +
 
-    '  <div class="map-search__list-and-map-wrapper">'+
+    '  <div class="map-search__content">'+
 
     '   <button id="btn-show-locations" aria-expanded="false" aria-label=' + JSON.stringify(googleMapConfig.label.showLocations) + '>' + googleMapConfig.label.showLocations + '</button>'+
 
@@ -433,9 +433,9 @@ JobsGoogleMap.Location.Map.DOM = {
 
     '   </div>'+
 
-    '  </div> <!-- /.map-search__list-and-map-wrapper -->'+
+    '  </div> <!-- /.map-search__content -->'+
 
-    ' </div> <!-- /#map-wrapper -->'
+    ' </div> <!-- /.map-search-container -->'
 
     $('#google-job-map').html(mapDOM);
     $('#search-clear').hide();
@@ -598,7 +598,7 @@ JobsGoogleMap.Location.Map.Events = {
 
       }
 
-      $('#map-wrapper').hide();
+      $('.map-search-container').hide();
 
     });
 
@@ -656,8 +656,8 @@ JobsGoogleMap.Location.Map.ListLocations = function (data) {
 
   var jobStatusMessage = resultsMsg;
 
-  $('.job-match-status').text(jobStatusMessage); // Visual Message
-  $('#map-search-results').text(jobStatusMessage); // Assistive Technology
+  $('.map-search-container__status').text(jobStatusMessage); // Visual Message
+  $('#map-search-assistive-tech').text(jobStatusMessage); // Assistive Technology
 
   JobsGoogleMap.Selector.$locationList.find('li .job-list-btn').click(function (e) {
 
