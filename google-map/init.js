@@ -596,6 +596,7 @@ JobsGoogleMap.Location.Map.Events = {
       }
 
       $('.map-search-container').hide();
+      $('#map-search-assistive-tech').empty(); // Clear AT message.
 
     });
 
