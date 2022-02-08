@@ -8,6 +8,8 @@
 
 */
 
+/* TODO: Bobby, the team is eventually going to want this in Sass. Strongly suggest we convert it that. Happy to do it. */
+
 :root {
 
   --base-color: 111, 0, 239;
@@ -158,57 +160,57 @@ margin-bottom: 0;
 margin-top: .5em;
 }
 
-.map-search__content {
-display: flex;
-}
-
-
-/* to be continued ... */
-
-
-#location-match {
-font-weight:bold;
-}
-
-#btn-show-locations {
+.map-search-container__toggle {
 background-color: rgb(var(--base-color));
 border: 0;
-color:#fff;
-font-weight: bold;
+color: #fff;
 margin: 1em 0 0;
 padding: 12px 15px;
 text-align: center;
 width: 100%;
 }
 
-#locations-list {
+.map-search-container__content {
 display: none;
 }
 
-#btn-show-locations[aria-expanded="true"] + #locations-list {
-display: block !important;
+.map-search-container__toggle[aria-expanded="true"] + .map-search-container__content {
+display: block;
 }
 
-@media screen and (min-width: 800px) {
 
-  #btn-show-locations {
+
+
+
+
+
+
+
+
+
+
+
+
+@media (min-width: 800px) {
+
+  .map-search-container__toggle {
   display: none;
   }
 
-  #locations-list {
-  display: block !important;
+  .map-search-container__content {
+  display: flex !important;
   }
 
 }
 
-#location-list-ul {
+.map-search-container__list {
 counter-reset: job-list-counter;
 list-style: none;
 margin: 0;
 padding: 0;
 }
 
-#location-list-ul li {
+.map-search-container__list li {
 counter-increment: job-list-counter;
 margin-top: .5em;
 padding: .5em;
@@ -216,7 +218,7 @@ display: block;
 position: relative;
 }
 
-#location-list-ul li::before {
+.map-search-container__list li::before {
 background-color: rgb(var(--base-color));
 border-radius: 50%;
 border: 1px #fff solid;
@@ -233,7 +235,7 @@ top: 1.3em;
 width: 25px;
 }
 
-#location-list-ul .job-list-btn {
+.map-search-container__list .job-list-btn {
 background-color: transparent;
 border: 0;
 color: inherit;
@@ -249,21 +251,21 @@ transition: none;
 line-height: 1.5;
 }
 
-#location-list-ul .job-list-btn .job-list-count {
+.map-search-container__list .job-list-btn .job-list-count {
 display: block;
 margin-top: .5em;
 }
 
-#location-list-ul  li.active, #location-list-ul  li:hover, #location-list-ul  li:focus-within {
+.map-search-container__list  li.active, .map-search-container__list  li:hover, .map-search-container__list  li:focus-within {
 border-radius: 5px;
 transition: all 100ms ease-in;
 }
 
-#location-list-ul  li:hover, #location-list-ul  li:focus-within {
+.map-search-container__list  li:hover, .map-search-container__list  li:focus-within {
 background-color: #eee;
 }
 
-#location-list-ul  li.active {
+.map-search-container__list  li.active {
 background-color: rgba(var(--base-color), .8);
 color: #fff;
 }
@@ -275,33 +277,33 @@ color: #fff;
 
 
 
-#google-api-wrapper {
+.map-search-container__map {
 width: auto;
 position: relative;
 overflow: hidden;
 }
 
-#google-api-wrapper #google-api {
+.map-search-container__map #google-api {
 width: auto;
 height: 360px
 }
 
 
-@media screen and (min-width: 800px) {
+@media (min-width: 800px) {
 
-#locations-list {
+.map-search-container__locations {
 width:30%;
 }
 
-#location-list-ul li {
+.map-search-container__list li {
 margin: .5em;
 }
 
-#google-api-wrapper #google-api {
+.map-search-container__map #google-api {
 height: 760px
 }
 
-#google-api-wrapper {
+.map-search-container__map {
 width: 70%;
 border: 1px solid #ccc;
 margin-left: 10px;
@@ -313,7 +315,7 @@ height: 760px
 
 /* Location List */
 
-#locations-list #google-api {
+.map-search-container__locations #google-api {
 border: 1px #666 solid;
 height: 240px;
 margin-top: .5em;
@@ -321,22 +323,38 @@ margin-top: .5em;
 
 /* Map Content when child of Location List. No need to show all details that are ALREADY in button, so just show "View All Jobs" */
 
-#locations-list .map-info-dialog button, #locations-list .map-info-content h3, #locations-list .map-info-content p, #locations-list .map-info-content ul {
+.map-search-container__locations .map-info-dialog button, .map-search-container__locations .map-info-content h3, .map-search-container__locations .map-info-content p, .map-search-container__locations .map-info-content ul {
 display: none !important;
 }
 
 
-@media screen and (min-width: 800px) {
+@media (min-width: 800px) {
 
-  #location-list-ul {
+  .map-search-container__list {
   height: 760px;
   overflow: auto;
   }
 
+
+  /*  Scrollbar styling may be limited cross-browser. This is NOT a bad thing as majority of browsers are WebKit based.
+      However, if you require full support, then have a look at http://grsmto.github.io/simplebar/ */
+
+      .map-search-container__list::-webkit-scrollbar {
+      width: 6px;
+      }
+
+      /* Track */
+      .map-search-container__list::-webkit-scrollbar-track {
+      background-color: #eee;
+      }
+
+      .map-search-container__list::-webkit-scrollbar-thumb {
+      background-color: rgb(var(--base-color));
+      }
+
 }
 
 /* End Location List */
-
 
 /* Map Dialog */
 
@@ -408,7 +426,7 @@ vertical-align: middle;
 width: 14px;
 }
 
-@media screen and (min-width: 800px) {
+@media (min-width: 800px) {
 
   .map-info-dialog {
   max-width: 500px !important;

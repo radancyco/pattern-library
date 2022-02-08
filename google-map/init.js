@@ -115,25 +115,27 @@ JobsGoogleMap.Util.init = function () {
 
   }
 
+  /*
+
   this.setStateActive = function (vstate) {
 
     $('#location-list h3').find("a[href=#" + vstate + "]").trigger("click");
-
-    // Bobby, is this still needed?
 
   }
 
   this.scollToLocation = function (elm) {
 
-    JobsGoogleMap.Var.scrolled = $("#location-list").offset().top;
+    JobsGoogleMap.Var.scrolled = $(".map-search-container__location").offset().top;
 
-    $("#location-list-wrapper").animate({
+    $(".map-search-container").animate({
 
       scrollTop: scrolled
 
     });
 
   }
+
+  */
 
   this.initPopup = function () {
 
@@ -155,10 +157,10 @@ JobsGoogleMap.Util.init = function () {
 
     $('.map-info-dialog button').removeAttr("title").click(function () {
 
-    // $('#location-list-ul li:nth-child(' + JobsGoogleMap.Var.currentFocusIndex + ') button').focus();
+    // $('.map-search-container__list li:nth-child(' + JobsGoogleMap.Var.currentFocusIndex + ') button').focus();
     // Bobby, we don't appear to need this as Google already setting focus for us.
 
-     $('#location-list-ul li').removeClass("active");
+     $('.map-search-container__list li').removeClass("active");
 
     });
 
@@ -168,10 +170,10 @@ JobsGoogleMap.Util.init = function () {
 
     if (e.key == "Escape") {
 
-        // $('#location-list-ul li:nth-child(' + JobsGoogleMap.Var.currentFocusIndex + ') button').focus();
+        // $('.map-search-container__list li:nth-child(' + JobsGoogleMap.Var.currentFocusIndex + ') button').focus();
         // Bobby, we don't appear to need this as Google already setting focus for us.
 
-        $('#location-list-ul li').removeClass("active");
+        $('.map-search-container__list li').removeClass("active");
 
       }
 
@@ -290,7 +292,7 @@ JobsGoogleMap.Selector = {};
 JobsGoogleMap.Selector.init = function () {
 
   this.$searchClear = $("#search-clear");
-  this.$locationList = $("#location-list-ul");
+  this.$locationList = $(".map-search-container__list");
   this.$searchMap = $("#search-submit-location");
   this.$myLocation = $("#my-location");
   this.$selState = $("#map-search-state");
@@ -339,7 +341,7 @@ $(document).ready(function () {
 
     if (JobsGoogleMap.Util.isMobile) {
 
-      $('.map-search__content').prepend($('#google-api-wrapper'));
+      $('.map-search-container__map').insertBefore($('.map-search-container__toggle'));
 
     }
 
@@ -403,11 +405,11 @@ JobsGoogleMap.Location.Map.DOM = {
 
     '<div class="map-search-alternative">'+
 
-    '  <button id="my-location" class="map-search-alternative__button map-search-alternative__button--my-location" aria-label=' + JSON.stringify(googleMapConfig.label.useMyLocation) + '><span>' + googleMapConfig.label.useMyLocation + '</span></button>' +
+    '  <button id="my-location" class="map-search-alternative__button" aria-label=' + JSON.stringify(googleMapConfig.label.useMyLocation) + '><span>' + googleMapConfig.label.useMyLocation + '</span></button>' +
 
     '  <span class="map-search-alternative__or">' + googleMapConfig.label.or + '</span>' +
 
-    '  <button href="/remote-jobs-vanity-url" class="map-search-alternative__button map-search-alternative__button--remote-jobs" aria-label=' + JSON.stringify(googleMapConfig.label.showRemote) + '><span>' + googleMapConfig.label.showRemote + '</span></button>' +
+    '  <button href="/remote-jobs-vanity-url" class="map-search-alternative__button" aria-label=' + JSON.stringify(googleMapConfig.label.showRemote) + '><span>' + googleMapConfig.label.showRemote + '</span></button>' +
 
     '</div><!-- /.map-search-alternative -->'+
 
@@ -417,36 +419,43 @@ JobsGoogleMap.Location.Map.DOM = {
 
     '  <p class="map-search-container__status"></p>' +
 
-    '  <div class="map-search__content">'+
+    '   <button class="map-search-container__toggle" aria-expanded="false" aria-label=' + JSON.stringify(googleMapConfig.label.toggleLocations) + '>' + googleMapConfig.label.toggleLocations + '</button>'+
 
-    '   <button id="btn-show-locations" aria-expanded="false" aria-label=' + JSON.stringify(googleMapConfig.label.showLocations) + '>' + googleMapConfig.label.showLocations + '</button>'+
+    '  <div class="map-search-container__content">'+
 
-    '   <div id="locations-list">'+
+    '   <div class="map-search-container__locations">'+
 
-    '     <ol id="location-list-ul"></ol>'+
+    '     <ol class="map-search-container__list"></ol>'+
 
     '   </div>'+
 
-    '   <div id="google-api-wrapper">'+
+    '   <div class="map-search-container__map">'+
 
     '     <div id="google-api"></div>'+
 
     '   </div>'+
 
-    '  </div> <!-- /.map-search__content -->'+
+    '  </div> <!-- /.map-search-container__content -->'+
 
     ' </div> <!-- /.map-search-container -->'
 
     $('#google-job-map').html(mapDOM);
     $('#search-clear').hide();
 
-    $("#btn-show-locations").click(function(e) {
+    $(".map-search-container__toggle").click(function(e) {
 
       $(this).attr('aria-expanded', function (i, attr) {
 
         return attr == 'true' ? 'false' : 'true';
 
       });
+
+      if ($(this).attr('aria-expanded') === "false") {
+
+        $('.map-search-container__map').insertBefore($('.map-search-container__toggle'));
+        $('.map-search-container__map').append($('#google-api'));
+
+      }
 
     });
 
@@ -515,9 +524,9 @@ JobsGoogleMap.Location.Map.Events = {
 
     JobsGoogleMap.Selector.$searchMap.click(function (e) {
 
-      if (JobsGoogleMap.Util.isMobile && !$('#google-api-wrapper #google-api').length) {
+      if (JobsGoogleMap.Util.isMobile && !$('.map-search-container__map #google-api').length) {
 
-        $('#google-api-wrapper').append($('#google-api'));
+        $('.map-search-container__map').append($('#google-api'));
 
       }
 
@@ -592,7 +601,7 @@ JobsGoogleMap.Location.Map.Events = {
       JobsGoogleMap.Selector.$selCity.val(['']);
       JobsGoogleMap.Selector.$txtZip.val("");
 
-      if ($("#google-api-wrapper").length > 0) {
+      if ($(".map-search-container__map").length > 0) {
 
         JobsGoogleMap.Location.Map.InItMap();
 
@@ -610,7 +619,7 @@ JobsGoogleMap.Location.Map.Events = {
 
 JobsGoogleMap.Location.Map.ListLocations = function (data) {
 
-  $('#location-list-ul').empty();
+  $('.map-search-container__list').empty();
 
   var count = 0;
 
@@ -634,7 +643,7 @@ JobsGoogleMap.Location.Map.ListLocations = function (data) {
 
     }
 
-    $('#location-list-ul').append('<li><button class="job-list-btn" data-job-count=' + count + ' data-href="' + searcURL + '"><span class="job-list-address">' + address + '<br> ' + eCity + ', ' + state + '</span> <strong class="job-list-count">' + jobCount + ' ' + jobTerm + '</strong></button></li>');
+    $('.map-search-container__list').append('<li><button class="job-list-btn" data-job-count=' + count + ' data-href="' + searcURL + '"><span class="job-list-address">' + address + '<br> ' + eCity + ', ' + state + '</span> <strong class="job-list-count">' + jobCount + ' ' + jobTerm + '</strong></button></li>');
 
   });
 
@@ -680,17 +689,15 @@ JobsGoogleMap.Location.Map.ListLocations = function (data) {
 
     if (JobsGoogleMap.Util.isMobile) {
 
-      $('#google-api-wrapper').hide();
-
       $that = $(this);
 
       setTimeout(function () {
 
-        $('#google-api-wrapper').append($('#google-api'));
+        $('.map-search-container__map').append($('#google-api'));
 
-        var container = $('#location-list-ul'),
+        var container = $('.map-search-container__list'),
 
-        scrollTo = $('#location-list-ul li').eq(parseInt(index) - 1);
+        scrollTo = $('.map-search-container__list li').eq(parseInt(index) - 1);
 
         container.animate({
 
@@ -941,13 +948,13 @@ JobsGoogleMap.Location.Map.LoadLocation = function (data) {
 
           // Scroll to list
 
-          $('#location-list-ul li').removeClass('active');
-          $('#location-list-ul li').eq(i).addClass('active');
+          $('.map-search-container__list li').removeClass('active');
+          $('.map-search-container__list li').eq(i).addClass('active');
 
           if (!JobsGoogleMap.Util.isMobile) {
 
-            var container = $('#location-list-ul'),
-            scrollTo = $('#location-list-ul li').eq(i);
+            var container = $('.map-search-container__list'),
+            scrollTo = $('.map-search-container__list li').eq(i);
 
             container.animate({
 
@@ -1125,13 +1132,9 @@ $(window).on('hashchange', function () {
 
 });
 
-// TODO
-
-// Bobby, instead of using resize, we may wish to explore window.matchMedia in the future.
+// TODO: Bobby, instead of using resize, we may wish to explore window.matchMedia in the future.
 // This is more effecient and can allow dev to pass desired breakpoints
-// to script, if they wish.
-
-// Spell
+// to script, if they wish. - Spell
 
 $(window).resize(function () {
 
@@ -1139,18 +1142,18 @@ $(window).resize(function () {
 
     waitForResize(function () {
 
-      console.log('RESIZING.Done.');
+      console.log('Resizing Done.');
 
       JobsGoogleMap.Util.isMobile = JobsGoogleMap.Util.setIsMobile();
 
       if (!JobsGoogleMap.Util.isMobile) {
 
-        $('#locations-list').insertAfter($('#search-filter-fields'));
-        $('#google-api-wrapper').append($('#google-api'));
+        $('.map-search-container__map').insertAfter($('.map-search-container__locations'));
+        $('.map-search-container__map').append($('#google-api'));
 
       } else {
 
-        $('#locations-list').insertBefore($('#google-api-wrapper'));
+        $('.map-search-container__map').insertBefore($('.map-search-container__toggle'));
 
       }
 
@@ -1251,7 +1254,7 @@ function showPosition(position) {
 
         alert("No results found");
 
-        // Bobby, I never this message, so not sure if we should tokenize it. Also, if it is related to interface, I may want to send it to HTML instead of using an alert.
+        // Bobby, I never saw this message appear in UI, so not sure if we should tokenize it. Also, if it IS related to interface, I may want to send it to HTML instead of using an alert.
 
       }
 

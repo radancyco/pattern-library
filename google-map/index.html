@@ -19,18 +19,20 @@ jquery: false
 
 </div>
 
+<!-- TODO: Eventually remove jQuery dependency and convert to plain vanilla JavaScript -->
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
 <script>
 
-// Google Map configuration
+// Google Map Configuration
 
 var googleMapConfig = {
 
   pop_ups: true,
   maxZoom: 16,
   minZoom: 6,
-  linkText: "View all Jobs",
+  linkText: "View all Jobs", // Should this be in label section below?
   url_new_tab: "no",
   backgroundColor: '#A2C1DE',
   defaultMyLocaiton: false,
@@ -56,9 +58,9 @@ var googleMapConfig = {
     "reset": "Reset all",
     "search": "Search map",
     "select": "Select",
-    "showLocations" : "Show Locations",
     "showRemote": "Show remote jobs",
     "state": "State/Province",
+    "toggleLocations" : "Show Locations",
     "useMyLocation": "Use my location",
     "zip": "Zip/Postal Code",
 
