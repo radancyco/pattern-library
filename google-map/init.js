@@ -141,24 +141,12 @@ JobsGoogleMap.Util.init = function () {
 
     JobsGoogleMap.Util.log("initPopup called ");
 
-    $(".gm-style-iw").addClass("map-info-dialog");
-    $('.map-info-dialog').attr("aria-labelledby", "map-info-title");
-
-    // Since we are trapping focus, no need for following anymore:
-
-    /* $('.map-info-dialog').attr({
-
-      "aria-labelledby": "map-info-title",
-      "tabindex": "-1"
-
-    }).focus(); */
+    $(".gm-style-iw").addClass("map-info__dialog");
+    $('.map-info__dialog').attr("aria-labelledby", "map-info-listing");
 
     // Close Button
 
-    $('.map-info-dialog button').removeAttr("title").click(function () {
-
-    // $('.map-search-container__list li:nth-child(' + JobsGoogleMap.Var.currentFocusIndex + ') button').focus();
-    // Bobby, we don't appear to need this as Google already setting focus for us.
+    $('.map-info__dialog button').removeAttr("title").click(function () {
 
      $('.map-search-container__list li').removeClass("active");
 
@@ -179,14 +167,14 @@ JobsGoogleMap.Util.init = function () {
 
     });
 
-    $('.map-info-dialog, .map-info-btn').removeAttr("tabindex");
+    $('.map-info__dialog, .map-info__btn').removeAttr("tabindex");
 
     // Trap Focus within dialog
 
     // Add all the elements inside modal which you want to make focusable
 
     const  focusableElements = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
-    const modal = document.querySelector('.map-info-dialog'); // select the modal by it's id
+    const modal = document.querySelector('.map-info__dialog'); // select the modal by it's id
     const firstFocusableElement = modal.querySelectorAll(focusableElements)[0]; // get first element to be focused inside modal
     const focusableContent = modal.querySelectorAll(focusableElements);
     const lastFocusableElement = focusableContent[focusableContent.length - 1]; // get last element to be focused inside modal
@@ -419,7 +407,7 @@ JobsGoogleMap.Location.Map.DOM = {
 
     '  <p class="map-search-container__status"></p>' +
 
-    '   <button class="map-search-container__toggle" aria-expanded="false" aria-label=' + JSON.stringify(googleMapConfig.label.toggleLocations) + '>' + googleMapConfig.label.toggleLocations + '</button>'+
+    '   <button class="map-search-container__toggle" aria-expanded="false" aria-label=' + JSON.stringify(googleMapConfig.label.toggleLocations) + '>' + googleMapConfig.label.toggleLocations + '<span class="map-search-container__toggle--icon" aria-hidden="true"></span></button>'+
 
     '  <div class="map-search-container__content">'+
 
@@ -643,7 +631,7 @@ JobsGoogleMap.Location.Map.ListLocations = function (data) {
 
     }
 
-    $('.map-search-container__list').append('<li><button class="job-list-btn" data-job-count=' + count + ' data-href="' + searcURL + '"><span class="job-list-address">' + address + '<br> ' + eCity + ', ' + state + '</span> <strong class="job-list-count">' + jobCount + ' ' + jobTerm + '</strong></button></li>');
+    $('.map-search-container__list').append('<li><button class="map-search-container__btn" data-job-count=' + count + ' data-href="' + searcURL + '"><span class="map-search-container__address">' + address + '<br> ' + eCity + ', ' + state + '</span> <strong class="map-search-container__count">' + jobCount + ' ' + jobTerm + '</strong></button></li>');
 
   });
 
@@ -668,7 +656,7 @@ JobsGoogleMap.Location.Map.ListLocations = function (data) {
   $('.map-search-container__status').text(jobStatusMessage); // Visual Message
   $('#map-search-assistive-tech').text(jobStatusMessage); // Assistive Technology
 
-  JobsGoogleMap.Selector.$locationList.find('li .job-list-btn').click(function (e) {
+  JobsGoogleMap.Selector.$locationList.find('.map-search-container__btn').click(function (e) {
 
     var index = $(this).data("job-count");
     var sMarker = JobsGoogleMap.Var.marker1[index];
@@ -921,8 +909,8 @@ JobsGoogleMap.Location.Map.LoadLocation = function (data) {
 
       }
 
-      var content = '<div class="map-info-content"><h3 id="map-info-title">' + address + '</h3><p>' + item.count + ' ' + googleMapConfig.label.mapInfoAvailablePositions + '</p>' + categoryInfoContent;
-      content += '<a class="map-info-btn" href="' + searchURL + '" target="_blank" rel="noopener">' + googleMapConfig.linkText + ' <span class="map-new-window">(' + googleMapConfig.label.mapInfoNewWindow + ')</span></a></div>';
+      var content = '<div class="map-info__content"><h3 class="map-info__heading" id="map-info-listing">' + address + '</h3><p>' + item.count + ' ' + googleMapConfig.label.mapInfoAvailablePositions + '</p>' + categoryInfoContent;
+      content += '<a class="map-info__btn" href="' + searchURL + '" target="_blank" rel="noopener">' + googleMapConfig.linkText + ' <span class="map-info__new-window">(' + googleMapConfig.label.mapInfoNewWindow + ')</span></a></div>';
 
       // TODO: Bobby to add switch to disable new window if not desired. Default behavior is always a new window.
 

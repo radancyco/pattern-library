@@ -3,7 +3,7 @@
 <ul>
   <li><a href="{{ site.repo }}/blob/main/{{ page.folder }}/index.html">HTML</a></li>
   {% if page.localcss %}
-  <li><a href="{{ site.repo }}/blob/main/{{ page.folder }}/init.scss">CSS</a></li>
+  <li><a href="{{ site.repo }}/blob/main/{{ page.folder }}/{% if page.notecss %}init.css{% else %}init.scss{% endif %}">CSS</a></li>
   {% endif %}
   {% if page.localjs %}
   <li><a href="{{ site.repo }}/blob/main/{{ page.folder }}/init.js">JavaScript</a></li>

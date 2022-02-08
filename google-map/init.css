@@ -16,6 +16,7 @@
   --map-search-elmn-border: 1px solid #666;
   --map-search-elmn-height: 50px;
   --map-search-elmn-width: 100%;
+  --map-list-api-height: 760px;
 
 }
 
@@ -31,7 +32,7 @@ white-space: nowrap;
 width: 1px;
 }
 
-/* Map Search Form */
+/* Map - Search Form */
 
 .map-search__field label {
 display: block;
@@ -170,6 +171,16 @@ text-align: center;
 width: 100%;
 }
 
+.map-search-container__toggle--icon {
+display: inline-block;
+margin-left: .5em;
+width: 10px;
+}
+
+.map-search-container__toggle--icon::after {
+content: "+";
+}
+
 .map-search-container__content {
 display: none;
 }
@@ -178,18 +189,9 @@ display: none;
 display: block;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
+.map-search-container__toggle[aria-expanded="true"] .map-search-container__toggle--icon::after {
+content: "-";
+}
 
 @media (min-width: 800px) {
 
@@ -202,6 +204,8 @@ display: block;
   }
 
 }
+
+/* Map - List */
 
 .map-search-container__list {
 counter-reset: job-list-counter;
@@ -216,6 +220,28 @@ margin-top: .5em;
 padding: .5em;
 display: block;
 position: relative;
+}
+
+/*
+
+Scrollbar styling may be limited cross-browser. This is NOT a bad thing
+as majority of browsers are WebKit based. Progressive enhancement is our friend.
+However, if you require full support, then have a look at http://grsmto.github.io/simplebar/
+
+...or just remove altogether.
+
+*/
+
+.map-search-container__list::-webkit-scrollbar {
+width: 6px;
+}
+
+.map-search-container__list::-webkit-scrollbar-track {
+background-color: #eee;
+}
+
+.map-search-container__list::-webkit-scrollbar-thumb {
+background-color: rgb(var(--base-color));
 }
 
 .map-search-container__list li::before {
@@ -235,7 +261,7 @@ top: 1.3em;
 width: 25px;
 }
 
-.map-search-container__list .job-list-btn {
+.map-search-container__btn {
 background-color: transparent;
 border: 0;
 color: inherit;
@@ -247,73 +273,63 @@ text-align:left;
 transition: none;
 }
 
-.job-list-address {
+.map-search-container__address {
 line-height: 1.5;
 }
 
-.map-search-container__list .job-list-btn .job-list-count {
+.map-search-container__count {
 display: block;
 margin-top: .5em;
 }
 
-.map-search-container__list  li.active, .map-search-container__list  li:hover, .map-search-container__list  li:focus-within {
+.map-search-container__list li.active, .map-search-container__list li:hover, .map-search-container__list li:focus-within {
 border-radius: 5px;
 transition: all 100ms ease-in;
 }
 
-.map-search-container__list  li:hover, .map-search-container__list  li:focus-within {
+.map-search-container__list li:hover, .map-search-container__list li:focus-within {
 background-color: #eee;
 }
 
-.map-search-container__list  li.active {
+.map-search-container__list li.active {
 background-color: rgba(var(--base-color), .8);
 color: #fff;
 }
 
-
-
-
-/* Google Map */
-
-
-
-.map-search-container__map {
-width: auto;
-position: relative;
-overflow: hidden;
-}
+/* Map - API (When in .map-search-container__map) */
 
 .map-search-container__map #google-api {
-width: auto;
 height: 360px
 }
 
-
 @media (min-width: 800px) {
 
-.map-search-container__locations {
-width:30%;
+  .map-search-container__locations {
+  width: 30%;
+  }
+
+  .map-search-container__list {
+  height: var(--map-list-api-height);
+  overflow: auto;
+  }
+
+  .map-search-container__list li {
+  margin: .5em;
+  }
+
+  .map-search-container__map {
+  border: 1px solid #ccc;
+  margin-left: 10px;
+  width: 70%;
+  }
+
+  .map-search-container__map #google-api {
+  height: var(--map-list-api-height);
+  }
+
 }
 
-.map-search-container__list li {
-margin: .5em;
-}
-
-.map-search-container__map #google-api {
-height: 760px
-}
-
-.map-search-container__map {
-width: 70%;
-border: 1px solid #ccc;
-margin-left: 10px;
-height: 760px
-}
-}
-/* End Google Map */
-
-
-/* Location List */
+/* Map - API (When in .map-search-container__locations) */
 
 .map-search-container__locations #google-api {
 border: 1px #666 solid;
@@ -321,46 +337,17 @@ height: 240px;
 margin-top: .5em;
 }
 
-/* Map Content when child of Location List. No need to show all details that are ALREADY in button, so just show "View All Jobs" */
+/* Map Content when child of location list. No need to show all details that are ALREADY in button, so just show "View All Jobs" */
 
-.map-search-container__locations .map-info-dialog button, .map-search-container__locations .map-info-content h3, .map-search-container__locations .map-info-content p, .map-search-container__locations .map-info-content ul {
+.map-search-container__locations .map-info__dialog button, .map-search-container__locations .map-info__heading, .map-search-container__locations .map-info__content p, .map-search-container__locations .map-info__content ul {
 display: none !important;
 }
-
-
-@media (min-width: 800px) {
-
-  .map-search-container__list {
-  height: 760px;
-  overflow: auto;
-  }
-
-
-  /*  Scrollbar styling may be limited cross-browser. This is NOT a bad thing as majority of browsers are WebKit based.
-      However, if you require full support, then have a look at http://grsmto.github.io/simplebar/ */
-
-      .map-search-container__list::-webkit-scrollbar {
-      width: 6px;
-      }
-
-      /* Track */
-      .map-search-container__list::-webkit-scrollbar-track {
-      background-color: #eee;
-      }
-
-      .map-search-container__list::-webkit-scrollbar-thumb {
-      background-color: rgb(var(--base-color));
-      }
-
-}
-
-/* End Location List */
 
 /* Map Dialog */
 
 /* Close Button */
 
-.map-info-dialog button  {
+.map-info__dialog button  {
 height: 40px !important;
 right: 4px !important;
 top: 4px !important;
@@ -368,36 +355,36 @@ transition: none;
 width: 40px !important;
 }
 
-.map-info-dialog button img {
+.map-info__dialog button img {
 height: 25px !important;
 width: 25px !important;
 }
 
 /* Map Content */
 
-.map-info-content {
+.map-info__content {
 color: inherit !important;
 }
 
-.map-info-content img {
+.map-info__content img {
 display: none;
 }
 
-.map-info-content h3 {
+.map-info__heading {
 color: rgb(var(--base-color));
 font-size: 1rem;
 margin: 0 1.8em 0 0;
 }
 
-.map-info-content p {
+.map-info__content p {
 font-size: .9rem;
 }
 
-.map-info-content p:empty {
+.map-info__content p:empty {
 display: none;
 }
 
-.map-info-btn {
+.map-info__btn {
 background-color: rgb(var(--base-color));
 color: #fff;
 display: block;
@@ -408,11 +395,11 @@ text-align: center;
 text-decoration: none;
 }
 
-.map-info-content a:not(.map-info-btn) {
+.map-info__content a:not(.map-info__btn) {
 color: rgb(var(--base-color)) !important;
 }
 
-.map-new-window {
+.map-info__new-window {
 background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDAyIDc5LjE2NDQ2MCwgMjAyMC8wNS8xMi0xNjowNDoxNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIxLjIgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjZDQkVDNEE3ODM3RjExRUNBMjc0OTcwNEVBNTU1M0QwIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjZDQkVDNEE4ODM3RjExRUNBMjc0OTcwNEVBNTU1M0QwIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NkNCRUM0QTU4MzdGMTFFQ0EyNzQ5NzA0RUE1NTUzRDAiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NkNCRUM0QTY4MzdGMTFFQ0EyNzQ5NzA0RUE1NTUzRDAiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4Q5npKAAAB9UlEQVR42uyZv07DMBDGkzYFBFQsbLAyMvAULFA2JP4MdOqI2BFTxQwDqLAwILFCxcRboE48AGxIoKZJKSqYO3RJjZU0aWI7QeonfVXsOO6vPjvxpSZjzCAdgbfAC8ZoegXvg+8j2lXAJ+D5Ufo1CbBJHaTRFLgXcm4S/JGgz24BPqoS4FRpwoKPg4ATdoIQ94a06dEgnAohxvo38FLIdS6GuAMHM1SB8d6NMZ+S/hhUmYP7BF/Tdwb3DYAOG8jGOanRdTZcbQzxF0f8TaPpaJhfDXAtqlFBKJsBdTrhbsBPwwCNDOGOwTvceqBVAXHmYw4uK5xzjZC5dsG16fI8OgHjwM2JPLoA48B5gH3ufF8HYFw4dAnscm0c1YCjwHleB7+Q11QCJoHzbJGVreI0cH+sAlAanApAqXCyAc9lw8kEXFUBh5b1LF4MqLuMs1uJlKQRxGseuX7OUo6cf5uxJI0g7qpXwJvgd/BDir4qtONB1czfB/JgG25T2mkb2agEblOG6Gd1edI0QfpZXd4AMeVw+awub4CROckYcAw4BvzvgIzuRVneB5kIWBTKToaAjjBoRUsgnqVXYc2MADeIwY8obhZacLCc8p2fLJWFcgsB9+DgKqdrpOptEO9Y/nSLbCb3N8QheDtk+65Tz/SesI6FHwEGAD6kmgYXamcIAAAAAElFTkSuQmCC");
 background-position: center;
 background-repeat: no-repeat;
@@ -428,15 +415,15 @@ width: 14px;
 
 @media (min-width: 800px) {
 
-  .map-info-dialog {
+  .map-info__dialog {
   max-width: 500px !important;
   }
 
-  .map-info-dialog button, .map-info-content h3, .map-info-content p, .map-info-content ul {
+  .map-info__dialog button, .map-info__title, .map-info__content p, .map-info__content ul {
   display: block !important;
   }
 
-  .map-info-btn {
+  .map-info__btn {
   margin: 2em 1em 1em;
   }
 
