@@ -41,9 +41,13 @@ var simpleExpander = {
 
     // Show content if hash in URL matches ID on button.
 
-    var url = document.location.href;
-    var hash = url.split("#");
-    $("#" + hash[1]).attr("aria-expanded", "true");
+    if(getExpanders.length) {
+
+      var url = document.location.href;
+      var hash = url.split("#");
+      $("#" + hash[1]).attr("aria-expanded", "true");
+
+    }
 
   }, clicked: function(){
 
