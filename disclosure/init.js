@@ -45,7 +45,7 @@ var simpleExpander = {
 
       var url = document.location.href;
       var hash = url.split("#");
-      $("#" + hash[1]).attr("aria-expanded", "true");
+      $("#" + hash[1] + ".disclosure--btn").attr("aria-expanded", "true");
 
     }
 
