@@ -579,6 +579,10 @@ JobsGoogleMap.Location.Map.Events = {
       e.preventDefault();
       getGeoLocation();
 
+      // Remove error if present
+
+      $("#map-search-error").remove();
+
       // Get GEOLocation city.
 
     });
@@ -597,6 +601,7 @@ JobsGoogleMap.Location.Map.Events = {
 
       $('.map-search-container').hide();
       $('#map-search-assistive-tech').empty(); // Clear AT message.
+      $("#map-search-error").remove(); // Remove error
 
     });
 
