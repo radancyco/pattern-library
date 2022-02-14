@@ -637,7 +637,7 @@ JobsGoogleMap.Location.Map.ListLocations = function (data) {
 
     }
 
-    $('.map-search-container__list').append('<li><button class="map-search-container__btn" data-job-count=' + count + ' data-href="' + searcURL + '"><span class="map-search-container__address">' + address + '<br> ' + eCity + ', ' + state + '</span> <strong class="map-search-container__count">' + jobCount + ' ' + jobTerm + '</strong></button></li>');
+    $('.map-search-container__list').append('<li><button class="map-search-container__btn" data-job-count=' + count + ' data-href="' + searcURL + '"><span class="map-search-container__address">' + address + ' <span class="map-search-container__city-state">' + eCity + ', ' + state + '</span></span> <strong class="map-search-container__count">' + jobCount + ' ' + jobTerm + '</strong></button></li>');
 
   });
 

@@ -277,6 +277,10 @@ transition: none;
 line-height: 1.5;
 }
 
+.map-search-container__city-state {
+display: block;
+}
+
 .map-search-container__count {
 display: block;
 margin-top: .5em;
