@@ -397,7 +397,7 @@ JobsGoogleMap.Location.Map.DOM = {
 
     '  <span class="map-search-alternative__or">' + googleMapConfig.label.or + '</span>' +
 
-    '  <button href="/remote-jobs-vanity-url" class="map-search-alternative__button" aria-label=' + JSON.stringify(googleMapConfig.label.showRemote) + '><span>' + googleMapConfig.label.showRemote + '</span></button>' +
+    '  <a href="/remote-jobs-vanity-url" class="map-search-alternative__button" aria-label=' + JSON.stringify(googleMapConfig.label.showRemote) + '><span>' + googleMapConfig.label.showRemote + '</span></a>' +
 
     '</div><!-- /.map-search-alternative -->'+
 
