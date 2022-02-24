@@ -28,7 +28,7 @@ googleMapCSS.setAttribute("rel", "stylesheet");
 
 // Run script locally when these domains present...
 
-if (localPath) {
+if (localURL) {
 
   googleMapCSS.setAttribute("href", "/google-map/init.css");
 
