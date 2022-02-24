@@ -8,6 +8,54 @@
 
 */
 
+// Load in needed CSS and/or JS files.
+
+// Get hostname so that we can select between QA and Production scripts.
+
+var hostName = location.hostname;
+
+// Need to apply hostName to localHost var so that we can load our assets locally.
+
+var localHost = hostName;
+hostName = hostName.substring(hostName.indexOf(".") + 1);
+
+var localURL = localHost === "localhost" || "127.0.0.1";
+var qaURL = hostName === "runmytests.com" || hostName === "talentbrew.com" || hostName === "radancy.dev" || hostName === "tmpworldwide.dev" || hostName === "tmpqa.com";
+
+var googleMapCSS = document.createElement("link");
+googleMapCSS.setAttribute("id", "google-map-css");
+googleMapCSS.setAttribute("rel", "stylesheet");
+
+// Run script locally when these domains present...
+
+if (localPath) {
+
+  googleMapCSS.setAttribute("href", "/google-map/init.css");
+
+} else {
+
+  // Run QA version on following domains only...
+
+  if(qaURL) {
+
+    googleMapCSS.setAttribute("href", "https://radancy.dev/pattern-library/google-map/init.css");
+
+  } else {
+
+    // ... run the production version.
+
+    googleMapCSS.setAttribute("href", "https://services1-tmpwebeng-com.tmpqa.com/js/google-jobs-map.css");
+
+  }
+
+}
+
+// Append CSS
+
+document.head.appendChild(googleMapCSS);
+
+// Map Init
+
 var clientHandle = googleMapConfig.client;
 var feedURL = "https://services1-tmpwebeng-com.tmpqa.com/location/GoogleMap/";
 var map;
