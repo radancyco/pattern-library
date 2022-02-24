@@ -34,6 +34,10 @@ width: 1px;
 
 /* Map - Search Form */
 
+.map-search .alert {
+color: #f00;
+}
+
 .map-search__field label {
 display: block;
 }
