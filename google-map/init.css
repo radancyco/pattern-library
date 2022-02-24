@@ -304,6 +304,10 @@ background-color: rgba(var(--base-color), .8);
 color: #fff;
 }
 
+.map-search-container__list li.active:hover, .map-search-container__list li.active:focus-within {
+color: inherit;
+}
+
 /* Map - API (When in .map-search-container__map) */
 
 .map-search-container__map #google-api {
