@@ -56,6 +56,7 @@ width: var(--map-search-elmn-width);
 }
 
 .map-search__spinner {
+background-color: #fff;
 background-image: url("https://tbcdn.talentbrew.com/company/1242/v2_0/img/logos/spinner.svg");
 background-position: 98%;
 background-repeat: no-repeat;
