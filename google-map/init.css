@@ -34,10 +34,6 @@ width: 1px;
 
 /* Map - Search Form */
 
-.map-search .alert {
-color: #f00;
-}
-
 .map-search__field label {
 display: block;
 }
@@ -57,10 +53,6 @@ width: var(--map-search-elmn-width);
 
 .map-search__spinner {
 background-color: #fff;
-background-image: url("https://tbcdn.talentbrew.com/company/1242/v2_0/img/logos/spinner.svg");
-background-position: 98%;
-background-repeat: no-repeat;
-background-size: var(--map-search-elmn-height);;
 border: var(--map-search-elmn-border);
 bottom: 0;
 display: block;
@@ -68,6 +60,17 @@ height: var(--map-search-elmn-height);
 left: 0;
 position: absolute;
 width: var(--map-search-elmn-width);
+}
+
+.map-search__spinner svg[aria-hidden="true"] {
+display: block;
+position: absolute;
+right: 0;
+top: 0;
+}
+
+.map-search__spinner svg rect {
+fill: rgb(var(--base-color));
 }
 
 .map-search__cta {
@@ -92,6 +95,10 @@ margin-left: 1.3em;
 .map-search__field input, .map-search__field select, .map-search__cta button {
 font-size: inherit;
 line-height: normal;
+}
+
+.map-search .alert {
+color: #f00;
 }
 
 @media (min-width: 800px) {
