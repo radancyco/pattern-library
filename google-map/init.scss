@@ -1,0 +1,536 @@
+/*!
+
+  Radancy Pattern Library: Google Map for Jobs
+
+  Contributor(s):
+  Bobby KC, Email: bobby.kc@radancy.com
+  Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy
+
+  Dependencies: Sass
+  Instructions: To run locally, install Sass (https://sass-lang.com/install), CL into directory of this file and run:
+  sass --watch init.scss:init.css --style compressed
+
+*/
+
+// Map Variables
+
+$google-map-end-small: "min-width: 800px";
+$google-map-end-medium: "min-width: 980px";
+$google-map-base-color: rgb(111, 0, 239);
+$google-map-search-elmn-border: 1px solid #666;
+$google-map-search-elmn-height: 50px;
+$google-map-search-elmn-width: 100%;
+$google-map-list-api-height: 760px;
+
+// Use to inclusively hide content for assistive tech users
+
+.visually-hidden:not(:focus):not(:active) {
+clip-path: inset(50%);
+clip: rect(0 0 0 0);
+height: 1px;
+overflow: hidden;
+position: absolute;
+white-space: nowrap;
+width: 1px;
+}
+
+// Map - Search Form
+
+.map-search {
+
+  &__filters {
+
+    @media ($google-map-end-small) {
+
+      align-items: flex-end;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+    }
+
+    @media ($google-map-end-medium) {
+
+      flex-wrap: nowrap;
+
+    }
+
+  }
+
+  &__field {
+  position: relative;
+
+    label {
+    display: block;
+    }
+
+    input, select {
+    background-color: #fff;
+    border: $google-map-search-elmn-border;
+    height: $google-map-search-elmn-height;
+    margin-bottom: .5em;
+    padding-left: 1em;
+    width: $google-map-search-elmn-width;
+
+      @media ($google-map-end-small) {
+
+        margin-bottom: 0;
+
+      }
+
+    }
+
+  }
+
+  &__spinner {
+  background-color: #fff;
+  border: $google-map-search-elmn-border;
+  bottom: 0;
+  display: block;
+  height: $google-map-search-elmn-height;
+  left: 0;
+  position: absolute;
+  width: $google-map-search-elmn-width;
+
+    svg {
+
+      &[aria-hidden="true"] {
+      display: block;
+      position: absolute;
+      right: 0;
+      top: 0;
+      }
+
+      rect {
+      fill: $google-map-base-color;
+      }
+
+    }
+
+  }
+
+  &__cta {
+  display: flex;
+
+    button {
+    background-color: $google-map-base-color;
+    border: 0;
+    color: #fff;
+    flex: 1;
+    font-size: inherit;
+    height: $google-map-search-elmn-height;
+    margin-top: .5em;
+    text-align: center;
+
+      &:last-child {
+      margin-left: 1.3em;
+      }
+
+    }
+
+  }
+
+  .alert {
+  color: #f00;
+  }
+
+  // Shared
+
+  &__field, &__cta {
+
+    @media ($google-map-end-small) {
+
+      width: 49%;
+
+    }
+
+    @media ($google-map-end-medium) {
+
+      width: 24%;
+
+    }
+
+    input, select {
+
+      @media ($google-map-end-small) {
+
+        margin-bottom: 0;
+
+      }
+
+    }
+
+    input, select, button {
+    font-size: inherit;
+    line-height: normal;
+    }
+
+  }
+
+}
+
+// Map - Alternative Search
+
+.map-search-alternative {
+display: flex;
+margin: 1em 0;
+
+  &__button {
+  background-color: $google-map-base-color;
+  border: 0;
+  color: #fff;
+  display: block;
+  flex: 1;
+  font-size: inherit;
+  height: $google-map-search-elmn-height;
+  padding: 0;
+  line-height: normal;
+  text-align: center;
+  text-decoration: none;
+
+    span {
+    line-height: $google-map-search-elmn-height;
+    }
+
+    &:last-child {
+    margin-left: 1.3em;
+    }
+
+  }
+
+  &__or {
+  display: none;
+  }
+
+}
+
+// Map - Container
+
+.map-search-container {
+
+  &__heading {
+  margin-bottom: 0;
+  }
+
+  &__status {
+  margin-top: .5em;
+  }
+
+  &__content {
+  display: none;
+
+    @media ($google-map-end-small) {
+
+      display: flex !important;
+
+    }
+
+  }
+
+  &__toggle {
+  background-color: $google-map-base-color;
+  border: 0;
+  color: #fff;
+  margin: 1em 0 0;
+  padding: 12px 15px;
+  text-align: center;
+  width: 100%;
+
+    @media ($google-map-end-small) {
+
+      display: none;
+
+    }
+
+    &--icon {
+    display: inline-block;
+    margin-left: .5em;
+    width: 10px;
+
+      &::after {
+      content: "+";
+
+        [aria-expanded="true"] & {
+
+          content: "-";
+
+        }
+
+      }
+
+    }
+
+    &[aria-expanded="true"] + .map-search-container__content {
+    display: block;
+    }
+
+  }
+
+  // Map - List
+
+  &__locations {
+
+    @media ($google-map-end-small) {
+
+        width: 30%;
+
+    }
+
+    // Map - API (When in .map-search-container__locations)
+
+    #google-api {
+    border: 1px #666 solid;
+    height: 240px;
+    margin-top: .5em;
+    }
+
+    // Map Content when child of location list. No need to show all details that are ALREADY in button, so just show "View All Jobs"
+
+    .map-info__dialog button, .map-info__heading, .map-info__content p, .map-info__content ul {
+    display: none !important;
+    }
+
+  }
+
+  &__list {
+  counter-reset: job-list-counter;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+    @media ($google-map-end-small) {
+
+      height: $google-map-list-api-height;
+      overflow: auto;
+
+    }
+
+    &::-webkit-scrollbar {
+    width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+    background-color: #eee;
+    }
+
+    &::-webkit-scrollbar-thumb {
+    background-color: $google-map-base-color;
+    }
+
+    li {
+    counter-increment: job-list-counter;
+    margin-top: .5em;
+    padding: .5em;
+    display: block;
+    position: relative;
+
+      @media ($google-map-end-small) {
+
+          margin: .5em;
+
+      }
+
+      &.active, &:hover, &:focus-within {
+      border-radius: 5px;
+      transition: all 100ms ease-in;
+      }
+
+      &:hover, &:focus-within {
+      background-color: #eee;
+      }
+
+      &.active {
+      background-color: rgba($google-map-base-color, .8);
+      color: #fff;
+      }
+
+      &::before {
+      background-color: $google-map-base-color;
+      border-radius: 50%;
+      border: 1px #fff solid;
+      color: #fff;
+      content: counter(job-list-counter);
+      display: block;
+      font-size: .8rem;
+      height: 25px;
+      left: .8em;
+      line-height: 22.5px;
+      position: absolute;
+      text-align: center;
+      top: 1.3em;
+      width: 25px;
+      }
+
+    }
+
+  }
+
+  &__btn {
+  background-color: transparent;
+  border: 0;
+  color: inherit;
+  font-size: inherit;
+  line-height:normal;
+  margin: 0 1em 0 2em;
+  padding: .5em;
+  text-align:left;
+  transition: none;
+  }
+
+  &__address {
+  line-height: 1.5;
+  }
+
+  &_city-state {
+  display: block;
+  }
+
+  &__count {
+  display: block;
+  margin-top: .5em;
+  }
+
+  // Map - API (When in .map-search-container__map)
+
+  &__map {
+
+    @media ($google-map-end-small) {
+
+      border: 1px solid #ccc;
+      margin-left: 10px;
+      width: 70%;
+
+    }
+
+    #google-api {
+    height: 360px;
+
+      @media ($google-map-end-small) {
+
+        height: $google-map-list-api-height;
+
+      }
+
+    }
+
+  }
+
+}
+
+// Map Dialog
+
+.map-info {
+
+  &__dialog {
+
+    @media ($google-map-end-small) {
+
+      max-width: 500px !important;
+
+    }
+
+    // Close Button
+
+    button  {
+    height: 40px !important;
+    right: 4px !important;
+    top: 4px !important;
+    transition: none;
+    width: 40px !important;
+
+      img {
+      height: 25px !important;
+      width: 25px !important;
+      }
+
+    }
+
+  }
+
+  // Map Heading
+
+  &__heading {
+  color: $google-map-base-color;
+  font-size: 1rem;
+  margin: 0 1.8em 0 0;
+  }
+
+  // Map Content
+
+  &__content {
+  color: inherit !important;
+
+    img {
+    display: none;
+    }
+
+    p {
+    font-size: .9rem;
+
+      &:empty {
+      display: none;
+      }
+
+    }
+
+    a:not(.map-info__btn) {
+    color: $google-map-base-color !important;
+    }
+
+  }
+
+  &__btn {
+  background-color: $google-map-base-color;
+  color: #fff;
+  display: block;
+  font-weight: bold;
+  line-height: normal;
+  padding: 1em;
+  text-align: center;
+  text-decoration: none;
+
+    @media ($google-map-end-small) {
+
+      margin: 2em 1em 1em;
+
+    }
+
+  }
+
+  // New Window
+
+  &__new-window {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDAyIDc5LjE2NDQ2MCwgMjAyMC8wNS8xMi0xNjowNDoxNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIxLjIgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjZDQkVDNEE3ODM3RjExRUNBMjc0OTcwNEVBNTU1M0QwIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjZDQkVDNEE4ODM3RjExRUNBMjc0OTcwNEVBNTU1M0QwIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NkNCRUM0QTU4MzdGMTFFQ0EyNzQ5NzA0RUE1NTUzRDAiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NkNCRUM0QTY4MzdGMTFFQ0EyNzQ5NzA0RUE1NTUzRDAiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4Q5npKAAAB9UlEQVR42uyZv07DMBDGkzYFBFQsbLAyMvAULFA2JP4MdOqI2BFTxQwDqLAwILFCxcRboE48AGxIoKZJKSqYO3RJjZU0aWI7QeonfVXsOO6vPjvxpSZjzCAdgbfAC8ZoegXvg+8j2lXAJ+D5Ufo1CbBJHaTRFLgXcm4S/JGgz24BPqoS4FRpwoKPg4ATdoIQ94a06dEgnAohxvo38FLIdS6GuAMHM1SB8d6NMZ+S/hhUmYP7BF/Tdwb3DYAOG8jGOanRdTZcbQzxF0f8TaPpaJhfDXAtqlFBKJsBdTrhbsBPwwCNDOGOwTvceqBVAXHmYw4uK5xzjZC5dsG16fI8OgHjwM2JPLoA48B5gH3ufF8HYFw4dAnscm0c1YCjwHleB7+Q11QCJoHzbJGVreI0cH+sAlAanApAqXCyAc9lw8kEXFUBh5b1LF4MqLuMs1uJlKQRxGseuX7OUo6cf5uxJI0g7qpXwJvgd/BDir4qtONB1czfB/JgG25T2mkb2agEblOG6Gd1edI0QfpZXd4AMeVw+awub4CROckYcAw4BvzvgIzuRVneB5kIWBTKToaAjjBoRUsgnqVXYc2MADeIwY8obhZacLCc8p2fLJWFcgsB9+DgKqdrpOptEO9Y/nSLbCb3N8QheDtk+65Tz/SesI6FHwEGAD6kmgYXamcIAAAAAElFTkSuQmCC");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: inline-block;
+  height: 14px;
+  margin-left: .5em;
+  overflow: hidden;
+  text-indent: -999em;
+  vertical-align: middle;
+  width: 14px;
+  }
+
+  // Shared
+
+  &__dialog button, &__title, &__content p, &__content ul {
+
+    @media ($google-map-end-small) {
+
+      display: block !important;
+
+    }
+
+  }
+
+}
+
+// Google Overrides
+
+// Dialog arrow has small space in it
+
+.gm-style .gm-style-iw-t::after {
+top: -1px;
+}
