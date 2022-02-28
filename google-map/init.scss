@@ -280,28 +280,31 @@ margin: 1em 0;
 
     #google-api {
     border: 1px #666 solid;
-    height: 240px;
+    height: 480px;
     margin-top: .5em;
     }
 
     // Map Content when child of location list. No need to show all details that are ALREADY in button, so just show "View All Jobs"
 
-    .map-info__dialog button, .map-info__heading, .map-info__content p, .map-info__content ul {
-    display: none !important;
-    }
+    //.map-info__dialog button, .map-info__heading, .map-info__content p, .map-info__content ul {
+    //display: none !important;
+    //}
 
   }
 
   &__list {
   counter-reset: job-list-counter;
+  height: $google-map-list-api-height;
   list-style: none;
-  margin: 0;
-  padding: 0;
+  margin: 1em .5em 0 0;
+  overflow: auto;
+  padding: 0 .5em 0 0;
 
     @media ($google-map-end-small) {
 
-      height: $google-map-list-api-height;
-      overflow: auto;
+      margin-top: 0;
+      margin-right: 0;
+      padding-right: 0;
 
     }
 
@@ -317,7 +320,7 @@ margin: 1em 0;
     background-color: $google-map-base-color;
     }
 
-    li {
+    > li {
     counter-increment: job-list-counter;
     margin-top: .5em;
     padding: .5em;
@@ -403,7 +406,7 @@ margin: 1em 0;
     }
 
     #google-api {
-    height: 360px;
+    height: 540px;
 
       @media ($google-map-end-small) {
 
@@ -451,17 +454,21 @@ margin: 1em 0;
 
   &__heading {
   color: $google-map-base-color;
-  font-size: 1rem;
-  margin: 0 1.8em 0 0;
+  font-size: .9rem;
+  margin: 0 3.6em 0 0;
   }
 
   // Map Content
 
   &__content {
-  color: inherit !important;
+  color: #000 !important;
 
     img {
     display: none;
+    }
+
+    ul {
+    margin-bottom: 1em;
     }
 
     p {
