@@ -19,7 +19,12 @@ var hostName = location.hostname;
 var localHost = hostName;
 hostName = hostName.substring(hostName.indexOf(".") + 1);
 
-var localURL = localHost === "localhost";
+var urlParts = hostName.split(".");
+var hostName = hostName.slice(-2).join(".");
+
+console.log("Host Name: " + hostName);
+
+var localURL = localHost === "localhost" || localHost === "127.0.0.1";
 var qaURL = hostName === "runmytests.com" || hostName === "talentbrew.com" || hostName === "radancy.dev" || hostName === "tmpworldwide.dev" || hostName === "tmpqa.com";
 
 var googleMapCSS = document.createElement("link");
