@@ -20,8 +20,6 @@ var localHost = hostName;
 var urlParts = hostName.split(".");
 hostName = urlParts.slice(-2).join(".");
 
-console.log("Host Name: " + hostName);
-
 var localURL = localHost === "localhost" || localHost === "127.0.0.1";
 var qaURL = hostName === "runmytests.com" || hostName === "talentbrew.com" || hostName === "radancy.dev" || hostName === "tmpworldwide.dev" || hostName === "tmpqa.com";
 
