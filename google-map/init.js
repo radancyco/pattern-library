@@ -17,10 +17,8 @@ var hostName = location.hostname;
 // Need to apply hostName to localHost var so that we can load our assets locally.
 
 var localHost = hostName;
-hostName = hostName.substring(hostName.indexOf(".") + 1);
-
 var urlParts = hostName.split(".");
-var hostName = urlParts.slice(-2).join(".");
+hostName = urlParts.slice(-2).join(".");
 
 console.log("Host Name: " + hostName);
 
