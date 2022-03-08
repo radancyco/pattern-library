@@ -284,12 +284,6 @@ margin: 1em 0;
     margin-top: .5em;
     }
 
-    // Map Content when child of location list. No need to show all details that are ALREADY in button, so just show "View All Jobs"
-
-    //.map-info__dialog button, .map-info__heading, .map-info__content p, .map-info__content ul {
-    //display: none !important;
-    //}
-
   }
 
   &__list {
@@ -338,8 +332,12 @@ margin: 1em 0;
       transition: all 100ms ease-in;
       }
 
-      &:hover, &:focus-within {
-      background-color: #eee;
+      &:not(.active) {
+
+        &:hover, &:focus-within {
+        background-color: #eee;
+        }
+
       }
 
       &.active {
