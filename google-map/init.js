@@ -20,7 +20,7 @@ var localHost = hostName;
 hostName = hostName.substring(hostName.indexOf(".") + 1);
 
 var urlParts = hostName.split(".");
-var hostName = hostName.slice(-2).join(".");
+var hostName = urlParts.slice(-2).join(".");
 
 console.log("Host Name: " + hostName);
 
