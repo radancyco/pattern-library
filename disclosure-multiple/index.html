@@ -4,14 +4,24 @@ jira: TCDQ-57187
 localcss: "init.css"
 localjs: "init.js"
 noindex: true
-title: "Multiple Disclosures v1.0"
+title: "Multiple Disclosures v1.1"
+warning: true
 ---
 
 {% include nav.html %}
 
 <p>This pattern will allow you to easily place and control the presentation of a multiple dislosure user interface (UI). Please read <a href="#a11y-info">Accessibility & UX</a> before using.</p>
 
-<h2>Example</h2>
+<h2 id="parameters">Parameters</h2>
+
+<ul>
+  <li><b>data-disclosure-multiple-icon (Boolean, Optional):</b> Permits inclusion of a visual icon that changes when the control is clicked. Any icon can be included, via the CSS.</li>
+  <li><b>data-disclosure-multiple-open (Number, Optional):</b> Specifies which tab should be opened on page load.</li>
+</ul>
+
+<p><strong>Note:</strong> The "Toggle All" button is optional.</p>
+
+<h2 id="example-1">Example 1: Basic</h2>
 
 <!-- Begin Multiple Disclosure -->
 
@@ -27,7 +37,7 @@ title: "Multiple Disclosures v1.0"
 
     <div class="disclosure-multiple__list__item">
 
-      <button class="disclosure-multiple__button" data-custom-category="FAQ Test" data-custom-label="hellure">Section 1</button>
+      <button class="disclosure-multiple__button">Section 1</button>
 
       <div class="disclosure-multiple__content">
 
@@ -49,57 +59,31 @@ title: "Multiple Disclosures v1.0"
 
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod, tortor nec pharetra ultricies, ante erat imperdiet velit, nec laoreet enim lacus a velit. <a href="#">Nam luctus</a>, enim in interdum condimentum, nisl diam iaculis lorem, vel volutpat mi leo sit amet lectus. Praesent non odio bibendum magna bibendum accumsan.</p>
 
-    </div>
-
-  </div>
-
-  <div class="disclosure-multiple__list__item">
-
-    <button class="disclosure-multiple__button">Section 3</button>
-
-    <div class="disclosure-multiple__content">
-
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod, tortor nec pharetra ultricies, ante erat imperdiet velit, nec laoreet enim lacus a velit. <a href="#">Nam luctus</a>, enim in interdum condimentum, nisl diam iaculis lorem, vel volutpat mi leo sit amet lectus. Praesent non odio bibendum magna bibendum accumsan.</p>
-
-      <p>A velit. <a href="#">Nam luctus</a>, enim in interdum condimentum, nisl diam iaculis lorem, vel volutpat mi leo sit amet lectus. Praesent non odio bibendum magna bibendum accumsan.</p>
+      </div>
 
     </div>
 
-  </div>
+    <div class="disclosure-multiple__list__item">
 
-  <div class="disclosure-multiple__list__item">
-
-    <button class="disclosure-multiple__button">Section 4</button>
-
-    <div class="disclosure-multiple__content">
-
-      <p>Phasellus ac tristique orci. Nulla maximus <a href="#">justo nec dignissim consequat</a>. Sed vehicula diam sit amet mi efficitur vehicula in in nisl. Aliquam erat volutpat. Suspendisse lorem turpis, accumsan consequat consectetur gravida, <a href="#">pellentesque ac ante</a>. Aliquam in commodo ligula, sit amet mollis neque. Vestibulum at facilisis massa.</p>
-
-    </div>
-
-  </div>
-
-  <div class="disclosure-multiple__list__item">
-
-    <button class="disclosure-multiple__button">Section 5</button>
-
-    <div class="disclosure-multiple__content">
-
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod, tortor nec pharetra ultricies, ante erat imperdiet velit, nec laoreet enim lacus a velit. <a href="#">Nam luctus</a>, enim in interdum condimentum, nisl diam iaculis lorem, vel volutpat mi leo sit amet lectus. Praesent non odio bibendum magna bibendum accumsan.</p>
-
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod, tortor nec pharetra ultricies, ante erat imperdiet velit, nec laoreet enim lacus a, enim in interdum condimentum, nisl diam iaculis lorem.</p>
-
-    </div>
-
-  </div>
-
-  <div class="disclosure-multiple__list__item">
-
-      <button class="disclosure-multiple__button">Section 6</button>
+      <button class="disclosure-multiple__button">Section 3</button>
 
       <div class="disclosure-multiple__content">
 
-        <p>Lorem ipsum dolor sit amet, consectetur nec pharetra ultricies, ante  velit, nec laoreet enim lacus a velit. <a href="#">Nam luctus</a>, enim in interdum condimentum, nisl diam iaculis lorem, vel volutpat mi leo sit amet lectus. Praesent non odio bibendum magna bibendum accumsan.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod, tortor nec pharetra ultricies, ante erat imperdiet velit, nec laoreet enim lacus a velit. <a href="#">Nam luctus</a>, enim in interdum condimentum, nisl diam iaculis lorem, vel volutpat mi leo sit amet lectus. Praesent non odio bibendum magna bibendum accumsan.</p>
+
+        <p>A velit. <a href="#">Nam luctus</a>, enim in interdum condimentum, nisl diam iaculis lorem, vel volutpat mi leo sit amet lectus. Praesent non odio bibendum magna bibendum accumsan.</p>
+
+      </div>
+
+    </div>
+
+    <div class="disclosure-multiple__list__item">
+
+      <button class="disclosure-multiple__button">Section 4</button>
+
+      <div class="disclosure-multiple__content">
+
+        <p>Phasellus ac tristique orci. Nulla maximus <a href="#">justo nec dignissim consequat</a>. Sed vehicula diam sit amet mi efficitur vehicula in in nisl. Aliquam erat volutpat. Suspendisse lorem turpis, accumsan consequat consectetur gravida, <a href="#">pellentesque ac ante</a>. Aliquam in commodo ligula, sit amet mollis neque. Vestibulum at facilisis massa.</p>
 
       </div>
 
@@ -110,6 +94,147 @@ title: "Multiple Disclosures v1.0"
 </div>
 
 <!-- End Multiple Disclosure -->
+
+<h2 id="example-2">Example 2: Visual Affordance</h2>
+
+<p class="param">Parameter(s): <code>data-disclosure-multiple-icon</code></p>
+
+<!-- Begin Multiple Disclosure -->
+
+<div class="disclosure-multiple" data-disclosure-multiple-icon>
+
+  <div class="disclosure-multiple__list">
+
+    <div class="disclosure-multiple__list__item">
+
+      <button class="disclosure-multiple__button">Section 1</button>
+
+      <div class="disclosure-multiple__content">
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod, tortor nec pharetra ultricies, ante erat imperdiet velit, nec laoreet enim lacus a velit. <a href="#">Nam luctus</a>, enim in interdum condimentum, nisl diam iaculis lorem, vel volutpat mi leo sit amet lectus. Praesent non odio bibendum magna bibendum accumsan.</p>
+
+        <p>Ante erat imperdiet velit, nec laoreet enim lacus a velit. <a href="#">Nam luctus</a>, enim in interdum condimentum, nisl diam iaculis lorem, vel volutpat mi leo sit amet lectus. Praesent non odio bibendum magna bibendum accumsan.</p>
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod, tortor nec pharetra ultricies, ante erat imperdiet velit, nec laoreet enim lacus a velit.</p>
+
+      </div>
+
+    </div>
+
+    <div class="disclosure-multiple__list__item">
+
+      <button class="disclosure-multiple__button">Section 2</button>
+
+      <div class="disclosure-multiple__content">
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod, tortor nec pharetra ultricies, ante erat imperdiet velit, nec laoreet enim lacus a velit. <a href="#">Nam luctus</a>, enim in interdum condimentum, nisl diam iaculis lorem, vel volutpat mi leo sit amet lectus. Praesent non odio bibendum magna bibendum accumsan.</p>
+
+      </div>
+
+    </div>
+
+    <div class="disclosure-multiple__list__item">
+
+      <button class="disclosure-multiple__button">Section 3</button>
+
+      <div class="disclosure-multiple__content">
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod, tortor nec pharetra ultricies, ante erat imperdiet velit, nec laoreet enim lacus a velit. <a href="#">Nam luctus</a>, enim in interdum condimentum, nisl diam iaculis lorem, vel volutpat mi leo sit amet lectus. Praesent non odio bibendum magna bibendum accumsan.</p>
+
+        <p>A velit. <a href="#">Nam luctus</a>, enim in interdum condimentum, nisl diam iaculis lorem, vel volutpat mi leo sit amet lectus. Praesent non odio bibendum magna bibendum accumsan.</p>
+
+      </div>
+
+    </div>
+
+    <div class="disclosure-multiple__list__item">
+
+      <button class="disclosure-multiple__button">Section 4</button>
+
+      <div class="disclosure-multiple__content">
+
+        <p>Phasellus ac tristique orci. Nulla maximus <a href="#">justo nec dignissim consequat</a>. Sed vehicula diam sit amet mi efficitur vehicula in in nisl. Aliquam erat volutpat. Suspendisse lorem turpis, accumsan consequat consectetur gravida, <a href="#">pellentesque ac ante</a>. Aliquam in commodo ligula, sit amet mollis neque. Vestibulum at facilisis massa.</p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- End Multiple Disclosure -->
+
+<h2 id="example-2">Example 3: Open on Page Load</h2>
+
+<p class="param">Parameter(s): <code>data-disclosure-multiple-open="1"</code></p>
+
+<!-- Begin Multiple Disclosure -->
+
+<div class="disclosure-multiple" data-disclosure-multiple-open="1">
+
+  <div class="disclosure-multiple__list">
+
+    <div class="disclosure-multiple__list__item">
+
+      <button class="disclosure-multiple__button">Section 1</button>
+
+      <div class="disclosure-multiple__content">
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod, tortor nec pharetra ultricies, ante erat imperdiet velit, nec laoreet enim lacus a velit. <a href="#">Nam luctus</a>, enim in interdum condimentum, nisl diam iaculis lorem, vel volutpat mi leo sit amet lectus. Praesent non odio bibendum magna bibendum accumsan.</p>
+
+        <p>Ante erat imperdiet velit, nec laoreet enim lacus a velit. <a href="#">Nam luctus</a>, enim in interdum condimentum, nisl diam iaculis lorem, vel volutpat mi leo sit amet lectus. Praesent non odio bibendum magna bibendum accumsan.</p>
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod, tortor nec pharetra ultricies, ante erat imperdiet velit, nec laoreet enim lacus a velit.</p>
+
+      </div>
+
+    </div>
+
+    <div class="disclosure-multiple__list__item">
+
+      <button class="disclosure-multiple__button">Section 2</button>
+
+      <div class="disclosure-multiple__content">
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod, tortor nec pharetra ultricies, ante erat imperdiet velit, nec laoreet enim lacus a velit. <a href="#">Nam luctus</a>, enim in interdum condimentum, nisl diam iaculis lorem, vel volutpat mi leo sit amet lectus. Praesent non odio bibendum magna bibendum accumsan.</p>
+
+      </div>
+
+    </div>
+
+    <div class="disclosure-multiple__list__item">
+
+      <button class="disclosure-multiple__button">Section 3</button>
+
+      <div class="disclosure-multiple__content">
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod, tortor nec pharetra ultricies, ante erat imperdiet velit, nec laoreet enim lacus a velit. <a href="#">Nam luctus</a>, enim in interdum condimentum, nisl diam iaculis lorem, vel volutpat mi leo sit amet lectus. Praesent non odio bibendum magna bibendum accumsan.</p>
+
+        <p>A velit. <a href="#">Nam luctus</a>, enim in interdum condimentum, nisl diam iaculis lorem, vel volutpat mi leo sit amet lectus. Praesent non odio bibendum magna bibendum accumsan.</p>
+
+      </div>
+
+    </div>
+
+    <div class="disclosure-multiple__list__item">
+
+      <button class="disclosure-multiple__button">Section 4</button>
+
+      <div class="disclosure-multiple__content">
+
+        <p>Phasellus ac tristique orci. Nulla maximus <a href="#">justo nec dignissim consequat</a>. Sed vehicula diam sit amet mi efficitur vehicula in in nisl. Aliquam erat volutpat. Suspendisse lorem turpis, accumsan consequat consectetur gravida, <a href="#">pellentesque ac ante</a>. Aliquam in commodo ligula, sit amet mollis neque. Vestibulum at facilisis massa.</p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- End Multiple Disclosure -->
+
 
 {% include disclosures.html %}
 

@@ -1,6 +1,6 @@
 /*!
 
-  Radancy Pattern Library: Multiple Disclosures v1.0
+  Radancy Pattern Library: Multiple Disclosure v1.1
 
   Contributor(s):
   Andrew Hill, Email: andrew.hill@radancy.com
@@ -9,4 +9,5 @@
   Instructions: To run locally, install Sass (https://sass-lang.com/install), CL to directory this file in and run:
   sass --watch init.scss:init.css --style compressed
 
-*/.disclosure-multiple__navigation{text-align:right}.disclosure-multiple__navigation__button{background-color:#6F00EF;border:0;color:#fff;margin-bottom:1em;padding:1em}.disclosure-multiple__navigation__button:focus,.disclosure-multiple__navigation__button:hover{opacity:.7}.disclosure-multiple__list__item{margin-bottom:5px}.disclosure-multiple__list__item .disclosure-multiple__content{display:none}.disclosure-multiple__list__item .disclosure-multiple__button{background-color:#6F00EF;border:0;color:#fff;margin-bottom:1em;padding:1em;text-align:left;width:100%}.disclosure-multiple__list__item .disclosure-multiple__button[aria-expanded=true]+.disclosure-multiple__content{display:block}.disclosure-multiple__list__item .disclosure-multiple__button:focus,.disclosure-multiple__list__item .disclosure-multiple__button:hover{opacity:.7}/*# sourceMappingURL=init.css.map */
+*/.disclosure-multiple__navigation{text-align:right}.disclosure-multiple__navigation__button{background-color:#6F00EF;border:0;color:white;font-size:inherit;margin-bottom:1em;padding:1em}.disclosure-multiple__navigation__button:focus{background-color:#69788C}.disclosure-multiple__list__item{margin-bottom:5px}.disclosure-multiple__list__item--open{background-color:#eee}.disclosure-multiple__list__item .disclosure-multiple__content{display:none;padding:0 10px 10px}.disclosure-multiple__list__item .disclosure-multiple__button{background-color:#6F00EF;border:0;color:white;font-size:inherit;margin-bottom:1em;padding:1em;text-align:left;width:100%}.disclosure-multiple__list__item .disclosure-multiple__button:focus{background-color:#69788C}.disclosure-multiple__list__item .disclosure-multiple__button .disclosure-multiple--icon::after{display:inline-block;content:"+"}.disclosure-multiple__list__item .disclosure-multiple__button[aria-expanded="true"] .disclosure-multiple--icon::after{content:"-"}.disclosure-multiple__list__item .disclosure-multiple__button[aria-expanded="true"]+.disclosure-multiple__content{display:block}
+/*# sourceMappingURL=init.css.map */

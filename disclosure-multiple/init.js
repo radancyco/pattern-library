@@ -1,6 +1,6 @@
 /*!
 
-  Radancy Pattern Library: Multiple Disclosures v1.0
+  Radancy Pattern Library: Multiple Disclosures v1.1
 
   Contributor(s):
   Andrew Hill, Email: andrew.hill@radancy.com
@@ -13,18 +13,20 @@ var prodAccordion = {
 
   init: function(){
 
-    var setupIDs = 0;
-    var useThis = "";
+    console.log('%c Multiple Disclosure v1.1 in use. ', 'background: #6e00ee; color: #fff');
 
     // setup each FAQ to be independent
 
-    $(".disclosure-multiple").each(function(){
+    $(".disclosure-multiple").each(function(e){
+
+      var setupIDs = e + 1;
+      var useThis = "";
 
       if($(this).attr("id")){
 
         useThis = $(this).attr("id");
 
-      } else{
+      } else {
 
         useThis = "prod-acc-" + setupIDs;
         $(this).attr("id","prod-acc-" + setupIDs);
@@ -44,10 +46,47 @@ var prodAccordion = {
 
     });
 
+
+
     $(".disclosure-multiple__navigation__button").attr('aria-pressed', 'false').on("click",function(){
 
       var e = $(this);
       prodAccordion.toggleAll(e);
+
+    });
+
+    $(".disclosure-multiple").each(function(){
+
+      $(this).find(".disclosure-multiple__button").each(function(e){
+
+        // Include Visual Affordance
+
+        var disclosureIcon = $(this).parent().parent().parent().attr('data-disclosure-multiple-icon');
+
+        if (typeof disclosureIcon !== 'undefined' && disclosureIcon !== false) {
+
+          $(this).append(' <span class="disclosure-multiple--icon" aria-hidden="true"></span>');
+
+        }
+
+        // Have one section opened by default.
+
+        $(this).attr("data-button-id", e + 1);
+
+        var disclosureOpen = $(this).parent().parent().parent().attr('data-disclosure-multiple-open');
+
+        if (typeof disclosureOpen !== 'undefined' && disclosureOpen !== false) {
+
+          if($(this).data("button-id") == disclosureOpen){
+
+            $(this).attr("aria-expanded", "true");
+            $(this).parent().addClass("disclosure-multiple__list__item--open");
+
+          }
+
+        }
+
+      });
 
     });
 
@@ -60,11 +99,13 @@ var prodAccordion = {
 
       $("#" + curID + " .disclosure-multiple__navigation__button").attr("aria-pressed","true");
       $("#" + curID + " .disclosure-multiple__button").attr("aria-expanded","true");
+      $("#" + curID + " .disclosure-multiple__list__item").addClass("disclosure-multiple__list__item--open");
 
-    } else{
+    } else {
 
       $("#" + curID + " .disclosure-multiple__navigation__button").attr("aria-pressed","false");
       $("#" + curID + " .disclosure-multiple__button").attr("aria-expanded","false");
+      $("#" + curID + " .disclosure-multiple__list__item").removeClass("disclosure-multiple__list__item--open");
 
     }
 
@@ -75,10 +116,12 @@ var prodAccordion = {
     if(curState === "true"){
 
       $(e).attr("aria-expanded","false");
+      $(e).parent().removeClass("disclosure-multiple__list__item--open");
 
     } else{
 
       $(e).attr("aria-expanded","true");
+      $(e).parent().addClass("disclosure-multiple__list__item--open");
 
     }
 
@@ -101,10 +144,6 @@ var prodAccordion = {
         console.log("Would send: Click - " + catValue + " - " + labelValue);
 
       }
-
-    } else {
-
-      // ???
 
     }
 
