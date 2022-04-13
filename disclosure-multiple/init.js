@@ -46,8 +46,6 @@ var prodAccordion = {
 
     });
 
-
-
     $(".disclosure-multiple__navigation__button").attr('aria-pressed', 'false').on("click",function(){
 
       var e = $(this);
