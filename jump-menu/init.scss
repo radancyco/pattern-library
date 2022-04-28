@@ -15,6 +15,7 @@ $base-color: #6F00EF;
 
 .jump-menu {
 font-size: 1.2rem;
+margin: 2em 0;
 
   &__label {
   display: block;
@@ -31,8 +32,8 @@ font-size: 1.2rem;
 
   &__select, &__btn {
   font-size: inherit;
-  padding: .5em;
   margin-right: .3em;
+  padding: .5em;
   }
 
   &__btn {
