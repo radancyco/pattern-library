@@ -2,7 +2,7 @@
 
 	<h2>Accessibility & UX</h2>
 
-  <p>Jump Menus that utilize a <code>select</code> dropdown to link to external pages, must always include a submit button. Unexpectedly taking a user to another page, upon making a selection from an input control, is a "change of context", and therefore a failure of <a href="https://www.w3.org/WAI/WCAG21/Understanding/on-input.html">Success Criterion 3.2.2: On Input</a>. The only exception to this rule is in-page navigation. If you are using a <code>select</code> dropdown to change content wihin the page, then you do not need a submit button. However, you do need to announce that a change has occured via <code>aria-live</code>.</p>
+  <p>Jump Menus that utilize a <code>select</code> dropdown to link to external pages, must always include a submit button. Unexpectedly taking a user to another page, upon making a selection from an input control, will cause a <em>change of context</em>, which is a failure of <a href="https://www.w3.org/WAI/WCAG21/Understanding/on-input.html">Success Criterion 3.2.2: On Input</a>. The only exception to this rule is in-page navigation. If you are using a <code>select</code> dropdown to change content within the page, then you do not need a submit button. However, you do need to announce that a change has occurred via <code>aria-live</code>.</p>
 
 	<p>If you want to navigate away from a page without a submit button, then simply use a hyperlink or a <a href="/disclosure/">disclosure</a> that reveals a list of hyperlinks to other pages, when opened.</p>
 
