@@ -1,0 +1,45 @@
+---
+folder: jump-menu
+jira: TCDQ-73886
+localcss: "init.css"
+localjs: "init.js"
+noindex: true
+title: "Jump Menu v1.0"
+warning: true
+---
+
+{% include nav.html %}
+
+<p>This pattern will allow you to place an accessible "Jump Menu" on your page.</p>
+
+<h2 id="parameters">Parameters</h2>
+
+<p>None. See <a href="#dependencies">Dependencies</a>.</p>
+
+<!-- Begin Jump Menu -->
+
+<div class="jump-menu">
+
+  <nav aria-label="Jump Menu" class="jump-menu__nav">
+
+    <label class="jump-menu__label">My favorite pattern to use is </label>
+
+    <select class="jump-menu__select">
+        <option value="/disclosure-grid/">Disclosure Grid</option>
+        <option value="#parameters">Jump Menu</option>
+        <option value="/read-more/">Read More</option>
+    </select>
+
+    <button class="jump-menu__btn">Learn More</button>
+
+    <!-- Note: The for attribute and ID are generated via JavaScript to accomodate multiple Jump Menus on page -->
+
+  </nav>
+
+</div>
+
+<!-- End Jump Menu -->
+
+{% include jump-menu.html %}
+
+{% include notes.html %}
