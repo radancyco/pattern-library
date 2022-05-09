@@ -1,0 +1,280 @@
+/*!
+
+  Radancy Pattern Library: Hero Banner
+
+  Contributor(s):
+  Andrew Hill, Email: andrew.hill@radancy.com
+
+  Dependencies: Sass
+  Instructions: To run locally, install Sass (https://sass-lang.com/install), CL to directory this file in and run:
+  sass --watch init.scss:init.css --style compressed
+
+*/
+
+@import "breakpoint"; // Note: Use your own breakpoint partial. 
+
+/* Specify Breakpoint for Mobile/Desktop */
+/* Should we build this for 3 so we can have a high res??? */
+
+$end-banner: 768px;
+
+/* specify max-width to create margins for the text wrapper */
+
+$banner-constrain-wrapper: 1400px;
+
+/* specify max-width for the text block itself */
+
+$banner-text-maxwidth: 400px;
+
+/* Set to zero if you want it flush with edges */
+
+$banner-x-offset: 40px;
+
+$banner-y-offset: 40px;
+
+/* Supporting Code */
+
+.hero-banner {
+max-width: 100%;
+position: relative;
+width: 100%;
+
+  img {
+  width: 100%;
+  }
+
+  &__image-wrapper {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  }
+
+  &__text-wrapper {
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  width: 100%;
+
+    @include breakpoint($end-banner) {
+
+      left: 0;
+      margin: auto;
+      position: absolute;
+      right: 0;
+
+    }
+
+  }
+
+  &__text-inner-wrapper {
+  display: block;
+  margin: 0 auto;
+  max-width: $banner-text-maxwidth;
+
+    @include breakpoint($end-banner) {
+
+      margin: auto;
+
+    }
+
+  }
+
+  @include breakpoint($end-banner) {
+
+    /* Top Alignment Options */
+
+    &.text-left-top {
+
+      .hero-banner__text-wrapper {
+      top: $banner-y-offset;
+      }
+
+      .hero-banner__text-inner-wrapper {
+      position: absolute;
+      left: $banner-x-offset;
+      }
+
+    }
+
+    &.text-right-top {
+
+      .hero-banner__text-wrapper {
+      top: $banner-y-offset;
+      }
+
+      .hero-banner__text-inner-wrapper {
+      position: absolute;
+      right: $banner-x-offset;
+      }
+
+    }
+
+    &.text-center-top {
+
+      .hero-banner__text-wrapper {
+      top: $banner-y-offset;
+      }
+
+      .hero-banner__text-inner-wrapper {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      }
+
+    }
+
+    /* Bottom Alignment Options */
+
+    &.text-left-bottom {
+
+      .hero-banner__text-wrapper {
+      bottom: $banner-y-offset;
+      }
+
+      .hero-banner__text-inner-wrapper {
+      bottom: 0;
+      left: $banner-x-offset;
+      position: absolute;
+      }
+
+    }
+
+    &.text-right-bottom {
+
+      .hero-banner__text-wrapper {
+      bottom: $banner-y-offset;
+      }
+
+      .hero-banner__text-inner-wrapper {
+      bottom: 0;
+      position: absolute;
+      right: $banner-x-offset;
+      }
+
+    }
+
+    &.text-center-bottom {
+
+      .hero-banner__text-wrapper {
+      bottom: $banner-y-offset;
+      }
+
+      .hero-banner__text-inner-wrapper {
+      bottom: 0;
+      left: 50%;
+      position: absolute;
+      transform: translateX(-50%);
+      }
+
+    }
+
+    /* Center Alignment Options */
+
+    &.text-left-center {
+
+      .hero-banner__text-wrapper {
+      bottom: 0;
+      top: 0;
+      }
+
+      .hero-banner__text-inner-wrapper {
+      left: $banner-x-offset;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      }
+
+    }
+
+    &.text-right-center {
+
+      .hero-banner__text-wrapper {
+      bottom: 0;
+      top: 0;
+      }
+
+      .hero-banner__text-inner-wrapper {
+      position: absolute;
+      right: $banner-x-offset;
+      top: 50%;
+      transform: translateY(-50%);
+      }
+
+    }
+
+    &.text-center-center {
+
+      .hero-banner__text-wrapper {
+      bottom: 0;
+      top: 0;
+      }
+
+      .hero-banner__text-inner-wrapper {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      }
+
+    }
+
+  }
+
+  &.constrain {
+
+    .hero-banner__text-wrapper {
+    max-width: $banner-constrain-wrapper;
+    }
+
+  }
+
+}
+
+
+// For Demo Form - Do not copy
+
+form {
+border: 1px #6F00EF solid;
+border-radius: 5px;
+font-size: .9em;
+margin-bottom: 1em;
+padding: .5em;
+right: 0;
+top: 0;
+z-index: 1;
+
+  @include breakpoint($end-banner) {
+
+    background-color: #fff;
+    margin: .5em;
+    position: fixed;
+    width: 560px;
+
+  }
+
+  fieldset {
+  border: 0;
+  }
+
+  legend, label {
+  font-weight: bold;
+  }
+
+  label {
+  margin: 0;
+  }
+
+  input, label, select {
+  font-family: inherit;
+  vertical-align: middle;
+  }
+
+  select {
+  font-size: 1.1em;
+  }
+
+  p {
+  margin-top: 0;
+  }
+
+}

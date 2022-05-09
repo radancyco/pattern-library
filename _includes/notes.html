@@ -1,11 +1,13 @@
 <h2 id="dependencies">Dependencies</h2>
 
 <ul>
+  {% if page.localhtmlnote != false %}
   <li><a href="{{ site.repo }}/blob/main/{{ page.folder }}/index.html">HTML</a></li>
-  {% if page.localcss %}
-  <li><a href="{{ site.repo }}/blob/main/{{ page.folder }}/{% if page.notecss %}init.css{% else %}init.scss{% endif %}">CSS</a></li>
   {% endif %}
-  {% if page.localjs %}
+  {% if page.localcss %}
+  <li><a href="{{ site.repo }}/blob/main/{{ page.folder }}/{% if page.notecss %}init.css{% else %}init.scss{% endif %}">CSS/Sass</a></li>
+  {% endif %}
+  {% if page.localjsnote != false && page.localjs == true %}
   <li><a href="{{ site.repo }}/blob/main/{{ page.folder }}/init.js">JavaScript</a></li>
   {% endif %}
 </ul>

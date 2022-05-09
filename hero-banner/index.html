@@ -1,0 +1,175 @@
+---
+constrain: false
+folder: hero-banner
+heading: false
+jira: TCDQ-74257
+localcss: "init.css"
+localhtmlnote: false
+localjs: "init.js"
+localjsnote: false
+noindex: true
+title: "Hero Banner"
+---
+
+<h1 class="primary-heading">{{ page.title }}</h1>
+
+<p>For scenarios where you have a mobile/desktop image along with a headline and some additional text.</p>
+
+{% include nav.html %}
+
+<h2>Use Case #1 - Create Banners to use with Content Page Settings</h2>
+
+<p>The default code used on site themes includes the structure that you need to leverage those page-level items.</p>
+
+<h2>Use Case #2 - Create Banners with Section & Modules</h2>
+
+<p>For core pages where you need to create a section and code to support a hero. Create a section with (2) partials.</p>
+
+<p><strong>Partial 1:</strong> Should contain your images/media modules wrapped in a <code>picture</code> element.</p>
+
+<ol>
+  <li>Mobile image should be first (Source)</li>
+  <li>Desktop image should be second (IMG)</li>
+</ol>
+
+<p><strong>Partial 2:</strong> Should contain your Text/HTML module. Make sure it's setup for SEO to use the right headline element (h1, h2, etc.)</p>
+
+<h2>SCSS Variables</h2>
+
+<ul>
+  <li><b>$end-banner</b> This is your breakpoint for when you want to go from mobile to desktop.</li>
+  <li><b>$banner-constrain-wrapper</b> If you need to contain the headline that overlays your hero image with a max-width to match other margins on the page. Used with <strong>.constrain</strong> class. (example: 1400px)</li>
+  <li><b>$banner-x-offset</b> Will allow you to choose the horizontal distance you want for your text to be from left or right. This would not apply to horizontally centered classes below.</li>
+  <li><b>$banner-y-offset</b> Will allow you to choose the vertical distance you want for your text to be from top or bottom. This would not apply to vertically centered classes below.</li>
+</ul>
+
+<h2>CSS Classes</h2>
+
+<p>The following classes can be used to help determine the orientation and position of the text</p>
+
+<ul>
+  <li><b>.constrain</b> This will apply a max-width around your text's inner-wrapper so that it can stay within margins used on page. Default would have text area be 100% the width of the viewport.</li>
+  <li><b>.text-left-top</b> This will align text with top (vertical) left(horizontal) of the hero.</li>
+  <li><b>.text-center-top</b> This will align text with top center of the hero.</li>
+  <li><b>.text-right-top</b> This will align text with top right of the hero.</li>
+  <li><b>.text-left-center</b> This will align text with center left of the hero.</li>
+  <li><b>.text-center-center</b> This will align text with center (horizontal and vertical) of the hero.</li>
+  <li><b>.text-right-center</b> This will align text with center right of the hero.</li>
+  <li><b>.text-left-bottom</b> This will align text with bottom left of the hero.</li>
+  <li><b>.text-center-bottom</b> This will align text with bottom center of the hero.</li>
+  <li><b>.text-right-bottom</b> This will align text with bottom right of the hero.</li>
+</ul>
+
+<form>
+
+  <fieldset>
+
+    <legend>Hero / Banner Demonstration</legend>
+
+    <p>Apply classes to the banner below to change the orientation of the text and choose if you want to show it "constrained" horizontally.</p>
+
+    <div>
+
+      <label for="selector-list">Choose Layout:</label>
+
+      <select id="selector-list">
+        <option value="text-left-top">Text Left Top</option>
+        <option value="text-right-top">Text Right Top</option>
+        <option value="text-center-top">Text Center Top</option>
+        <option value="text-left-center">Text Left Center</option>
+        <option value="text-right-center">Text Right Center</option>
+        <option value="text-center-center">Text Center Center</option>
+        <option value="text-left-bottom">Text Left Bottom</option>
+        <option value="text-right-bottom">Text Right Bottom</option>
+        <option value="text-center-bottom">Text Center Bottom</option>
+      </select>
+
+    </div>
+
+    <div>
+
+      <label for="constrainMe">Constrain Content?</label> <input id="constrainMe" aria-describedby="constrain-note" type="checkbox">
+
+      <p id="constrain-note"><strong>Note:</strong> For this demo, optional constraint is set for a max of 1400px horizontally.</p>
+
+    </div>
+
+    <div>
+
+      <button class="btn" id="changeUp">Update Demo</button>
+
+    </div>
+
+  </fieldset>
+
+  <div id="form-update" class="sr-only" aria-live="polite"></div>
+
+</form>
+
+<!-- Begin Pattern -->
+
+<div id="this-hero" class="hero-banner text-left-top">
+
+  <!-- Partial 1 -->
+
+  <div class="hero-banner__image-wrapper">
+
+    <picture>
+      <source srcset="https://via.placeholder.com/768x550" media="(max-width: 767px)">
+      <img loading="lazy" src="https://via.placeholder.com/1600x450" alt="">
+    </picture>
+
+  </div>
+
+  <!-- Partial 2 -->
+
+  <div class="hero-banner__text-wrapper">
+
+    <div class="hero-banner__text-inner-wrapper">
+
+      <h1>Page Headline Here</h1>
+
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra feugiat laoreet.</p>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- End Pattern -->
+
+<h3>HTML</h3>
+
+<!-- Code to copy -->
+
+<pre><code>&lt;div id="this-hero" class="hero-banner <strong id="codeExampleClass">text-left-top</strong>"&gt;
+
+  &lt;!-- Partial 1 --&gt;
+
+  &lt;div class="hero-banner__image-wrapper"&gt;
+
+    &lt;picture&gt;
+      &lt;source srcset="https://via.placeholder.com/768x550" media="(max-width: 767px)"&gt;
+      &lt;img loading="lazy" src="https://via.placeholder.com/1600x450" alt=""&gt;
+    &lt;/picture&gt;
+
+  &lt;/div&gt;
+
+  &lt;!-- Partial 2 --&gt;
+
+  &lt;div class="hero-banner__text-wrapper"&gt;
+
+    &lt;div class="hero-banner__text-inner-wrapper"&gt;
+
+      &lt;h1&gt;Page Headline Here&lt;/h1&gt;
+
+      &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra feugiat laoreet.&lt;/p&gt;
+
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+&lt;/div&gt;</code></pre>
+
+{% include notes.html %}

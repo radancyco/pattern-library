@@ -23,11 +23,15 @@
 
     </header>
 
-    <main id="content">
+    <main{% if page.constrain != false %} id="content"{% endif %}>
 
       {% if page.title %}
 
+      {% if page.heading != false %}
+
       <h1 class="primary-heading">{{ page.title }}</h1>
+
+      {% endif %}
 
       {% endif %}
 
@@ -53,7 +57,7 @@
 
     </main>
 
-    <aside id="contribute">
+    <aside{% if page.constrain != false %} id="contribute"{% endif %}>
 
       <h2>Contribute</h2>
 
