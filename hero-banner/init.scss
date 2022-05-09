@@ -11,7 +11,7 @@
 
 */
 
-@import "breakpoint"; // Note: Use your own breakpoint partial. 
+@import "breakpoint"; // Note: Use your own breakpoint partial.
 
 /* Specify Breakpoint for Mobile/Desktop */
 /* Should we build this for 3 so we can have a high res??? */
@@ -261,7 +261,7 @@ z-index: 1;
   }
 
   label {
-  margin: 0;
+  margin: 0 .5em 0 0;
   }
 
   input, label, select {
@@ -271,6 +271,7 @@ z-index: 1;
 
   select {
   font-size: 1.1em;
+  padding: .2em;
   }
 
   p {

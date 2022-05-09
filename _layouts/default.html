@@ -71,7 +71,7 @@
 
     </aside>
 
-    <footer id="contentinfo">
+    <footer{% if page.constrain != false %} id="contentinfo"{% endif %}>
 
       <p><small>&copy; {{ "now" | date: "%Y" }} {{ site.company-name }}. An equal opportunity employer.</small></p>
 
