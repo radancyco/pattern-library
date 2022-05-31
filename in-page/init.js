@@ -14,75 +14,75 @@
 
   console.log('%c Jump Menu (In-page) v1.0 in use. ', 'background: #6e00ee; color: #fff');
 
-  var jumpMenuClass = ".jump-menu";
-  var jumpMenuLabelClass = ".jump-menu__label";
-  var jumpMenuSelectClass = ".jump-menu__select";
-  var jumpMenuOptionClass = ".jump-menu__select option";
-  var jumpMenuBtnClass = ".jump-menu__btn";
-  var jumpMenuContentClass = ".jump-menu__content";
-  var jumpMenu = document.querySelectorAll(jumpMenuClass);
-  var jumpMenuLabel = document.querySelectorAll(jumpMenuLabelClass);
-  var jumpMenuSelect = document.querySelectorAll(jumpMenuSelectClass);
-  var jumpMenuOption = document.querySelectorAll(jumpMenuOptionClass);
-  var jumpMenuBtn = document.querySelectorAll(jumpMenuBtnClass);
-  var jumpMenuState = "active";
-  var jumpMenuHash =  window.location.hash;
-  var jumpFragment = jumpMenuHash.substr(1);
-  var jumpMenuContentList = [];
+  var inPageClass = ".in-page";
+  var inPageLabelClass = ".in-page__label";
+  var inPageSelectClass = ".in-page__select";
+  var inPageOptionClass = ".in-page__select option";
+  var inPageBtnClass = ".in-page__btn";
+  var inPageContentClass = ".in-page__content";
+  var inPage = document.querySelectorAll(inPageClass);
+  var inPageLabel = document.querySelectorAll(inPageLabelClass);
+  var inPageSelect = document.querySelectorAll(inPageSelectClass);
+  var inPageOption = document.querySelectorAll(inPageOptionClass);
+  var inPageBtn = document.querySelectorAll(inPageBtnClass);
+  var inPageState = "active";
+  var inPageHash =  window.location.hash;
+  var inPageFragment = inPageHash.substr(1);
+  var inPageContentList = [];
 
   // On page load
 
-  jumpMenuLabel.forEach(function(label, e){
+  inPageLabel.forEach(function(label, e){
 
     // Apply "for" attribute to each label.
 
-    label.setAttribute("for", "jump-menu-select-" + (e + 1));
+    label.setAttribute("for", "in-page-select-" + (e + 1));
 
   });
 
-  jumpMenuSelect.forEach(function(select, e){
+  inPageSelect.forEach(function(select, e){
 
     // Apply "id" to each select.
 
-    select.setAttribute("id", "jump-menu-select-" + (e + 1));
+    select.setAttribute("id", "in-page-select-" + (e + 1));
 
   });
 
   // Get all Job Menu options on page and push to array.
 
-  jumpMenuOption.forEach(function(option, e){
+  inPageOption.forEach(function(option, e){
 
-    jumpMenuContentList.push(option.getAttribute("value"));
+    inPageContentList.push(option.getAttribute("value"));
 
   });
 
-  function jumpmenuSelectedState() {
+  function inPageSelectedState() {
 
     // Check array against hash
 
-    if(jumpMenuContentList.includes(jumpMenuHash)) {
+    if(inPageContentList.includes(inPageHash)) {
 
       // If hash matches one of the array selections, then load the selected content in hash
 
-      var jumpMenuSelected =  document.getElementById(jumpFragment);
-      var jumpMenuContent = jumpMenuSelected.closest(jumpMenuClass).querySelectorAll(jumpMenuContentClass);
+      var inPageSelected =  document.getElementById(inPageFragment);
+      var inPageContent = inPageSelected.closest(inPageClass).querySelectorAll(inPageContentClass);
 
-      jumpMenuContent.forEach(function(content, i){
+      inPageContent.forEach(function(content, i){
 
         content.setAttribute("hidden", "");
 
       });
 
-      jumpMenuSelected.removeAttribute("hidden");
+      inPageSelected.removeAttribute("hidden");
 
-      jumpMenuOption.forEach(function(select, i){
+      inPageOption.forEach(function(select, i){
 
         var optionvalue  = select.getAttribute("value");
 
         if (location.hash === optionvalue) {
 
           select.setAttribute("selected", "");
-          select.closest(jumpMenuClass).classList.add(jumpMenuState);
+          select.closest(inPageClass).classList.add(inPageState);
 
         }
 
@@ -92,44 +92,43 @@
 
   }
 
-  jumpmenuSelectedState();
+  inPageSelectedState();
 
-  jumpMenuSelect.forEach(function(select, e){
+  inPageSelect.forEach(function(select, e){
 
     select.addEventListener("change", function () {
 
-      var jumpMenuParent = this.closest(jumpMenuClass);
+      var inPageParent = this.closest(inPageClass);
 
-      var jumpMenuSelected = jumpMenuParent.getElementsByTagName("select")[0];
+      var inPageSelected = inPageParent.getElementsByTagName("select")[0];
 
-      var jumpMenuAnnounce = jumpMenuParent.querySelector("div[aria-live]");
+      var inPageAnnounce = inPageParent.querySelector("div[aria-live]");
 
-      jumpMenuAnnounce.innerHTML = "Selected Content: " + this.options[this.selectedIndex].text;
+      inPageAnnounce.innerHTML = "Selected Content: " + this.options[this.selectedIndex].text;
 
-      history.replaceState(null, null, jumpMenuSelected.value);
+      history.replaceState(null, null, inPageSelected.value);
 
-      var jumpMenuContentSelected = window.location.hash.substr(1);
+      var inPageContentSelected = window.location.hash.substr(1);
 
-      var jumpMenuContent = jumpMenuParent.querySelectorAll(jumpMenuContentClass);
+      var inPageContent = inPageParent.querySelectorAll(inPageContentClass);
 
-      jumpMenuContent.forEach(function(content, i){
+      inPageContent.forEach(function(content, i){
 
         content.setAttribute("hidden", "");
 
-
       });
 
-      document.getElementById(jumpMenuContentSelected).removeAttribute("hidden");
+      document.getElementById(inPageContentSelected).removeAttribute("hidden");
 
       // Set selected jump menu to active.
 
-      jumpMenu.forEach(function(menu, e){
+      inPage.forEach(function(menu, e){
 
-        menu.classList.remove(jumpMenuState);
+        menu.classList.remove(inPageState);
 
       });
 
-      jumpMenuParent.classList.add(jumpMenuState);
+      inPageParent.classList.add(inPageState);
 
     });
 
@@ -139,9 +138,9 @@
 
   window.addEventListener("beforeunload", function () {
 
-    jumpMenu.forEach(function(menu, e){
+    inPage.forEach(function(menu, e){
 
-      if (!menu.classList.contains(jumpMenuState)) {
+      if (!menu.classList.contains(inPageState)) {
 
         menu.getElementsByTagName("select")[0].selectedIndex = 0;
 
