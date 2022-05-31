@@ -104,7 +104,7 @@
 
       var inPageAnnounce = inPageParent.querySelector("div[aria-live]");
 
-      inPageAnnounce.innerHTML = "Selected Content: " + this.options[this.selectedIndex].text;
+      inPageAnnounce.textContent = "Selected Content: " + this.options[this.selectedIndex].text;
 
       history.replaceState(null, null, inPageSelected.value);
 
