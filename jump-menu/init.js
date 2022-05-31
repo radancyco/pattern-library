@@ -1,6 +1,6 @@
 /*!
 
-  Radancy Pattern Library: Jump Menu v1.0
+  Radancy Pattern Library: Jump Menu (External) v1.0
 
   Contributor(s):
   Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy
@@ -12,11 +12,15 @@
 
   // Display which Grid version in use via console:
 
-  console.log('%c Jump Menu v1.0 in use. ', 'background: #6e00ee; color: #fff');
+  console.log('%c Jump Menu (External) v1.0 in use. ', 'background: #6e00ee; color: #fff');
 
-  var jumpMenuLabel = document.querySelectorAll(".jump-menu__label");
-  var jumpMenuSelect = document.querySelectorAll(".jump-menu__select");
-  var jumpMenuBtn = document.querySelectorAll(".jump-menu__btn");
+  var jumpMenuClass = ".jump-menu";
+  var jumpMenuLabelClass = ".jump-menu__label";
+  var jumpMenuSelectClass = ".jump-menu__select";
+  var jumpMenuBtnClass = ".jump-menu__btn";
+  var jumpMenuLabel = document.querySelectorAll(jumpMenuLabelClass);
+  var jumpMenuSelect = document.querySelectorAll(jumpMenuSelectClass);
+  var jumpMenuBtn = document.querySelectorAll(jumpMenuBtnClass);
 
   jumpMenuLabel.forEach(function(label, e){
 
@@ -34,12 +38,14 @@
 
     button.addEventListener("click", function () {
 
-      var jumpMenuSelected = this.closest(".jump-menu").getElementsByTagName("select")[0];
+      var jumpMenuSelected = this.closest(jumpMenuClass).getElementsByTagName("select")[0];
 
+   // jumpMenuSelected.selectedIndex = 0;
       location.href = jumpMenuSelected.value;
 
     });
 
   });
+
 
 })();

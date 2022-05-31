@@ -1,0 +1,79 @@
+---
+folder: in-page
+jira: TCDQ-73886
+localcss: "init.css"
+localjs: "init.js"
+noindex: true
+title: "Jump Menu (In-page) v1.0"
+warning: true
+---
+
+{% include nav.html %}
+
+<p>This pattern will allow you to place an accessible "Jump Menu" on your page that can reveal in-page content.</p>
+
+<h2 id="notes">Notes</h2>
+
+<ol>
+  <li>Multiple Jump Menus per-page are allowed. Be sure to update <code>aria-label</code> with a unique name.</li>
+  <li>Custom URL fragments are allowed. However, removing fragments is not permitted, as we want to be able to link to this content as well as allow users to share it.</li>
+  <li><code>&lt;div class="sr-only" aria-live="polite"&gt;&lt;/div&gt;</code> must always be included and be <a href="https://www.scottohara.me/blog/2017/04/14/inclusively-hidden.html">inclusively hidden</a>. This <code>div</code> let's assistive technology users know there is new content.</li>
+</ol>
+
+<h2 id="parameters">Parameters</h2>
+
+<p>None. See <a href="#dependencies">Dependencies</a>.</p>
+
+<h2 id="example-1">Example</h2>
+
+<!-- Begin Jump Menu -->
+
+<div class="jump-menu">
+
+  <nav aria-label="Jump Menu" class="jump-menu__nav">
+
+    <label class="jump-menu__label">Select your job position</label>
+
+    <select class="jump-menu__select">
+        <option value="#uid">User Interface Developer</option>
+        <option value="#a11y-director">Director, Accessibility</option>
+        <option value="#chief-cook">Chief Cook & Bottle Washer</option>
+    </select>
+
+    <!-- Note: The for attribute and ID are generated via JavaScript to accomodate multiple Jump Menus per page -->
+
+  </nav>
+
+  <div class="jump-menu__content" id="uid">
+
+    <h2>User Interface Developer</h2>
+
+    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, <a href="#">tempor sit amet</a>, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+
+  </div>
+
+  <div class="jump-menu__content" hidden id="a11y-director">
+
+    <h2>Director, Accessibility</h2>
+
+    <p>Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+
+  </div>
+
+  <div class="jump-menu__content" hidden id="chief-cook">
+
+    <h2>Chief Cook & Bottle Washer</h2>
+
+    <p>Pellentesque habitant <a href="#">morbi tristique senectus</a> et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.</p>
+
+  </div>
+
+  <div class="sr-only" aria-live="polite"></div>
+
+</div>
+
+<!-- End Jump Menu -->
+
+{% include jump-menu.html %}
+
+{% include notes.html %}
