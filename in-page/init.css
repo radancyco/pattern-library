@@ -1,0 +1,13 @@
+/*!
+
+  Radancy Pattern Library: Jump Menu v1.0
+
+  Contributor(s):
+  Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy
+
+  Dependencies: Sass
+  Instructions: To run locally, install Sass (https://sass-lang.com/install), CL to directory this file in and run:
+  sass --watch init.scss:init.css --style compressed
+
+*/.jump-menu{font-size:1.2rem;margin:2em 0}.jump-menu__label{display:block;font-weight:bold;margin-right:.3em}@media (min-width: 48.625em){.jump-menu__label{display:inline-block}}.jump-menu__select,.jump-menu__btn{font-size:inherit;margin-right:.3em;padding:.5em}.jump-menu__btn{background-color:#6F00EF;border:0;color:white;font-size:inherit}.jump-menu__btn:focus{background-color:#69788C}
+/*# sourceMappingURL=init.css.map */
