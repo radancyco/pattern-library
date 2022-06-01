@@ -2,6 +2,10 @@
 
 	<h2>Accessibility & UX</h2>
 
-  <p>Jump Menus that utilize a <code>select</code> dropdown to link to external pages, must always include a submit button. Unexpectedly taking a user to another page, upon making a selection from an input control, will cause a <em>change of context</em>, which is a failure of <a href="https://www.w3.org/WAI/WCAG21/Understanding/on-input.html">Success Criterion 3.2.2: On Input</a>. The only exception to this rule is in-page navigation. If you are using a <code>select</code> dropdown to change content within the page, then you do not need a submit button. See <a href="/in-page/">In Page</a> navigation for more details.</p>
+	<ul>
+  	<li>Jump Menus that utilize a single <code>select</code> dropdown to link to external pages, must always include a submit button. Unexpectedly taking a user to another page, upon making a selection from an input control, will cause a <em>change of context</em>, which is a failure of <a href="https://www.w3.org/WAI/WCAG21/Understanding/on-input.html">Success Criterion 3.2.2: On Input</a>. If you wish to navigate away from a page without a submit button, then use a <strong>hyperlink</strong> or a <a href="{{ site.baseurl }}/disclosure/">disclosure</a> that reveals a list of hyperlinks to other pages, when opened.</li>
+		<li>Complex forms that change content based on multiple selections, must also contain a submit button. Changing content on the fly, based on each selection made, can be confusing for everybody.</li>
+		<li>The only exception to the above rules is in-page navigation. If you are using a single <code>select</code> dropdown to change content within the page, then a submit button is not required. Please see <a href="{{ site.baseurl }}/in-page/">Jump Menu (In-page)</a> for more details.</li>
+	</ul>
 
 </section>

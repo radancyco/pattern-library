@@ -5,7 +5,7 @@ navigation: true
 title: "CSS Animation"
 ---
 
-<p>Spice up your next website design with some of these commonly used CSS animations.</p>
+<p>Spice up your next website design with some of these commonly used CSS animations. Please read <a href="#a11y-info">Accessibility & UX</a> before using.</p>
 
 <div class="animation-container">
 
@@ -112,12 +112,4 @@ title: "CSS Animation"
 
 </div>
 
-<section id="a11y-info" class="a11y-info">
-
-    <h2>Accessibility & UX</h2>
-
-    <p>Animation on the web should be used <em>responsibly</em>. Consider those with seizures and other neurological disorders and do not create animations that can be harmful. See WCAG 2.1 <a href="https://www.w3.org/TR/WCAG21/#seizures-and-physical-reactions">Guideline 2.3 Seizures and Physical Reactions</a> for more details.</p>
-
-    <p>Developers should now be using <code>prefers-reduced-motion</code> where needed, which can be helpful for those users who disable animations by default, via their operating system of choice. You can <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion">learn more about this media query on MDN Web Docs</a>.</p>
-
-</section>
+{% include css-animation.html %}

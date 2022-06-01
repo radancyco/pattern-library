@@ -2,9 +2,9 @@
 
 	<h2>Accessibility & UX</h2>
 
-  <p>Toggling or changing text in a control to indicate a state change or another action to be taken should be avoided. For example, don't do this:</p>
+  <p>Toggling or changing text in a control to indicate a state change or another action to be taken should be avoided. While it is not out of realm of possibility to make such a control accessible, doing so takes additional time and may introduce unnecessary complexity. For example, don't do this:</p>
 
-	<button class="btn" id="toggleExample" onclick="toggleText()">Open</button>
+	<button aria-expanded="false" class="btn" id="toggleExample" onclick="toggleText()">Open</button>
 
 	<script>
 
@@ -12,13 +12,15 @@
 
   	var x = document.getElementById("toggleExample");
 
-		if (x.innerHTML === "Open") {
+		if (x.textContent === "Open") {
 
-			x.innerHTML = "Close";
+			x.textContent = "Close";
+			x.setAttribute("aria-expanded", "true");
 
 		} else {
 
-			x.innerHTML = "Open";
+			x.textContent = "Open";
+			x.setAttribute("aria-expanded", "false");
 
 		}
 
@@ -27,8 +29,9 @@
 	</script>
 
   <ul>
-    <li>Changing the text removes the initial context of the control, which can be confusing, especially for assistive technology users.</li>
+    <li>Changing the text removes the initial context of the control, which can be confusing, especially if <code>aria-expanded</code> or <code>aria-pressed</code> is used, for assistive technology users.</li>
     <li>Instead of changing text, consider using visual affordance to convey that toggling behavior exists, which is a well-known and quickly understood convention. For example, up and down arrows, check mark, plus and minus, or close ("X") indicators.</li>
+		<li>Using a single instruction means their is less text to translate.</li>
     <li>Users are well-adept at using such interfaces. Afterall, if they knew how to open it, a text instruction to close it is really unnecessary.</li>
   </ul>
 

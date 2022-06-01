@@ -16,11 +16,11 @@ title: "Hero Banner"
 
 <p>For scenarios where you have a mobile/desktop image along with a headline and some additional text.</p>
 
-<h2>Use Case #1 - Create Banners to use with Content Page Settings</h2>
+<h2>Use Case 1: Create Banners to use with Content Page Settings</h2>
 
 <p>The default code used on site themes includes the structure that you need to leverage those page-level items.</p>
 
-<h2>Use Case #2 - Create Banners with Section & Modules</h2>
+<h2>Use Case 2: Create Banners with Section & Modules</h2>
 
 <p>For core pages where you need to create a section and code to support a hero. Create a section with (2) partials.</p>
 
@@ -30,6 +30,8 @@ title: "Hero Banner"
   <li>Mobile image should be first (Source)</li>
   <li>Desktop image should be second (IMG)</li>
 </ol>
+
+<p><strong>Note:</strong> Please see <a href="#advisory">advisory</a> on using the <code>picture</code> element in this fashion.</p>
 
 <p><strong>Partial 2:</strong> Should contain your Text/HTML module. Make sure it's setup for SEO to use the right headline element (h1, h2, etc.)</p>
 
@@ -171,30 +173,8 @@ title: "Hero Banner"
 
 &lt;/div&gt;</code></pre>
 
-<section id="a11y" class="a11y-info">
+{% include hero-headings.html %}
 
-	<h2>Accessibility</h2>
-
-  <p>Before using an <code>h1</code> heading in your hero banner, please make absolutely sure it is the right heading to use.</p>
-
-  <ul>
-    <li>Is there another element on the page that is better suited to be a primary heading? Often, this will be below the hero banner. If so, this should be your <code>h1</code>.</li>
-    <li>Is the hero banner meant as more of a call to action or branded message? If so, you may wish to treat the banner as decorative, in which case a <code>div</code> could be used instead of an <code>h1</code> or lower heading level.</li>
-    <li>Think contextually. Often, the hero banner on the homepage could justifiably describe the overarching message of the site and be an <code>h1</code>, while hero banners on subpages can contain a <code>div</code>, especially if those suppages include additional and more suitable headings that can be the <code>h1</code>.</li>
-  </ul>
-
-  <p>If you are not sure, then please reach out to <a href="mailto:michael.spellacy@radancy.com">Michael Spellacy</a>.</p>
-
-</section>
-
-<section id="advisory" class="warning-info">
-
-  <h2>Advisory</h2>
-
-  <p>Please be advised that the current demo reflects implementation of the <code>picture</code> element before Internet Explorer 11 was dropped. This behavior is also currently reflected in the product and will be updated at a later date to support a mobile first approach.</p>
-
-  <p>Ideally, the default image should be the smallest, with single or multiple <code>source</code> elements containing progressively larger images. Each <code>source</code> would contain a <code>media</code> attribute with <code>min-width</code> value set for each breakpoint to reval image at.</p>
-
-</section>
+{% include hero-advisory.html %}
 
 {% include notes.html %}

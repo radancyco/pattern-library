@@ -14,8 +14,11 @@
 $base-color: #6F00EF;
 
 .in-page {
+background-color: #eee;
+border-radius: 5px;
 font-size: 1.2rem;
 margin: 2em 0;
+padding: 1em;
 
   &__label {
   display: block;

@@ -1,6 +1,6 @@
 /*!
 
-  Radancy Pattern Library: Disclosure v1.0
+  Radancy Pattern Library: Disclosure v1.1
 
   Contributor(s):
   Andrew Hill, Email: andrew.hill@radancy.com
