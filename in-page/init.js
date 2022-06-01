@@ -23,7 +23,6 @@
   var inPage = document.querySelectorAll(inPageClass);
   var inPageLabel = document.querySelectorAll(inPageLabelClass);
   var inPageSelect = document.querySelectorAll(inPageSelectClass);
-  var inPageOption = document.querySelectorAll(inPageOptionClass);
   var inPageBtn = document.querySelectorAll(inPageBtnClass);
   var inPageState = "active";
   var inPageHash =  window.location.hash;
@@ -31,6 +30,47 @@
   var inPageContentList = [];
 
   // On page load
+
+  inPage.forEach(function(component, e){
+
+    // Check to see if "dynamic" Jump Menu in use.
+
+    if(component.hasAttribute("data-in-page-dynamic")){
+
+      var inPageContent = component.querySelectorAll(inPageContentClass);
+      var inPageContentNth = component.querySelectorAll(inPageContentClass + ":nth-child(n + 3)");
+
+      inPageContentNth.forEach(function(content, i){
+
+        content.setAttribute("hidden", "");
+
+      });
+
+      inPageContent.forEach(function(content, i){
+
+        var count = (i + 1);
+
+        content.setAttribute("id", "content-" + count);
+
+        // Create option element
+
+        var option = document.createElement("option");
+        option.setAttribute("value", "#content-" + count);
+        option.textContent = content.getAttribute("data-in-page-name");
+
+        var thisSelect = content.closest(inPageClass).getElementsByTagName("select")[0];
+
+        // Append each dynamic option.
+
+        thisSelect.appendChild(option);
+
+      });
+
+    }
+
+  });
+
+  var inPageOption = document.querySelectorAll(inPageOptionClass);
 
   inPageLabel.forEach(function(label, e){
 
@@ -55,6 +95,8 @@
     inPageContentList.push(option.getAttribute("value"));
 
   });
+
+  console.log(inPageContentList)
 
   function inPageSelectedState() {
 
