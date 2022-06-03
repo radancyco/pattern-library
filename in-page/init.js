@@ -96,7 +96,7 @@
 
   });
 
-  console.log(inPageContentList)
+  // console.log(inPageContentList)
 
   function inPageSelectedState() {
 
