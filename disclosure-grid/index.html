@@ -11,31 +11,7 @@ warning: true
 
 <p>This pattern will allow you to easily implement and control the presentation of a button grid with multiple disclosures.</p>
 
-<p><strong>Note:</strong> Do not use this if you are looking for a simple, tabbed interface. Instead, use the <a href="../tabcordion/">TabCordion</a> pattern.</p>
-
-<h2 id="parameters">Parameters</h2>
-
-<ul>
-  <li><b>data-grid-active (Number, Optional):</b> Using a number from "1" up, you can specify which content area should be open on page load. When this attribute is not specified, no panels will be open.</li>
-  <li><b>data-grid-callback (String, Optional):</b> You can use a callback to initiate a function within the disclosed content area on page load and reinitiate the same function on button click. The function will fire when any button in the grid disclosure is engaged with. The value of this data attribute should, of course, be the same as the function you wish to call.</li>
-  <li><b>data-grid-disable-close (Boolean, Optional):</b> Removes all close buttons from content area.</li>
-  <li><b>data-grid-disable-url (Boolean, Optional):</b> By default, the URL will always change to reflect selected content area. This is recommended behavior because it allows one to share and find fragmented content more easily. If this behavior is not desired, you may use this attribute to disable this behavior.</li>
-  <li><b>data-grid-large (String, Optional): </b> Your "large" viewport breakpoint. At this breakpoint, your layout will be thrown into "grid mode".</li>
-  <li><b>data-grid-max (Number, Mandatory):</b> Specifies the number of grid items to display per row in "large" viewport. This attribute is mandatory when <code>data-grid-large</code> is in use.</li>
-  <li><b>data-grid-medium (String, Optional):</b> Your "medium" viewport breakpoint. At this breakpoint, your layout will be thrown into "grid mode". </li>
-  <li><b>data-grid-min (Number, Mandatory):</b> Specifies the number of grid items to display per row in "medium" viewport. This attribute is mandatory when <code>data-grid-medium</code> is in use.</li>
-  <li><b>data-grid-sticky (String, Optional):</b> Accepts a single or comma-delimited list of ID values of the fixed position element(s), such as your header, that you may wish to offset the grid layout from. <span class="alert">New!</span></li>
-  <li><b>data-grid-exclude (Boolean, Optional):</b> To be placed on both the button and content you wish to not be included in the grid. This is particulary useful in situations where you may wish to dynamically hide content. Please note that if you are dynamically adding or removing a grid item, that the <code>gridViewPort()</code> function will need to be reinitiated. <span class="alert">New!</span></li>
-</ul>
-
-<h2 id="coming-soon">Coming Soon</h2>
-
-<ul>
-  <li>Ability to include placeholder content to fill in empty grid spaces. Some clients (and designers) do not like uneven space in desktop design.</li>
-  <li>Allow mobile accordions to have multiple disclosures open instead of one at a time.</li>
-  <li>Allow mobile accordions to all be closed.</li>
-  <li>Ability to customize URL fragments. For example, <code>#about-us-1-1</code> instead of the generic <code>#grid-content-1-1</code>.</li>
-</ul>
+{% include_relative para.html %}
 
 <h2 id="basic-layout">Example: Basic Layout</h2>
 
