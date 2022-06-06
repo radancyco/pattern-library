@@ -121,6 +121,67 @@ title: "Jump Menu (In-page) v1.0"
 
 <!-- End Jump Menu -->
 
+<h2 id="example-3">Example: Custom Aria-Live</h2>
+
+<!-- Begin Jump Menu (In-page) -->
+
+<div class="in-page" data-in-page-aria-live>
+
+  <nav aria-label="Favorite Movies" class="in-page__nav">
+
+    <label class="in-page__label">Select your favorite movie franchise</label>
+
+    <select class="in-page__select">
+        <option value="#harry-potter">Harry Potter</option>
+        <option value="#marvel">Marvel</option>
+        <option value="#star-trek">Star Trek</option>
+        <option value="#star-wars">Star Wars</option>
+    </select>
+
+    <!-- Note: The for attribute and ID are generated via JavaScript to accomodate multiple Jump Menus per page -->
+
+  </nav>
+
+  <div aria-live="polite">
+
+    <div class="in-page__content" id="harry-potter">
+
+      <h2>Harry Potter</h2>
+
+      <p>Expecto Patronum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+
+    </div>
+
+    <div class="in-page__content" hidden id="marvel">
+
+      <h2>Marvel</h2>
+
+      <p>Pellentesque habitant <a href="#">morbi tristique senectus</a> tempor sit amet, ante. Donec eu libero sit amet quam egestas 3000.</p>
+
+    </div>
+
+    <div class="in-page__content" hidden id="star-trek">
+
+      <h2>Star Trek</h2>
+
+      <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, <a href="#">U.S.S. Enterprise</a>, ante. Donec eu libero sit amet.</p>
+
+    </div>
+
+    <div class="in-page__content" hidden id="star-wars">
+
+      <h2>Star Wars</h2>
+
+      <p>Senectus et netus et the force fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, <a href="#">Sidious</a>, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- End Jump Menu -->
+
 {% include jump-menu.html %}
 
 {% include notes.html %}

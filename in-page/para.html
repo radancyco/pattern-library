@@ -1,8 +1,9 @@
 <h2 id="parameters">Parameters</h2>
 
 <ul>
-  <li><b>data-in-page-dynamic (Boolean, Mandatory):</b> To be added to the parent element of the dynamic Jump Menu. In this case, the element with a class of <code>.in-page</code>.</li>
-  <li><b>data-in-page-name (String, Mandatory):</b> To be added to each content container of the dynamic Jump Menu. In this case, the element with a class of <code>.in-page__content</code>. May contain any value you wish to see populate the <code>select</code> element.</li>
+  <li><b>data-in-page-aria-live (Boolean, Optional):</b> To be added to the parent element of the dynamic Jump Menu to supress dynamic <code>aria-live</code> announcements.  In this case, you will be expected to wrap all of your <code>.in-page__content</code> blocks with a single <code>&lt;div aria-live="polite"&gt;&lt;/div&gt;</code>. This technique should be used sparingly and only when each content area contains a minimal amount of content.</li>
+  <li><b>data-in-page-dynamic (Boolean, Optional):</b> To be added to the parent element of the dynamic Jump Menu. In this case, the element with a class of <code>.in-page</code>.</li>
+  <li><b>data-in-page-name (String, Mandatory when <code>data-in-page-dynamic</code> used):</b> To be added to each content container of the dynamic Jump Menu. In this case, the element with a class of <code>.in-page__content</code>. May contain any value you wish to see populate the <code>select</code> element.</li>
 </ul>
 
 <h2 id="notes">Notes</h2>
