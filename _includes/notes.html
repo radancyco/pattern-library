@@ -4,7 +4,7 @@
   {% if page.localhtmlnote != false %}
   <li><a href="{{ site.repo }}/blob/main/{{ page.folder }}/index.html">HTML</a></li>
   {% endif %}
-  {% if page.localcss %}
+  {% if page.localcssnote != false && page.localcss == true %}
   <li><a href="{{ site.repo }}/blob/main/{{ page.folder }}/{% if page.notecss %}init.css{% else %}init.scss{% endif %}">CSS/Sass</a></li>
   {% endif %}
   {% if page.localjsnote != false && page.localjs == true %}
