@@ -11,5 +11,5 @@
 <ul>
   <li>Multiple Jump Menus per-page are allowed. However, be sure to update each <code>aria-label</code> with a <em>unique</em> name.</li>
   <li>Custom URL fragments are allowed. Removing fragments is not permitted, as we want to be able to link to this content as well as allow users to share it. The dynamic version of the menu will produce generic fragments (e.g., content-1, content-2, etc.).</li>
-  <li><code>&lt;div class="sr-only" aria-live="polite"&gt;&lt;/div&gt;</code> must <strong>always</strong> be included and be <a href="https://www.scottohara.me/blog/2017/04/14/inclusively-hidden.html">inclusively hidden</a>. This <code>div</code> let's assistive technology users know there is new content.</li>
+  <li><code>&lt;div class="sr-only" aria-live="polite"&gt;&lt;/div&gt;</code> must <strong>always</strong> be included and be <a href="https://www.scottohara.me/blog/2017/04/14/inclusively-hidden.html">inclusively hidden</a>. This <code>div</code> let's assistive technology users know there is new content. To bypass this default and use <code>aria-live</code> to announce all content that changes, see <code>data-in-page-aria-live</code>.</li>
 </ul>
