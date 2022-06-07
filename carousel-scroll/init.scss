@@ -68,7 +68,26 @@ border-right: 4px $base-color solid;
     margin-right: 110px;
     }
 
-    // Note: If IE11 support is required, then focus-within should be placed in seperate declaration (you'll need to duplicate hover rules here) and tabindex=0 should be added to __card in HTML.
+  }
+
+  &__heading {
+
+    a {
+    display: block;
+
+      // Make entire clickable
+
+      &::before {
+      bottom: 0;
+      content: "";
+      display: block;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      }
+
+    }
 
   }
 
