@@ -24,7 +24,7 @@
 
   // Display which Grid version in use via console:
 
-  console.log('%c Grid Disclosure v1.0 (Beta) in use. ', 'background: #6e00ee; color: #fff');
+  console.log('%c Grid Disclosure v1.0 (Beta) in use. ', 'background: #6F00EF; color: #fff');
 
   // Commonly used Classes, Data Attributes, States, and Strings.
 
