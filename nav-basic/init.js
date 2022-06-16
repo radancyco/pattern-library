@@ -1,6 +1,6 @@
 /*!
 
-  Radancy Pattern Library: Jump Menu (External) v1.0
+  Radancy: Navigation (Basic) v1.0
 
   Contributor(s):
   Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy
@@ -10,7 +10,7 @@
 
 (function() {
 
-  // Display which Grid version in use via console:
+  // Display which Nvaigation version in use via console:
 
   console.log('%c Navigation (Basic) v1.0 in use. ', 'background: #6e00ee; color: #fff');
 
@@ -22,7 +22,7 @@
   var primaryNavMenu = document.querySelectorAll(primaryNavigationMenuClass);
   var primaryNavItem = document.querySelectorAll(primaryNavigationItemClass);
   var primaryNavContent = document.querySelectorAll(primaryNavigationContentClass);
-  var URLPath = location.pathname;
+  var URLPath = decodeURIComponent(location.pathname);
   var fileName = /[^\/]*$/;
 
   URLPath.replace(fileName, ''); // Remove file name, if any.
@@ -59,9 +59,6 @@
 
     });
 
-
-
-
   });
 
   primaryNavItem.forEach(function(button, e){
@@ -84,24 +81,5 @@
     });
 
   });
-
-//  jumpMenuSelect.forEach(function(select, e){
-
-  //  select.setAttribute("id", "jump-menu-select-" + (e + 1));
-
-//  });
-
-//  jumpMenuBtn.forEach(function(button, e){
-
-  //  button.addEventListener("click", function () {
-
-    //  var jumpMenuSelected = this.closest(jumpMenuClass).getElementsByTagName("select")[0];
-
-   // jumpMenuSelected.selectedIndex = 0;
-    //  location.href = jumpMenuSelected.value;
-
-    //});
-
-  //});
 
 })();
