@@ -75,7 +75,7 @@ text-align: center;
   border-left: 4px $your-path-primary-color solid;
   list-style: none;
   margin: 0;
-  margin: 3em 2em;
+  margin: 3em 1em;
   padding: 0;
   position: relative;
 
@@ -85,6 +85,8 @@ text-align: center;
       border-left: 0;
       display: flex;
       justify-content: space-evenly;
+      margin-left: 2em;
+      margin-right: 2em;
       place-items: flex-end;
 
     }
@@ -132,19 +134,18 @@ text-align: center;
 
     }
 
-
     &::before, &::after {
     content: "";
     display: block;
     left: 0;
     position: absolute;
 
-        @include breakpoint($end-banner) {
+      @include breakpoint($end-banner) {
 
-            margin: auto;
-            right: 0;
+        margin: auto;
+        right: 0;
 
-        }
+      }
 
     }
 
