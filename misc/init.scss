@@ -1,0 +1,237 @@
+/*!
+
+  Radancy Pattern Library: Miscellaneous Patterns
+
+  Contributor(s):
+  Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy
+
+  Dependencies: Sass
+  Instructions: To run locally, install Sass (https://sass-lang.com/install), CL to directory this file in and run:
+  sass --watch init.scss:init.css --style compressed
+
+*/
+
+@import "breakpoint"; // Note: Use your own breakpoint partial.
+
+// Example 1: Your Path
+
+$your-path-primary-color: #134c8d;
+$end-banner: 1024px;
+$end-mid-banner: 1185px;
+
+.your-path {
+background-image: linear-gradient(180deg, rgba(63,123,164,1) 0%, rgba(63,123,164,1) 35%, rgba(165,185,203,1) 100%);
+color: white;
+padding: 1em;
+text-align: center;
+
+  &__btn {
+  background-color: #fff;
+  border: 4px #134c8d solid;
+  color: black;
+  cursor: pointer;
+  font-size: inherit;
+  font-weight: bold;
+  line-height: 1.4;
+  padding: 1em;
+  position: relative;
+  width: 100%;
+
+    @include breakpoint($end-banner) {
+
+      margin-bottom: 25px;
+      max-width: 180px;
+      width: 180px;
+      z-index: 1;
+
+    }
+
+    &:focus, &:hover {
+    background-color: #134c8d;
+    color: #fff;
+    border-color: #fff;
+    }
+
+    &[aria-expanded="true"] {
+    display: none;
+
+      @include breakpoint($end-banner) {
+
+        display: block;
+        visibility: hidden;
+
+      }
+
+      + .your-path__content {
+      display: block;
+      }
+
+    }
+
+  }
+
+  &__list {
+  border-left: 4px #134c8d solid;
+  list-style: none;
+  margin: 0;
+  margin: 3em 2em;
+  padding: 0;
+  position: relative;
+
+    @include breakpoint($end-banner) {
+
+      border-bottom: 4px #134c8d solid;
+      border-left: 0;
+      display: flex;
+      justify-content: space-evenly;
+      place-items: flex-end;
+
+    }
+
+    // Bottom Arrow
+
+    &::after {
+    border: 4px transparent solid;
+    border-bottom-color: $your-path-primary-color;
+    border-right-color: $your-path-primary-color;
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 25px;
+    left: -15px;
+    position: absolute;
+    transform: rotate(45deg);
+    width: 25px;
+
+      @include breakpoint($end-banner) {
+
+        bottom: -15px;
+        left: auto;
+        right: 0;
+        transform: rotate(-45deg);
+
+      }
+
+    }
+
+  }
+
+
+  &__item {
+  display: flex;
+  padding: 1em 0 1em 50px;
+  align-items: center;
+
+    @include breakpoint($end-banner) {
+
+      align-items: normal;
+      justify-content: space-evenly;
+      padding: 0 0 50px;
+      position: relative;
+
+    }
+
+
+    &::before, &::after {
+    content: "";
+    display: block;
+    left: 0;
+    position: absolute;
+
+        @include breakpoint($end-banner) {
+
+            margin: auto;
+            right: 0;
+
+        }
+
+    }
+
+    &::before {
+    background-color: #134c8d;
+    height: 4px;
+    width: 100%;
+
+      @include breakpoint($end-banner) {
+
+        height: 100%;
+        width: 4px;
+
+      }
+
+    }
+
+    &::after {
+    background-color: #fff;
+    border-radius: 50%;
+    border: 4px #134c8d solid;
+    height: 30px;
+    width: 30px;
+    left: -15px;
+
+      @include breakpoint($end-banner) {
+
+        bottom: -15px;
+        left: 0;
+
+      }
+
+    }
+
+  }
+
+  &__content {
+  background-color: #fff;
+  border: 4px #134c8d solid;
+  box-shadow: 0px 0px 6px 0px #000000;
+  color: black;
+  display: none;
+  line-height: 1.4;
+  padding: 1em;
+  position: relative;
+  width: 100%;
+  z-index: 2;
+
+    @include breakpoint($end-banner) {
+
+      bottom: -30px;
+      position: absolute;
+      width: 200px;
+
+    }
+
+    @include breakpoint($end-mid-banner) {
+
+      width: 300px;
+
+    }
+
+  }
+
+  &__heading {
+  color: #134c8d;
+  font-weight: bold;
+  margin: 0;
+  }
+
+  &__info {
+  font-size: 14px;
+  }
+
+  &__view {
+  background-color: #134c8d;
+  color: #fff;
+  display: block;
+  font-weight: bold;
+  margin: 0 -1em -1em;
+  padding: .8em;
+  text-decoration: none;
+  text-transform: uppercase;
+
+    &:focus, &:hover {
+    text-decoration: underline; // Do not remove - Spell
+    }
+
+  }
+
+}
