@@ -173,8 +173,8 @@ text-align: center;
     border-radius: 50%;
     border: 4px $your-path-primary-color solid;
     height: 30px;
-    width: 30px;
     left: -15px;
+    width: 30px;
 
       @include breakpoint($end-banner) {
 
