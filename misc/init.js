@@ -8,7 +8,7 @@
 
 */
 
-// Example 1: Your Path
+// Your Path
 
 var yourPathClass = ".your-path";
 var yourPathBtnClass = ".your-path__btn";

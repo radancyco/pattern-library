@@ -13,22 +13,23 @@
 
 @import "breakpoint"; // Note: Use your own breakpoint partial.
 
-// Example 1: Your Path
+// Your Path
 
 $your-path-primary-color: #134c8d;
+$your-path-secondary-color: #fff;
 $end-banner: 1024px;
 $end-mid-banner: 1185px;
 
 .your-path {
 background-image: linear-gradient(180deg, rgba(63,123,164,1) 0%, rgba(63,123,164,1) 35%, rgba(165,185,203,1) 100%);
-color: white;
+color: #fff;
 padding: 1em;
 text-align: center;
 
   &__btn {
-  background-color: #fff;
-  border: 4px #134c8d solid;
-  color: black;
+  background-color: $your-path-secondary-color;
+  border: 4px $your-path-primary-color solid;
+  color: #000;
   cursor: pointer;
   font-size: inherit;
   font-weight: bold;
@@ -47,9 +48,9 @@ text-align: center;
     }
 
     &:focus, &:hover {
-    background-color: #134c8d;
-    color: #fff;
-    border-color: #fff;
+    background-color: $your-path-primary-color;
+    color: $your-path-secondary-color;
+    border-color: $your-path-secondary-color;
     }
 
     &[aria-expanded="true"] {
@@ -71,7 +72,7 @@ text-align: center;
   }
 
   &__list {
-  border-left: 4px #134c8d solid;
+  border-left: 4px $your-path-primary-color solid;
   list-style: none;
   margin: 0;
   margin: 3em 2em;
@@ -80,7 +81,7 @@ text-align: center;
 
     @include breakpoint($end-banner) {
 
-      border-bottom: 4px #134c8d solid;
+      border-bottom: 4px $your-path-primary-color solid;
       border-left: 0;
       display: flex;
       justify-content: space-evenly;
@@ -148,7 +149,7 @@ text-align: center;
     }
 
     &::before {
-    background-color: #134c8d;
+    background-color: $your-path-primary-color;
     height: 4px;
     width: 100%;
 
@@ -162,9 +163,9 @@ text-align: center;
     }
 
     &::after {
-    background-color: #fff;
+    background-color: $your-path-secondary-color;
     border-radius: 50%;
-    border: 4px #134c8d solid;
+    border: 4px $your-path-primary-color solid;
     height: 30px;
     width: 30px;
     left: -15px;
@@ -181,10 +182,10 @@ text-align: center;
   }
 
   &__content {
-  background-color: #fff;
-  border: 4px #134c8d solid;
-  box-shadow: 0px 0px 6px 0px #000000;
-  color: black;
+  background-color: $your-path-secondary-color;
+  border: 4px $your-path-primary-color solid;
+  box-shadow: 0 0 6px 0 #000;
+  color: #000;
   display: none;
   line-height: 1.4;
   padding: 1em;
@@ -209,7 +210,7 @@ text-align: center;
   }
 
   &__heading {
-  color: #134c8d;
+  color: $your-path-primary-color;
   font-weight: bold;
   margin: 0;
   }
@@ -219,7 +220,7 @@ text-align: center;
   }
 
   &__view {
-  background-color: #134c8d;
+  background-color: $your-path-primary-color;
   color: #fff;
   display: block;
   font-weight: bold;
