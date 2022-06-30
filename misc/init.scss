@@ -66,12 +66,6 @@ text-align: center;
 
     }
 
-    &:focus, &:hover {
-    background-color: $your-path-primary-color;
-    color: $your-path-secondary-color;
-    border-color: $your-path-secondary-color;
-    }
-
     &[aria-expanded="true"] {
     display: none;
 
@@ -184,14 +178,26 @@ text-align: center;
 
     }
 
-    // Circle Animation
+    // State/Animation
 
     &:focus-within, &:hover {
 
+      .your-path__btn {
+      background-color: $your-path-primary-color;
+      color: $your-path-secondary-color;
+      border-color: $your-path-secondary-color;
+      }
+
       &::after {
-      animation-duration: 1.5s;
-      animation-iteration-count: infinite;
-      animation-name: pulse;
+
+        @media (prefers-reduced-motion: no-preference) {
+
+          animation-duration: 1.5s;
+          animation-iteration-count: infinite;
+          animation-name: pulse;
+
+        }
+
       }
 
     }
