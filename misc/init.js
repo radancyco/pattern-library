@@ -34,6 +34,7 @@ yourPathBtn.forEach(function(button, e){
 
       this.setAttribute("aria-expanded", "false");
 
+
     } else {
 
       var activeButton = this.closest(yourPathClass).querySelectorAll(yourPathBtnClass);
@@ -41,10 +42,12 @@ yourPathBtn.forEach(function(button, e){
       activeButton.forEach(function(active, i){
 
         active.setAttribute("aria-expanded", "false");
+        active.parentNode.classList.remove("active");
 
       });
 
       this.setAttribute("aria-expanded", "true");
+      this.parentNode.classList.add("active");
 
     }
 

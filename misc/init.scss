@@ -17,6 +17,7 @@
 
 $your-path-primary-color: #134c8d;
 $your-path-secondary-color: #fff;
+$your-path-line-size: 4px;
 $end-banner: 1024px;
 $end-mid-banner: 1185px;
 
@@ -26,9 +27,11 @@ color: #fff;
 padding: 1em;
 text-align: center;
 
+  // Toggle Button
+
   &__btn {
   background-color: $your-path-secondary-color;
-  border: 4px $your-path-primary-color solid;
+  border: $your-path-line-size $your-path-primary-color solid;
   color: #000;
   cursor: pointer;
   font-size: inherit;
@@ -71,8 +74,10 @@ text-align: center;
 
   }
 
+  // List
+
   &__list {
-  border-left: 4px $your-path-primary-color solid;
+  border-left: $your-path-line-size $your-path-primary-color solid;
   list-style: none;
   margin: 3em 1em;
   padding: 0;
@@ -80,7 +85,7 @@ text-align: center;
 
     @include breakpoint($end-banner) {
 
-      border-bottom: 4px $your-path-primary-color solid;
+      border-bottom: $your-path-line-size $your-path-primary-color solid;
       border-left: 0;
       display: flex;
       justify-content: space-evenly;
@@ -93,7 +98,7 @@ text-align: center;
     // Bottom Arrow
 
     &::after {
-    border: 4px transparent solid;
+    border: $your-path-line-size transparent solid;
     border-bottom-color: $your-path-primary-color;
     border-right-color: $your-path-primary-color;
     bottom: 0;
@@ -118,6 +123,7 @@ text-align: center;
 
   }
 
+  // List Item
 
   &__item {
   display: flex;
@@ -150,17 +156,29 @@ text-align: center;
 
     }
 
+    &.active {
+
+      @include breakpoint($end-banner) {
+
+        &::before, &::after {
+        display: none;
+        }
+
+      }
+
+    }
+
     // Line
 
     &::before {
     background-color: $your-path-primary-color;
-    height: 4px;
+    height: $your-path-line-size;
     width: 100%;
 
       @include breakpoint($end-banner) {
 
         height: 100%;
-        width: 4px;
+        width: $your-path-line-size;
 
       }
 
@@ -171,7 +189,7 @@ text-align: center;
     &::after {
     background-color: $your-path-secondary-color;
     border-radius: 50%;
-    border: 4px $your-path-primary-color solid;
+    border: $your-path-line-size $your-path-primary-color solid;
     height: 30px;
     left: -15px;
     width: 30px;
@@ -189,7 +207,7 @@ text-align: center;
 
   &__content {
   background-color: $your-path-secondary-color;
-  border: 4px $your-path-primary-color solid;
+  border: $your-path-line-size $your-path-primary-color solid;
   box-shadow: 0 0 6px 0 #000;
   color: #000;
   display: none;
