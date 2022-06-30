@@ -21,6 +21,22 @@ $your-path-line-size: 4px;
 $end-banner: 1024px;
 $end-mid-banner: 1185px;
 
+@keyframes pulse {
+
+    0% {
+    transform: scale(0.9);
+    }
+
+    50% {
+    transform: scale(1.2);
+    }
+
+    100% {
+    transform: scale(0.9);
+    }
+
+}
+
 .your-path {
 background-image: linear-gradient(180deg, rgba(63,123,164,1) 0%, rgba(63,123,164,1) 35%, rgba(165,185,203,1) 100%);
 color: #fff;
@@ -164,6 +180,18 @@ text-align: center;
         display: none;
         }
 
+      }
+
+    }
+
+    // Circle Animation
+
+    &:focus-within, &:hover {
+
+      &::after {
+      animation-duration: 1.5s;
+      animation-iteration-count: infinite;
+      animation-name: pulse;
       }
 
     }
