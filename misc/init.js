@@ -30,26 +30,17 @@ yourPathBtn.forEach(function(button, e){
 
   button.addEventListener("click", function () {
 
-    if(this.getAttribute("aria-expanded") === "true") {
+    var activeButton = this.closest(yourPathClass).querySelectorAll(yourPathBtnClass);
 
-      this.setAttribute("aria-expanded", "false");
+    activeButton.forEach(function(active, i){
 
+      active.setAttribute("aria-expanded", "false");
+      active.parentNode.classList.remove("active");
 
-    } else {
+    });
 
-      var activeButton = this.closest(yourPathClass).querySelectorAll(yourPathBtnClass);
-
-      activeButton.forEach(function(active, i){
-
-        active.setAttribute("aria-expanded", "false");
-        active.parentNode.classList.remove("active");
-
-      });
-
-      this.setAttribute("aria-expanded", "true");
-      this.parentNode.classList.add("active");
-
-    }
+    this.setAttribute("aria-expanded", "true");
+    this.parentNode.classList.add("active");
 
   });
 
