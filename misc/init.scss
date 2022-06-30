@@ -11,7 +11,7 @@
 
 */
 
-@import "breakpoint"; // Note: Use your own breakpoint partial. 
+@import "breakpoint"; // Note: Use your own breakpoint partial.
 
 // Your Path
 
@@ -191,7 +191,7 @@ text-align: center;
     border-radius: 50%;
     border: $your-path-line-size $your-path-primary-color solid;
     height: 30px;
-    left: -15px;
+    left: -17px;
     width: 30px;
 
       @include breakpoint($end-banner) {
@@ -204,6 +204,8 @@ text-align: center;
     }
 
   }
+
+  // Content Area
 
   &__content {
   background-color: $your-path-secondary-color;
@@ -232,6 +234,8 @@ text-align: center;
     }
 
   }
+
+  // Content Elements
 
   &__heading {
   color: $your-path-primary-color;
