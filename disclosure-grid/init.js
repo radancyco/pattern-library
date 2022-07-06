@@ -174,23 +174,25 @@
             // var itemSize = parseInt(100 / gridSize);
             // button.setAttribute("style", "order: " + gridButtonCount + "; width: " + itemSize + "%;");
 
-            // Note: Because spacing with margins is a problem for a dynamic l;ayout such of this, we have to pull in
-            // the computed margin value from CSS and apply calculation for inline style.
+            // Note: Because spacing with margins is a problem for a dynamic layout such as this, we have to pull in
+            // the computed margin value from CSS and apply calculation via inline style.
 
             var buttonStyle = window.getComputedStyle(button);
             var buttonMarginLeft = parseInt(buttonStyle.getPropertyValue("margin-left").replace("px", ""));
             var buttonMarginRight = parseInt(buttonStyle.getPropertyValue("margin-right").replace("px", ""));
             var buttonMarginTotal = buttonMarginLeft + buttonMarginRight;
 
-            // if(!isIE11) {
+            if (button.hasAttribute("data-grid-size")) {
 
-            button.setAttribute("style", "margin-right: " + buttonMarginRight + "px; margin-left: " + buttonMarginLeft + "px; order: " + gridButtonCount + "; width: calc(100%/" + gridSize + " - " + buttonMarginTotal + "px);");
+              var temp = button.getAttribute("data-grid-size");
 
-            // } else {
+              button.setAttribute("style", "margin-right: " + buttonMarginRight + "px; margin-left: " + buttonMarginLeft + "px; order: " + gridButtonCount + "; width: calc(100%/" + temp + " - " + buttonMarginTotal + "px);");
 
-            // button.setAttribute("style", "margin-right: " + buttonMarginRight + "px; margin-left: " + buttonMarginLeft + "px; order: " + gridButtonCount + "; width: calc(99.9%/" + gridSize + " - " + buttonMarginTotal + "px);");
+            } else {
 
-            // }
+              button.setAttribute("style", "margin-right: " + buttonMarginRight + "px; margin-left: " + buttonMarginLeft + "px; order: " + gridButtonCount + "; width: calc(100%/" + gridSize + " - " + buttonMarginTotal + "px);");
+
+            }
 
             if (gridButtonCount % gridSize === 0) {
 
@@ -249,7 +251,15 @@
 
           if (gridDisclosureLarge[i].matches || gridDisclosureMedium[i].matches) {
 
-            content.setAttribute("style", "order: " + gridContentCount);
+            if (content.previousElementSibling.hasAttribute("data-grid-size")) {
+
+              content.setAttribute("style", "order: " + gridContentCount + 1);
+
+            } else {
+
+              content.setAttribute("style", "order: " + gridContentCount);
+
+            }
 
             if (gridContentCount % gridSize === 0) {
 
