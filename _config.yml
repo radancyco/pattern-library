@@ -14,6 +14,7 @@ exclude: [
 destination: _httpdocs
 git-url: https://radancy.dev
 highlighter: rouge
+include: [_*.*]
 lang: en
 markdown: kramdown
 name: Pattern Library
