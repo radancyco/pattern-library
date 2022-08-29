@@ -39,7 +39,7 @@ html {
 .tab-accordion {
 overflow: hidden;
 
-  &[data-tab-vertical][role="tablist"] {
+  &[aria-orientation="vertical"][role="tablist"] {
   display: flex;
   }
 
@@ -68,7 +68,7 @@ overflow: hidden;
     width: auto;
     }
 
-    [data-tab-vertical] & {
+    [aria-orientation="vertical"] & {
     width: 100%;
     }
 
@@ -106,7 +106,7 @@ overflow: hidden;
     &.expanded {
     display: block;
 
-      [data-tab-vertical][role="tablist"] & {
+      [aria-orientation="vertical"][role="tablist"] & {
       display: none;
       }
 
@@ -116,7 +116,7 @@ overflow: hidden;
 
   &__dynamic {
 
-      [data-tab-vertical][role="tablist"] & {
+      [aria-orientation="vertical"][role="tablist"] & {
       display: block;
       }
 

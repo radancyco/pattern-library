@@ -12,17 +12,9 @@
 
 (function() {
 
-  // forEach Polyfill for IE11.
-
-  if (window.NodeList && !NodeList.prototype.forEach) {
-
-    NodeList.prototype.forEach = Array.prototype.forEach;
-
-  }
-
   // Display which TabCordion is in use via console:
 
-  console.log('%c TabCordion v1.3 (Beta) in use. ', 'background: #6e00ee; color: #fff');
+  console.log('%c TabCordion v1.5 in use. ', 'background: #6e00ee; color: #fff');
 
   // Commonly used Classes, Data Attributes, States, and Strings.
 
@@ -34,13 +26,11 @@
   var tabCordionActiveState = tabCordionActiveClass.replace(".", "");
   var tabCordionDynamicState = tabCordionDynamicClass.replace(".", "");
   var tabCordionExpandedState = "expanded";
-  var tabCordionReturnState = "tab-accordion__return";
   var tabCordionDataActive = "data-tab-active";
   var tabCordionDataActiveChanged = "data-tab-active-changed";
   var tabCordionDataBreakpoint = "data-tab-breakpoint";
   var tabCoprdionDataDisableURL = "data-tab-disable-url";
   var tabCordionDataVertical = "data-tab-vertical";
-  var tabCordionReturnText = "Return to Navigation";
 
   // Grab the hash (fragment) from the URL.
 
@@ -71,7 +61,7 @@
 
   // TabAccordion Toggle
 
-  function toggleTabCordion(thisButton, thisButtonIndex) {
+  function toggleTabCordion(thisButton, oldTab, thisButtonIndex) {
 
     // Normally, we would use ARIA as a CSS hook, but since we are
     // dealing with adding and removeing aria-expanded and aria-selected,
@@ -85,6 +75,7 @@
 
         activeButton.classList.remove(tabCordionActiveState);
         activeButton.nextElementSibling.classList.remove(tabCordionExpandedState);
+        activeButton.nextElementSibling.removeAttribute("tabindex");
 
         if (activeButton.hasAttribute("aria-expanded")) {
 
@@ -92,28 +83,36 @@
 
         }
 
+        if (thisButton.hasAttribute("aria-expanded")) {
+
+          thisButton.setAttribute("aria-expanded", "true");
+
+        }
+
         if (activeButton.hasAttribute("aria-selected")) {
 
+          thisButton.focus(); // For arrow keys
+
+          // Make the active tab focusable by the user (Tab key)
+
+          thisButton.removeAttribute('tabindex');
+
+          // Set the selected state
+
           activeButton.setAttribute("aria-selected", "false");
+          activeButton.setAttribute("tabindex", "-1");
+          activeButton.classList.remove(tabCordionActiveState);
+          activeButton.nextElementSibling.classList.remove(tabCordionExpandedState);
+          activeButton.nextElementSibling.removeAttribute("tabindex");
+          thisButton.setAttribute("aria-selected", "true");
 
         }
 
       });
 
-      if (thisButton.hasAttribute("aria-expanded")) {
-
-        thisButton.setAttribute("aria-expanded", "true");
-
-      }
-
-      if (thisButton.hasAttribute("aria-selected")) {
-
-        thisButton.setAttribute("aria-selected", "true");
-
-      }
-
       thisButton.classList.add(tabCordionActiveState);
       thisButton.nextElementSibling.classList.add(tabCordionExpandedState);
+      thisButton.nextElementSibling.setAttribute("tabindex", "-1");
 
       // TODO: Have mobile panels be closed by default or when toggled on.
       // As it is now, panels will behave the same across smaller
@@ -149,21 +148,6 @@
 
       }, 100);
 
-      // Return to Navigation
-      // TODO: Break this out into own function.
-
-      var tabReturntoNav = document.createElement("a");
-      tabReturntoNav.setAttribute("href", "#" + thisButtonID);
-      tabReturntoNav.classList.add(tabCordionReturnState);
-      tabReturntoNav.innerHTML = tabCordionReturnText;
-      tabReturntoNav.addEventListener("click", function () {
-
-        returnToTabNavigation(this, event);
-
-      });
-
-      tabTarget.appendChild(tabReturntoNav);
-
     }
 
     // Append fragment to URL if data-tab-disable-url not present.
@@ -193,16 +177,6 @@
       thisButton.parentNode.parentNode.setAttribute(tabCordionDataActiveChanged, "");
 
     }
-
-  }
-
-  function returnToTabNavigation(thisButton, e) {
-
-    var tabTargetButtonId = thisButton.getAttribute("href").replace("#", "");
-    var tabTargetButton = document.getElementById(tabTargetButtonId);
-    tabTargetButton.focus();
-
-    e.preventDefault();
 
   }
 
@@ -281,18 +255,43 @@
 
             button.classList.add(tabCordionActiveState);
             button.nextElementSibling.classList.add(tabCordionExpandedState);
+            button.nextElementSibling.setAttribute("tabindex", "-1");
 
           }
 
           button.setAttribute("id", "tab-button-" + tabListCount + "-" + tabListItemCount);
-          button.addEventListener("click", function () {
+          button.setAttribute("aria-controls", "tab-panel-" + tabListCount + "-" + tabListItemCount);
+          button.addEventListener("click", function (e) {
 
             var index = j + 1;
 
-            toggleTabCordion(this, index);
+            toggleTabCordion(this, e.currentTarget, index);
 
           });
 
+          button.addEventListener("keydown", function (e) {
+
+            if (this.hasAttribute("aria-selected")) {
+
+              var index = Array.prototype.indexOf.call(tabListButton, e.currentTarget);
+
+              //console.log(index);
+
+              // Work out which key the user is pressing and calculate the new tab's index where appropriate
+
+              var dir = e.which === 37 ? index - 1 : e.which === 39 ? index + 1 : e.which === 40 ? "down" : null;
+
+              if (dir !== null) {
+
+                // If the down key is pressed, move focus to the open panel, otherwise switch to the adjacent tab
+
+                dir === "down" ? document.getElementById(e.currentTarget.id).nextElementSibling.focus() : tabListButton[dir] ? toggleTabCordion(tabListButton[dir], e.currentTarget, null) : void 0;
+
+              }
+
+            }
+
+          });
 
         });
 
@@ -330,6 +329,14 @@
 
           tabCordion.setAttribute("role", "tablist");
 
+          if(tabVertical !== null) {
+
+            // Indicate orientation
+
+            tabCordion.setAttribute("aria-orientation", "vertical");
+
+          }
+
           // Our Tab UI buttons.
 
           tabListButton.forEach(function(button, j){
@@ -338,12 +345,13 @@
 
             button.setAttribute("aria-selected", "false");
             button.setAttribute("role", "tab");
-            button.setAttribute("aria-controls", "tab-panel-" + tabListCount + "-" + tabListItemCount);
+            button.setAttribute("tabindex", -1);
             button.removeAttribute("aria-expanded");
 
             if(Number(tabListItemCount) === Number(tabPanelSelected)) {
 
               button.setAttribute("aria-selected", "true");
+              button.removeAttribute("tabindex");
 
             }
 
@@ -357,8 +365,8 @@
 
             var tabListItemCount = j + 1;
 
-            panel.setAttribute("aria-labelledby", "tab-button-" + tabListCount + "-" + tabListItemCount);
             panel.setAttribute("role", "tabpanel");
+            panel.setAttribute("aria-labelledby", "tab-button-" + tabListCount + "-" + tabListItemCount);
 
             // Our dynamic Tab UI panels, when TabCordion
             // is in "vertical" mode.
@@ -395,21 +403,6 @@
 
                 }
 
-                // Return to Navigation.
-
-                var tabReturntoNav = document.createElement("a");
-                tabReturntoNav.setAttribute("href", "#" + thisButtonID);
-                tabReturntoNav.classList.add(tabCordionReturnState);
-                tabReturntoNav.innerHTML = tabCordionReturnText;
-
-                tabReturntoNav.addEventListener("click", function () {
-
-                 returnToTabNavigation(this, event);
-
-                });
-
-                tabTarget.appendChild(tabReturntoNav);
-
               }
 
             }
@@ -422,6 +415,14 @@
 
           tabCordion.removeAttribute("role");
 
+          if(tabVertical !== null) {
+
+            // Remove orientation
+
+            tabCordion.removeAttribute("aria-orientation");
+
+          }
+
           // Our Accordion UI buttons.
 
           tabListButton.forEach(function(button, j){
@@ -429,9 +430,9 @@
             var tabListItemCount = j + 1;
 
             button.setAttribute("aria-expanded", "false");
-            button.removeAttribute("aria-controls");
             button.removeAttribute("aria-selected");
             button.removeAttribute("role");
+            button.removeAttribute("tabindex");
 
             if(Number(tabListItemCount) === Number(tabPanelSelected)) {
 
@@ -445,8 +446,9 @@
 
           tabListPanel.forEach(function(panel){
 
-            panel.removeAttribute("aria-labelledby");
             panel.removeAttribute("role");
+            panel.removeAttribute("tabindex");
+            panel.removeAttribute("aria-labelledby");
 
           });
 
