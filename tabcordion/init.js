@@ -95,7 +95,7 @@
 
           thisButton.focus(); // For arrow keys
 
-          // Make the active tab focusable by the user (Tab key)
+          // Make the active tab focusable by the user (Tab key).
 
           thisButton.removeAttribute('tabindex');
 
