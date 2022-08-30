@@ -107,6 +107,7 @@
           activeButton.nextElementSibling.classList.remove(tabCordionExpandedState);
           activeButton.nextElementSibling.removeAttribute("tabindex");
           thisButton.setAttribute("aria-selected", "true");
+          thisButton.nextElementSibling.setAttribute("tabindex", "-1");
 
         }
 
@@ -114,7 +115,6 @@
 
       thisButton.classList.add(tabCordionActiveState);
       thisButton.nextElementSibling.classList.add(tabCordionExpandedState);
-      thisButton.nextElementSibling.setAttribute("tabindex", "-1");
 
       // TODO: Have mobile panels be closed by default or when toggled on.
       // As it is now, panels will behave the same across smaller
