@@ -142,8 +142,6 @@
 
       setTimeout(function(){
 
-        tabTarget.focus({ preventScroll: true });
-
         // Fix: Add class here on delay so we can animate content if needed.
 
         tabTarget.classList.add(tabCordionExpandedState);
@@ -280,13 +278,35 @@
 
               // Work out which key the user is pressing and calculate the new tab's index where appropriate
 
-              var dir = e.which === 37 ? index - 1 : e.which === 39 ? index + 1 : e.which === 40 ? "down" : null;
+              // Left:	37, Up: 38, Right: 39, Down: 40
 
-              if (dir !== null) {
+              if(tabVertical !== null) {
 
-                // If the down key is pressed, move focus to the open panel, otherwise switch to the adjacent tab
+                // Move up, down, and right.
 
-                dir === "down" ? document.getElementById(e.currentTarget.id).nextElementSibling.focus() : tabListButton[dir] ? toggleTabCordion(tabListButton[dir], e.currentTarget, tabListButton[dir].getAttribute("data-button-count")) : void 0;
+                var dir = e.which === 38 ? index - 1 : e.which === 40 ? index + 1 : e.which === 39 ? "right" : null;
+
+                if (dir !== null) {
+
+                  // If the right key is pressed, move focus to the open panel, otherwise switch to the adjacent tab
+
+                  dir === "right" ? document.getElementById(e.currentTarget.id).parentNode.parentNode.querySelector(tabCordionDynamicClass).focus() : tabListButton[dir] ? toggleTabCordion(tabListButton[dir], e.currentTarget, tabListButton[dir].getAttribute("data-button-count")) : void 0;
+
+                }
+
+              } else {
+
+                // Move left, right, and down.
+
+                var dir = e.which === 37 ? index - 1 : e.which === 39 ? index + 1 : e.which === 40 ? "down" : null;
+
+                if (dir !== null) {
+
+                  // If the down key is pressed, move focus to the open panel, otherwise switch to the adjacent tab
+
+                  dir === "down" ? document.getElementById(e.currentTarget.id).nextElementSibling.focus() : tabListButton[dir] ? toggleTabCordion(tabListButton[dir], e.currentTarget, tabListButton[dir].getAttribute("data-button-count")) : void 0;
+
+                }
 
               }
 
