@@ -63,6 +63,8 @@
 
   function toggleTabCordion(thisButton, oldTab, thisButtonIndex) {
 
+    // console.log("This Button: " + thisButton + " Old Tab: " + oldTab + "This Button Index: " + thisButtonIndex);
+
     // Normally, we would use ARIA as a CSS hook, but since we are
     // dealing with adding and removeing aria-expanded and aria-selected,
     // it is easier to include/target a class.
@@ -261,6 +263,7 @@
 
           button.setAttribute("id", "tab-button-" + tabListCount + "-" + tabListItemCount);
           button.setAttribute("aria-controls", "tab-panel-" + tabListCount + "-" + tabListItemCount);
+          button.setAttribute("data-button-count", tabListItemCount);
           button.addEventListener("click", function (e) {
 
             var index = j + 1;
@@ -275,8 +278,6 @@
 
               var index = Array.prototype.indexOf.call(tabListButton, e.currentTarget);
 
-              //console.log(index);
-
               // Work out which key the user is pressing and calculate the new tab's index where appropriate
 
               var dir = e.which === 37 ? index - 1 : e.which === 39 ? index + 1 : e.which === 40 ? "down" : null;
@@ -285,7 +286,7 @@
 
                 // If the down key is pressed, move focus to the open panel, otherwise switch to the adjacent tab
 
-                dir === "down" ? document.getElementById(e.currentTarget.id).nextElementSibling.focus() : tabListButton[dir] ? toggleTabCordion(tabListButton[dir], e.currentTarget, null) : void 0;
+                dir === "down" ? document.getElementById(e.currentTarget.id).nextElementSibling.focus() : tabListButton[dir] ? toggleTabCordion(tabListButton[dir], e.currentTarget, tabListButton[dir].getAttribute("data-button-count")) : void 0;
 
               }
 
