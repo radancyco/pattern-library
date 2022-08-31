@@ -112,7 +112,11 @@
     // Also, is it better to put focus on item or first focusable element within item?
     // TODO: More research will be required.
 
-    $loadMoreItemsHidden.first().attr("tabindex", "-1").focus();
+  //  $loadMoreItemsHidden.first().attr("tabindex", "-1").focus();
+
+    var $focusElms = "a, audio, button, input, select, video";
+
+    $loadMoreItemsHidden.find($focusElms).first().focus();
 
     $(this).trigger("itemsDisplayed", [totalItems]);
 
