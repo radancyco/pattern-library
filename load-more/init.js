@@ -109,7 +109,7 @@
     // In not knowing what kind of content may exist in item, we are applying temporary focus to item itself.
     // Question: Is it better to apply focus here or keep focus on the 'Load More' button itself, allowing
     // keyboard user to navigate through newly revealed items?
-    // Also, is it better to put focus on item or first focusable element within item? 
+    // Also, is it better to put focus on item or first focusable element within item?
     // TODO: More research will be required.
 
     $loadMoreItemsHidden.first().attr("tabindex", "-1").focus();
@@ -125,12 +125,6 @@
       $loadMoreMsg.empty();
 
     }, loadMoreDelay);
-
-    // HACK: Continually set focus on button to keep user
-    // at bottom of page. You'd think browser would do this
-    // on its own.
-
-    // $(this).blur().focus();
 
   });
 
