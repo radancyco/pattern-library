@@ -23,6 +23,13 @@ padding: 6em 0;
   position: absolute;
   top: 1em;
   width: 40px;
+
+    @media(min-width: 48.625em) {
+
+      position: static;
+
+    }
+
   }
 
   .mobile-menu {
