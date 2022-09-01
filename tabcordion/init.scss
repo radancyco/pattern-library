@@ -142,22 +142,6 @@ overflow: hidden;
 
   }
 
-  // Return to Navigation
-
-  &__return {
-  background-color: $base-color;
-  font-size: .9rem;
-  padding: 0 .5em;
-  position: absolute;
-  right: 10px;
-  top: -80px;
-
-    &:focus {
-    top: 10px;
-    }
-
-  }
-
   // Animation Example
   // Note: Enable if you require it.
 
