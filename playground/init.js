@@ -13,4 +13,6 @@ $(".primary-navigation__btn").on("click", function() {
 
   $(this).parent().toggleClass("active");
 
+  // dont forget aria-expanded on button.
+
 });
