@@ -1,0 +1,82 @@
+/*!
+
+  Radancy Pattern Library: Playground
+
+  Contributor(s):
+  Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy
+
+  Dependencies: Sass
+  Instructions: To run locally, install Sass (https://sass-lang.com/install), CL to directory this file in and run:
+  sass --watch init.scss:init.css --style compressed
+
+*/
+
+.primary-navigation {
+position: relative;
+border: 1px green solid;
+padding: 6em 0;
+
+  &__btn {
+  border: 2px tomato solid;
+  right: 1em;
+  height: 40px;
+  position: absolute;
+  top: 1em;
+  width: 40px;
+  }
+
+  .mobile-menu {
+  display: none;
+
+    @media(min-width: 48.625em) {
+
+      display: block;
+
+    }
+
+  }
+
+  .desktop-menu {
+  display: none;
+  }
+
+  &.active {
+  background-color: tomato;
+
+    @media(min-width: 48.625em) {
+
+      background-color: transparent;
+
+    }
+
+    .mobile-menu {
+    display: block;
+
+      @media(min-width: 48.625em) {
+
+        display: block;
+
+      }
+
+    }
+
+    .desktop-menu {
+    background-color: tomato;
+    display: block;
+    }
+
+  }
+
+  .utility-navigation {
+
+    @media(min-width: 48.625em) {
+
+      position: absolute;
+      top: 0;
+      right: 6em;
+
+    }
+
+  }
+
+}
