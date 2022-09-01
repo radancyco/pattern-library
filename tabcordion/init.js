@@ -107,7 +107,7 @@
           activeButton.nextElementSibling.classList.remove(tabCordionExpandedState);
           activeButton.nextElementSibling.removeAttribute("tabindex");
           thisButton.setAttribute("aria-selected", "true");
-          thisButton.nextElementSibling.setAttribute("tabindex", "-1");
+          thisButton.nextElementSibling.setAttribute("tabindex", -1);
 
         }
 
@@ -255,7 +255,7 @@
 
             button.classList.add(tabCordionActiveState);
             button.nextElementSibling.classList.add(tabCordionExpandedState);
-            button.nextElementSibling.setAttribute("tabindex", "-1");
+            button.nextElementSibling.setAttribute("tabindex", -1);
 
           }
 
@@ -328,6 +328,7 @@
 
           tabDynamicPanel.classList.add(tabCordionDynamicState);
           tabDynamicPanel.setAttribute("role", "tabpanel");
+          tabDynamicPanel.setAttribute("tabindex", -1);
 
           // Only load dynamic panel once on load and on resize.
 
