@@ -134,10 +134,7 @@ overflow: hidden;
   &__button, &__panel, &__dynamic {
 
     &:focus {
-    outline-color: currentColor;
-    outline-offset: -5px;
-    outline-style: solid;
-    outline-width: 1px;
+    outline-offset: -6px;
     }
 
   }

@@ -63,8 +63,6 @@
 
   function toggleTabCordion(thisButton, oldTab, thisButtonIndex) {
 
-    // console.log("This Button: " + thisButton + " Old Tab: " + oldTab + "This Button Index: " + thisButtonIndex);
-
     // Normally, we would use ARIA as a CSS hook, but since we are
     // dealing with adding and removeing aria-expanded and aria-selected,
     // it is easier to include/target a class.
