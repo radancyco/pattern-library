@@ -18,30 +18,10 @@ $base-color: #6F00EF;
 $base-color-active: white;
 $base-color-neutral: lightgrey;
 
-html {
-
-  &:focus-within {
-
-    @media (prefers-reduced-motion: no-preference) {
-
-      scroll-behavior: smooth;
-
-    }
-
-  }
-
-}
-
-// Note: Consider using a CSS scroll rather than a JavaScript one, when possible. Learn: https://michaelspellacy.com/pushing-buttons/
 
 // TabAccordion
 
 .tab-accordion {
-overflow: hidden;
-
-  &[aria-orientation="vertical"][role="tablist"] {
-  display: flex;
-  }
 
   &__container {
 
@@ -49,6 +29,11 @@ overflow: hidden;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    }
+
+    [aria-orientation="vertical"] & {
+    display: grid;
+    grid-template-columns: 20% auto;
     }
 
   }
@@ -68,10 +53,6 @@ overflow: hidden;
     width: auto;
     }
 
-    [aria-orientation="vertical"] & {
-    width: 100%;
-    }
-
     &.active {
     background-color: $base-color;
     color: $base-color-active;
@@ -79,9 +60,9 @@ overflow: hidden;
 
   }
 
-// Accordion & Layout Panel: Shared
+// Accordion & Layout Panel
 
-  &__panel, &__dynamic  {
+  &__panel  {
   background-color: $base-color;
   color: $base-color-active;
   display: none;
@@ -91,6 +72,10 @@ overflow: hidden;
     [role="tablist"] & {
     flex-basis: 100%;
     order: 1;
+    }
+
+    [aria-orientation="vertical"] & {
+    grid-area: 1 / 2 / 6; // Note: Set to higher number if you do not want height of button to scale.
     }
 
     a {
@@ -105,20 +90,7 @@ overflow: hidden;
 
     &.expanded {
     display: block;
-
-      [aria-orientation="vertical"][role="tablist"] & {
-      display: none;
-      }
-
     }
-
-  }
-
-  &__dynamic {
-
-      [aria-orientation="vertical"][role="tablist"] & {
-      display: block;
-      }
 
   }
 
@@ -131,7 +103,7 @@ overflow: hidden;
   // Focus State
   // Accessibility: NEVER remove focus outlines! Either redesign them or design an alternative focus state. Learn: https://webaim.org/articles/contrast/
 
-  &__button, &__panel, &__dynamic {
+  &__button, &__panel {
 
     &:focus {
     outline-offset: -6px;

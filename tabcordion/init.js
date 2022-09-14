@@ -14,7 +14,7 @@
 
   // Display which TabCordion is in use via console:
 
-  console.log('%c TabCordion v1.5 in use. ', 'background: #6e00ee; color: #fff');
+  console.log('%c TabCordion v1.6 in use. ', 'background: #6e00ee; color: #fff');
 
   // Commonly used Classes, Data Attributes, States, and Strings.
 
@@ -22,9 +22,7 @@
   var tabCordionActiveClass = ".active";
   var tabCordionButtonClass = ".tab-accordion__button";
   var tabCordionPanelClass = ".tab-accordion__panel";
-  var tabCordionDynamicClass = ".tab-accordion__dynamic";
   var tabCordionActiveState = tabCordionActiveClass.replace(".", "");
-  var tabCordionDynamicState = tabCordionDynamicClass.replace(".", "");
   var tabCordionExpandedState = "expanded";
   var tabCordionDataActive = "data-tab-active";
   var tabCordionDataActiveChanged = "data-tab-active-changed";
@@ -120,33 +118,7 @@
 
     }
 
-    var tabVertical = thisButton.parentNode.parentNode.getAttribute(tabCordionDataVertical);
     var tabListActive = thisButton.parentNode.parentNode.getAttribute(tabCordionDataActive);
-
-    if(tabVertical !== null) {
-
-      var thisButtonID = thisButton.getAttribute("id");
-      var thisPanelID = thisButtonID.replace("tab-button-", "tab-panel-");
-      var tabSelected = document.getElementById(thisPanelID);
-      var tabTarget = tabSelected.parentNode.parentNode.querySelector(tabCordionDynamicClass);
-
-      tabTarget.setAttribute("id", thisPanelID);
-      tabTarget.setAttribute("aria-labelledby", thisButtonID);
-      tabTarget.classList.remove(tabCordionExpandedState);
-      tabTarget.innerHTML = tabSelected.innerHTML;
-      tabTarget.setAttribute("tabindex", -1);
-
-      // Fix: NVDA is reading previous content, delaying focus slightly appears to help.
-
-      setTimeout(function(){
-
-        // Fix: Add class here on delay so we can animate content if needed.
-
-        tabTarget.classList.add(tabCordionExpandedState);
-
-      }, 100);
-
-    }
 
     // Append fragment to URL if data-tab-disable-url not present.
     // TODO: Investagte possible performance issue with History API.
@@ -288,7 +260,7 @@
 
                   // If the right key is pressed, move focus to the open panel, otherwise switch to the adjacent tab
 
-                  dir === "right" ? document.getElementById(e.currentTarget.id).parentNode.parentNode.querySelector(tabCordionDynamicClass).focus() : tabListButton[dir] ? toggleTabCordion(tabListButton[dir], e.currentTarget, tabListButton[dir].getAttribute("data-button-count")) : void 0;
+                  dir === "right" ? document.getElementById(e.currentTarget.id).nextElementSibling.focus() : tabListButton[dir] ? toggleTabCordion(tabListButton[dir], e.currentTarget, tabListButton[dir].getAttribute("data-button-count")) : void 0;
 
                 }
 
@@ -313,32 +285,6 @@
           });
 
         });
-
-        // Add dynamic panel for vertical layouts.
-
-        if(tabVertical !== null) {
-
-          // Create Dynamic Tab Panel.
-
-          var tabDynamicPanel = document.createElement("div");
-
-          // Set Attributes.
-
-          tabDynamicPanel.classList.add(tabCordionDynamicState);
-          tabDynamicPanel.setAttribute("role", "tabpanel");
-          tabDynamicPanel.setAttribute("tabindex", -1);
-
-          // Only load dynamic panel once on load and on resize.
-
-          var tabNewPanel = tabCordion.querySelector(tabCordionDynamicClass);
-
-            if (!tabNewPanel) {
-
-              tabCordion.appendChild(tabDynamicPanel);
-
-            }
-
-        }
 
         // Begin looping though breakpoints and altering DOM as each of
         // those viewports is resized/loaded.
@@ -387,45 +333,6 @@
 
             panel.setAttribute("role", "tabpanel");
             panel.setAttribute("aria-labelledby", "tab-button-" + tabListCount + "-" + tabListItemCount);
-
-            // Our dynamic Tab UI panels, when TabCordion
-            // is in "vertical" mode.
-
-            if(tabVertical !== null) {
-
-              if(Number(tabListItemCount) === Number(tabPanelSelected)) {
-
-                var thisPanelID = panel.getAttribute("id");
-                var tabSelected = document.getElementById(thisPanelID);
-                var thisButtonID = tabSelected.previousElementSibling.getAttribute("id");
-                var tabTarget = tabSelected.parentNode.parentNode.querySelector(tabCordionDynamicClass);
-
-                tabTarget.setAttribute("id", thisPanelID);
-                tabTarget.setAttribute("aria-labelledby", thisButtonID);
-                tabTarget.innerHTML = tabSelected.innerHTML;
-
-                setTimeout(function(){
-
-                  // Fix: Add class here on delay so we can animate content if needed.
-
-                  tabTarget.classList.add(tabCordionExpandedState);
-
-                }, 100);
-
-                // Fix: Page cannot jump to fragment created on the fly,
-                // so we need jump to it programtically, via scrollIntoView.
-                // See https://caniuse.com/?search=scrollIntoView
-
-                if(URLFragment.indexOf("tab-panel") > -1) {
-
-                  tabToScroll = document.getElementById(thisPanelID);
-                  tabToScroll.scrollIntoView();
-
-                }
-
-              }
-
-            }
 
           });
 
