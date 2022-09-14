@@ -18,10 +18,11 @@ $base-color: #6F00EF;
 $base-color-active: white;
 $base-color-neutral: lightgrey;
 
-
 // TabAccordion
 
 .tab-accordion {
+color: $base-color-active;
+overflow: hidden;
 
   &__container {
 
@@ -49,8 +50,11 @@ $base-color-neutral: lightgrey;
 
     [role="tablist"] & {
     background-color: $base-color-neutral;
-    color: inherit;
     width: auto;
+    }
+
+    &:focus, &:hover {
+    background-color: darken($base-color-neutral, 10%);
     }
 
     &.active {
@@ -64,7 +68,6 @@ $base-color-neutral: lightgrey;
 
   &__panel  {
   background-color: $base-color;
-  color: $base-color-active;
   display: none;
   padding: 1em;
   position: relative;
@@ -75,7 +78,19 @@ $base-color-neutral: lightgrey;
     }
 
     [aria-orientation="vertical"] & {
-    grid-area: 1 / 2 / 6; // Note: Set to higher number if you do not want height of button to scale.
+    grid-area: 1 / 2 / 6; // Note: Set to higher number if you do not want height of buttons to scale.
+    }
+
+    [data-tab-animation] & {
+
+      @media (prefers-reduced-motion: no-preference) {
+
+        display: block;
+        position: absolute;
+        visibility: hidden;
+
+      }
+
     }
 
     a {
@@ -90,6 +105,14 @@ $base-color-neutral: lightgrey;
 
     &.expanded {
     display: block;
+
+      [data-tab-animation] & {
+
+        position: static;
+        visibility: visible;
+
+      }
+
     }
 
   }
@@ -98,6 +121,28 @@ $base-color-neutral: lightgrey;
 
   &__content {
   position: relative;
+
+    [data-tab-animation] & {
+
+      bottom: -100px;
+      opacity: 0;
+      visibility: hidden;
+
+    }
+
+    .expanded & {
+
+      [data-tab-animation] & {
+
+        bottom: 0;
+        opacity: 1;
+        transition: all 300ms ease-in;
+        visibility: visible;
+
+      }
+
+    }
+
   }
 
   // Focus State
@@ -110,23 +155,5 @@ $base-color-neutral: lightgrey;
     }
 
   }
-
-  // Animation Example
-  // Note: Enable if you require it.
-
-  /* &__content {
-
-    @media (prefers-reduced-motion: no-preference) {
-
-      bottom: -100px;
-      transition: all 300ms ease-in;
-
-        .expanded & {
-        bottom: 0;
-        }
-
-    }
-
-  } */
 
 }
