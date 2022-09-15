@@ -20,6 +20,7 @@ color: #fff;
 font-size: initial;
 margin-bottom: 1em;
 padding: 1em;
+position: relative;
 text-align: left;
 width: 100%;
 }
@@ -29,23 +30,20 @@ margin: 0;
 padding: 0;
 }
 
+.disclosure--icon {
+
+  &::after {
+  content: "+";
+  display: inline-block;
+  font-size: x-large;
+  position: absolute;
+  right: .75em;
+  top: .5em;
+  }
+
+}
+
 .disclosure--heading, .disclosure--btn {
-
-  .disclosure--icon {
-
-    &::after {
-    display: inline-block;
-    }
-
-  }
-
-  .disclosure--icon {
-
-    &::after {
-    content: "+";
-    }
-
-  }
 
   + .disclosure--content {
   display: none;
