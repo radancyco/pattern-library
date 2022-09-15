@@ -40,6 +40,7 @@ color: $base-color-active;
     [aria-orientation="vertical"] & {
     display: grid;
     grid-template-columns: 20% auto;
+    min-height: 400px;
     }
 
   }
