@@ -7,59 +7,87 @@
 
 */
 
-var getExpanders = document.getElementsByClassName("disclosure--btn");
+var getExpanders = document.querySelectorAll(".disclosure--btn");
+var getContent = document.querySelectorAll(".disclosure--content");
+
 var simpleExpander = {
 
   init: function(){
 
     console.log('%c Disclosure v1.2 in use. ', 'background: #6e00ee; color: #fff');
 
-    // Add Listener and other needed attributes
+    // Add Listener and other needed attributes to disclosure button
 
-    var i = 0;
+    getExpanders.forEach(function(disclosure, i){
 
-    for (i = 0; i < getExpanders.length; i++) {
+      var int = i + 1;
 
-      var thisButtonText = getExpanders[i].textContent;
+      disclosure.setAttribute("aria-expanded", "false");
 
-      getExpanders[i].setAttribute("aria-expanded", "false");
+      if(disclosure.hasAttribute("id")){
 
-      getExpanders[i].addEventListener("click", simpleExpander.clicked);
+        var thisButtonID = disclosure.getAttribute("id");
+        var thisContentID = thisButtonID + "-content";
 
-      if(getExpanders[i].hasAttribute("data-disclosure-icon")){
+      } else {
 
-        getExpanders[i].insertAdjacentHTML('beforeend', ' <span class="disclosure--icon" aria-hidden="true"></span>');
-
-      }
-
-    }
-
-    // Show content if hash in URL matches ID on button.
-
-    if(getExpanders.length) {
-
-      var url = document.location.href;
-      var hash = url.split("#");
-
-      var disclosureID = document.getElementById(hash[1]);
-
-      if(disclosureID) {
-
-        if(disclosureID.parentElement.classList.contains("disclosure--heading")) {
-
-          disclosureID.parentElement.classList.add("open");
-
-        } else {
-
-          disclosureID.classList.add("open");
-
-        }
-
-        disclosureID.setAttribute("aria-expanded", "true");
+        var thisButtonID = "disclosure-btn-" + int;
+        var thisContentID = "disclosure-content-" + int;
 
       }
 
-    }
+      disclosure.setAttribute("id", thisButtonID);
+      disclosure.setAttribute("aria-controls", thisContentID);
+
+      if(disclosure.parentElement.classList.contains("disclosure--heading")) {
+
+        disclosure.parentElement.nextElementSibling.setAttribute("id", thisContentID);
+
+      } else {
+
+        disclosure.nextElementSibling.setAttribute("id", thisContentID);
+
+      }
+
+      // Prep each content area.
+
+      getContent.forEach(function(content, e){
+
+        content.setAttribute("role", "group");
+
+      });
+
+      if(disclosure.hasAttribute("data-disclosure-icon")){
+
+        disclosure.insertAdjacentHTML('beforeend', ' <span class="disclosure--icon" aria-hidden="true"></span>');
+
+      }
+
+      disclosure.addEventListener("click", simpleExpander.clicked);
+
+     });
+
+     // Open selected disclosure via URL
+
+     var url = document.location.href;
+     var hash = url.split("#");
+     var disclosureID = document.getElementById(hash[1]);
+
+     if(disclosureID) {
+
+       if(disclosureID.parentElement.classList.contains("disclosure--heading")) {
+
+         disclosureID.parentElement.classList.add("open");
+
+       } else {
+
+         disclosureID.classList.add("open");
+
+       }
+
+       disclosureID.setAttribute("aria-expanded", "true");
+
+     }
 
   }, clicked: function(){
 
