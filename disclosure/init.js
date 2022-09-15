@@ -12,7 +12,7 @@ var simpleExpander = {
 
   init: function(){
 
-    console.log('%c Disclosure v1.1 in use. ', 'background: #6e00ee; color: #fff');
+    console.log('%c Disclosure v1.2 in use. ', 'background: #6e00ee; color: #fff');
 
     // Add Listener and other needed attributes
 
@@ -23,13 +23,8 @@ var simpleExpander = {
       var thisButtonText = getExpanders[i].textContent;
 
       getExpanders[i].setAttribute("aria-expanded", "false");
+
       getExpanders[i].addEventListener("click", simpleExpander.clicked);
-
-      if(getExpanders[i].hasAttribute("data-label-close")){
-
-        getExpanders[i].setAttribute("aria-label", thisButtonText);
-
-      }
 
       if(getExpanders[i].hasAttribute("data-disclosure-icon")){
 
@@ -45,7 +40,24 @@ var simpleExpander = {
 
       var url = document.location.href;
       var hash = url.split("#");
-      $("#" + hash[1] + ".disclosure--btn").attr("aria-expanded", "true");
+
+      var disclosureID = document.getElementById(hash[1]);
+
+      if(disclosureID) {
+
+        if(disclosureID.parentElement.classList.contains("disclosure--heading")) {
+
+          disclosureID.parentElement.classList.add("open");
+
+        } else {
+
+          disclosureID.classList.add("open");
+
+        }
+
+        disclosureID.setAttribute("aria-expanded", "true");
+
+      }
 
     }
 
@@ -54,30 +66,37 @@ var simpleExpander = {
     // Run Event
 
     var isActive = this.getAttribute("aria-expanded");
-    var labelOpen = this.getAttribute("aria-label");
-    var labelClose = this.getAttribute("data-label-close");
 
     if (isActive == "true") {
 
-      // Active
+      // Not Active
 
       this.setAttribute("aria-expanded", "false");
 
-      if(labelOpen) {
+      if(this.parentElement.classList.contains("disclosure--heading")) {
 
-        this.textContent = labelOpen;
+        this.parentElement.classList.remove("open");
+
+      } else {
+
+        this.classList.remove("open");
 
       }
 
+
     } else {
 
-      // Not Active
+      // Active
 
       this.setAttribute("aria-expanded", "true");
 
-      if(labelClose) {
+      if(this.parentElement.classList.contains("disclosure--heading")) {
 
-        this.textContent = labelClose;
+        this.parentElement.classList.add("open");
+
+      } else {
+
+        this.classList.add("open");
 
       }
 

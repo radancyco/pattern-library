@@ -17,10 +17,19 @@ $base-color: #6F00EF;
 background-color: $base-color;
 border: 0;
 color: #fff;
+font-size: initial;
 margin-bottom: 1em;
 padding: 1em;
 text-align: left;
 width: 100%;
+}
+
+.disclosure--heading {
+margin: 0;
+padding: 0;
+}
+
+.disclosure--heading, .disclosure--btn {
 
   .disclosure--icon {
 
@@ -30,23 +39,19 @@ width: 100%;
 
   }
 
-  &[aria-expanded="false"] {
+  .disclosure--icon {
 
-    .disclosure--icon {
-
-      &::after {
-      content: "+";
-      }
-
-    }
-
-    + .disclosure--content {
-    display: none;
+    &::after {
+    content: "+";
     }
 
   }
 
-  &[aria-expanded="true"] {
+  + .disclosure--content {
+  display: none;
+  }
+
+  &.open {
 
     .disclosure--icon {
 
