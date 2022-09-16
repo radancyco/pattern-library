@@ -1,6 +1,6 @@
 /*!
 
-  Radancy Pattern Library: Jump Menu (In-Page) v1.0
+  Radancy Pattern Library: Jump Menu (In-Page)
 
   Contributor(s):
   Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy
