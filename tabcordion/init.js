@@ -127,12 +127,6 @@
     var selectedPanelID = thisButton.nextElementSibling.getAttribute("id");
     var targetPanel = document.getElementById(selectedPanelID)
 
-    targetPanel.scrollIntoView({
-
-      block: "nearest"
-
-    });
-
     if(tabDisableURL === null) {
 
       history.replaceState(null, null, "#" + selectedPanelID);
