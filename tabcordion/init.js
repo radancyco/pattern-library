@@ -65,7 +65,7 @@
     // dealing with adding and removeing aria-expanded and aria-selected,
     // it is easier to include/target a class.
 
-    var activeState = thisButton.parentNode.parentNode.querySelectorAll(tabCordionActiveClass);
+    var activeState = thisButton.parentNode.querySelectorAll(tabCordionActiveClass);
 
     if (!thisButton.classList.contains(tabCordionActiveState)) {
 
@@ -118,12 +118,12 @@
 
     }
 
-    var tabListActive = thisButton.parentNode.parentNode.getAttribute(tabCordionDataActive);
+    var tabListActive = thisButton.parentNode.getAttribute(tabCordionDataActive);
 
     // Append fragment to URL if data-tab-disable-url not present.
     // TODO: Investagte possible performance issue with History API.
 
-    var tabDisableURL = thisButton.parentNode.parentNode.getAttribute(tabCoprdionDataDisableURL);
+    var tabDisableURL = thisButton.parentNode.getAttribute(tabCoprdionDataDisableURL);
     var selectedPanelID = thisButton.nextElementSibling.getAttribute("id");
     var targetPanel = document.getElementById(selectedPanelID)
 
@@ -137,8 +137,8 @@
 
     if(tabListActive !== null) {
 
-      thisButton.parentNode.parentNode.setAttribute(tabCordionDataActive, thisButtonIndex);
-      thisButton.parentNode.parentNode.setAttribute(tabCordionDataActiveChanged, "");
+      thisButton.parentNode.setAttribute(tabCordionDataActive, thisButtonIndex);
+      thisButton.parentNode.setAttribute(tabCordionDataActiveChanged, "");
 
     }
 

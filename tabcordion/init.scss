@@ -29,20 +29,16 @@ color: $base-color-active;
 
   }
 
-  &__container {
+  &[role="tablist"] {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  }
 
-    [role="tablist"] & {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    }
-
-    [aria-orientation="vertical"] & {
-    display: grid;
-    grid-template-columns: 20% auto;
-    min-height: 400px;
-    }
-
+  &[aria-orientation="vertical"] {
+  display: grid;
+  grid-template-columns: 20% auto;
+  min-height: 400px; // Note: Used to set consistent height in vertical tab panels. Adjust as needed.
   }
 
   // Button
@@ -57,6 +53,7 @@ color: $base-color-active;
     [role="tablist"] & {
     background-color: $base-color-neutral;
     width: auto;
+    order: -1;
     }
 
     &:focus, &:hover {
@@ -80,7 +77,6 @@ color: $base-color-active;
 
     [role="tablist"] & {
     flex-basis: 100%;
-    order: 1;
     }
 
     [aria-orientation="vertical"] & {
