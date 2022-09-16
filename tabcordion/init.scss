@@ -3,8 +3,8 @@
   Radancy Pattern Library: TabCordion
 
   Contributor(s):
-  Andrew Hill, Email: andrew.hill@radancy.com
   Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy
+  Andrew Hill, Email: andrew.hill@radancy.com
 
   Dependencies: Sass
   Instructions: To run locally, install Sass (https://sass-lang.com/install), CL to directory this file in and run:
@@ -52,8 +52,8 @@ color: $base-color-active;
 
     [role="tablist"] & {
     background-color: $base-color-neutral;
-    width: auto;
     order: -1;
+    width: auto;
     }
 
     &:focus, &:hover {

@@ -3,8 +3,8 @@
   Radancy Pattern Library: TabCordion
 
   Contributor(s):
-  Andrew Hill, Email: andrew.hill@radancy.com
   Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy
+  Andrew Hill, Email: andrew.hill@radancy.com
 
   Dependencies: None
 
