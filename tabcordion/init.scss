@@ -35,10 +35,13 @@ color: $base-color-active;
   flex-wrap: wrap;
   }
 
+  // Note: min-heiht to set consistent height in vertical tab panels. Adjust as needed.
+  // Ideally, we would handle this via JavaScript, but can't due to display: none on each panel.
+
   &[aria-orientation="vertical"] {
   display: grid;
   grid-template-columns: 20% auto;
-  min-height: 400px; // Note: Used to set consistent height in vertical tab panels. Adjust as needed.
+  min-height: 400px;
   }
 
   // Button
@@ -47,7 +50,7 @@ color: $base-color-active;
   border: 0;
   display: block;
   margin: 0;
-  padding: 1em;
+  padding: 1.5em;
   width: 100%;
 
     [role="tablist"] & {
@@ -67,7 +70,7 @@ color: $base-color-active;
 
   }
 
-// Accordion & Layout Panel
+  // Accordion & Layout Panel
 
   &__panel  {
   background-color: $base-color;
