@@ -14,7 +14,7 @@
 
   // Display which TabCordion is in use via console:
 
-  console.log('%c TabCordion v1.6 in use. ', 'background: #6e00ee; color: #fff');
+  console.log('%c TabCordion v1.7 in use. ', 'background: #6e00ee; color: #fff');
 
   // Commonly used Classes, Data Attributes, States, and Strings.
 
@@ -29,6 +29,7 @@
   var tabCordionDataBreakpoint = "data-tab-breakpoint";
   var tabCoprdionDataDisableURL = "data-tab-disable-url";
   var tabCordionDataVertical = "data-tab-vertical";
+  var tabCordionCallback = document.querySelectorAll(".tab-accordion[data-tab-callback]");
 
   // Grab the hash (fragment) from the URL.
 
@@ -115,6 +116,17 @@
       // TODO: Have mobile panels be closed by default or when toggled on.
       // As it is now, panels will behave the same across smaller
       // and larger viewports.
+
+      // Callback
+
+      var tabCallBack = thisButton.parentNode.dataset.tabCallback;
+
+      if(tabCallBack !== undefined) {
+
+        contentTarget = thisButton.nextElementSibling.getAttribute("id");
+        customCallback(contentTarget, tabCallBack);
+
+      }
 
     }
 
@@ -280,8 +292,7 @@
 
         });
 
-        // Begin looping though breakpoints and altering DOM as each of
-        // those viewports is resized/loaded.
+        // Begin looping though breakpoints and altering DOM as each of those viewports is resized/loaded.
 
         if (tabListBreakPoints[i].matches) {
 
@@ -314,8 +325,6 @@
               button.removeAttribute("tabindex");
 
             }
-
-            //TODO: Add key direction support.
 
           });
 
@@ -391,4 +400,43 @@
 
   viewPortChange();
 
+  // Callback OnLoad
+
+  tabCordionCallback.forEach(function(callback){
+
+    var callBackFunction = callback.dataset.tabCallback;
+    var callBackContent = callback.querySelectorAll("." + tabCordionExpandedState);
+
+    callBackContent.forEach(function(content){
+
+      contentTarget = content.getAttribute("id");
+      customCallback(contentTarget, callBackFunction);
+
+    });
+
+  });
+
+  // Custom callback with variable name. Accepts ID of content you will target.
+
+  function customCallback(contentTarget, customCallBackName) {
+
+    if (customCallBackName !== null) {
+
+      window[customCallBackName](contentTarget);
+
+    }
+
+  }
+
 })();
+
+// Example Callback Function (No need to copy this if you do not need it.)
+
+function helloWorld(contentID) {
+
+  var targetContent = document.getElementById(contentID);
+  var message = document.createElement("p");
+  message.innerHTML = "<strong>Hello World! The ID of this content area is <em> " + contentID + "</em>. You can use a callback to initiate a function within the disclosed content area on page load and reinitiate the same function on button click.</strong>";
+  targetContent.append(message);
+
+}
