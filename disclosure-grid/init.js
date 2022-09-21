@@ -1,6 +1,6 @@
 /*!
 
-  Radancy Pattern Library: Grid Disclosure v1.0
+  Radancy Pattern Library: Grid Disclosure
 
   Contributor(s):
   Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy
@@ -10,21 +10,9 @@
 
 (function() {
 
-  // IE11 Detection
-
-  var isIE11 = !!window.MSInputMethodContext && !!document.documentMode;
-
-  // forEach Polyfill for IE11.
-
-  if(isIE11) {
-
-    NodeList.prototype.forEach = Array.prototype.forEach;
-
-  };
-
   // Display which Grid version in use via console:
 
-  console.log('%c Grid Disclosure v1.0 (Beta) in use. ', 'background: #6F00EF; color: #fff');
+  console.log('%c Grid Disclosure v1.0 in use. ', 'background: #6F00EF; color: #fff');
 
   // Commonly used Classes, Data Attributes, States, and Strings.
 
