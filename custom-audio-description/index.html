@@ -1,0 +1,31 @@
+---
+jquery: false
+localcss: "init.css"
+localjs: "init.js"
+noindex: true
+title: "Custom Audio Descriptions"
+---
+
+<div id="video-player">
+
+	<div id="video-player-wrapper">
+
+		<video id="hero-video" preload="none" aria-label="SCJ Recruiting" mute poster="example.jpg">
+			<source src="example.mp4" type="video/mp4">
+			<!-- track kind="captions" label="English" src="example-caps.vtt" srclang="en-US" -->
+			<track kind="descriptions" label="English" src="example-desc.vtt" srclang="en-US">
+		</video>
+
+		<div class="custom-controls">
+
+			<button id="btn-play-pause"><img src="btn-play.png" alt="Toggle Play/Pause"></button>
+
+			<button id="btn-audio-description"><img src="btn-audio.png" alt="Toggle Audio Description"></button>
+
+		</div>
+
+	</div>
+
+	<div id="audio-description" aria-live="polite" aria-atomic="true"></div>
+
+</div>
