@@ -36,7 +36,7 @@
       // Check for custom ID on button.
 
       var thisButtonID = button.getAttribute("id");
-      var thisContentID = button + "-content";
+      var thisContentID = thisButtonID + "-content";
 
     } else {
 
@@ -82,7 +82,7 @@
 
     });
 
-    // Open desired disclosure. 
+    // Open desired disclosure.
 
     if(button.hasAttribute("data-disclosure-open")) {
 
@@ -174,6 +174,12 @@
         thisButton.classList.add("open");
 
       }
+
+    }
+
+    if(thisButton.hasAttribute("data-disclosure-enable-url")) {
+
+      window.location = "#" + thisButton.id;
 
     }
 
