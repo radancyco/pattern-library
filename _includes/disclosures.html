@@ -1,8 +1,8 @@
 <section id="a11y-info" class="a11y-info">
 
-	<h2>Accessibility & UX</h2>
+	<h2>Avoid Changing Text</h2>
 
-  <p>Toggling text in a control to indicate a state change should be avoided. For example, don't do this:</p>
+  <p>Toggling text in a control to indicate a state change should be avoided. For example, click on the following button:</p>
 
 	<button aria-expanded="false" class="btn" id="toggleExample" onclick="toggleText()">Open</button>
 
@@ -27,6 +27,8 @@
 	}
 
 	</script>
+
+	<p>This is problematic for the following reasons:</p>
 
   <ul>
     <li>Changing text removes the initial context of the control, which can be confusing, especially if <code>aria-expanded</code> or <code>aria-pressed</code> are used to aid assistive technology users.</li>
