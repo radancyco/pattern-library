@@ -71,6 +71,8 @@
       button.insertAdjacentHTML('beforeend', ' <span class="disclosure--icon" aria-hidden="true"></span>');
 
       // Note: We add icon in spon with aria-hidden so that is not read back by AT. For example, we don't want to hear "Learn More Plus Sign", etc.
+      // You can roll your own custom icons if you like, say an inline SVG, but be sure to always hide it, like so:
+      // <button class="disclosure--btn">Learn More <span aria-hidden="true"><svg ... > ... </svg></button>
 
     }
 
@@ -79,6 +81,8 @@
       discloseContent(this);
 
     });
+
+    // Open desired disclosure. 
 
     if(button.hasAttribute("data-disclosure-open")) {
 
