@@ -3,128 +3,199 @@
   Radancy Pattern Library: Disclosure
 
   Contributor(s):
+  Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy
   Andrew Hill, Email: andrew.hill@radancy.com
+
+  Dependencies: None
 
 */
 
-var getExpanders = document.querySelectorAll(".disclosure--btn");
-var getContent = document.querySelectorAll(".disclosure--content");
+(function() {
 
-var simpleExpander = {
+  // Display which Disclosure is in use via console:
 
-  init: function(){
+  console.log('%c Disclosure v1.4 in use. ', 'background: #6e00ee; color: #fff');
 
-    console.log('%c Disclosure v1.2 in use. ', 'background: #6e00ee; color: #fff');
+  // Commonly used Classes, Data Attributes, States, Strings, etc.
 
-    // Add Listener and other needed attributes to disclosure button
+  var disclosure = document.querySelectorAll(".disclosure");
+  var disclosureBtn = document.querySelectorAll(".disclosure--btn");
+  var disclosureContent = document.querySelectorAll(".disclosure--content");
+  var disclosureToggleAll = document.querySelectorAll(".disclosure--toggle-all");
 
-    getExpanders.forEach(function(disclosure, i){
+  // Add Listener and other needed attributes to disclosure button
 
-      var int = i + 1;
+  disclosureBtn.forEach(function(button, e) {
 
-      disclosure.setAttribute("aria-expanded", "false");
+    var int = e + 1;
 
-      if(disclosure.hasAttribute("id")){
+    button.setAttribute("aria-expanded", "false");
 
-        var thisButtonID = disclosure.getAttribute("id");
-        var thisContentID = thisButtonID + "-content";
+    if(button.hasAttribute("id")){
 
-      } else {
+      // Check for custom ID on button.
 
-        var thisButtonID = "disclosure-btn-" + int;
-        var thisContentID = "disclosure-content-" + int;
+      var thisButtonID = button.getAttribute("id");
+      var thisContentID = button + "-content";
 
-      }
+    } else {
 
-      disclosure.setAttribute("id", thisButtonID);
-      disclosure.setAttribute("aria-controls", thisContentID);
+      // else, add dynamic ID.
 
-      if(disclosure.parentElement.classList.contains("disclosure--heading")) {
+      var thisButtonID = "disclosure-btn-" + int;
+      var thisContentID = "disclosure-content-" + int;
 
-        disclosure.parentElement.nextElementSibling.setAttribute("id", thisContentID);
+    }
 
-      } else {
+    // Set ID and aria-controls on button.
 
-        disclosure.nextElementSibling.setAttribute("id", thisContentID);
+    button.setAttribute("id", thisButtonID);
+    button.setAttribute("aria-controls", thisContentID);
 
-      }
+    if(button.closest(".disclosure--heading")) {
 
-      // Prep each content area.
+      // If button contains heading.
 
-      getContent.forEach(function(content, e){
+      button.closest(".disclosure--heading").nextElementSibling.setAttribute("id", thisContentID);
 
-        content.setAttribute("role", "group");
+    } else {
 
-      });
+      button.nextElementSibling.setAttribute("id", thisContentID);
 
-      if(disclosure.hasAttribute("data-disclosure-icon")){
+    }
 
-        disclosure.insertAdjacentHTML('beforeend', ' <span class="disclosure--icon" aria-hidden="true"></span>');
+    // If button needs icon
 
-      }
+    if(button.hasAttribute("data-disclosure-icon")){
 
-      disclosure.addEventListener("click", simpleExpander.clicked);
+      button.insertAdjacentHTML('beforeend', ' <span class="disclosure--icon" aria-hidden="true"></span>');
 
-     });
+      // Note: We add icon in spon with aria-hidden so that is not read back by AT. For example, we don't want to hear "Learn More Plus Sign", etc.
 
-     // Open selected disclosure via URL
+    }
 
-     var url = document.location.href;
-     var hash = url.split("#");
-     var disclosureID = document.getElementById(hash[1]);
+    button.addEventListener("click", function () {
 
-     if(disclosureID) {
+      discloseContent(this);
 
-       if(disclosureID.parentElement.classList.contains("disclosure--heading")) {
+    });
 
-         disclosureID.parentElement.classList.add("open");
+    if(button.hasAttribute("data-disclosure-open")) {
 
-       } else {
+      button.click();
 
-         disclosureID.classList.add("open");
+    }
 
-       }
+  });
 
-       disclosureID.setAttribute("aria-expanded", "true");
+  // Prep each content area.
 
-     }
+  disclosureContent.forEach(function(content, e) {
 
-  }, clicked: function(){
+    content.setAttribute("role", "group");
+
+  });
+
+  // Multiple
+
+  disclosureToggleAll.forEach(function(toggle, e) {
+
+    toggle.setAttribute("aria-pressed", "false");
+    toggle.insertAdjacentHTML("beforeend", " <span class='disclosure--toggle-all-icon' aria-hidden='true'></span>");
+
+    toggle.addEventListener("click", function () {
+
+      discloseMultiple(this);
+
+    });
+
+  });
+
+  // Open selected disclosure via URL
+
+  var url = document.location.href;
+  var hash = url.split("#");
+  var disclosureID = document.getElementById(hash[1]);
+
+  if(disclosureID) {
+
+    if(disclosureID.closest(".disclosure--heading")) {
+
+      disclosureID.closest(".disclosure--heading").classList.add("open");
+
+    } else {
+
+      disclosureID.classList.add("open");
+
+    }
+
+    disclosureID.setAttribute("aria-expanded", "true");
+
+  }
+
+  function discloseContent(thisButton){
 
     // Run Event
 
-    var isActive = this.getAttribute("aria-expanded");
+    var isActive = thisButton.getAttribute("aria-expanded");
 
-    if (isActive == "true") {
+    if (isActive === "true") {
 
       // Not Active
 
-      this.setAttribute("aria-expanded", "false");
+      thisButton.setAttribute("aria-expanded", "false");
 
-      if(this.parentElement.classList.contains("disclosure--heading")) {
+      if(thisButton.closest(".disclosure--heading")) {
 
-        this.parentElement.classList.remove("open");
+        thisButton.closest(".disclosure--heading").classList.remove("open");
 
       } else {
 
-        this.classList.remove("open");
+        thisButton.classList.remove("open");
 
       }
-
 
     } else {
 
       // Active
 
-      this.setAttribute("aria-expanded", "true");
+      thisButton.setAttribute("aria-expanded", "true");
 
-      if(this.parentElement.classList.contains("disclosure--heading")) {
+      if(thisButton.closest(".disclosure--heading")) {
 
-        this.parentElement.classList.add("open");
+        thisButton.closest(".disclosure--heading").classList.add("open");
 
       } else {
 
-        this.classList.add("open");
+        thisButton.classList.add("open");
+
+      }
+
+    }
+
+    // Check if all buttons are open
+
+    if(thisButton.closest(".disclosure")) {
+
+      var buttonArray = [];
+
+      var allGroupButtons = thisButton.closest(".disclosure").querySelectorAll(".disclosure--btn");
+
+      allGroupButtons.forEach(function(button, e) {
+
+        buttonArray.push(button.getAttribute("aria-expanded"));
+
+      });
+
+      // console.log(buttonArray);
+
+      if(buttonArray.includes("false")) {
+
+        thisButton.closest(".disclosure").querySelector(".disclosure--toggle-all").setAttribute("aria-pressed", "false");
+
+      } else {
+
+        thisButton.closest(".disclosure").querySelector(".disclosure--toggle-all").setAttribute("aria-pressed", "true");
 
       }
 
@@ -132,10 +203,56 @@ var simpleExpander = {
 
   }
 
-}
+  function discloseMultiple(thisButton){
 
-if(getExpanders){
+    var isActive = thisButton.getAttribute("aria-pressed");
 
-  simpleExpander.init();
+    if(isActive === "true") {
 
-}
+      thisButton.setAttribute("aria-pressed", "false");
+
+    } else {
+
+      thisButton.setAttribute("aria-pressed", "true");
+
+    }
+
+    var openAll = thisButton.closest(".disclosure").querySelectorAll(".disclosure--btn");
+
+    openAll.forEach(function(button, e) {
+
+      if (isActive === "true") {
+
+        button.setAttribute("aria-expanded", "false");
+
+        if(button.closest(".disclosure--heading")) {
+
+          button.closest(".disclosure--heading").classList.remove("open");
+
+        } else {
+
+          button.classList.remove("open");
+
+        }
+
+      } else {
+
+        button.setAttribute("aria-expanded", "true");
+
+        if(button.closest(".disclosure--heading")) {
+
+          button.closest(".disclosure--heading").classList.add("open");
+
+        } else {
+
+          button.classList.add("open");
+
+        }
+
+      }
+
+    });
+
+  }
+
+})();

@@ -1,6 +1,6 @@
 /*!
 
-  Radancy Pattern Library: Disclosure v1.1
+  Radancy Pattern Library: Disclosure
 
   Contributor(s):
   Andrew Hill, Email: andrew.hill@radancy.com
@@ -13,7 +13,17 @@
 
 $base-color: #6F00EF;
 
-.disclosure--btn {
+.disclosure {
+
+  ul, li {
+  margin: 0;
+  padding:0;
+  list-style: none;
+  }
+
+}
+
+.disclosure--btn, .disclosure--toggle-all {
 background-color: $base-color;
 border: 0;
 color: #fff;
@@ -22,7 +32,32 @@ margin-bottom: 1em;
 padding: 1em;
 position: relative;
 text-align: left;
-width: 100%;
+}
+
+.disclosure--toggle-all {
+float: right;
+
+  .disclosure--toggle-all-icon {
+
+    &::after {
+    display: inline-block;
+    content: "+";
+    }
+
+  }
+
+  &[aria-pressed="true"] {
+
+    .disclosure--toggle-all-icon {
+
+      &::after {
+      content: "-";
+      }
+
+    }
+
+  }
+
 }
 
 .disclosure--heading {
@@ -44,11 +79,11 @@ margin: 0;
 
 .disclosure--heading, .disclosure--btn {
 
-  + .disclosure--content {
-  display: none;
-  }
+  // Open State
 
   &.open {
+
+    // Toggle Icon
 
     .disclosure--icon {
 
@@ -58,8 +93,25 @@ margin: 0;
 
     }
 
+    // Show Content
+
     + .disclosure--content {
     display: block;
+    }
+
+  }
+
+  + .disclosure--content {
+  display: none;
+
+    // Demo: You can remove the following styles if not desired.
+
+    background-color: #ccc;
+    margin: -2em 0 1em;
+    padding: 1em;
+
+    * {
+    margin: 1em 0 0;
     }
 
   }

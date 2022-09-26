@@ -3,10 +3,10 @@ folder: disclosure
 localcss: "init.css"
 localjs: "init.js"
 noindex: true
-title: "Disclosure v1.2"
+title: "Disclosure v1.4"
 ---
 
-<p>This pattern will allow you to implement a disclosure widget. Please read <a href="#a11y-info">Accessibility & UX</a> before using.</p>
+<p>This pattern will allow you to implement a disclosure widget.</p>
 
 {% include_relative para.html %}
 
@@ -26,13 +26,83 @@ title: "Disclosure v1.2"
 
 <!-- End Disclosure -->
 
-<h2 id="visual-affordance">Visual Affordance</h2>
+<h2 id="interactive-heading">Interactive Heading</h2>
 
-<p>Parameter: <code>data-disclosure-icon</code></p>
+<p>Example: <code>&lt;h2 <b>class="disclosure--heading"</b>&gt;&lt;button class="disclosure--btn"&gt; ... &lt;/button&gt;&lt;/h2&gt;</code></p>
 
 <!-- Begin Disclosure -->
 
-<button class="disclosure--btn" data-disclosure-icon>Learn More</button>
+<h3 class="disclosure--heading"><button class="disclosure--btn">What is the answer to life, the universe, and everything?</button></h3>
+
+<div class="disclosure--content">
+
+  <p>Purple ipsum dolor sit amet, consectetur adipiscing elit. Etiam congue, urna eu efficitur accumsan, massa sem rhoncus elit, eu mattis erat metus gravida dolor. Maecenas imperdiet sodales dolor, sit amet malesuada lorem tincidunt in. Nunc a risus augue. Sed pellentesque pharetra iaculis. Donec gravida risus ut placerat venenatis. Integer sed erat eget risus rutrum condimentum. Curabitur tincidunt nisl ornare, viverra est eget, condimentum lectus. Integer pretium justo ac odio vestibulum ornare. Nullam mi risus, faucibus lacinia justo et, auctor vehicula lectus.</p>
+
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam congue, urna eu efficitur accumsan, massa sem rhoncus elit, eu mattis erat metus gravida dolor. Maecenas imperdiet sodales dolor, sit amet malesuada lorem tincidunt in. Nunc a risus augue. Sed pellentesque pharetra iaculis. Donec gravida risus ut placerat venenatis. Integer sed erat eget risus rutrum condimentum. Curabitur tincidunt nisl ornare, viverra est eget, condimentum lectus. Integer pretium justo ac odio vestibulum ornare. Nullam mi risus, faucibus lacinia justo et, auctor vehicula lectus.</p>
+
+</div>
+
+<!-- End Disclosure -->
+
+<h2 id="multiple">Multiple</h2>
+
+<!-- Begin Disclosure -->
+
+<div class="disclosure">
+
+  <button class="disclosure--toggle-all">Show All</button>
+
+  <ul>
+
+    <li>
+
+      <h2 class="disclosure--heading"><button class="disclosure--btn">What is your quest?</button></h2>
+
+      <div class="disclosure--content">
+
+        <p>Netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus. Habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.</p>
+
+    </div>
+
+    </li>
+
+    <li>
+
+      <h2 class="disclosure--heading"><button class="disclosure--btn">What is your favourite colour?</button></h2>
+
+      <div class="disclosure--content">
+
+        <p>Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+
+      </div>
+
+    </li>
+
+    <li>
+
+      <h2 class="disclosure--heading"><button class="disclosure--btn">What is the airspeed velocity of an unladen swallow?</button></h2>
+
+      <div class="disclosure--content">
+
+        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+
+      </div>
+
+    </li>
+
+  </ul>
+
+</div>
+
+{% include toggle-all.html %}
+
+<h2 id="open-disclosure">Open Disclosure</h2>
+
+<p>Example: <code>&lt;button class="disclosure--btn" <b>data-disclosure-open</b>&gt; ... &lt;/button&gt;</code></p>
+
+<!-- Begin Disclosure -->
+
+<h2 class="disclosure--heading"><button class="disclosure--btn" data-disclosure-open>Learn More</button></h2>
 
 <div class="disclosure--content">
 
@@ -46,17 +116,19 @@ title: "Disclosure v1.2"
 
 <!-- End Disclosure -->
 
-<h2 id="interactive-heading">Interactive Heading</h2>
+<h2 id="visual-affordance">Visual Affordance</h2>
 
-<p>Class: <code>disclosure--heading</code></p>
+<p>Example: <code>&lt;button class="disclosure--btn" <b>data-disclosure-icon</b>&gt; ... &lt;/button&gt;</code></p>
 
 <!-- Begin Disclosure -->
 
-<h3 class="disclosure--heading"><button class="disclosure--btn">What is your favorite color?</button></h3>
+<button class="disclosure--btn" data-disclosure-icon>Learn More</button>
 
 <div class="disclosure--content">
 
-  <p>Purple ipsum dolor sit amet, consectetur adipiscing elit. Etiam congue, urna eu efficitur accumsan, massa sem rhoncus elit, eu mattis erat metus gravida dolor. Maecenas imperdiet sodales dolor, sit amet malesuada lorem tincidunt in. Nunc a risus augue. Sed pellentesque pharetra iaculis. Donec gravida risus ut placerat venenatis. Integer sed erat eget risus rutrum condimentum. Curabitur tincidunt nisl ornare, viverra est eget, condimentum lectus. Integer pretium justo ac odio vestibulum ornare. Nullam mi risus, faucibus lacinia justo et, auctor vehicula lectus.</p>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam congue, urna eu efficitur accumsan, massa sem rhoncus elit, eu mattis erat metus gravida dolor. Maecenas imperdiet sodales dolor, sit amet malesuada lorem tincidunt in. Nunc a risus augue. Sed pellentesque pharetra iaculis. Donec gravida risus ut placerat venenatis. Integer sed erat eget risus rutrum condimentum. Curabitur tincidunt nisl ornare, viverra est eget, condimentum lectus. Integer pretium justo ac odio vestibulum ornare. Nullam mi risus, faucibus lacinia justo et, auctor vehicula lectus.</p>
+
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam congue, urna eu efficitur accumsan, massa sem rhoncus elit, eu mattis erat metus gravida dolor. Maecenas imperdiet sodales dolor, sit amet malesuada lorem tincidunt in. Nunc a risus augue. Sed pellentesque pharetra iaculis. Donec gravida risus ut placerat venenatis. Integer sed erat eget risus rutrum condimentum. Curabitur tincidunt nisl ornare, viverra est eget, condimentum lectus. Integer pretium justo ac odio vestibulum ornare. Nullam mi risus, faucibus lacinia justo et, auctor vehicula lectus.</p>
 
   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam congue, urna eu efficitur accumsan, massa sem rhoncus elit, eu mattis erat metus gravida dolor. Maecenas imperdiet sodales dolor, sit amet malesuada lorem tincidunt in. Nunc a risus augue. Sed pellentesque pharetra iaculis. Donec gravida risus ut placerat venenatis. Integer sed erat eget risus rutrum condimentum. Curabitur tincidunt nisl ornare, viverra est eget, condimentum lectus. Integer pretium justo ac odio vestibulum ornare. Nullam mi risus, faucibus lacinia justo et, auctor vehicula lectus.</p>
 
