@@ -3,6 +3,7 @@
   Radancy Pattern Library: Disclosure
 
   Contributor(s):
+  Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy
   Andrew Hill, Email: andrew.hill@radancy.com
 
   Dependencies: Sass
@@ -68,13 +69,16 @@ margin: 0;
 
 .disclosure--icon {
 
+  // This can be whatever you want.
+
   &::after {
   content: "+";
   display: inline-block;
   font-size: x-large;
+  line-height: normal;
   position: absolute;
   right: .75em;
-  top: .5em;
+  top: .4em;
   }
 
 }
