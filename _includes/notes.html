@@ -12,6 +12,8 @@
   {% endif %}
 </ul>
 
+{% if page.localissues != false %}
+
 <h2 id="roadmap">Roadmap</h2>
 
 <p><a href="https://github.com/radancyco/pattern-library/issues/2">View and request feature enhancements on GitHub.</a></p>
@@ -27,3 +29,5 @@
 <a class="btn" href="{{ site.repo }}/archive/main.zip" aria-describedby="note-download">Download Repository</a>
 
 <p id="note-download"><strong>Note:</strong> <a href="https://jekyllrb.com/">Jekyll</a> is a requirement to run the repository locally. Contact <a href="mailto:{{ site.owner-email }}">{{ site.owner-name }}</a> for further setup instructions.</p>
+
+{% endif %}
