@@ -14,7 +14,7 @@
 
   // Display which TabCordion is in use via console:
 
-  console.log('%c TabCordion v1.7 in use. ', 'background: #6e00ee; color: #fff');
+  console.log('%c TabCordion v1.8 in use. ', 'background: #6e00ee; color: #fff');
 
   // Commonly used Classes, Data Attributes, States, and Strings.
 
@@ -272,9 +272,19 @@
 
               } else {
 
+                var getReadingDirection = document.getElementsByTagName("html")[0];
+
                 // Move left, right, and down.
 
-                var dir = e.which === 37 ? index - 1 : e.which === 39 ? index + 1 : e.which === 40 ? "down" : null;
+                if (getReadingDirection.getAttribute("dir") === "rtl") {
+
+                  var dir = e.which === 39 ? index - 1 : e.which === 37 ? index + 1 : e.which === 40 ? "down" : null;
+
+                } else {
+
+                  var dir = e.which === 37 ? index - 1 : e.which === 39 ? index + 1 : e.which === 40 ? "down" : null;
+
+                }
 
                 if (dir !== null) {
 
