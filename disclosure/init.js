@@ -27,7 +27,7 @@
 
   disclosureBtn.forEach(function(button, e) {
 
-    var int = e + 1;
+    var count = e + 1;
 
     button.setAttribute("aria-expanded", "false");
 
@@ -42,8 +42,8 @@
 
       // else, add dynamic ID.
 
-      var thisButtonID = "disclosure-btn-" + int;
-      var thisContentID = "disclosure-content-" + int;
+      var thisButtonID = "disclosure-btn-" + count;
+      var thisContentID = "disclosure-content-" + count;
 
     }
 
