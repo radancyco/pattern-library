@@ -175,6 +175,16 @@
 
       }
 
+      if(thisButton.hasAttribute("data-disclosure-dynamic")){
+
+        var disclosureDynamic = document.getElementById("disclosure-dynamic");
+
+        disclosureDynamic.innerHTML = thisButton.nextElementSibling.innerHTML;
+        disclosureDynamic.setAttribute("tabindex", "-1");
+        disclosureDynamic.focus();
+
+      }
+
     }
 
     if(thisButton.hasAttribute("data-disclosure-enable-url")) {
