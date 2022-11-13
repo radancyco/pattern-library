@@ -88,6 +88,8 @@
 
       button.click();
 
+      // button.dispatchEvent(new Event("click")); use this in future.
+
     }
 
   });
@@ -175,21 +177,28 @@
 
       }
 
-      if(thisButton.hasAttribute("data-disclosure-dynamic")){
-
-        var disclosureDynamic = document.getElementById("disclosure-dynamic");
-
-        disclosureDynamic.innerHTML = thisButton.nextElementSibling.innerHTML;
-        disclosureDynamic.setAttribute("tabindex", "-1");
-        disclosureDynamic.focus();
-
-      }
-
     }
 
     if(thisButton.hasAttribute("data-disclosure-enable-url")) {
 
       window.location = "#" + thisButton.id;
+
+    }
+
+    // Pass content to div
+
+    if(thisButton.hasAttribute("data-disclosure-dynamic")){
+
+      var disclosureDynamic = document.getElementById("disclosure-dynamic");
+
+      disclosureDynamic.innerHTML = thisButton.nextElementSibling.innerHTML;
+
+      if (document.readyState === "complete") {
+
+        disclosureDynamic.setAttribute("tabindex", "-1");
+        disclosureDynamic.focus();
+
+      }
 
     }
 
