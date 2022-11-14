@@ -35,8 +35,8 @@ flex-wrap: wrap;
     text-align: center;
     width: 100%;
 
-    // Note: Focus and hover states must meet a 3:1 color ratio between background color and foreground text.
-    // The project designer should be providing this state. When received, please ensure it is meeting correct ratio.
+      // Note: Focus and hover states must meet a 3:1 color ratio between background color and foreground text.
+      // The project designer should be providing this state. When received, please ensure it is meeting correct ratio.
 
       &:focus, &:hover {
       background-color: $grid-color;

@@ -189,14 +189,51 @@
 
     if(thisButton.hasAttribute("data-disclosure-dynamic")){
 
-      var disclosureDynamic = document.getElementById("disclosure-dynamic");
+      var dynamicTarget = thisButton.closest(".disclosure-dynamic").querySelector(".disclosure--target");
 
-      disclosureDynamic.innerHTML = thisButton.nextElementSibling.innerHTML;
+      dynamicTarget.innerHTML = thisButton.nextElementSibling.innerHTML;
+
+      // We only want focus and states to run on click, not initial page load.
 
       if (document.readyState === "complete") {
 
-        disclosureDynamic.setAttribute("tabindex", "-1");
-        disclosureDynamic.focus();
+        // Set focus to dynamic content
+
+        dynamicTarget.setAttribute("tabindex", "-1");
+        dynamicTarget.focus();
+
+        // Basic button toggle.
+        // TODO: This seems redundant. Move to global function
+
+        var allButtons = thisButton.closest(".disclosure-dynamic").querySelectorAll("[data-disclosure-dynamic]");
+
+        allButtons.forEach(function(button, e) {
+
+          thisButton.setAttribute("aria-expanded", "true");
+
+          if(thisButton.closest(".disclosure--heading")) {
+
+            thisButton.closest(".disclosure--heading").classList.add("open");
+
+          } else {
+
+            thisButton.classList.add("open");
+
+          }
+
+          button.setAttribute("aria-expanded", "false");
+
+          if(button.closest(".disclosure--heading")) {
+
+            button.closest(".disclosure--heading").classList.remove("open");
+
+          } else {
+
+            button.classList.remove("open");
+
+          }
+
+        });
 
       }
 
