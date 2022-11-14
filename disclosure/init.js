@@ -209,18 +209,6 @@
 
         allButtons.forEach(function(button, e) {
 
-          thisButton.setAttribute("aria-expanded", "true");
-
-          if(thisButton.closest(".disclosure--heading")) {
-
-            thisButton.closest(".disclosure--heading").classList.add("open");
-
-          } else {
-
-            thisButton.classList.add("open");
-
-          }
-
           button.setAttribute("aria-expanded", "false");
 
           if(button.closest(".disclosure--heading")) {
@@ -230,6 +218,18 @@
           } else {
 
             button.classList.remove("open");
+
+          }
+
+          thisButton.setAttribute("aria-expanded", "true");
+
+          if(thisButton.closest(".disclosure--heading")) {
+
+            thisButton.closest(".disclosure--heading").classList.add("open");
+
+          } else {
+
+            thisButton.classList.add("open");
 
           }
 
