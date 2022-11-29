@@ -118,4 +118,39 @@ margin: 0;
 
   }
 
+  // Viewport Friendly
+
+  @media(min-width: 48.625em) { // 778px
+
+    &.disclosure--viewport {
+
+      .disclosure--btn {
+      visibility: hidden;
+      pointer-events: none;
+
+        span {
+        color: $base-color;
+        font-weight: 700;
+        visibility: visible;
+        }
+
+        // If icon present
+
+        &:after {
+        display: none;
+        }
+
+      }
+
+      // Always show content
+
+      + .disclosure--content {
+      display: block;
+      background-color: transparent;
+      }
+
+    }
+
+  }
+
 }
