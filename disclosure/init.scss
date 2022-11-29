@@ -122,14 +122,14 @@ margin: 0;
 
   @media(min-width: 48.625em) { // 778px
 
-    &.disclosure--viewport {
+    &[data-disclosure-viewport] {
 
       .disclosure--btn {
       margin: 0;
       pointer-events: none;
       visibility: hidden;
 
-        span {
+        span:not([aria-hidden]) {
         color: $base-color;
         font-weight: 700;
         visibility: visible;
@@ -137,7 +137,7 @@ margin: 0;
 
         // If icon present
 
-        &:after {
+        span[aria-hidden] {
         display: none;
         }
 
