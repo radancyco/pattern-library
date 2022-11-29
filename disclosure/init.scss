@@ -125,8 +125,9 @@ margin: 0;
     &.disclosure--viewport {
 
       .disclosure--btn {
-      visibility: hidden;
+      margin: 0;
       pointer-events: none;
+      visibility: hidden;
 
         span {
         color: $base-color;
@@ -145,8 +146,8 @@ margin: 0;
       // Always show content
 
       + .disclosure--content {
-      display: block;
       background-color: transparent;
+      display: block;
       }
 
     }
