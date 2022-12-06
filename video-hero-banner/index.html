@@ -1,0 +1,68 @@
+---
+folder: video-hero-banner
+localcss: init.css
+localjs: init.js
+title: "Video Hero Banner v2.0"
+---
+
+<p>This pattern will allow you to implement an accessible and performance friendly video banner.</p>
+
+{% include_relative para.html %}
+
+<h2 id="basic-setup">Basic Setup</h2>
+
+<p>Example:</p>
+
+<pre><code>&lt;div class="hero-banner" data-banner-desktop="hero-banner-video-lg.mp4" data-banner-mobile="hero-banner-video-sm.mp4" data-banner-breakpoint="(min-width:778px)"&gt;
+
+	&lt;div class="hero-banner__content"&gt;Simple. Accessible. Performant.&lt;/div&gt;
+
+	&lt;img alt="" class="hero-banner__poster" src="hero-banner-image.jpg"&gt;
+
+&lt;/div&gt;</code></pre>
+
+<!-- Begin Video Hero Banner -->
+
+<!-- div class="hero-banner" data-banner-all="hero-banner-video-lg.mp4">
+
+	<div class="hero-banner__content">Simple. Accessible. Performant.</div>
+
+	<img alt="" class="hero-banner__poster" src="hero-banner-image.jpg" alt="">
+
+</div -->
+
+<!-- End Video Hero Banner -->
+
+<br>
+
+<!-- Begin Video Hero Banner -->
+
+<div class="hero-banner" data-banner-breakpoint="(min-width: 980px)" data-banner-desktop="hero-banner-video-lg.mp4" data-banner-mobile="hero-banner-video-sm.mp4">
+
+	<div class="hero-banner__content">Simple. Accessible. Performant.</div>
+
+	<img alt="" class="hero-banner__poster" src="hero-banner-image.jpg" alt="">
+
+</div>
+
+<!-- End Video Hero Banner -->
+
+<br>
+
+<!-- Begin Video Hero Banner -->
+
+<div class="hero-banner" data-banner-breakpoint="(min-width: 778px)" data-banner-desktop="handbrake/output-optimized.mp4" data-banner-mobile="handbrake/output-mobile.mp4">
+
+	<div class="hero-banner__content">Simple. Accessible. Performant.</div>
+
+	<img alt="" class="hero-banner__poster" src="hero-banner-image.jpg" alt="">
+
+</div>
+
+<!-- End Video Hero Banner -->
+
+{% include pause-animation.html %}
+
+{% include video-optimization.html %}
+
+{% include notes.html %}

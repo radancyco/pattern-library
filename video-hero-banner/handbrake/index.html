@@ -1,0 +1,99 @@
+---
+title: "HandBrake Tutorial"
+---
+
+<style>
+
+video {
+max-width: 966px;
+}
+
+</style>
+
+<p>This is a brief overview of the steps one might take to produce a more performance friendly video banner using HandBrake, though this lesson can be used to optimize many other types of web based videos, too. If these steps are too difficult, a <a download href="vhb-handbrake-preset.json">user preset</a> is available to download and import into HandBrake. This may serve useful for beginners.</p>
+
+<h2 id="summary">Summary</h2>
+
+<img src="step-1-summary.png" alt="">
+
+<ol>
+  <li>Open your source video. HandbBrake is capable of opening up many different kinds of video types.</li>
+  <li>Doublecheck the duration of the video. The length of the video will contribute to overall file size, so a video no longer than <strong>30 seconds</strong>, for banners, is usually recommended. The smaller in length, the better.</li>
+  <li>Ensure that your output container is <b>MP4</b>. This format has pretty much become the de facto standard for web based video.</li>
+  <li>Make sure the <b>Web Optimized</b> checkbox is clicked on. This will help improve streaming of the video over slower networks.</li>
+  <li>Create a new file name and choose an output path.</li>
+</ol>
+
+<h2 id="dimensions">Dimensions</h2>
+
+<img src="step-2-dimensions.png" alt="">
+
+<ol>
+  <li>Choose a median dimension for your video. The larger your video dimension are, the larger the file size will be.</li>
+  <li><b>1280 x 720</b> is considered a decent target for desktop, while about half this size should be considered if a version for mobile is to be created.</li>
+  <li>These are not fixed dimensions, but guidelines. Different sizes are okay, but should stay as near to these ranges as possible.</li>
+  <li>Videos that are not banners may demand different dimensions.</li>
+</ol>
+
+<h2 id="video">Video</h2>
+
+<img src="step-3-video.png" alt="">
+
+<ol>
+  <li>Select the quality of your video. A default range of <b>20</b> is generally good, but has little impact on file size.</li>
+  <li>A range between <b>26</b> and <b>28</b> can usually be depended upon to deliver good quality video, with a reduced file size.</li>
+  <li>Adjust <b>Encoder Options</b> to <b>Placebo</b>. This trades off compression effeciency against encoding speed and may improve file size without sacrificing quality.</li>
+  <li>For desktop, we should be shooting for <b>2-3MB</b> in file size. A mobile version of the video, if needed, should obviously be smaller.</li>
+</ol>
+
+<h2 id="audio">Audio</h2>
+
+<img src="step-4-audio.png" alt="">
+
+<ol>
+  <li>Video banners, in order to auto-play, must be muted. If no audio track is required, then it can safely be deleted, which will reduce file size further.</li>
+  <li>If your banner has sound, then it cannot auto-play. However, you can optimize your audio track further by reducing the audio bitrate to <b>128KB</b>, which is adequate for most audio playback.</li>
+</ol>
+
+<p><b>Note:</b> A bitrate is number of bits per second that can be transmitted along a digital network.</p>
+
+<h2 id="encode">Encode. Wash. Rinse. Repeat.</h2>
+
+<img src="step-5-encode.png" alt="">
+
+<ol>
+  <li>You are done! You may now encode your video!</li>
+  <li>Feel free to experiment with different ranges and other settings until you are satisfied with the quality of the video and file size.</li>
+</ol>
+
+<h2>Output Examples</h2>
+
+<h3>Source Video</h3>
+
+<ul>
+  <li><b>Video Dimensions:</b> 1280 x 720</li>
+  <li><b>Constant Quality:</b> N/A</li>
+  <li><b>Video Size:</b> 20MB</li>
+</ul>
+
+<video aria-label="Source Video" preload="none" poster="output-original.png" controls src="output-original.mp4"></video>
+
+<h3>Video (Desktop Optimized)</h3>
+
+<ul>
+  <li><b>Video Dimensions:</b> 1280 x 720</li>
+  <li><b>Constant Quality:</b> 28</li>
+  <li><b>Output Size:</b> 2.6MB</li>
+</ul>
+
+<video aria-label="Video (Desktop Optimized)" preload="none" poster="output-optimized.png" controls src="output-optimized.mp4"></video>
+
+<h3>Optimized Video (Mobile)</h3>
+
+<ul>
+  <li><b>Video Dimensions:</b> 716 x 404</li>
+  <li><b>Constant Quality:</b> 29</li>
+  <li><b>Output Size:</b> 996KB</li>
+</ul>
+
+<video aria-label="Video (Mobile Optimized)" preload="none" poster="output-mobile.png" style="max-width: 700px; object-fit: fill;" controls src="output-mobile.mp4"></video>
