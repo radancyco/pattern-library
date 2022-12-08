@@ -1,24 +1,25 @@
 ---
 folder: related-content
 localcss: "init.css"
+localjsnote: false
 title: "Related Content"
 ---
 
-<p>This pattern will allow you to implement a soluton to expand hidden content.</p>
+<h2 id="link-heading">Always Link Your Headings</h2>
 
-<h2>Heading Link</h2>
+<p>Instead of making your "learn more" text a hyperlink (which would require visually hidden text) or wrapping your entire content block in a hyperlink (which would create additional noise for assistive technology users), make your unique heading the link and then use CSS to allow the entire region to be clickable (a.k.a the "pseudo-element trick"). Also, make sure your heading levels are correct based on surrounding content. Skiping of headings should be avoided. </p>
 
 <ul class="related-content">
 
   <li class="related-content__item">
 
-    <img class="related-content__media" loading="lazy" src="https://via.placeholder.com/400x200/6F00EF/FFFFFF/?text=Placeholder" alt="">
+    <img alt="" class="related-content__media" height="200" loading="lazy" src="https://via.placeholder.com/400x200/6F00EF/FFFFFF/?text=Placeholder" width="400">
 
-    <h2 class="related-content__title"><a href="#">Item 1</a></h2>
+    <h3 class="related-content__title"><a href="#">Item 1</a></h3>
 
     <div class="related-content__description">
 
-      <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque habitant morbi tristique senectus et netus et malesuada.</p>
+      <p>Tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque habitant morbi tristique senectus et netus et malesuada.</p>
 
     </div>
     
@@ -28,13 +29,13 @@ title: "Related Content"
 
   <li class="related-content__item">
 
-    <img class="related-content__media" loading="lazy" src="https://via.placeholder.com/400x200/6F00EF/FFFFFF/?text=Placeholder" alt="">
+    <img alt="" class="related-content__media" height="200" loading="lazy" src="https://via.placeholder.com/400x200/6F00EF/FFFFFF/?text=Placeholder" width="400">
 
-    <h2 class="related-content__title"><a href="#">Item 2</a></h2>
+    <h3 class="related-content__title"><a href="#">Item 2</a></h3>
 
     <div class="related-content__description">
 
-      <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque habitant morbi tristique senectus et netus et malesuada.</p>
+      <p>Pellentesque habitant morbi tristique senectus et netus et fames ac turpis egestas. Pellentesque habitant morbi tristique senectus et netus et malesuada.</p>
 
     </div>
     
@@ -44,13 +45,29 @@ title: "Related Content"
 
   <li class="related-content__item">
 
-    <img class="related-content__media" loading="lazy" src="https://via.placeholder.com/400x200/6F00EF/FFFFFF/?text=Placeholder" alt="">
+    <img alt="" class="related-content__media" height="200" loading="lazy" src="https://via.placeholder.com/400x200/6F00EF/FFFFFF/?text=Placeholder" width="400">
 
-    <h2 class="related-content__title"><a href="#">Item 3</a></h2>
+    <h3 class="related-content__title"><a href="#">Item 3</a></h3>
 
     <div class="related-content__description">
 
-      <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque habitant morbi tristique senectus et netus et malesuada.</p>
+      <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames. Pellentesque morbi tristique senectus et netus et malesuada.</p>
+
+    </div>
+    
+    <p class="related-content__more">Learn More</p>
+
+  </li>
+
+  <li class="related-content__item">
+
+    <img alt="" class="related-content__media" height="200" loading="lazy" src="https://via.placeholder.com/400x200/6F00EF/FFFFFF/?text=Placeholder" width="400">
+
+    <h3 class="related-content__title"><a href="#">Item 4</a></h3>
+
+    <div class="related-content__description">
+
+      <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames. Pellentesque morbi tristique senectus et netus et malesuada.</p>
 
     </div>
     
@@ -60,13 +77,15 @@ title: "Related Content"
 
 </ul>
 
-<h2>Heading Link</h2>
+<h2 id="no-content">No Content Means No Heading</h2>
+
+<p>When a related content area has no content other than a title, please do not use a heading. Headings should only be used to precede content (paragraphs, lists, etc.). The "pseudo-element trick" can be used here as well, to make entire region clickable.</p>
 
 <ul class="related-content">
 
   <li class="related-content__item">
 
-    <img class="related-content__media" loading="lazy" src="https://via.placeholder.com/400x200/6F00EF/FFFFFF/?text=Placeholder" alt="">
+    <img alt="" class="related-content__media" height="200" loading="lazy" src="https://via.placeholder.com/400x200/6F00EF/FFFFFF/?text=Placeholder" width="400">
 
     <div class="related-content__title"><a href="#">Item 1</a></div>
 
@@ -74,7 +93,7 @@ title: "Related Content"
 
   <li class="related-content__item">
 
-    <img class="related-content__media" loading="lazy" src="https://via.placeholder.com/400x200/6F00EF/FFFFFF/?text=Placeholder" alt="">
+    <img alt="" class="related-content__media" height="200" loading="lazy" src="https://via.placeholder.com/400x200/6F00EF/FFFFFF/?text=Placeholder" width="400">
 
     <div class="related-content__title"><a href="#">Item 2</a></div>
 
@@ -82,9 +101,17 @@ title: "Related Content"
 
   <li class="related-content__item">
 
-    <img class="related-content__media" loading="lazy" src="https://via.placeholder.com/400x200/6F00EF/FFFFFF/?text=Placeholder" alt="">
+    <img alt="" class="related-content__media" loading="lazy" src="https://via.placeholder.com/400x200/6F00EF/FFFFFF/?text=Placeholder">
 
     <div class="related-content__title"><a href="#">Item 3</a></div>
+
+  </li>
+
+  <li class="related-content__item">
+
+    <img alt="" class="related-content__media" loading="lazy" src="https://via.placeholder.com/400x200/6F00EF/FFFFFF/?text=Placeholder">
+
+    <div class="related-content__title"><a href="#">Item 4</a></div>
 
   </li>
 
