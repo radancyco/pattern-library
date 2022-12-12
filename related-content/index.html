@@ -9,6 +9,8 @@ title: "Related Content"
 
 <p>Instead of making the "learn more" text a hyperlink (which would require visually hidden text or ARIA) or wrapping your entire content block in a hyperlink (which might create additional noise for assistive technology users), make the unique heading the link and then use CSS to allow the entire region to be clickable (a.k.a the "pseudo-element trick"). Also, make sure your heading levels are correct based on surrounding content. Skiping of headings should be avoided. Typically, these tend to be <code>h2</code> or <code>h3</code>. Lastly, don't forget about the focus state. Applying <code>:focus</code> to <code>li</code> or <code>div</code> will not work. Use <code>:focus-within</code> instead.</code></p>
 
+<p><strong>Question:</strong> This being a well-known and ubiquitous pattern on the web, is the "Learn More" even needed here?</p>
+
 <ul class="related-content">
 
   <li class="related-content__item">
@@ -79,7 +81,7 @@ title: "Related Content"
 
 <h2 id="no-content">No Content Means No Heading</h2>
 
-<p>When a related content area has no content other than a title, please do not use a heading. Headings should only be used to precede content (paragraphs, lists, etc.). The "pseudo-element trick" can be used here as well, to make entire region clickable.</p>
+<p>When a related content area has no content other than a title, please do not use a heading. Headings should only be used to precede content (paragraphs, lists, etc.). The "pseudo-element trick" can be used here as well, to make entire region clickable. If you are asked to remove content, the heading must be changed to a <code>div</code> or <code>span</code>. <strong>Reminder:</strong> Heading adjustments are a common task in accessibility, so using classes on your headings makes future mark-up changes easier.</p>
 
 <ul class="related-content">
 
