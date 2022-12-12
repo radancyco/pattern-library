@@ -7,7 +7,7 @@ title: "Related Content"
 
 <h2 id="link-heading">Always Link Your Headings</h2>
 
-<p>Instead of making your "learn more" text a hyperlink (which would require visually hidden text) or wrapping your entire content block in a hyperlink (which would create additional noise for assistive technology users), make your unique heading the link and then use CSS to allow the entire region to be clickable (a.k.a the "pseudo-element trick"). Also, make sure your heading levels are correct based on surrounding content. Skiping of headings should be avoided. </p>
+<p>Instead of making the "learn more" text a hyperlink (which would require visually hidden text or ARIA) or wrapping your entire content block in a hyperlink (which might create additional noise for assistive technology users), make the unique heading the link and then use CSS to allow the entire region to be clickable (a.k.a the "pseudo-element trick"). Also, make sure your heading levels are correct based on surrounding content. Skiping of headings should be avoided. Typically, these tend to be <code>h2</code> or <code>h3</code>. Lastly, don't forget about the focus state. Applying <code>:focus</code> to <code>li</code> or <code>div</code> will not work. Use <code>:focus-within</code> instead.</code></p>
 
 <ul class="related-content">
 
