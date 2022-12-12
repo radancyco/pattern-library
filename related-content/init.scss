@@ -11,23 +11,8 @@
 
 */
 
-.visually-hidden:not(:focus):not(:active) {
-clip-path: inset(50%);
-clip: rect(0 0 0 0); 
-height: 1px;
-overflow: hidden;
-position: absolute;
-white-space: nowrap; 
-width: 1px;
-}
-
-img {
-display: block;
-min-width: 100%;
-}
-
 .related-content {
-margin: 0;
+margin: 1em 0;
 padding: 0;
 list-style: none;
 
