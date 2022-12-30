@@ -28,11 +28,11 @@ $base-color: #6F00EF;
 background-color: $base-color;
 border: 0;
 color: #fff;
-font-size: initial;
+font-size: unset;
 margin-bottom: 1em;
 padding: 1em;
 position: relative;
-text-align: left;
+text-align: start;
 width: 100%;
 }
 
@@ -64,6 +64,7 @@ width: auto;
 }
 
 .disclosure--heading {
+font-size: unset;
 margin: 0;
 }
 
