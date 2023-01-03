@@ -32,7 +32,7 @@ font-size: unset;
 margin-bottom: 1em;
 padding: 1em;
 position: relative;
-text-align: start;
+text-align: start; 
 width: 100%;
 }
 
@@ -69,17 +69,15 @@ margin: 0;
 }
 
 .disclosure--icon {
+position: absolute;
+inset-inline-end: 15px;
+inset-block-start: 10px;
 
   // This can be whatever you want.
 
   &::after {
   content: "+";
-  display: inline-block;
-  font-size: x-large;
-  line-height: normal;
-  position: absolute;
-  right: .75em;
-  top: .4em;
+  display: block;
   }
 
 }
