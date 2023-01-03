@@ -42,10 +42,10 @@ padding: 1em 0;
   label {
   display: inline-block;
   font-size: 1rem;
-  left: 10px;
+  inset-inline-start: 10px;
   line-height: normal;
   position: absolute;
-  top: 30px;
+  inset-block-start: 30px;
   transition: all .2s ease;
   z-index: 2;
   }
@@ -57,13 +57,12 @@ padding: 1em 0;
   font-size: 1.25rem;
   height: 75px;
   margin: 0;
-  outline: 0;
   padding: 0 10px;
   position: relative;
   width: 100%;
 
     &:focus ~ label, &:valid ~ label {
-    top: 5px;
+    inset-block-start: 5px;
     font-size: .8rem;
     }
 
@@ -117,10 +116,10 @@ padding: 2em 0 1em;
   label {
   display: inline-block;
   font-size: 1rem;
-  left: 10px;
+  inset-inline-start: 10px;
   line-height: normal;
   position: absolute;
-  top: 30px;
+  inset-block-start: 30px;
   transition: all .2s ease;
   z-index: 2;
   }
@@ -132,13 +131,12 @@ padding: 2em 0 1em;
   font-size: 1.25rem;
   height: 75px;
   margin: 0;
-  outline: 0;
   padding: 0 10px;
   position: relative;
   width: 100%;
 
     &:focus ~ label, &:valid ~ label {
-    top: -30px;
+    inset-block-start: -30px;
     }
 
     &:focus, &:focus {
@@ -190,10 +188,10 @@ padding: 2em 0 1em;
   label {
   display: inline-block;
   font-size: 1rem;
-  left: 10px;
+  inset-inline-start: 10px;
   line-height: normal;
   position: absolute;
-  top: 30px;
+  inset-block-start: 30px;
   transition: all .2s ease;
   z-index: 2;
   }
@@ -205,7 +203,6 @@ padding: 2em 0 1em;
   font-size: 1.25rem;
   height: 75px;
   margin: 0;
-  outline: 0;
   padding: 0 10px;
   position: relative;
   width: 100%;
@@ -231,7 +228,7 @@ padding: 2em 0 1em;
 
         ~ label {
           font-size: .9em;
-          top: -30px;
+          inset-block-start: -30px;
 
         }
 
