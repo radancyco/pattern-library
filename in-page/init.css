@@ -1,6 +1,6 @@
 /*!
 
-  Radancy Pattern Library: Jump Menu (In-page) v1.0
+  Radancy Pattern Library: Jump Menu (In-page)
 
   Contributor(s):
   Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy
@@ -9,5 +9,4 @@
   Instructions: To run locally, install Sass (https://sass-lang.com/install), CL to directory this file in and run:
   sass --watch init.scss:init.css --style compressed
 
-*/.in-page{background-color:#eee;border-radius:5px;font-size:1.2rem;margin:2em 0;padding:1em}.in-page__label{display:block;font-weight:bold;margin-right:.3em}@media (min-width: 48.625em){.in-page__label{display:inline-block}}.in-page__select,.in-page__btn{font-size:inherit;margin-right:.3em;padding:.5em}.in-page__btn{background-color:#6F00EF;border:0;color:white;font-size:inherit}.in-page__btn:focus{background-color:#69788C}
-/*# sourceMappingURL=init.css.map */
+*/.in-page{background-color:#eee;border-radius:5px;font-size:1.2rem;margin:2em 0;padding:1em}.in-page__label{display:block;font-weight:bold;margin-inline-end:.3em}@media(min-width: 48.625em){.in-page__label{display:inline-block}}.in-page__select,.in-page__btn{font-size:inherit;margin-inline-end:.3em;padding:.5em}.in-page__btn{background-color:#6f00ef;border:0;color:#fff;font-size:inherit}.in-page__btn:focus{background-color:#69788c}/*# sourceMappingURL=init.css.map */

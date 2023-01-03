@@ -99,8 +99,8 @@ flex-wrap: wrap;
     height: 40px;
     padding: 0;
     position: absolute;
-    right: 2em;
-    top: 2em;
+    inset-inline-end: 2em;
+    inset-block-start: 2em;
     width: 40px;
     }
 

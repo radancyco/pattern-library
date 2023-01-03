@@ -23,7 +23,7 @@ padding: 1em;
   &__label {
   display: block;
   font-weight: bold;
-  margin-right: .3em;
+  margin-inline-end: .3em;
 
     @media(min-width: 48.625em) {
 
@@ -35,7 +35,7 @@ padding: 1em;
 
   &__select, &__btn {
   font-size: inherit;
-  margin-right: .3em;
+  margin-inline-end: .3em;
   padding: .5em;
   }
 
