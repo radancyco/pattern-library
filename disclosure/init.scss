@@ -15,6 +15,8 @@
 $base-color: #6F00EF;
 
 .disclosure {
+padding-top: 4em;
+position: relative;
 
   ul, li {
   margin: 0;
@@ -37,7 +39,9 @@ width: 100%;
 }
 
 .disclosure--toggle-all {
-float: right;
+inset-block-start: 0;
+inset-inline-end: 0;
+position: absolute;
 width: auto;
 
   .disclosure--toggle-all-icon {
@@ -78,6 +82,7 @@ inset-block-start: 10px;
   &::after {
   content: "+";
   display: block;
+  font-size: x-large;
   }
 
 }
