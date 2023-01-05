@@ -42,12 +42,11 @@ width: 100%;
 inset-block-start: 0;
 inset-inline-end: 0;
 position: absolute;
-width: auto;
+max-width: 6.8rem;
 
   .disclosure--toggle-all-icon {
 
     &::after {
-    display: inline-block;
     content: "+";
     }
 
@@ -76,14 +75,15 @@ margin: 0;
 position: absolute;
 inset-inline-end: 15px;
 inset-block-start: 10px;
+font-size: x-large;
+line-height: normal;
 
   // This can be whatever you want.
 
   &::after {
   content: "+";
-  display: block;
-  font-size: x-large;
   }
+
 
 }
 
