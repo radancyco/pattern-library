@@ -27,7 +27,7 @@ list-style: none;
   flex: 1;
   margin: 0.5em;
   padding: 1em;
-  position: relative;
+  position: relative; // Needed for pseudo-element trick.
   transition: all 300ms ease-in-out;
 
     &:focus-within, &:hover {
@@ -48,7 +48,8 @@ list-style: none;
   
     a {
     
-      // Where the magic happens. This is how we make entire area clickable.
+      // Pseudo-element Trick
+      // Makes all content in container clickable. 
 
       &::before {
       content: "";
