@@ -1,16 +1,3 @@
-/*!
-
-  Radancy: Navigation (Basic) v1.0
-
-  Contributor(s):
-  Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy
-
-  Dependencies: Sass
-  Instructions: To run locally, install Sass (https://sass-lang.com/install), CL to directory this file in and run:
-  sass --watch init.scss:init.css --style compressed
-
-*/
-
 ///////////////////////////
 //   A11y Dropdown Nav
 ///////////////////////////
@@ -48,7 +35,7 @@ $nav-breakpoint: 1000px;
     filter: invert(1);
   }
   &:focus {
-    outline: none;
+
     background-color: $nav-color-bg-focus;
   }
 }
@@ -64,7 +51,7 @@ $nav-breakpoint: 1000px;
   &.toggled {
     display: block;
     background: #fff;
-    outline: 1px solid #666;
+
     a,
     button {
       color: #000;
@@ -82,7 +69,7 @@ $nav-breakpoint: 1000px;
       display: flex;
       background: $nav-color-bg;
       color: #fff;
-      outline: none;
+
       a,
       button {
         color: #fff;
@@ -115,8 +102,7 @@ $nav-breakpoint: 1000px;
       display: block;
       padding: 1.5rem 1.5rem;
       position: relative;
-      outline: 1px solid transparent;
-      // outline-offset: -1px;
+
       &:hover,
       &:focus {
         background-color: $nav-color-bg-focus;
@@ -155,7 +141,7 @@ $nav-breakpoint: 1000px;
       content: "";
       display: inline-block;
       transition: 0.3s;
-      margin-left: 0.5rem;
+      margin-inline-start: 0.5rem;
       margin-top: -4px;
       vertical-align: middle;
     }
@@ -190,7 +176,7 @@ $nav-breakpoint: 1000px;
   li {
     overflow: hidden;
     a {
-      text-align: left;
+      text-align: start;
       transition: 0.1s;
       padding: 1rem;
       width: auto;
@@ -223,20 +209,18 @@ $nav-breakpoint: 1000px;
   $spacing: 3;
   $color: #fff;
   position: absolute;
-  right: 0;
+  inset-inline-end: 0;
   top: 0;
   margin: 0.3rem;
   padding: 0.3rem 0.3rem 0;
   border: 0;
   background: none;
   height: $size * 10;
-  cursor: pointer;
   display: block;
   @media (min-width: $nav-breakpoint) {
     display: none;
   }
   &:focus {
-    outline: none;
     background-color: $nav-color-bg-focus;
   }
   &.toggled {
@@ -278,21 +262,5 @@ $nav-breakpoint: 1000px;
       transform: translate(0, $size * $spacing);
     }
   }
-}
-
-.access-link {
-  background-color: #0076ce;
-  color: #fff;
-  font-weight: 400;
-  font-size: 1rem;
-  left: -200px;
-  min-width: 200px;
-  opacity: 0;
-  padding: 4px 1em;
-  position: absolute;
-  text-align: center;
-  text-decoration: none;
-  top: 0;
-  z-index: 100;
 }
 
