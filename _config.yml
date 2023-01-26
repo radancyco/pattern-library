@@ -17,7 +17,7 @@ highlighter: rouge
 include: [_*.*]
 lang: en
 markdown: kramdown
-name: Pattern Library
+name: Component Library
 navigation: true
 owner-name: Michael Spellacy
 owner-email: michael.spellacy@radancy.com

@@ -1,6 +1,6 @@
 /*!
 
-  Radancy Pattern Library: Grid Disclosure
+  Radancy Component Library: Grid Disclosure
 
   Contributor(s):
   Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy

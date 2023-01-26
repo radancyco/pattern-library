@@ -1,6 +1,6 @@
 /*!
 
-  Radancy Pattern Library: Miscellaneous Examples
+  Radancy Component Library: Miscellaneous Examples
 
   Contributor(s):
   Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy

@@ -1,6 +1,6 @@
 /*!
 
-  Radancy Pattern Library: Jump Menu (External)
+  Radancy Component Library: Jump Menu (External)
 
   Contributor(s):
   Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy

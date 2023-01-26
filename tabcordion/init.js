@@ -1,6 +1,6 @@
 /*!
 
-  Radancy Pattern Library: TabCordion
+  Radancy Component Library: TabCordion
 
   Contributor(s):
   Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy

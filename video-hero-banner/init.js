@@ -1,6 +1,6 @@
 /*!
 
-  Radancy Pattern Library: Video Hero Banner (VHB)
+  Radancy Component Library: Video Hero Banner (VHB)
 
   Contributor(s):
   Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy

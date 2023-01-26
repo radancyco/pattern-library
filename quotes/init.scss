@@ -17,7 +17,7 @@ $base-color: #6F00EF;
 
 .carousel-scroll {
 position: relative;
-border-inline-end: 4px $base-color solid;
+border-right: 4px $base-color solid;
 
   &__container {
   display: flex;
@@ -59,22 +59,13 @@ border-inline-end: 4px $base-color solid;
   position: relative;
   transition: .6s;
 
-    &:first-child {
-    margin-inline-end: 110px;
-    }
-
     &:not(:first-child) {
     box-shadow: -2rem 0 3rem -2rem #000;
-    margin-inline-start: -100px;
-
-      html[dir="rtl"] & {
-      box-shadow: 2rem 0 3rem -2rem #000;
-      }
-
+    margin-left: -100px;
     }
 
     &:hover, &:focus, &:focus-within {
-    margin-inline-end: 110px;
+    margin-right: 110px;
     }
 
   }
@@ -87,14 +78,30 @@ border-inline-end: 4px $base-color solid;
       // Make entire clickable
 
       &::before {
+      bottom: 0;
       content: "";
       display: block;
-      inset: 0;
+      left: 0;
       position: absolute;
+      right: 0;
+      top: 0;
       }
 
     }
 
   }
+
+  // Custom Border
+
+  /* &::after {
+  background-color: red;
+  content: "";
+  display: block;
+  height: 100%;
+  position: absolute;
+  right: -4px;
+  top: 0;
+  width: 4px;
+  } */
 
 }

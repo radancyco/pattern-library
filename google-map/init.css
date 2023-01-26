@@ -1,6 +1,6 @@
 /*!
 
-  Radancy Pattern Library: Google Map for Jobs
+  Radancy Component Library: Google Map for Jobs
 
   Contributor(s):
   Bobby KC, Email: bobby.kc@radancy.com

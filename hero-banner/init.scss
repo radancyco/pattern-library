@@ -1,6 +1,6 @@
 /*!
 
-  Radancy Pattern Library: Hero Banner
+  Radancy Component Library: Hero Banner
 
   Contributor(s):
   Andrew Hill, Email: andrew.hill@radancy.com
@@ -48,10 +48,9 @@ margin: 0 -1em; // Remove if not needed.
 
     @include breakpoint($end-banner) {
 
-      left: 0;
+      inset-inline: 0;
       margin: auto;
       position: absolute;
-      right: 0;
 
     }
 
@@ -73,15 +72,15 @@ margin: 0 -1em; // Remove if not needed.
 
     /* Top Alignment Options */
 
-    &.text-left-top {
+    &.text-inset-start {
 
       .hero-banner__text-wrapper {
-      top: $banner-y-offset;
+      inset-block-start: $banner-y-offset;
       }
 
       .hero-banner__text-inner-wrapper {
       position: absolute;
-      left: $banner-x-offset;
+      inset-inline-start: $banner-x-offset;
       }
 
     }
@@ -229,8 +228,8 @@ border: 1px #6F00EF solid;
 font-size: .9em;
 margin-bottom: 1em;
 padding: .5em;
-right: 60px;
-top: 0;
+inset-inline-end: 60px;
+inset-block-start: 0;
 z-index: 1;
 
   @include breakpoint($end-banner) {

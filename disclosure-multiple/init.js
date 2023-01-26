@@ -1,6 +1,6 @@
 /*!
 
-  Radancy Pattern Library: Multiple Disclosures v1.1
+  Radancy Component Library: Multiple Disclosures v1.1
 
   Contributor(s):
   Andrew Hill, Email: andrew.hill@radancy.com

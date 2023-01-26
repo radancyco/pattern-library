@@ -1,6 +1,6 @@
 /*!
 
-  Radancy Pattern Library: Load More
+  Radancy Component Library: Load More
 
   Contributor(s):
   Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy

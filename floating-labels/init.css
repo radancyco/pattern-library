@@ -1,6 +1,6 @@
 /*!
 
-  Radancy Pattern Library: Floating Labels
+  Radancy Component Library: Floating Labels
 
   Contributor(s):
   Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy
