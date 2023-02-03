@@ -4,6 +4,7 @@ in-page: true
 localcss: "init.css"
 localjs: "init.js"
 read-more: true
+tabcordion: true
 title: "Disclosure v1.5"
 ---
 
@@ -85,34 +86,28 @@ title: "Disclosure v1.5"
 
 </div>
 
-<div class="in-page" data-in-page-dynamic>
+<div class="tab-accordion" data-tab-breakpoint="(min-width: 0)">
 
-  {% include select-assets.html %}
+  <button class="tab-accordion__button">CSS</button>
 
-  <div class="in-page__content" data-in-page-name="CSS" data-in-page-id="css">
+  <div class="tab-accordion__panel">
 
-    <div class="read-more">
+    <div class="tab-accordion__content">
 
-      <div class="read-more__content">
-
-        {% highlight css %}{% include_relative init.scss %}{% endhighlight %}
-
-      </div>
-
+      {% highlight css %}{% include_relative init.scss %}{% endhighlight %}
+      
     </div>
 
   </div>
 
-  <div class="in-page__content" data-in-page-name="JavaScript" data-in-page-id="javascript">
+  <button class="tab-accordion__button">JavaScript</button>
 
-    <div class="read-more">
+  <div class="tab-accordion__panel">
 
-      <div class="read-more__content">
+    <div class="tab-accordion__content">
 
-        {% highlight javascript %}{% include_relative init.js %}{% endhighlight %}
-
-      </div>
-
+      {% highlight javascript %}{% include_relative init.js %}{% endhighlight %}
+      
     </div>
 
   </div>
