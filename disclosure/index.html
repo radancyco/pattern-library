@@ -1,5 +1,6 @@
 ---
 folder: disclosure
+in-page: true
 localcss: "init.css"
 localjs: "init.js"
 title: "Disclosure v1.5"
@@ -7,188 +8,88 @@ title: "Disclosure v1.5"
 
 <p>This component will allow you to implement a disclosure widget.</p>
 
-{% include_relative para.html %}
+<div class="in-page" data-in-page-dynamic>
 
-<h2 id="basic-setup">Basic Setup</h2>
+  {% include select-example.html %}
 
-<p>Example:</p>
+  <div class="in-page__content" data-in-page-name="Basic Setup" data-in-page-id="basic-setup">
 
-<pre><code>&lt;button <span>class="disclosure--btn"</span>&gt; ... &lt;/button&gt;
-&lt;div <span>class="disclosure--content"</span>&gt; ... &lt;/div&gt;
-</code></pre>
+    {% include_relative html/basic-setup.html %}
 
-<!-- Begin Disclosure -->
+    {% highlight html %}{% include_relative html/basic-setup.html %}{% endhighlight %}
 
-<button class="disclosure--btn">Learn More</button>
+  </div>
 
-<div class="disclosure--content">
+  <div class="in-page__content" data-in-page-name="Enable URL" data-in-page-id="enable-url">
 
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam congue, urna eu efficitur accumsan, massa sem rhoncus elit, eu mattis erat metus gravida dolor. Maecenas imperdiet sodales dolor, sit amet malesuada lorem tincidunt in. Nunc a risus augue. Sed pellentesque pharetra iaculis. Donec gravida risus ut placerat venenatis. Integer sed erat eget risus rutrum condimentum. Curabitur tincidunt nisl ornare, viverra est eget, condimentum lectus. Integer pretium justo ac odio vestibulum ornare. Nullam mi risus, faucibus lacinia justo et, auctor vehicula lectus.</p>
+    {% include_relative html/enable-url.html %}
 
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam congue, urna eu efficitur accumsan, massa sem rhoncus elit, eu mattis erat metus gravida dolor. Maecenas imperdiet sodales dolor, sit amet malesuada lorem tincidunt in. Nunc a risus augue. Sed pellentesque pharetra iaculis. Donec gravida risus ut placerat venenatis. Integer sed erat eget risus rutrum condimentum. Curabitur tincidunt nisl ornare, viverra est eget, condimentum lectus. Integer pretium justo ac odio vestibulum ornare. Nullam mi risus, faucibus lacinia justo et, auctor vehicula lectus.</p>
+    {% highlight html %}{% include_relative html/enable-url.html %}{% endhighlight %}
 
-</div>
+  </div>
 
-<!-- End Disclosure -->
+  <div class="in-page__content" data-in-page-name="Interactive Heading" data-in-page-id="interactive-heading">
 
-<h2 id="enable-url">Enable URL</h2>
+    {% include_relative html/interactive-heading.html %}
 
-<p>Example: <code>&lt;button class="disclosure--btn" <b>data-disclosure-enable-url</b>&gt; ... &lt;/button&gt;</code></p>
+    {% highlight html %}{% include_relative html/interactive-heading.html %}{% endhighlight %}
 
-<!-- Begin Disclosure -->
+  </div>
 
-<button class="disclosure--btn" data-disclosure-enable-url>Learn More</button>
+  <div class="in-page__content" data-in-page-name="Interactive Heading: Viewport Friendly" data-in-page-id="viewport-friendly">
 
-<div class="disclosure--content">
+    {% include_relative html/viewport-friendly.html %}
 
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam congue, urna eu efficitur accumsan, massa sem rhoncus elit, eu mattis erat metus gravida dolor. Maecenas imperdiet sodales dolor, sit amet malesuada lorem tincidunt in. Nunc a risus augue. Sed pellentesque pharetra iaculis. Donec gravida risus ut placerat venenatis. Integer sed erat eget risus rutrum condimentum. Curabitur tincidunt nisl ornare, viverra est eget, condimentum lectus. Integer pretium justo ac odio vestibulum ornare. Nullam mi risus, faucibus lacinia justo et, auctor vehicula lectus.</p>
+    {% highlight html %}{% include_relative html/viewport-friendly.html %}{% endhighlight %}
 
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam congue, urna eu efficitur accumsan, massa sem rhoncus elit, eu mattis erat metus gravida dolor. Maecenas imperdiet sodales dolor, sit amet malesuada lorem tincidunt in. Nunc a risus augue. Sed pellentesque pharetra iaculis. Donec gravida risus ut placerat venenatis. Integer sed erat eget risus rutrum condimentum. Curabitur tincidunt nisl ornare, viverra est eget, condimentum lectus. Integer pretium justo ac odio vestibulum ornare. Nullam mi risus, faucibus lacinia justo et, auctor vehicula lectus.</p>
+  </div>
 
-</div>
+  <div class="in-page__content" data-in-page-name="Multiple Disclosures" data-in-page-id="multiple-disclosures">
 
-<!-- End Disclosure -->
+    {% include_relative html/multiple-disclosures.html %}
 
-<h2 id="interactive-heading">Interactive Heading</h2>
+    {% highlight html %}{% include_relative html/multiple-disclosures.html %}{% endhighlight %}
 
-<p>Example: <code>&lt;h2 <b>class="disclosure--heading"</b>&gt;&lt;button class="disclosure--btn"&gt; ... &lt;/button&gt;&lt;/h2&gt;</code></p>
+  </div>
 
-<!-- Begin Disclosure -->
+  <div class="in-page__content" data-in-page-name="Open Disclosure" data-in-page-id="open-disclosure">
 
-<h3 class="disclosure--heading"><button class="disclosure--btn">What is the answer to life, the universe, and everything?</button></h3>
+    {% include_relative html/open-disclosure.html %}
 
-<div class="disclosure--content">
+    {% highlight html %}{% include_relative html/open-disclosure.html %}{% endhighlight %}
 
-  <p>Purple ipsum dolor sit amet, consectetur adipiscing elit. Etiam congue, urna eu efficitur accumsan, massa sem rhoncus elit, eu mattis erat metus gravida dolor. Maecenas imperdiet sodales dolor, sit amet malesuada lorem tincidunt in. Nunc a risus augue. Sed pellentesque pharetra iaculis. Donec gravida risus ut placerat venenatis. Integer sed erat eget risus rutrum condimentum. Curabitur tincidunt nisl ornare, viverra est eget, condimentum lectus. Integer pretium justo ac odio vestibulum ornare. Nullam mi risus, faucibus lacinia justo et, auctor vehicula lectus.</p>
+  </div>
 
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam congue, urna eu efficitur accumsan, massa sem <strong>42</strong> rhoncus elit, eu mattis erat metus gravida dolor. Maecenas imperdiet sodales dolor, sit amet malesuada lorem tincidunt in. Nunc a risus augue. Sed pellentesque pharetra iaculis. Donec gravida risus ut placerat venenatis. Integer sed erat eget risus rutrum condimentum. Curabitur tincidunt nisl ornare, viverra est eget, condimentum lectus. Integer pretium justo ac odio vestibulum ornare. Nullam mi risus, faucibus lacinia justo et, auctor vehicula lectus.</p>
+  <div class="in-page__content" data-in-page-name="Visual Affordance" data-in-page-id="visual-affordance">
 
-</div>
+    {% include_relative html/visual-affordance.html %}
 
-<!-- End Disclosure -->
+    {% highlight html %}{% include_relative html/visual-affordance.html %}{% endhighlight %}
 
-<h2 id="viewport-friendly">Interactive Heading: Viewport Friendly</h2>
+    {% include disclosures.html %}
 
-<p>Example: <code>&lt;h2 class="disclosure--heading" <b>data-disclosure-viewport</b>&gt;&lt;button class="disclosure--btn data-disclosure-icon"&gt;<b>&lt;span&gt;</b> ... <b>&lt;/span&gt;</b>&lt;/button&gt;&lt;/h2&gt;</code></p>
-
-<p><strong>Note:</strong> Resize browser to see how this componenent works. On desktop the headings will not be interactive, but in smaller viewports they will be.</p>
-
-<!-- Learn more about this technique: https://www.scottohara.me/blog/2022/11/07/responsive-accessibility.html -->
-
-<!-- Begin Disclosure -->
-
-<h3 class="disclosure--heading" data-disclosure-viewport><button class="disclosure--btn" data-disclosure-icon><span>What is the answer to life, the universe, and everything?</span></button></h3>
-
-<div class="disclosure--content">
-
-  <p>Purple ipsum dolor sit amet, consectetur adipiscing elit. Etiam congue, urna eu efficitur accumsan, massa sem rhoncus elit, eu mattis erat metus gravida dolor. Maecenas imperdiet sodales dolor, sit amet malesuada lorem tincidunt in. Nunc a risus augue. Sed pellentesque pharetra iaculis. Donec gravida risus ut placerat venenatis. Integer sed erat eget risus rutrum condimentum. Curabitur tincidunt nisl ornare, viverra est eget, condimentum lectus. Integer pretium justo ac odio vestibulum ornare. Nullam mi risus, faucibus lacinia justo et, auctor vehicula lectus.</p>
-
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam congue, urna eu efficitur accumsan, massa sem <strong>42</strong> rhoncus elit, eu mattis erat metus gravida dolor. Maecenas imperdiet sodales dolor, sit amet malesuada lorem tincidunt in. Nunc a risus augue. Sed pellentesque pharetra iaculis. Donec gravida risus ut placerat venenatis. Integer sed erat eget risus rutrum condimentum. Curabitur tincidunt nisl ornare, viverra est eget, condimentum lectus. Integer pretium justo ac odio vestibulum ornare. Nullam mi risus, faucibus lacinia justo et, auctor vehicula lectus.</p>
+  </div>
 
 </div>
 
-<h3 class="disclosure--heading" data-disclosure-viewport><button class="disclosure--btn" data-disclosure-icon><span>What is your favorite colour?</span></button></h3>
+<div class="in-page" data-in-page-dynamic>
 
-<div class="disclosure--content">
+  {% include select-assets.html %}
 
-  <p>Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+  <div class="in-page__content" data-in-page-name="CSS" data-in-page-id="css">
 
-</div>
+    {% highlight css %}{% include_relative init.scss %}{% endhighlight %}
 
-<!-- End Disclosure -->
+  </div>
 
-<h2 id="multiple-disclosures">Multiple Disclosures</h2>
+  <div class="in-page__content" data-in-page-name="JavaScript" data-in-page-id="javascript">
 
-<!-- Begin Disclosure -->
+    {% highlight javascript %}{% include_relative init.js %}{% endhighlight %}
 
-<div class="disclosure">
-
-  <button class="disclosure--toggle-all">Show All</button>
-
-  <ul role="list">
-
-    <li>
-
-      <h2 class="disclosure--heading"><button class="disclosure--btn">What is your quest?</button></h2>
-
-      <div class="disclosure--content">
-
-        <p>Netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus. Habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.</p>
-
-    </div>
-
-    </li>
-
-    <li>
-
-      <h2 class="disclosure--heading"><button class="disclosure--btn">What is your favourite colour?</button></h2>
-
-      <div class="disclosure--content">
-
-        <p>Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
-
-      </div>
-
-    </li>
-
-    <li>
-
-      <h2 class="disclosure--heading"><button class="disclosure--btn">What is the airspeed velocity of an unladen swallow?</button></h2>
-
-      <div class="disclosure--content">
-
-        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
-
-      </div>
-
-    </li>
-
-  </ul>
+  </div>
 
 </div>
 
-{% include show-all.html %}
+{% include_relative attr.html %}
 
-<h2 id="open-disclosure">Open Disclosure</h2>
-
-<p>Example: <code>&lt;button class="disclosure--btn" <b>data-disclosure-open</b>&gt; ... &lt;/button&gt;</code></p>
-
-<!-- Begin Disclosure -->
-
-<h2 class="disclosure--heading"><button class="disclosure--btn" data-disclosure-open>Learn More</button></h2>
-
-<div class="disclosure--content">
-
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam congue, urna eu efficitur accumsan, massa sem rhoncus elit, eu mattis erat metus gravida dolor. Maecenas imperdiet sodales dolor, sit amet malesuada lorem tincidunt in. Nunc a risus augue. Sed pellentesque pharetra iaculis. Donec gravida risus ut placerat venenatis. Integer sed erat eget risus rutrum condimentum. Curabitur tincidunt nisl ornare, viverra est eget, condimentum lectus. Integer pretium justo ac odio vestibulum ornare. Nullam mi risus, faucibus lacinia justo et, auctor vehicula lectus.</p>
-
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam congue, urna eu efficitur accumsan, massa sem rhoncus elit, eu mattis erat metus gravida dolor. Maecenas imperdiet sodales dolor, sit amet malesuada lorem tincidunt in. Nunc a risus augue. Sed pellentesque pharetra iaculis. Donec gravida risus ut placerat venenatis. Integer sed erat eget risus rutrum condimentum. Curabitur tincidunt nisl ornare, viverra est eget, condimentum lectus. Integer pretium justo ac odio vestibulum ornare. Nullam mi risus, faucibus lacinia justo et, auctor vehicula lectus.</p>
-
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam congue, urna eu efficitur accumsan, massa sem rhoncus elit, eu mattis erat metus gravida dolor. Maecenas imperdiet sodales dolor, sit amet malesuada lorem tincidunt in. Nunc a risus augue. Sed pellentesque pharetra iaculis. Donec gravida risus ut placerat venenatis. Integer sed erat eget risus rutrum condimentum. Curabitur tincidunt nisl ornare, viverra est eget, condimentum lectus. Integer pretium justo ac odio vestibulum ornare. Nullam mi risus, faucibus lacinia justo et, auctor vehicula lectus.</p>
-
-</div>
-
-<!-- End Disclosure -->
-
-<h2 id="visual-affordance">Visual Affordance</h2>
-
-<p>Example: <code>&lt;button class="disclosure--btn" <b>data-disclosure-icon</b>&gt; ... &lt;/button&gt;</code></p>
-
-<!-- Begin Disclosure -->
-
-<button class="disclosure--btn" data-disclosure-icon>Learn More</button>
-
-<div class="disclosure--content">
-
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam congue, urna eu efficitur accumsan, massa sem rhoncus elit, eu mattis erat metus gravida dolor. Maecenas imperdiet sodales dolor, sit amet malesuada lorem tincidunt in. Nunc a risus augue. Sed pellentesque pharetra iaculis. Donec gravida risus ut placerat venenatis. Integer sed erat eget risus rutrum condimentum. Curabitur tincidunt nisl ornare, viverra est eget, condimentum lectus. Integer pretium justo ac odio vestibulum ornare. Nullam mi risus, faucibus lacinia justo et, auctor vehicula lectus.</p>
-
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam congue, urna eu efficitur accumsan, massa sem rhoncus elit, eu mattis erat metus gravida dolor. Maecenas imperdiet sodales dolor, sit amet malesuada lorem tincidunt in. Nunc a risus augue. Sed pellentesque pharetra iaculis. Donec gravida risus ut placerat venenatis. Integer sed erat eget risus rutrum condimentum. Curabitur tincidunt nisl ornare, viverra est eget, condimentum lectus. Integer pretium justo ac odio vestibulum ornare. Nullam mi risus, faucibus lacinia justo et, auctor vehicula lectus.</p>
-
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam congue, urna eu efficitur accumsan, massa sem rhoncus elit, eu mattis erat metus gravida dolor. Maecenas imperdiet sodales dolor, sit amet malesuada lorem tincidunt in. Nunc a risus augue. Sed pellentesque pharetra iaculis. Donec gravida risus ut placerat venenatis. Integer sed erat eget risus rutrum condimentum. Curabitur tincidunt nisl ornare, viverra est eget, condimentum lectus. Integer pretium justo ac odio vestibulum ornare. Nullam mi risus, faucibus lacinia justo et, auctor vehicula lectus.</p>
-
-</div>
-
-<!-- End Disclosure -->
-
-{% include disclosures.html %}
-
-{% include notes.html %}
+{% include repo-info.html %}

@@ -4,9 +4,11 @@
     <meta charset="{{ site.charset }}">
     <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">{% if page.noindex != false %}
     <meta content="noindex, nofollow" name="robots">{% endif %}
-    <meta content="{{ site.theme-color }}" name="theme-color">
-    <link href="{{ site.git-url }}/css/init.css" rel="stylesheet">{% if page.slick %}
-    <link href="{{ site.git-url }}/lib/a11y-slick-1.0.1/slick.min.css" rel="stylesheet">{% endif %}{% if page.localcss %}
+    <meta content="{{ site.theme-color }}" name="theme-color">{% if page.disclosure %}
+    <!-- link href="{{ site.git-url }}/pattern-library/disclosure/init.css" rel="stylesheet"-->{% endif %}{% if page.in-page %}
+    <link href="{{ site.git-url }}/pattern-library/in-page/init.css" rel="stylesheet">{% endif %}{% if page.slick %}
+    <link href="{{ site.git-url }}/lib/a11y-slick-1.0.1/slick.min.css" rel="stylesheet">{% endif %}
+    <link href="{{ site.git-url }}/css/init.css" rel="stylesheet">{% if page.localcss %}
     <link href="{{ page.localcss }}" rel="stylesheet">{% endif %}
     <link href="{{ site.git-url }}/favicon.ico" rel="icon">
     <link href="{{ site.git-url }}/manifest.json" rel="manifest">

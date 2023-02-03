@@ -135,7 +135,7 @@
 
     }
 
-    disclosureID.setAttribute("aria-expanded", "true");
+    docement.querySelector(".disclosure--btn" + disclosureID).setAttribute("aria-expanded", "true");
 
   }
 
