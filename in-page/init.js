@@ -50,12 +50,24 @@
 
         var count = (i + 1);
 
-        content.setAttribute("id", "content-" + count);
+        // If custom ID present
+
+        if(content.hasAttribute("data-in-page-id")) {
+
+          var contentID = content.getAttribute("data-in-page-id");
+
+        } else { 
+
+          var contentID = "content-" + count;
+
+        }
+
+        content.setAttribute("id", contentID);
 
         // Create option element
 
         var option = document.createElement("option");
-        option.setAttribute("value", "#content-" + count);
+        option.setAttribute("value", "#" + contentID);
         option.textContent = content.getAttribute("data-in-page-name");
 
         var thisSelect = content.closest(inPageClass).getElementsByTagName("select")[0];
