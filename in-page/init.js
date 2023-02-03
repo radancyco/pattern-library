@@ -38,7 +38,7 @@
     if(component.hasAttribute("data-in-page-dynamic")){
 
       var inPageContent = component.querySelectorAll(inPageContentClass);
-      var inPageContentNth = component.querySelectorAll(inPageContentClass + ":nth-child(n + 3)");
+      var inPageContentNth = component.querySelectorAll(inPageContentClass + ":nth-of-type(n + 2)");
 
       inPageContentNth.forEach(function(content, i){
 
