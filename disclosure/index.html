@@ -3,10 +3,21 @@ folder: disclosure
 in-page: true
 localcss: "init.css"
 localjs: "init.js"
+read-more: true
 title: "Disclosure v1.5"
 ---
 
 <p>This component will allow you to implement various types of disclosure widgets.</p>
+
+<nav aria-label="In-page" class="jump-nav">
+
+  <ul>
+    <li><a href="#examples">Examples</a></li>
+    <li><a href="#assets">Assets</a></li>
+    <li><a href="#properties">Properties</a></li>
+  </ul>
+
+</nav>
 
 <div class="in-page" data-in-page-dynamic>
 
@@ -50,6 +61,8 @@ title: "Disclosure v1.5"
 
     {% highlight html %}{% include_relative html/multiple-disclosures.html %}{% endhighlight %}
 
+    {% include show-all.html %}
+
   </div>
 
   <div class="in-page__content" data-in-page-name="Open Disclosure" data-in-page-id="open-disclosure">
@@ -78,13 +91,29 @@ title: "Disclosure v1.5"
 
   <div class="in-page__content" data-in-page-name="CSS" data-in-page-id="css">
 
-    {% highlight css %}{% include_relative init.scss %}{% endhighlight %}
+    <div class="read-more">
+
+      <div class="read-more__content">
+
+        {% highlight css %}{% include_relative init.scss %}{% endhighlight %}
+
+      </div>
+
+    </div>
 
   </div>
 
   <div class="in-page__content" data-in-page-name="JavaScript" data-in-page-id="javascript">
 
-    {% highlight javascript %}{% include_relative init.js %}{% endhighlight %}
+    <div class="read-more">
+
+      <div class="read-more__content">
+
+        {% highlight javascript %}{% include_relative init.js %}{% endhighlight %}
+
+      </div>
+
+    </div>
 
   </div>
 
