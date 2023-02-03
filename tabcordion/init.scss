@@ -110,6 +110,7 @@ color: $base-color-active;
 
     &.expanded {
     display: block;
+    width: 100%;
 
       [data-tab-animation] & {
 
