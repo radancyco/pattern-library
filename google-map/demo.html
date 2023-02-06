@@ -1,0 +1,105 @@
+---
+folder: google-map
+jira: TCDQ-66939
+jquery: false
+localjs: "init.js"
+title: "Map Search"
+---
+
+<p>Use the search form below to find job opportunities in your desired area.</p>
+
+<!-- Begin Map -->
+
+<div aria-live="polite" class="visually-hidden" id="map-search-assistive-tech"></div>
+
+<div id="google-job-map"></div>
+
+<!-- End Map -->
+
+<h2>For Translation</h2>
+
+<ul>
+  <li><b>a11yFormName:</b> Map Search</li>
+  <li><b>city:</b> City</li>
+  <li><b>country:</b> Country</li>
+  <li><b>errorMessage:</b> Please select City, State or Zip/Postal Code</li>
+  <li><b>glyphRemoveCityLocation:</b> Remove City Selection</li>
+  <li><b>jobCountMsgPlaural:</b> % jobs in this location</li>
+  <li><b>jobCountMsgSingular:</b> % job in this location</li>
+  <li><b>locationCount:</b> % locations found</li>
+  <li><b>locationCountSingular:</b> % location found</li>
+  <li><b>locationsHeading:</b> Locations</li>
+  <li><b>mapInfoAvailablePositions:</b> % available position(s) at this location:</li>
+  <li><b>mapInfoNewWindow:</b> opens in new tab</li>
+  <li><b>markerTooltipJobs:</b> % job(s)</li>
+  <li><b>or:</b> or</li>
+  <li><b>reset:</b> Reset all</li>
+  <li><b>search:</b> Search map</li>
+  <li><b>select:</b> Select</li>
+  <li><b>showRemote:</b> Show remote jobs</li>
+  <li><b>state:</b> State/Province</li>
+  <li><b>toggleLocations:</b> Show Locations</li>
+  <li><b>useMyLocation:</b> Use my location</li>
+  <li><b>zip:</b> Zip/Postal Code</li>
+</ul>
+
+<!-- TODO: Eventually remove jQuery dependency and convert to plain vanilla JavaScript -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script>
+
+// Google Map Configuration
+
+var googleMapConfig = {
+
+  pop_ups: true,
+  maxZoom: 16,
+  minZoom: 6,
+  linkText: "View all Jobs", // Should this be in label section below?
+  url_new_tab: "no",
+  backgroundColor: '#A2C1DE',
+  defaultMyLocaiton: false,
+  client: "wallgreen",
+  showCategoryInfo:true,
+  markerImage: "https://tbcdn.talentbrew.com/company/1242/v2_0/img/logos/red-flag.png",
+  label: {
+
+    "a11yFormName" : "Map Search",
+    "city": "City",
+    "country": "Country",
+    "errorMessage" : "Please select City, State or Zip/Postal Code",
+    "glyphRemoveCityLocation" : "Remove City Selection",
+    "jobCountMsgPlaural" : "jobs in this location",
+    "jobCountMsgSingular" : "job in this location",
+    "locationCount": "locations found",
+    "locationCountSingular" : "location found",
+    "locationsHeading" : "Locations",
+    "mapInfoAvailablePositions" : "available position(s) at this location:",
+    "mapInfoNewWindow" : "opens in new tab",
+    "markerTooltipJobs" : "job(s)",
+    "or": "or",
+    "reset": "Reset all",
+    "search": "Search map",
+    "select": "Select",
+    "showRemote": "Show remote jobs",
+    "state": "State/Province",
+    "toggleLocations" : "Show Locations",
+    "useMyLocation": "Use my location",
+    "zip": "Zip/Postal Code",
+
+  },
+  searchCustomFieldName: "custom_fields.Shift",
+  searchDomain: "https://jobs.walgreens.com"
+
+  //For demo purpose only
+
+  //styles : [{ "featureType": "administrative", "elementType": "all", "stylers": [{ "saturation": "-100"}] }, { "featureType": "administrative.province", "elementType": "all", "stylers": [{ "visibility": "off"}] }, { "featureType": "landscape", "elementType": "all", "stylers": [{ "saturation": -100 }, { "lightness": 65 }, { "visibility": "on"}] }, { "featureType": "poi", "elementType": "all", "stylers": [{ "saturation": -100 }, { "lightness": "50" }, { "visibility": "simplified"}] }, { "featureType": "road", "elementType": "all", "stylers": [{ "saturation": "-100"}] }, { "featureType": "road.highway", "elementType": "all", "stylers": [{ "visibility": "simplified"}] }, { "featureType": "road.arterial", "elementType": "all", "stylers": [{ "lightness": "30"}] }, { "featureType": "road.local", "elementType": "all", "stylers": [{ "lightness": "40"}] }, { "featureType": "transit", "elementType": "all", "stylers": [{ "saturation": -100 }, { "visibility": "simplified"}] }, { "featureType": "water", "elementType": "geometry", "stylers": [{ "hue": "#ffff00" }, { "lightness": -25 }, { "saturation": -97}] }, { "featureType": "water", "elementType": "labels", "stylers": [{ "lightness": -25 }, { "saturation": -100}]}];
+
+};
+
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places&client=gme-tmpworldwideadvertising&sensor=false&language=EN"></script>
+
+{% include notes.html %}
