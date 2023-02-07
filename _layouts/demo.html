@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang }}" class="no-js">
+<head>
+    <meta charset="{{ site.charset }}">
+    <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">{% if page.noindex != false %}
+    <meta content="noindex, nofollow" name="robots">{% endif %}
+    <link href="{{ site.git-url }}/css/init.css" rel="stylesheet">
+    <link href="../init.css" rel="stylesheet">
+    <link href="{{ site.git-url }}/favicon.ico" rel="icon">
+    <title>{{ page.title }} - {{ site.company-name }}</title>
+</head>
+
+<body id="rad-{{ page.path | replace:'.html',''|  replace:'.md','' | replace:'_','' | replace: '/', '-'}}"{% if page.section %} class="{{ page.section }}"{% endif %}>
+
+  {{ content }}
+
+  {% if page.jquery != false %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>{% endif %}
+  <script src="../init.js"></script>
+
+</body>
+</html>
