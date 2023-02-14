@@ -122,6 +122,12 @@ line-height: normal;
   + .disclosure--content {
   display: none;
 
+    // Demo: You can remove the following styles if not desired.
+
+    background-color: #ccc;
+    margin: -2em 0 1em;
+    padding: 1em;
+
     // Animation
 
     &.disclosure--animate {
