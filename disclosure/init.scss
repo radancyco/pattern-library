@@ -5,6 +5,7 @@
   Contributor(s):
   Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy
   Andrew Hill, Email: andrew.hill@radancy.com
+  Eric Porter, Email: eric.porter@radancy.com
 
   Dependencies: Sass
   Instructions: To run locally, install Sass (https://sass-lang.com/install), CL to directory this file in and run:
@@ -107,6 +108,13 @@ line-height: normal;
 
     + .disclosure--content {
     display: block;
+
+      // Animation
+
+      &.disclosure--animate {
+      grid-template-rows: 1fr;
+      }
+
     }
 
   }
@@ -114,11 +122,28 @@ line-height: normal;
   + .disclosure--content {
   display: none;
 
-    // Demo: You can remove the following styles if not desired.
+    // Animation
 
-    background-color: #ccc;
-    margin: -2em 0 1em;
-    padding: 1em;
+    &.disclosure--animate {
+    background-color: transparent;
+    display: grid;
+    grid-template-rows: 0fr; 
+    overflow: hidden;
+    width: 100%;
+    
+      @media (prefers-reduced-motion: no-preference) {
+        
+        transition: 0.4s ease-in-out;
+        
+      }
+      
+      > div {
+      min-height: 0;
+      margin: 0;
+      transition: 0.3s;
+      }
+
+    }
 
   }
 
