@@ -11,7 +11,7 @@
 
 $(".read-more").append("<button class='read-more__btn' aria-expanded='false'>Read More <span class='read-more__btn--icon' aria-hidden='true'></span></button>");
 
-var $focusElms = "a, audio, button, input, select, video";
+var $focusElms = "a, audio, button, input, select, video, *[tabindex]";
 
 $(".read-more__content").attr("aria-hidden", "true").find($focusElms).attr("tabindex", "-1");
 
@@ -36,7 +36,7 @@ $(".read-more__btn").on("click", function() {
   } else {
 
     $parentTarget.removeAttr("aria-hidden").attr("tabindex", "-1").focus();
-    $parentTarget.find($focusElms).removeAttr("tabindex");
+    $parentTarget.find($focusElms).attr("tabindex", "0");
 
   }
 

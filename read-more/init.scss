@@ -25,7 +25,7 @@ $base-color: #6F00EF;
   position: relative;
 
     &[aria-hidden] * {
-    outline: 0;
+    pointer-events: none;
     }
 
     &[tabindex] {
@@ -41,13 +41,13 @@ $base-color: #6F00EF;
 
     &::after {
     background-image: linear-gradient( rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 1) 100%);
-    bottom: 0;
     content: "";
     height: 100px;
-    left: 0;
-    pointer-events: none;
+    inset-block-end: 0;
+    inset-inline-start: 0;
     position: absolute;
     width: 100%;
+    z-index: 1;
     }
 
   }
