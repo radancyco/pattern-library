@@ -24,8 +24,9 @@ border-inline-end: 6px $base-color solid;
   overflow-x: scroll;
   outline-offset: 8px;
   padding: 2em 0 2em 1em;
+  scroll-snap-type: x mandatory;
   scrollbar-color: $base-color #fff;
-  scrollbar-gutter: always;
+  scrollbar-gutter: always; 
   -webkit-overflow-scrolling: touch;
 
       // Scrollbar styling may be limited cross-browser. This is NOT a bad thing as majority of browsers are WebKit based.
@@ -57,6 +58,7 @@ border-inline-end: 6px $base-color solid;
   min-width: 300px;
   padding: 1em;
   position: relative;
+  scroll-snap-align: start; 
   transition: .6s;
 
     &:first-child {
