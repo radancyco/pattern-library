@@ -1,0 +1,103 @@
+/*!
+
+  Radancy Component Library: Carousel Grid
+
+  Contributor(s):
+  Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy
+
+  Dependencies: Sass
+  Instructions: To run locally, install Sass (https://sass-lang.com/install), CL to directory this file in and run:
+  sass --watch init.scss:init.css --style compressed
+
+*/
+
+$base-color: #6F00EF;
+
+.carousel-grid {
+position: relative;
+border-inline-end: 6px $base-color solid;
+
+  @media(min-width: 62.5em) {
+
+    border: 0;
+
+  }
+
+  &__container {
+  display: flex;
+  overflow-x: scroll;
+  padding: 2em 0 2em 1em;
+  scrollbar-color: $base-color #fff;
+  scrollbar-gutter: always;
+  -webkit-overflow-scrolling: touch;
+
+    @media(min-width: 62.5em) {
+
+      flex-wrap: wrap;
+      justify-content: space-around;
+      overflow-x: auto;
+
+    }
+
+    // Scrollbar styling may be limited cross-browser. This is NOT a bad thing as majority of browsers are WebKit based.
+    // However, if you require full support, then have a look at http://grsmto.github.io/simplebar/
+
+    &::-webkit-scrollbar {
+    height: 6px;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+    background-color: #fff;
+    }
+
+    &::-webkit-scrollbar-thumb {
+    background-color: $base-color;
+    }
+
+  }
+
+  &__card {
+  background-color: #fff;
+  border-radius: 10px;
+  border: 1px #666 solid;
+  margin: 0 1em 1% 0;
+  min-height: 350px;
+  padding: 1em;
+  position: relative;
+  min-width: 300px;
+  transition: background 300ms ease-in;
+
+    @media(min-width: 62.5em) {
+
+      margin-right: 0;
+      min-width: auto;
+      width: calc(96%/4);
+
+    }
+
+    &:hover, &:focus, &:focus-within {
+    background-color: #ccc;
+    }
+
+  }
+
+  &__heading {
+
+    a {
+    display: block;
+
+      // Make entire card clickable
+
+      &::before {
+      content: "";
+      display: block;
+      inset: 0;
+      position: absolute;
+      }
+
+    }
+
+  }
+
+}

@@ -17,7 +17,7 @@ $base-color: #6F00EF;
 
 .carousel-scroll {
 position: relative;
-border-inline-end: 4px $base-color solid;
+border-inline-end: 6px $base-color solid;
 
   &__container {
   display: flex;
@@ -32,7 +32,7 @@ border-inline-end: 4px $base-color solid;
       // However, if you require full support, then have a look at http://grsmto.github.io/simplebar/
 
       &::-webkit-scrollbar {
-      height: 4px;
+      height: 6px;
       }
 
       /* Track */
