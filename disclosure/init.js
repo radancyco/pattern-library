@@ -182,6 +182,7 @@
     if(thisButton.hasAttribute("data-disclosure-enable-url")) {
 
       history.replaceState(null, null, "#" + thisButton.id);
+      history.scrollRestoration = 'manual';
 
     }
 
