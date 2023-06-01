@@ -181,9 +181,9 @@
 
     if(thisButton.hasAttribute("data-disclosure-enable-url")) {
 
+      history.scrollRestoration = "manual";
       history.replaceState(null, null, "#" + thisButton.id);
-      history.scrollRestoration = 'manual';
-
+      
     }
 
     // Pass content to div
