@@ -135,7 +135,7 @@
 
     }
 
-    docement.querySelector(".disclosure--btn" + disclosureID).setAttribute("aria-expanded", "true");
+    document.querySelector(".disclosure--btn#" + disclosureID.id).setAttribute("aria-expanded", "true");
 
   }
 
@@ -180,7 +180,7 @@
     }
 
     if(thisButton.hasAttribute("data-disclosure-enable-url")) {
-      
+
       history.replaceState(null, null, "#" + thisButton.id);
 
     }
