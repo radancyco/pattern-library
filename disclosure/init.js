@@ -14,7 +14,7 @@
 
   // Display which Disclosure is in use via console:
 
-  console.log('%c Disclosure v1.5 in use. ', 'background: #6e00ee; color: #fff');
+  console.log('%c Disclosure v1.6 in use. ', 'background: #6e00ee; color: #fff');
 
   // Commonly used Classes, Data Attributes, States, Strings, etc.
 
@@ -180,8 +180,8 @@
     }
 
     if(thisButton.hasAttribute("data-disclosure-enable-url")) {
-
-      window.location = "#" + thisButton.id;
+      
+      history.replaceState(null, null, "#" + thisButton.id);
 
     }
 
