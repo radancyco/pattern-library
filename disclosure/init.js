@@ -181,7 +181,13 @@
 
     if(thisButton.hasAttribute("data-disclosure-enable-url")) {
 
-      history.pushState({}, "", "#" + thisButton.id)
+      var buttonID = thisButton.id;
+
+      thisButton.removeAttribute("id");
+
+      history.pushState(null, null, "#" + buttonID);
+
+      thisButton.setAttribute("id", buttonID);
       
     }
 
