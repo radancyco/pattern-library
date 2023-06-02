@@ -187,7 +187,7 @@
 
       history.pushState(null, null, "#" + buttonID);
 
-      thisButton.setAttribute("id", buttonID);
+      // thisButton.setAttribute("id", buttonID);
       
     }
 
