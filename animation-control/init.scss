@@ -1,0 +1,99 @@
+/*!
+
+  Radancy: Animation Control (AC)
+
+  Contributor(s):
+  Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy
+
+  Dependencies: Sass
+  Instructions: To run locally, install Sass (https://sass-lang.com/install), CL to directory this file in and run:
+  sass --watch init.scss:init.css --style compressed
+
+*/ 
+
+.ac { 
+position: relative;
+
+  // Video
+
+  &__video {
+  display: block;
+  clip-path: inset(1px 1px); 
+
+    &::-webkit-media-controls {
+    display: none;
+    }
+
+  }
+
+  // Toggle Button
+
+  &__button {
+  background-color: #000;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAQAAAC0NkA6AAADE2lDQ1BEb3QgR2FpbiAyMCUAACiRY2BgnuDo4uTKJMDAUFBUUuQe5BgZERmlwH6egY2BmYGBgYGBITG5uMAxIMCHgYGBIS8/L5UBFTAyMHy7xsDIwMDAcFnX0cXJlYE0wJpcUFTCwMBwgIGBwSgltTiZgYHhCwMDQ3p5SUEJAwNjDAMDg0hSdkEJAwNjAQMDg0h2SJAzAwNjCwMDE09JakUJAwMDg3N+QWVRZnpGiYKhpaWlgmNKflKqQnBlcUlqbrGCZ15yflFBflFiSWoKAwMD1A4GBgYGXpf8EgX3xMw8BSMDVRLdTRBEREYpQFiI8EGIIUByaVEZhMXIwMDAIMCgwGDA4MAQwJDIUM+wgOEowxtGcUYXxlLGFYz3mMSYgpgmMF1gFmaOZF7I/IbFkqWD5RarHmsr6z02S7ZpbN/Yw9l3cyhxdHF84UzkvMDlyLWFW5N7AY8Uz1ReId5JfMJ80/hl+BcL6AjsEHQVvCKUKvRDuFdERWSvaLjoF7FJ4kbiVyQqJOUkj0nlS0tLn5Apk1WXvSXXJ+8i/0dhq2Khkp7SW+W1KgWqJqo/1Q6qd2mEaippftA6oD1JJ1XXSk9Q75X+EYMFhrVGMca2JvKmzKYvzS6Y77RYYjnBqs461ybONtDO1d7awdhRx0nNWclFwVXeTcFd2UPdU9fLxNvGx9032C/BPz+gPnBi0NLgXSEXQ1+GM0XIRVpFRURXxMyM3RP3IIEtUTcpLLkhZU3qzXSODIvMzKy52Rdz2fPs8ysKNhW+K9YuySpdVfamQr+ypGpXDWOtV93U+oeNek01zWdb5doK2492SncVdZ/uVe1r7L870WbS7Ml/p8ZPOzxDY2b/rO9zEuaenm++YOkikcWtS74ty1x+b2XIqtNrXNbuW2+5Ydsmk81btpps277Dauf+3a57zu4L2//gYM6hn0faj4kfX3HS+tS5M8lnf52fdFH70tEriVf/XZ9z0+bW3Tv195Tvn3iY91jsyf5nmS9EXh58nf9W/t2FD02fTD+/+rrge/hPgV+n/rT+c/z/HwANAA803sW02gAAAAlwSFlzAAALEwAACxMBAJqcGAAABQxpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDkuMC1jMDAwIDc5LjE3MWMyN2YsIDIwMjIvMDgvMTYtMTg6MDI6NDMgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIiB4bWxuczpwaG90b3Nob3A9Imh0dHA6Ly9ucy5hZG9iZS5jb20vcGhvdG9zaG9wLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdEV2dD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlRXZlbnQjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCAyNC4wIChXaW5kb3dzKSIgeG1wOkNyZWF0ZURhdGU9IjIwMjMtMDQtMTNUMDk6NTItMDQ6MDAiIHhtcDpNb2RpZnlEYXRlPSIyMDIzLTA0LTEzVDEwOjA4OjQyLTA0OjAwIiB4bXA6TWV0YWRhdGFEYXRlPSIyMDIzLTA0LTEzVDEwOjA4OjQyLTA0OjAwIiBkYzpmb3JtYXQ9ImltYWdlL3BuZyIgcGhvdG9zaG9wOkNvbG9yTW9kZT0iMSIgcGhvdG9zaG9wOklDQ1Byb2ZpbGU9IkRvdCBHYWluIDIwJSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDoxOTEwZDExNS0yODY4LThlNGMtODdlOC03OWIyODA4M2VlZmUiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MTkxMGQxMTUtMjg2OC04ZTRjLTg3ZTgtNzliMjgwODNlZWZlIiB4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ9InhtcC5kaWQ6MTkxMGQxMTUtMjg2OC04ZTRjLTg3ZTgtNzliMjgwODNlZWZlIj4gPHhtcE1NOkhpc3Rvcnk+IDxyZGY6U2VxPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0iY3JlYXRlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDoxOTEwZDExNS0yODY4LThlNGMtODdlOC03OWIyODA4M2VlZmUiIHN0RXZ0OndoZW49IjIwMjMtMDQtMTNUMDk6NTItMDQ6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCAyNC4wIChXaW5kb3dzKSIvPiA8L3JkZjpTZXE+IDwveG1wTU06SGlzdG9yeT4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5w4qfXAAABIElEQVRYhe2Yr0oEURjFf3MZg9hcxKBoEQSrQRTLYlkMPoE+g2A1LIjJJjjBZDKoj2BQzCK+gJjVosWyM3vM82fvfMqC5Ts3nXvP4Qc3nkQAsxzSo8MAUVZKzgun3NCsbQ5YYYK8cp+Q8sU9x7wCQusq1KZr0XCy1p60I9CCvg1RKash+qaetIrOjNFCiyXElN6NzavA1ojfrirQLfkuM8bmWmDOGIVOxMU0HcxRCBH3i2JcirixQf4shzjEIQ5xiEMc4hCHOMQhDnHIf0KSiBsbZBhxLZA3c/Yz4qK9wJ05/FBxVswjWtbQtJBc1AacE+O2solQzxC8bZyiLg3NPZEIYIkjNpgkr+0MgYQPMs5HfMUu+8wDRe0lZcATfZ7hB9Zx3NJLeIiRAAAAAElFTkSuQmCC");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 8px;
+  border-radius: 3px;
+  border: 1px #fff solid;
+  cursor: pointer;
+  display: block;
+  height: 25px;
+  inset-block-start: 0.8em;
+  inset-inline-end: 0.8em;
+  opacity: 0.3;
+  outline-offset: 4px;
+  position: absolute;
+  transition: all 300ms ease-in-out;
+  width: 25px;
+  z-index: 1;
+
+    .ac-contrast & {
+    filter: invert(1);
+    }
+
+    &[aria-pressed="true"] {
+    background-image: url("data:image/png;base64,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")
+    }
+
+    &:focus-visible, .ac-container:hover & {
+    transform: scale(1.3);
+    opacity: 1;
+    }
+
+  }
+
+}
+
+// Example: CSS Animation
+
+@keyframes pulse {
+
+  0% {
+  transform: scale(1.1);
+  }
+
+  50% {
+  transform: scale(0.8);
+  }
+  
+  100% {
+  transform: scale(1);
+  }
+
+}
+
+.example {
+margin: 0 auto;
+
+  @media (prefers-reduced-motion: no-preference) {
+
+    animation: pulse 1s linear infinite paused; // Paused by default. Prevents animation from running before JS loads.
+
+    .animation-enabled & {
+    animation-play-state: running;
+    }
+  
+  }
+
+}

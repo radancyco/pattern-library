@@ -12,7 +12,11 @@
 
 <body id="rad-{{ page.path | replace:'.html',''|  replace:'.md','' | replace:'_','' | replace: '/', '-'}}"{% if page.section %} class="{{ page.section }}"{% endif %}>
 
-  {{ content }}
+  <main>
+
+    {{ content }}
+
+  </main>
 
   {% if page.jquery != false %}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>{% endif %}
