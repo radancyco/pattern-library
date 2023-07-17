@@ -25,7 +25,7 @@
   var $acDisabledClassName = "animation-enabled"
   var $acCookieName = "AnimationPaused";
 
-  // Check Cookie. If set to true, pause video.
+  // Get Cookie. Used to retrieve cookie and pause all video if present.
 
   function getCookie(name) {
 
@@ -53,7 +53,7 @@
     btnPlayPause.setAttribute("aria-label", $acButtonLabel);
     btnPlayPause.classList.add($acButtonClassName);
 
-    // Set attribute depending on OS user settings in OS...
+    // Set attribute(s) depending on if users has disabled animation via their OS...
 
     if (window.matchMedia("(prefers-reduced-motion: no-preference)").matches) {
 
