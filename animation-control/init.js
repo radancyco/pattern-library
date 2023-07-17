@@ -4,19 +4,20 @@
 
   Contributor(s):
   Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy
-  Dependencies: None
 
-  Note(s): 
-  1. Script utilizes prefers-reduced-motion in addition to the pause button. When user disables animation in their operating system, 
-  these videos will not autoplay.
-  2. Cookie set or removed when pause button toggled to remember the desired setting on return visits across entire site where AC used.
-  3. Video may not play if mobile device is in low-power mode. This is for a good reason—so video does not drain the battery life.
+  Dependencies: None
 
 */
 
 (function() {
 
   "use strict";
+
+  // Display which component in use via console:
+
+  console.log('%c Animation Control v1.0 in use. ', 'background: #6e00ee; color: #fff');
+
+  // Commonly used Classes, Data Attributes, States, Strings, etc.
 
   var $acClass = ".ac";
   var $acMediaClass = ".ac__video";

@@ -27,6 +27,7 @@ position: relative;
   }
 
   // Toggle Button
+  // Important: Be sure to adjust colors so that button contrasts well on darker or lighter backgrounds.
 
   &__button {
   background-color: #000;
@@ -48,15 +49,11 @@ position: relative;
   width: 25px;
   z-index: 1;
 
-    .ac-contrast & {
-    filter: invert(1);
-    }
-
     &[aria-pressed="true"] {
     background-image: url("data:image/png;base64,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")
     }
 
-    &:focus-visible, .ac-container:hover & {
+    &:focus-visible, .ac:hover & {
     transform: scale(1.3);
     opacity: 1;
     }
@@ -65,7 +62,8 @@ position: relative;
 
 }
 
-// Example: CSS Animation
+// Example: CSS Animation (.example)
+// Note: You can use any class name you like to target your specifc animation.
 
 @keyframes pulse {
 
