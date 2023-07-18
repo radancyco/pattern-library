@@ -84,7 +84,7 @@ position: relative;
 .example {
 margin: 0 auto;
 
-  @media (prefers-reduced-motion: no-preference) {
+  //@media (prefers-reduced-motion: no-preference) {
 
     animation: pulse 1s linear infinite paused; // Paused by default. Prevents animation from running before JS loads.
 
@@ -92,6 +92,6 @@ margin: 0 auto;
     animation-play-state: running;
     }
   
-  }
+ // }
 
 }

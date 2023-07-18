@@ -1,4 +1,4 @@
-@keyframes bounce {
+@keyframes bounce2 {
 
     0% {
     transform: translateY(0%) scaleY(0.6);
@@ -26,9 +26,9 @@
 
 }
 
-.bounce {
+.bounce2 {
 animation-duration: 1.6s;
-animation-name: bounce;
+animation-name: bounce2;
 animation-timing-function: ease;
 transform-origin: 50% 100%;
 }
