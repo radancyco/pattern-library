@@ -21,16 +21,16 @@
 
   // Animation variables
 
-  var $acClass = ".ac";
-  var $acMediaClass = ".ac__video";
-  var $acButtonClassName = "ac__button"
-  var $acButtonLabel = "Pause Animation";
-  var $acEnabledClassName = "animation-enabled"
-  var $acCookieName = "AnimationPaused";
+  var acButtonClassName = "ac__button"
+  var acButtonLabel = "Pause Animation";
+  var acClass = ".ac";
+  var acCookieName = "AnimationPaused";
+  var acEnabledClassName = "animation-enabled"
+  var acMediaClass = ".ac__video";
   var animationBody = document.body;
-  var animationPaused = getCookie($acCookieName);
-  var animationControls = document.querySelectorAll($acClass);
-  var backgroundVideos = document.querySelectorAll($acMediaClass);
+  var animationControls = document.querySelectorAll(acClass);
+  var animationPaused = getCookie(acCookieName);
+  var backgroundVideos = document.querySelectorAll(acMediaClass);
 
   // Used to retrieve cookie and pause all video if present.
 
@@ -49,17 +49,17 @@
 
       if (location.protocol === "https:") {
 
-        document.cookie = $acCookieName + "=true; Secure; SameSite=None; path=/";
+        document.cookie = acCookieName + "=true; Secure; SameSite=None; path=/";
 
       } else {
 
-        document.cookie = $acCookieName + "=true; path=/";
+        document.cookie = acCookieName + "=true; path=/";
 
       }
 
     } else {
 
-      document.cookie = $acCookieName + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      document.cookie = acCookieName + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 
     }
 
@@ -72,8 +72,8 @@
     // Create Pause Button
 
     var btnPlayPause = document.createElement("button");
-    btnPlayPause.setAttribute("aria-label", $acButtonLabel);
-    btnPlayPause.classList.add($acButtonClassName);
+    btnPlayPause.setAttribute("aria-label", acButtonLabel);
+    btnPlayPause.classList.add(acButtonClassName);
 
     // Check OS settings first to see if user has disabled animation...
 
@@ -89,7 +89,7 @@
 
         // Add animation enabled class to body.
 
-        animationBody.classList.remove($acEnabledClassName);
+        animationBody.classList.remove(acEnabledClassName);
 
       } else {
 
@@ -99,7 +99,7 @@
 
         // Remove animation enabled class from body.
 
-        animationBody.classList.add($acEnabledClassName);
+        animationBody.classList.add(acEnabledClassName);
 
       }
 
@@ -113,13 +113,13 @@
 
     btnPlayPause.addEventListener("click", function() {
 
-      var animationToggles = document.querySelectorAll("." + $acButtonClassName);
+      var animationToggles = document.querySelectorAll("." + acButtonClassName);
 
       if (this.getAttribute("aria-pressed") === "false") {
 
         // Remove animation enabled class from body.
 
-        animationBody.classList.remove($acEnabledClassName);
+        animationBody.classList.remove(acEnabledClassName);
 
         // Add cookie
 
@@ -145,7 +145,7 @@
 
         // Add animation enabled class to body.
         
-        animationBody.classList.add($acEnabledClassName);
+        animationBody.classList.add(acEnabledClassName);
 
         // Remove cookie.
 
