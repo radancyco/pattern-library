@@ -7,6 +7,8 @@
 
   Dependencies: None
 
+  TODO: We may need way to load in smaller videos on mobile using MatchMedia. Rather than use divs, will just add data-animation-mobile to video element to swap source with.
+
 */
 
 (function() {
@@ -190,5 +192,60 @@
     }
 
   });
+
+  // Lazy Load Video
+  // Usage: Uncomment function below and replace "src" with "data-src" attribute on "source" element.
+
+  function lazyLoadVideos() {
+
+    document.addEventListener("DOMContentLoaded", function() {
+
+      var lazyVideos = [].slice.call(backgroundVideos);
+  
+      if ("IntersectionObserver" in window) {
+  
+        var lazyVideoObserver = new IntersectionObserver(function(entries, observer) {
+  
+          entries.forEach(function(video) {
+  
+            if (video.isIntersecting) {
+  
+              for (var source in video.target.children) {
+  
+                var videoSource = video.target.children[source];
+  
+                if (typeof videoSource.tagName === "string" && videoSource.tagName === "SOURCE") {
+  
+                  videoSource.src = videoSource.dataset.src;
+  
+                }
+  
+              }
+  
+              video.target.load();
+              
+              video.target.classList.remove("lazy");
+  
+              lazyVideoObserver.unobserve(video.target);
+  
+            }
+  
+          });
+  
+        });
+  
+        lazyVideos.forEach(function(lazyVideo) {
+  
+          lazyVideoObserver.observe(lazyVideo);
+  
+        });
+  
+      }
+  
+    });
+
+  }
+
+  // lazyLoadVideos();
 
 })();
