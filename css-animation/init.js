@@ -1,17 +1,20 @@
 /*
 
-  Radancy: Animation Patterns
+	Radancy Component Library: CSS Animation
 
-  Drew Toth (drew.toth[at]radancy.com)
-  Michael "Spell" Spellacy (michael.spellacy[at]radancy.com)
+	Contributor(s):
+	Drew Toth (drew.toth[at]radancy.gov)
+	Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy
+
+	Dependencies: jQuery
 
 */
 
 (function () {
 
-	// Create Animation Code button and container
+	// Create animation code button and container
 
-	$(".animation-container").append("<button class='btn btn-code' aria-expanded='false'>View Code</button><div class='animation-code' tabindex='0'><pre><code class='slideLeft'/></pre></div>");
+	$(".animation-container").append("<button class='btn btn-code' aria-expanded='false'>View Code</button><div class='animation-code' role='region' tabindex='0'><pre><code class='slideLeft'/></pre></div>");
 
 	$(".btn-code").on( "click", function() {
 
@@ -46,7 +49,7 @@
   		$(".container").find(".button").removeClass("active");
   		$(this).addClass("active");
 
-			return false;
+		return false;
 
 	});
 
@@ -69,7 +72,7 @@
 
   	}
 
-  	$window.on('scroll resize', checkTopPosition);
-  	$window.trigger('scroll');
+  	$window.on("scroll resize", checkTopPosition);
+  	$window.trigger("scroll");
 
 })();
