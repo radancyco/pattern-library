@@ -1,6 +1,5 @@
 // Ignore!
 // No JavaScript needed for this pattern
-// JS IS ONLY USED FOR THE FORM THAT ILLUSTRATES OPTIONS
 // JavaScript is only used for the form that illustrates the options.
 
 $("#changeUp").on("click",function(e){

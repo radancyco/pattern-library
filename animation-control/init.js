@@ -30,6 +30,7 @@
   var animationBody = document.body;
   var animationControls = document.querySelectorAll(acClass);
   var backgroundVideos = document.querySelectorAll(acMediaClass);
+  var lazyLoadClassName = "lazy-load";
 
   // Used to retrieve cookie and pause all video if present.
 
@@ -178,22 +179,8 @@
 
   });
 
-  // On page load, loop through all the videos on the page.
-
-  backgroundVideos.forEach(function(video){
-
-      // If cookie is false or null, play video(s).
-
-      if(animationPaused === "false" || animationPaused === null) {
-
-        video.autoplay = true;
-
-      }
-
-  });
-
-  // Lazy Load Video
-  // Usage: Uncomment function below and replace "src" with "data-src" attribute on "source" element.
+  // Lazy Load Video (Optional)
+  // Usage:  Add lazy-load class to video element. Replace "src" with "data-src" attribute on "source" element.
 
   function lazyLoadVideos() {
 
@@ -223,7 +210,7 @@
   
               video.target.load();
               
-              video.target.classList.remove("lazy");
+              video.target.classList.remove(lazyLoadClassName);
   
               lazyVideoObserver.unobserve(video.target);
   
@@ -245,6 +232,26 @@
 
   }
 
-  // lazyLoadVideos();
+  // On page load, loop through all the videos on the page.
+
+  backgroundVideos.forEach(function(video){
+
+      // If cookie is false or null, play video(s).
+
+      if(animationPaused === "false" || animationPaused === null) {
+
+        video.autoplay = true;
+
+      }
+
+      // Lazy Load Videos if data-src present
+
+      if (video.querySelector("source").hasAttribute("data-src")) {
+
+        lazyLoadVideos();
+
+      }
+
+  });
 
 })();
