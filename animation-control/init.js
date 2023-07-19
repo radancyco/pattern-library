@@ -186,7 +186,7 @@
 
     document.addEventListener("DOMContentLoaded", function() {
 
-      var lazyVideos = [].slice.call(backgroundVideos);
+      var lazyVideos = [].slice.call(document.querySelectorAll("." + lazyLoadClassName));
   
       if ("IntersectionObserver" in window) {
   
@@ -244,9 +244,9 @@
 
       }
 
-      // Lazy Load Videos if data-src present
+      // Lazy Load Videos if class present
 
-      if (video.querySelector("source").hasAttribute("data-src")) {
+      if (video.classList.contains(lazyLoadClassName)) {
 
         lazyLoadVideos();
 

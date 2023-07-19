@@ -126,6 +126,60 @@ title: "Animation Control (AC) v1.1"
 
   </div>
 
+  <div class="in-page__content" data-in-page-name="Lazy Load" data-in-page-id="lazy-load">
+
+    <div class="preview">
+
+      {% include_relative html/lazy-load.html %}
+
+    </div>
+
+    <p><a class="external" href="lazy-load" target="_blank">Open in new window</a></p>
+
+    <h2>Code</h2>
+
+    <div class="tab-accordion" data-tab-disable-url data-tab-breakpoint="(min-width: 0)">
+
+      <button class="tab-accordion__button">HTML</button>
+    
+      <div class="tab-accordion__panel">
+    
+        <div class="tab-accordion__content">
+    
+          {% highlight html %}{% include_relative html/lazy-load.html %}{% endhighlight %}
+          
+        </div>
+    
+      </div>
+    
+      <button class="tab-accordion__button">CSS</button>
+    
+      <div class="tab-accordion__panel">
+    
+        <div class="tab-accordion__content">
+    
+          {% highlight css %}{% include_relative init.scss %}{% endhighlight %}
+          
+        </div>
+    
+      </div>
+    
+      <button class="tab-accordion__button">JavaScript</button>
+    
+      <div class="tab-accordion__panel">
+    
+        <div class="tab-accordion__content">
+    
+          {% highlight javascript %}{% include_relative init.js %}{% endhighlight %}
+          
+        </div>
+    
+      </div>
+    
+    </div>
+
+  </div>
+
 </div>
 
 {% include css-animation.html %}
