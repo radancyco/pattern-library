@@ -17,7 +17,7 @@
 
   // Display which component in use via console:
 
-  console.log('%c Animation Control v1.0 in use. ', 'background: #6e00ee; color: #fff');
+  console.log('%c Animation Control v1.1 in use. ', 'background: #6e00ee; color: #fff');
 
   // Animation variables
 
@@ -29,7 +29,6 @@
   var acMediaClass = ".ac__video";
   var animationBody = document.body;
   var animationControls = document.querySelectorAll(acClass);
-  var animationPaused = getCookie(acCookieName);
   var backgroundVideos = document.querySelectorAll(acMediaClass);
 
   // Used to retrieve cookie and pause all video if present.
@@ -41,25 +40,37 @@
     
   }
 
+  // Get cookie on initial load
+
+  var animationPaused = getCookie(acCookieName);
+
   // Used to set and remove cookie
 
-  function toggleCookie(value) {
+  function setCookie(state) {
 
-    if(value === true) {
+    if (location.protocol === "https:") {
 
-      if (location.protocol === "https:") {
+      // Secure environments require secure cookies.
 
-        document.cookie = acCookieName + "=true; Secure; SameSite=None; path=/";
-
-      } else {
-
-        document.cookie = acCookieName + "=true; path=/";
-
-      }
+      document.cookie = acCookieName + "=" + state + "; Secure; SameSite=None; path=/";
 
     } else {
 
-      document.cookie = acCookieName + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      document.cookie = acCookieName + "=" + state + "; path=/";
+
+    }
+
+  }
+
+  // If animation disabled in OS setting and cookie not present, set cookie.
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+
+    if(animationPaused === null) {
+
+      setCookie("true");
+
+      var animationPaused = getCookie(acCookieName);
 
     }
 
@@ -75,39 +86,33 @@
     btnPlayPause.setAttribute("aria-label", acButtonLabel);
     btnPlayPause.classList.add(acButtonClassName);
 
-    // Check OS settings first to see if user has disabled animation...
+    // Check to see if cookie is false or null.
 
-    if (window.matchMedia("(prefers-reduced-motion: no-preference)").matches) {
+    if(animationPaused === "false" || animationPaused === null) {
 
-       // ... and check to see if cookie present.
+      // If cookie not present, set aria-pressed to false.
 
-      if(animationPaused !== null) {
+      btnPlayPause.setAttribute("aria-pressed", "false");
 
-        // If cookie present, set aria-pressed to true.
+      // Remove animation enabled class from body.
 
-        btnPlayPause.setAttribute("aria-pressed", "true");
+      animationBody.classList.add(acEnabledClassName);
 
-        // Add animation enabled class to body.
+    } else {
 
-        animationBody.classList.remove(acEnabledClassName);
+      // If cookie present, set aria-pressed to true.
 
-      } else {
+      btnPlayPause.setAttribute("aria-pressed", "true");
 
-        // If cookie not present, set aria-pressed to false.
+      // Add animation enabled class to body.
+        
+      animationBody.classList.remove(acEnabledClassName);
 
-        btnPlayPause.setAttribute("aria-pressed", "false");
+    }
 
-        // Remove animation enabled class from body.
-
-        animationBody.classList.add(acEnabledClassName);
-
-      }
-
-      // Append Pause Button
+    // Append Pause Button
     
-      control.prepend(btnPlayPause);
-
-    } 
+    control.prepend(btnPlayPause);
     
     // Pause Button Toggle Event
 
@@ -121,9 +126,9 @@
 
         animationBody.classList.remove(acEnabledClassName);
 
-        // Add cookie
+        // Set cookie to true
 
-        toggleCookie(true);
+        setCookie("true");
 
         // Get all pause buttons on page and set them to true. 
 
@@ -147,9 +152,9 @@
         
         animationBody.classList.add(acEnabledClassName);
 
-        // Remove cookie.
+        // Set cookie to false
 
-        toggleCookie();
+        setCookie("false");
 
         // Get all pause buttons on page and set them to false. 
 
@@ -177,19 +182,13 @@
 
   backgroundVideos.forEach(function(video){
 
-    // Check OS settings first to see if user has disabled animation...
+      // Check to see if cookie present. If cookie is false or null, play video(s).
 
-    if (window.matchMedia("(prefers-reduced-motion: no-preference)").matches) {
-
-      // ... and check to see if cookie present. If cookie not present, play video(s).
-
-      if(animationPaused === null) {
+      if(animationPaused === "false" || animationPaused === null) {
 
         video.autoplay = true;
 
       }
-
-    }
 
   });
 
