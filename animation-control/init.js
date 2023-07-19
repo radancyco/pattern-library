@@ -113,7 +113,7 @@
 
     // Append pause button.
     
-    control.prepend(btnPlayPause);
+    control.append(btnPlayPause);
     
     // Pause Toggle Event
 
