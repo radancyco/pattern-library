@@ -40,11 +40,11 @@
     
   }
 
-  // Get cookie on initial load
+  // Get cookie on initial load.
 
   var animationPaused = getCookie(acCookieName);
 
-  // Used to set and remove cookie
+  // Used to set and remove cookie.
 
   function setCookie(state) {
 
@@ -62,7 +62,7 @@
 
   }
 
-  // If animation disabled in OS setting and cookie not present, set cookie.
+  // If animation disabled in OS settings and cookie not present, set cookie.
 
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
 
@@ -76,11 +76,11 @@
 
   }
 
-  // For each Animation Control
+  // For each animation control...
 
   animationControls.forEach(function(control){
 
-    // Create Pause Button
+    // Create pause button.
 
     var btnPlayPause = document.createElement("button");
     btnPlayPause.setAttribute("aria-label", acButtonLabel);
@@ -90,7 +90,7 @@
 
     if(animationPaused === "false" || animationPaused === null) {
 
-      // If cookie not present, set aria-pressed to false.
+      // Set aria-pressed to false.
 
       btnPlayPause.setAttribute("aria-pressed", "false");
 
@@ -100,7 +100,7 @@
 
     } else {
 
-      // If cookie present, set aria-pressed to true.
+      // Set aria-pressed to true.
 
       btnPlayPause.setAttribute("aria-pressed", "true");
 
@@ -110,11 +110,11 @@
 
     }
 
-    // Append Pause Button
+    // Append pause button.
     
     control.prepend(btnPlayPause);
     
-    // Pause Button Toggle Event
+    // Pause Toggle Event
 
     btnPlayPause.addEventListener("click", function() {
 
@@ -126,7 +126,7 @@
 
         animationBody.classList.remove(acEnabledClassName);
 
-        // Set cookie to true
+        // Set cookie to true.
 
         setCookie("true");
 
@@ -152,7 +152,7 @@
         
         animationBody.classList.add(acEnabledClassName);
 
-        // Set cookie to false
+        // Set cookie to false.
 
         setCookie("false");
 
@@ -182,7 +182,7 @@
 
   backgroundVideos.forEach(function(video){
 
-      // Check to see if cookie present. If cookie is false or null, play video(s).
+      // If cookie is false or null, play video(s).
 
       if(animationPaused === "false" || animationPaused === null) {
 
