@@ -1,6 +1,6 @@
 /*!
 
-  Radancy: Animation Control (AC)
+  Radancy: Animation Toggle
 
   Contributor(s):
   Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy
@@ -17,19 +17,19 @@
 
   // Display which component in use via console:
 
-  console.log('%c Animation Control v1.1 in use. ', 'background: #6e00ee; color: #fff');
+  console.log('%c Animation Toggle v1.1 in use. ', 'background: #6e00ee; color: #fff');
 
   // Animation variables
 
-  var acButtonClassName = "ac__button"
-  var acButtonLabel = "Pause Animation";
-  var acClass = ".ac";
-  var acCookieName = "AnimationPaused";
-  var acEnabledClassName = "animation-enabled"
-  var acMediaClass = ".ac__video";
+  var atButtonClassName = "animation-toggle__button"
+  var atButtonLabel = "Pause Animation";
+  var atClass = ".animation-toggle";
+  var atCookieName = "AnimationPaused";
+  var atEnabledClassName = "animation-enabled"
+  var atMediaClass = ".animation-toggle__video";
   var animationBody = document.body;
-  var animationControls = document.querySelectorAll(acClass);
-  var backgroundVideos = document.querySelectorAll(acMediaClass);
+  var animationControls = document.querySelectorAll(atClass);
+  var backgroundVideos = document.querySelectorAll(atMediaClass);
   var lazyLoadClassName = "lazy-load";
 
   // Used to retrieve cookie and pause all video if present.
@@ -43,7 +43,7 @@
 
   // Get cookie on initial load.
 
-  var animationPaused = getCookie(acCookieName);
+  var animationPaused = getCookie(atCookieName);
 
   // Used to set and remove cookie.
 
@@ -53,11 +53,11 @@
 
       // Secure environments require secure cookies.
 
-      document.cookie = acCookieName + "=" + state + "; Secure; SameSite=None; path=/";
+      document.cookie = atCookieName + "=" + state + "; Secure; SameSite=None; path=/";
 
     } else {
 
-      document.cookie = acCookieName + "=" + state + "; path=/";
+      document.cookie = atCookieName + "=" + state + "; path=/";
 
     }
 
@@ -71,7 +71,7 @@
 
       setCookie("true");
 
-      var animationPaused = getCookie(acCookieName);
+      var animationPaused = getCookie(atCookieName);
 
     }
 
@@ -84,8 +84,8 @@
     // Create pause button.
 
     var btnPlayPause = document.createElement("button");
-    btnPlayPause.setAttribute("aria-label", acButtonLabel);
-    btnPlayPause.classList.add(acButtonClassName);
+    btnPlayPause.setAttribute("aria-label", atButtonLabel);
+    btnPlayPause.classList.add(atButtonClassName);
 
     // Check to see if cookie is false or null.
 
@@ -97,7 +97,7 @@
 
       // Remove animation enabled class from body.
 
-      animationBody.classList.add(acEnabledClassName);
+      animationBody.classList.add(atEnabledClassName);
 
     } else {
 
@@ -107,7 +107,7 @@
 
       // Add animation enabled class to body.
         
-      animationBody.classList.remove(acEnabledClassName);
+      animationBody.classList.remove(atEnabledClassName);
 
     }
 
@@ -119,13 +119,13 @@
 
     btnPlayPause.addEventListener("click", function() {
 
-      var animationToggles = document.querySelectorAll("." + acButtonClassName);
+      var animationToggles = document.querySelectorAll("." + atButtonClassName);
 
       if (this.getAttribute("aria-pressed") === "false") {
 
         // Remove animation enabled class from body.
 
-        animationBody.classList.remove(acEnabledClassName);
+        animationBody.classList.remove(atEnabledClassName);
 
         // Set cookie to true.
 
@@ -151,7 +151,7 @@
 
         // Add animation enabled class to body.
         
-        animationBody.classList.add(acEnabledClassName);
+        animationBody.classList.add(atEnabledClassName);
 
         // Set cookie to false.
 
@@ -180,7 +180,7 @@
   });
 
   // Lazy Load Video (Optional)
-  // Usage:  Add lazy-load class to video element. Replace "src" with "data-src" attribute on "source" element.
+  // Usage:  Add lazy-load class to video element. Replace 'src' with 'data-src' attribute on 'source' element.
 
   function lazyLoadVideos() {
 
