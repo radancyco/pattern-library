@@ -32,6 +32,7 @@
   var atVideoLabel = "Background Animation";
   var animationBody = document.body;
   var dataPauseButton = "data-pause-button";
+  var dataVideoBreakPoint = "data-media";
   var lazyLoadClassName = "lazy-load";
   var lazyLoadClass = "." + lazyLoadClassName;
   var getAnimationToggles = document.querySelectorAll(atClass);
@@ -162,7 +163,14 @@
         getBackgroundVideos.forEach(function(video) {
 
           video.pause();
-          video.autoplay = false; // Only need this for lazly loading video in hidden divs.
+
+          // Only need this for lazly loading videos in hidden divs.
+
+          if (video.classList.contains(lazyLoadClassName)) {
+
+            video.autoplay = false;
+
+          }
 
         });
 
@@ -189,6 +197,8 @@
         getBackgroundVideos.forEach(function(video){
 
           video.play();
+
+          // TODO: https://stackoverflow.com/questions/36803176/how-to-prevent-the-play-request-was-interrupted-by-a-call-to-pause-error/37172024#37172024
   
         });
 
@@ -278,5 +288,71 @@
       }
 
   });
+
+
+  // Test
+
+
+
+
+  // Create an array to store each TabCordions breakpoint in,
+  // which we will loop through later...
+
+  var videoBreakPoints = [];
+
+  // loop through each TabCordion...
+
+  getBackgroundVideos.forEach(function(video){
+
+    // Get each TabCordion breakpoint...
+
+    var videoBreakpoint = video.getAttribute(dataVideoBreakPoint);
+
+    // Store each breakpoint in array (above) for later use by matchMedia.
+
+    videoBreakPoints.push(window.matchMedia(videoBreakpoint));
+
+  });
+
+
+  function viewPortChange() {
+
+    getBackgroundVideos.forEach(function(video, i){
+
+      if(video.hasAttribute(dataVideoBreakPoint)) {
+
+        var largeVideo = video.getAttribute("data-large-viewport");
+        var smallVideo = video.src;
+
+        if (videoBreakPoints[i].matches) {
+
+          video.setAttribute("src", largeVideo);
+
+        } else { 
+
+          video.setAttribute("src", smallVideo);
+
+        }
+
+        video.load();
+
+      }
+
+    });
+
+
+  }
+
+   // Initiate viewPortWidth function when viewport is resized.
+
+   videoBreakPoints.forEach(function(breakpoints){
+
+    breakpoints.addEventListener("change", viewPortChange);
+
+  });
+
+   // Initiate tabCordions on page load.
+
+   viewPortChange();
 
 })();
