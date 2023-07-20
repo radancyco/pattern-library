@@ -20,17 +20,23 @@
   console.log('%c Animation Toggle v1.1 in use. ', 'background: #6e00ee; color: #fff');
 
   // Animation variables
+  // Note: For labels such as atButtonLabel and atVideoLabel, do not forget to translate on multi-language sites.
 
-  var atButtonClassName = "animation-toggle__button"
+  var atButtonClassName = "animation-toggle__button";
+  var atButtonClass = "." + atButtonClassName;
   var atButtonLabel = "Pause Animation";
   var atClass = ".animation-toggle";
   var atCookieName = "AnimationPaused";
   var atEnabledClassName = "animation-enabled"
   var atMediaClass = ".animation-toggle__video";
+  var atVideoLabel = "Background Animation";
   var animationBody = document.body;
-  var animationControls = document.querySelectorAll(atClass);
-  var backgroundVideos = document.querySelectorAll(atMediaClass);
+  var dataPauseButton = "data-pause-button";
   var lazyLoadClassName = "lazy-load";
+  var lazyLoadClass = "." + lazyLoadClassName;
+  var getAnimationToggles = document.querySelectorAll(atClass);
+  var getBackgroundVideos = document.querySelectorAll(atMediaClass);
+  var getLazyLoadClass = document.querySelectorAll(lazyLoadClass);
 
   // Used to retrieve cookie and pause all video if present.
 
@@ -79,12 +85,22 @@
 
   // For each animation control...
 
-  animationControls.forEach(function(control){
+  getAnimationToggles.forEach(function(control){
 
     // Create pause button.
 
     var btnPlayPause = document.createElement("button");
-    btnPlayPause.setAttribute("aria-label", atButtonLabel);
+
+    if(control.hasAttribute(dataPauseButton)) {
+
+      btnPlayPause.setAttribute("aria-label", control.getAttribute(dataPauseButton));
+
+    } else {
+
+      btnPlayPause.setAttribute("aria-label", atButtonLabel);
+
+    }
+
     btnPlayPause.classList.add(atButtonClassName);
 
     // Check to see if cookie is false or null.
@@ -119,7 +135,9 @@
 
     btnPlayPause.addEventListener("click", function() {
 
-      var animationToggles = document.querySelectorAll("." + atButtonClassName);
+      var getAtButtonClass = document.querySelectorAll(atButtonClass);
+
+      var animationToggles = getAtButtonClass;
 
       if (this.getAttribute("aria-pressed") === "false") {
 
@@ -141,9 +159,10 @@
 
         // Pause video(s) on page.
 
-        backgroundVideos.forEach(function(video) {
+        getBackgroundVideos.forEach(function(video) {
 
           video.pause();
+          video.autoplay = false; // Only need this for lazly loading video in hidden divs.
 
         });
 
@@ -167,7 +186,7 @@
 
         // Play video(s) on page.
 
-        backgroundVideos.forEach(function(video){
+        getBackgroundVideos.forEach(function(video){
 
           video.play();
   
@@ -180,13 +199,13 @@
   });
 
   // Lazy Load Video (Optional)
-  // Usage:  Add lazy-load class to video element. Replace 'src' with 'data-src' attribute on 'source' element.
+  // Usage:  Add .lazy-load class to video element. Replace 'src' with 'data-src' attribute on 'source' element.
 
   function lazyLoadVideos() {
 
     document.addEventListener("DOMContentLoaded", function() {
 
-      var lazyVideos = [].slice.call(document.querySelectorAll("." + lazyLoadClassName));
+      var lazyVideos = [].slice.call(getLazyLoadClass);
   
       if ("IntersectionObserver" in window) {
   
@@ -234,11 +253,17 @@
 
   // On page load, loop through all the videos on the page.
 
-  backgroundVideos.forEach(function(video){
+  getBackgroundVideos.forEach(function(video){
 
-      // If cookie is false or null, play video(s).
+      if(!video.hasAttribute("aria-label")) {
 
-      if(animationPaused === "false" || animationPaused === null) {
+        video.setAttribute("aria-label", atVideoLabel);
+
+      }
+
+      // If animation class on body exists...
+
+      if (animationBody.classList.contains(atEnabledClassName)) {
 
         video.autoplay = true;
 
