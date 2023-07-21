@@ -322,15 +322,21 @@
       if(video.hasAttribute(dataVideoBreakPoint)) {
 
         var largeVideo = video.getAttribute("data-large-viewport");
-        var smallVideo = video.src;
+        var smallVideo = video.querySelector("source").getAttribute("src");
 
         if (videoBreakPoints[i].matches) {
 
+          //desktop
+
           video.setAttribute("src", largeVideo);
+
 
         } else { 
 
+          // mobile
+
           video.setAttribute("src", smallVideo);
+
 
         }
 
