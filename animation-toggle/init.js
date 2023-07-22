@@ -163,14 +163,8 @@
         getBackgroundVideos.forEach(function(video) {
 
           video.pause();
+          video.autoplay = false;
 
-          // Only need this for lazly loading videos in hidden divs.
-
-          if (video.classList.contains(lazyLoadClassName)) {
-
-            video.autoplay = false;
-
-          }
 
         });
 
@@ -323,6 +317,8 @@
 
         var largeVideo = video.getAttribute("data-large-viewport");
         var smallVideo = video.querySelector("source").getAttribute("src");
+
+        // var smallVideo = video.currentSrc;
 
         if (videoBreakPoints[i].matches) {
 
