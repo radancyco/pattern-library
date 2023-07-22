@@ -165,7 +165,6 @@
           video.pause();
           video.autoplay = false;
 
-
         });
 
       } else {
