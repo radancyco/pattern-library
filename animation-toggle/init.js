@@ -288,16 +288,15 @@
 
 
 
-  // Create an array to store each TabCordions breakpoint in,
-  // which we will loop through later...
+  // Create an array to store each video breakpoint in (which we will loop through later)
 
   var videoBreakPoints = [];
 
-  // loop through each TabCordion...
+  // Loop through each background video...
 
   getBackgroundVideos.forEach(function(video){
 
-    // Get each TabCordion breakpoint...
+    // Get each video breakpoint...
 
     var videoBreakpoint = video.getAttribute(dataVideoBreakPoint);
 
@@ -325,17 +324,23 @@
 
           video.setAttribute("src", largeVideo);
 
-
         } else { 
 
           // mobile
 
           video.setAttribute("src", smallVideo);
 
-
         }
 
         video.load();
+       
+        // If animation class on body exists...
+
+      if (animationBody.classList.contains(atEnabledClassName)) {
+
+        video.autoplay = true;
+
+      }
 
       }
 
