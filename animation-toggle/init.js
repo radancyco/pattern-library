@@ -288,13 +288,7 @@
 
   });
 
-
-  // Test
-
-
-
-
-  // Create an array to store each video breakpoint in (which we will loop through later)
+ // Breakpoint Support
 
   var videoBreakPoints = [];
 
