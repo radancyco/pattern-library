@@ -201,10 +201,29 @@
 
   });
 
-  // Lazy Load Video (Optional)
-  // Usage:  Add .lazy-load class to video element. Replace 'src' with 'data-src' attribute on 'source' element.
+  // On page load, loop through all the videos on the page.
 
-  function lazyLoadVideos() {
+  getBackgroundVideos.forEach(function(video){
+
+    if(!video.hasAttribute("aria-label")) {
+
+      video.setAttribute("aria-label", atVideoLabel);
+
+    }
+
+    // If animation class on body exists...
+
+    if (animationBody.classList.contains(atEnabledClassName)) {
+
+      video.autoplay = true;
+
+    }
+
+  });
+
+  // Video Lazy Load (Optional)
+
+  function videoLazyLoad() {
 
     document.addEventListener("DOMContentLoaded", function() {
 
@@ -260,75 +279,50 @@
 
   }
 
-  // On page load, loop through all the videos on the page.
+  // Initiate on page load.
 
-  getBackgroundVideos.forEach(function(video){
+  videoLazyLoad();
 
-      if(!video.hasAttribute("aria-label")) {
+  // Video Breakpoint Support (Optional)
 
-        video.setAttribute("aria-label", atVideoLabel);
-
-      }
-
-      // If animation class on body exists...
-
-      if (animationBody.classList.contains(atEnabledClassName)) {
-
-        video.autoplay = true;
-
-      }
-
-      // Lazy Load Videos if class present
-
-      if (video.classList.contains(lazyLoadClassName)) {
-
-        lazyLoadVideos();
-
-      }
-
-  });
-
- // Breakpoint Support
+  // Create array to store all video brakpoints in.
 
   var videoBreakPoints = [];
 
-  // Loop through each background video...
+  // Loop through each video...
 
   getBackgroundVideos.forEach(function(video){
 
-    // Get each video breakpoint...
+    // Get each breakpoint in video
 
     var videoBreakpoint = video.getAttribute(dataVideoBreakPoint);
 
-    // Store each breakpoint in array (above) for later use by matchMedia.
+    // Store each breakpoint in array (videoBreakPoints) for later use by matchMedia.
 
     videoBreakPoints.push(window.matchMedia(videoBreakpoint));
 
   });
 
-
-  function viewPortChange() {
+  function videoViewPortChange() {
 
     getBackgroundVideos.forEach(function(video, i){
 
       if(video.hasAttribute(dataVideoBreakPoint)) {
 
-        var largeVideo = video.getAttribute("data-large-viewport");
-        var smallVideo = video.querySelector("source").getAttribute("src");
-
-        // var smallVideo = video.currentSrc;
+        var largeViewportSource = video.getAttribute("data-large-viewport");
+        var smallViewportSource = video.querySelector("source").getAttribute("src");
 
         if (videoBreakPoints[i].matches) {
 
-          //desktop
+          // Large Viewport Video
 
-          video.setAttribute("src", largeVideo);
+          video.setAttribute("src", largeViewportSource);
 
         } else { 
 
-          // mobile
+          // Small Viewport Video (Default)
 
-          video.setAttribute("src", smallVideo);
+          video.setAttribute("src", smallViewportSource);
 
         }
 
@@ -336,29 +330,28 @@
        
         // If animation class on body exists...
 
-      if (animationBody.classList.contains(atEnabledClassName)) {
+        if (animationBody.classList.contains(atEnabledClassName)) {
 
-        video.autoplay = true;
+          video.autoplay = true;
 
-      }
+        }
 
       }
 
     });
 
-
   }
 
-   // Initiate viewPortWidth function when viewport is resized.
+  // Initiate videoViewPortChange function when viewport is resized.
 
-   videoBreakPoints.forEach(function(breakpoints){
+  videoBreakPoints.forEach(function(breakpoints){
 
-    breakpoints.addEventListener("change", viewPortChange);
-
+    breakpoints.addEventListener("change", videoViewPortChange);
+  
   });
-
-   // Initiate tabCordions on page load.
-
-   viewPortChange();
+  
+  // Initiate on page load.
+  
+  videoViewPortChange();
 
 })();
