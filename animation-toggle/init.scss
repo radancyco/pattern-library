@@ -31,18 +31,14 @@ position: relative;
 
   &__hero {
 
-    &:has(video) {
+    &:not(.animation-enabled &) {
 
-      &:not(.animation-enabled &) {
-
-        &::after {
-        background-color: rgba(0, 0, 0, 0.4);
-        content: "";
-        inset: 0;
-        pointer-events: none;
-        position: absolute;
-        }
-
+      &::after {
+      background-color: rgba(0, 0, 0, 0.4);
+      content: "";
+      inset: 0;
+      pointer-events: none;
+      position: absolute;
       }
 
     }

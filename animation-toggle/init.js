@@ -221,6 +221,137 @@
 
   });
 
+  // Video Lazy Load (Optional)
+
+  function videoLazyLoad() {
+
+    document.addEventListener("DOMContentLoaded", function() {
+
+      var lazyVideos = [].slice.call(getLazyLoadClass);
   
+      if ("IntersectionObserver" in window) {
+  
+        var lazyVideoObserver = new IntersectionObserver(function(entries, observer) {
+  
+          entries.forEach(function(video) {
+  
+            if (video.isIntersecting) {
+  
+              for (var source in video.target.children) {
+  
+                var videoSource = video.target.children[source];
+  
+                if (typeof videoSource.tagName === "string" && videoSource.tagName === "SOURCE") {
+  
+                  videoSource.src = videoSource.dataset.src;
+  
+                }
+  
+              }
+  
+              video.target.load();
+
+              if (animationBody.classList.contains(atEnabledClassName)) {
+
+                video.target.autoplay = true;
+        
+              }
+              
+              video.target.classList.remove(lazyLoadClassName);
+  
+              lazyVideoObserver.unobserve(video.target);
+  
+            }
+  
+          });
+  
+        });
+  
+        lazyVideos.forEach(function(lazyVideo) {
+  
+          lazyVideoObserver.observe(lazyVideo);
+  
+        });
+  
+      }
+  
+    });
+
+  }
+
+  // Initiate on page load.
+
+  videoLazyLoad();
+
+  // Video Breakpoint Support (Optional)
+
+  // Create array to store all video brakpoints in.
+
+  var videoBreakPoints = [];
+
+  // Loop through each video...
+
+  getBackgroundVideos.forEach(function(video){
+
+    // Get each breakpoint in video
+
+    var videoBreakpoint = video.getAttribute(dataVideoBreakPoint);
+
+    // Store each breakpoint in array (videoBreakPoints) for later use by matchMedia.
+
+    videoBreakPoints.push(window.matchMedia(videoBreakpoint));
+
+  });
+
+  function videoViewPortChange() {
+
+    getBackgroundVideos.forEach(function(video, i){
+
+      if(video.hasAttribute(dataVideoBreakPoint)) {
+
+        var largeViewportSource = video.getAttribute("data-large-viewport");
+        var smallViewportSource = video.querySelector("source").getAttribute("src");
+
+        if (videoBreakPoints[i].matches) {
+
+          // Large Viewport Video
+
+          video.setAttribute("src", largeViewportSource);
+
+        } else { 
+
+          // Small Viewport Video (Default)
+
+          video.setAttribute("src", smallViewportSource);
+
+        }
+
+        video.load();
+       
+        // If animation class on body exists...
+
+        if (animationBody.classList.contains(atEnabledClassName)) {
+
+          video.autoplay = true;
+
+        }
+
+      }
+
+    });
+
+  }
+
+  // Initiate videoViewPortChange function when viewport is resized.
+
+  videoBreakPoints.forEach(function(breakpoints){
+
+    breakpoints.addEventListener("change", videoViewPortChange);
+  
+  });
+  
+  // Initiate on page load.
+  
+  videoViewPortChange();
 
 })();
