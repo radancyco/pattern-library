@@ -231,6 +231,12 @@
               }
   
               video.target.load();
+
+              if (animationBody.classList.contains(atEnabledClassName)) {
+
+                video.target.autoplay = true;
+        
+              }
               
               video.target.classList.remove(lazyLoadClassName);
   
