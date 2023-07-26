@@ -110,6 +110,11 @@ position: relative;
 
       &.active {
       display: inline-block;
+
+        &:empty {
+        display: none;
+        }
+
       }
 
   }
