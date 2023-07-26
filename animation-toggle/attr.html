@@ -28,16 +28,28 @@
       <td>Indicates whether to use CORS to fetch the related video, which is often needed for cross-domain hosting of assets.</td>
     </tr>
     <tr>
-      <td><code>data-src</code></td>
-      <td><code>source</code></td>
-      <td>Optional</td>
-      <td>Include when lazy loading required. It's value should be the path to your video asset.</td>
+      <td><code>data-large-viewport</code></td>
+      <td><code>video</code></td>
+      <td>String, Optional</td>
+      <td>Include when breakpoint is needed to load in larger video asset. It's value should be the path to your large screen video asset.</td>
+    </tr>
+    <tr>
+      <td><code>data-media</code></td>
+      <td><code>video</code></td>
+      <td>String, Optional</td>
+      <td>Include when breakpoint is needed to load in larger video asset. It's value can be any valid media query.</td>
     </tr>
     <tr>
       <td><code>data-pause-button</code></td>
       <td><code>.animation-toggle</code></td>
       <td>String, Optional</td>
       <td>This will override the default button label, which is "Pause Animation".</td>
+    </tr>
+    <tr>
+      <td><code>data-src</code></td>
+      <td><code>source</code></td>
+      <td>Optional</td>
+      <td>Include when lazy loading required. It's value should be the path to your video asset.</td>
     </tr>
     <tr>
       <td><code>loop</code></td>

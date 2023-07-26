@@ -7,8 +7,6 @@
 
   Dependencies: None
 
-  TODO: We may need way to load in smaller videos on mobile using MatchMedia. Rather than use divs, will just add data-animation-mobile to video element to swap source with.
-
 */
 
 (function() {
@@ -22,8 +20,8 @@
   // Animation variables
   // Note: For labels such as atButtonLabel and atVideoLabel, do not forget to translate on multi-language sites.
 
-  var atButtonClassName = "animation-toggle__button";
-  var atButtonClass = "." + atButtonClassName;
+  var atPauseButtonClassName = "animation-toggle__pause";
+  var atPauseButtonClass = "." + atPauseButtonClassName;
   var atButtonLabel = "Pause Animation";
   var atClass = ".animation-toggle";
   var atCookieName = "AnimationPaused";
@@ -88,6 +86,16 @@
 
   getAnimationToggles.forEach(function(control){
 
+    // Create control container.
+
+    var btnControls = document.createElement("div");
+
+    btnControls.setAttribute("class", "animation-toggle__controls");
+
+    // Append control div.
+    
+    control.append(btnControls);
+
     // Create pause button.
 
     var btnPlayPause = document.createElement("button");
@@ -102,7 +110,7 @@
 
     }
 
-    btnPlayPause.classList.add(atButtonClassName);
+    btnPlayPause.classList.add(atPauseButtonClassName);
 
     // Check to see if cookie is false or null.
 
@@ -128,17 +136,17 @@
 
     }
 
-    // Append pause button.
-    
-    control.append(btnPlayPause);
+    // Append pause button
+
+    btnControls.append(btnPlayPause);
     
     // Pause Toggle Event
 
     btnPlayPause.addEventListener("click", function() {
 
-      var getAtButtonClass = document.querySelectorAll(atButtonClass);
+      var getAtPauseButtonClass = document.querySelectorAll(atPauseButtonClass);
 
-      var animationToggles = getAtButtonClass;
+      var animationPauseToggles = getAtPauseButtonClass;
 
       if (this.getAttribute("aria-pressed") === "false") {
 
@@ -152,7 +160,7 @@
 
         // Get all pause buttons on page and set them to true. 
 
-        animationToggles.forEach(function(button){
+        animationPauseToggles.forEach(function(button){
 
           button.setAttribute("aria-pressed", "true");
 
@@ -179,7 +187,7 @@
 
         // Get all pause buttons on page and set them to false. 
 
-        animationToggles.forEach(function(button){
+        animationPauseToggles.forEach(function(button){
 
           button.setAttribute("aria-pressed", "false");
         
@@ -199,6 +207,62 @@
 
     });
 
+    if (control.querySelector("track") !== null) {
+
+      // Create audio description button 
+
+      var btnAudioDescription = document.createElement("button");
+
+      btnAudioDescription.setAttribute("class", "animation-toggle__audio");
+
+      // Append pause button
+
+      btnControls.append(btnAudioDescription);
+
+      // Pause Toggle Event
+
+      btnAudioDescription.addEventListener("click", function() {
+
+
+        var thisVideo = control.querySelector(atMediaClass);
+        var thisDescription = control.querySelector(".animation-toggle__description")
+
+        // alert(thisVideo);
+
+        
+        thisDescription.classList.toggle("active");
+
+        if (thisVideo.textTracks) {
+
+        
+          const track = thisVideo.textTracks[0];
+          track.mode = "hidden";
+      
+          track.oncuechange = function(e) {
+      
+            const cue = this.activeCues[0];
+      
+            if (cue) {
+      
+              thisDescription.innerHTML = "";
+              thisDescription.appendChild(cue.getCueAsHTML());
+      
+              var Message = thisDescription.textContent;
+              var msg = new SpeechSynthesisUtterance(Message);
+      
+              window.speechSynthesis.speak(msg);
+      
+            }
+      
+          }
+
+        }
+      
+    
+      });
+
+    }
+  
   });
 
   // On page load, loop through all the videos on the page.
@@ -220,6 +284,90 @@
     }
 
   });
+
+
+
+
+/* ========================= */
+
+
+// Audi Description
+
+  /* <video id="hero-video" preload="none" aria-label="SCJ Recruiting" mute poster="example.jpg">
+			<source src="example.mp4" type="video/mp4">
+			<!-- track kind="captions" label="English" src="example-caps.vtt" srclang="en-US" -->
+			<track kind="descriptions" label="English" src="example-desc.vtt" srclang="en-US">
+		</video>
+
+		<div class="custom-controls">
+
+			<button id="btn-play-pause"><img src="btn-play.png" alt="Toggle Play/Pause"></button>
+
+			<button id="btn-audio-description"><img src="btn-audio.png" alt="Toggle Audio Description"></button>
+
+		</div> */
+/* 
+
+    const heroVideo = document.getElementById("hero-video");
+    const audioDescription = document.getElementById("audio-description");
+    
+    const btnAudioDescription = document.getElementById("btn-audio-description");
+    const btnPlayToggle = document.getElementById("btn-play-pause");
+    
+    btnAudioDescription.onclick = function() {
+    
+      this.classList.toggle("on");
+      audioDescription.classList.toggle("active");
+    
+      if (heroVideo.textTracks) {
+    
+        const track = heroVideo.textTracks[0];
+        track.mode = "hidden";
+    
+        track.oncuechange = function(e) {
+    
+          const cue = this.activeCues[0];
+    
+          if (cue) {
+    
+            audioDescription.innerHTML = "";
+            audioDescription.appendChild(cue.getCueAsHTML());
+    
+            var Message = audioDescription.textContent;
+            var msg = new SpeechSynthesisUtterance(Message);
+    
+            window.speechSynthesis.speak(msg);
+    
+          }
+    
+        }
+    
+      }
+    
+      heroVideo.volume = 0.05;
+    
+    }
+    
+    btnPlayToggle.onclick = function() {
+    
+      this.classList.toggle("on");
+      heroVideo.paused ? heroVideo.play() : heroVideo.pause();
+    
+    }
+
+*/
+
+
+/* ========================== */
+
+
+
+
+
+
+
+
+
 
   // Video Lazy Load (Optional)
 
