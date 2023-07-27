@@ -239,36 +239,33 @@
 
           this.setAttribute("aria-pressed", "true");
 
-          if (thisVideo.textTracks) {
-
-            var track = thisVideo.textTracks[0];
-            track.mode = "hidden";
-            track.addEventListener("cuechange", function () {
- 
-              var currentCue = this.activeCues[0];
-
-              if (currentCue) {
-
-                thisDescription.innerHTML = "";
-                thisDescription.appendChild(currentCue.getCueAsHTML());
-        
-                var Message = thisDescription.textContent;
-                var msg = new SpeechSynthesisUtterance(Message);
-        
-                window.speechSynthesis.speak(msg);
-
-              }
-
-            },false);
-
-          }
-
         } else {
 
-          thisDescription.innerHTML = "";
-          window.speechSynthesis.cancel();
-
           this.setAttribute("aria-pressed", "false");
+
+        }
+
+        if (thisVideo.textTracks) {
+
+          var track = thisVideo.textTracks[0];
+          track.mode = "hidden";
+          track.oncuechange = function(e) {
+
+            var currentCue = this.activeCues[0];
+
+            if (currentCue) {
+
+              thisDescription.innerHTML = "";
+              thisDescription.appendChild(currentCue.getCueAsHTML());
+      
+              var Message = thisDescription.textContent;
+              var msg = new SpeechSynthesisUtterance(Message);
+      
+              window.speechSynthesis.speak(msg);
+
+            }
+
+          };
 
         }
       
