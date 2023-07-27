@@ -166,15 +166,6 @@
 
         });
 
-        // Pause video(s) on page.
-
-        getBackgroundVideos.forEach(function(video) {
-
-          video.pause();
-          video.autoplay = false;
-
-        });
-
       } else {
 
         // Add animation enabled class to body.
@@ -193,17 +184,27 @@
         
         });
 
-        // Play video(s) on page.
+      }
 
-        getBackgroundVideos.forEach(function(video){
+      // Toggle Video Playback
+
+      getBackgroundVideos.forEach(function(video){
+
+        var isPlaying = video.currentTime > 0 && !video.paused && !video.ended && video.readyState > video.HAVE_CURRENT_DATA;
+
+        // Note: https://stackoverflow.com/questions/36803176/how-to-prevent-the-play-request-was-interrupted-by-a-call-to-pause-error/37172024#37172024
+
+        if(!isPlaying) {
 
           video.play();
 
-          // TODO: https://stackoverflow.com/questions/36803176/how-to-prevent-the-play-request-was-interrupted-by-a-call-to-pause-error/37172024#37172024
-  
-        });
+        } else {
 
-      }
+          video.pause();
+
+        }
+              
+      });
 
     });
 
@@ -279,7 +280,11 @@
 
     if (animationBody.classList.contains(atEnabledClassName)) {
 
-      video.autoplay = true;
+      video.play();
+
+    } else { 
+
+      video.load();
 
     }
 
@@ -348,12 +353,7 @@
     
     }
     
-    btnPlayToggle.onclick = function() {
-    
-      this.classList.toggle("on");
-      heroVideo.paused ? heroVideo.play() : heroVideo.pause();
-    
-    }
+
 
 */
 
@@ -401,7 +401,7 @@
 
               if (animationBody.classList.contains(atEnabledClassName)) {
 
-                video.target.autoplay = true;
+                video.target.play();
         
               }
               
@@ -480,7 +480,7 @@
 
         if (animationBody.classList.contains(atEnabledClassName)) {
 
-          video.autoplay = true;
+          video.play();
 
         }
 
