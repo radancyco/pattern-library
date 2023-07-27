@@ -12,11 +12,69 @@ title: "Animation Toggle v1.1"
 
 <p>This component will allow you to implement video and CSS background animations that include a pause button.</p>
 
-<p class="alert"><strong>Warning:</strong> Readers with vestibular motion disorders may wish to enable the reduce motion feature on their device before viewing animations in this demo.</p>
+<div class="warning">
+
+  <p><strong>Warning:</strong> Readers with vestibular motion disorders may wish to enable the reduce motion feature on their device before viewing animations in this demo.</p>
+
+</div>
 
 <div class="in-page" data-in-page-dynamic>
 
   {% include select-example.html %}
+
+  <div class="in-page__content" data-in-page-name="Basic Setup" data-in-page-id="basic-setup">
+
+    <div class="preview">
+
+      {% include_relative html/video.html %}
+
+    </div>
+
+    <p><a class="external" href="video" target="_blank">Open in new window</a></p>
+
+    <h2>Code</h2>
+
+    <div class="tab-accordion" data-tab-disable-url data-tab-breakpoint="(min-width: 0)">
+
+      <button class="tab-accordion__button">HTML</button>
+    
+      <div class="tab-accordion__panel">
+    
+        <div class="tab-accordion__content">
+    
+          {% highlight html %}{% include_relative html/video.html %}{% endhighlight %}
+          
+        </div>
+    
+      </div>
+    
+      <button class="tab-accordion__button">CSS</button>
+    
+      <div class="tab-accordion__panel">
+    
+        <div class="tab-accordion__content">
+    
+          {% highlight css %}{% include_relative init.scss %}{% endhighlight %}
+          
+        </div>
+    
+      </div>
+    
+      <button class="tab-accordion__button">JavaScript</button>
+    
+      <div class="tab-accordion__panel">
+    
+        <div class="tab-accordion__content">
+    
+          {% highlight javascript %}{% include_relative init.js %}{% endhighlight %}
+          
+        </div>
+    
+      </div>
+    
+    </div>
+
+  </div>
 
   <div class="in-page__content" data-in-page-name="Audio Description" data-in-page-id="audio-description">
 
@@ -39,6 +97,60 @@ title: "Animation Toggle v1.1"
         <div class="tab-accordion__content">
     
           {% highlight html %}{% include_relative html/audio-description.html %}{% endhighlight %}
+          
+        </div>
+    
+      </div>
+    
+      <button class="tab-accordion__button">CSS</button>
+    
+      <div class="tab-accordion__panel">
+    
+        <div class="tab-accordion__content">
+    
+          {% highlight css %}{% include_relative init.scss %}{% endhighlight %}
+          
+        </div>
+    
+      </div>
+    
+      <button class="tab-accordion__button">JavaScript</button>
+    
+      <div class="tab-accordion__panel">
+    
+        <div class="tab-accordion__content">
+    
+          {% highlight javascript %}{% include_relative init.js %}{% endhighlight %}
+          
+        </div>
+    
+      </div>
+    
+    </div>
+
+  </div>
+
+  <div class="in-page__content" data-in-page-name="Breakpoint" data-in-page-id="breakpoint">
+
+    <div class="preview">
+
+      {% include_relative html/breakpoint.html %}
+
+    </div>
+
+    <p><a class="external" href="breakpoint" target="_blank">Open in new window</a></p>
+
+    <h2>Code</h2>
+
+    <div class="tab-accordion" data-tab-disable-url data-tab-breakpoint="(min-width: 0)">
+
+      <button class="tab-accordion__button">HTML</button>
+    
+      <div class="tab-accordion__panel">
+    
+        <div class="tab-accordion__content">
+    
+          {% highlight html %}{% include_relative html/breakpoint.html %}{% endhighlight %}
           
         </div>
     
@@ -180,15 +292,15 @@ title: "Animation Toggle v1.1"
 
   </div>
 
-  <div class="in-page__content" data-in-page-name="Lazy Load" data-in-page-id="lazy-load">
+  <div class="in-page__content" data-in-page-name="Kitchen Sink" data-in-page-id="kitchen-sink">
 
     <div class="preview">
 
-      {% include_relative html/lazy-load.html %}
+      {% include_relative html/kitchen-sink.html %}
 
     </div>
 
-    <p><a class="external" href="lazy-load" target="_blank">Open in new window</a></p>
+    <p><a class="external" href="kitchen-sink" target="_blank">Open in new window</a></p>
 
     <h2>Code</h2>
 
@@ -200,7 +312,7 @@ title: "Animation Toggle v1.1"
     
         <div class="tab-accordion__content">
     
-          {% highlight html %}{% include_relative html/lazy-load.html %}{% endhighlight %}
+          {% highlight html %}{% include_relative html/kitchen-sink.html %}{% endhighlight %}
           
         </div>
     
@@ -234,15 +346,15 @@ title: "Animation Toggle v1.1"
 
   </div>
 
-  <div class="in-page__content" data-in-page-name="Video Animation" data-in-page-id="video-animation">
+  <div class="in-page__content" data-in-page-name="Poster (Fallback Image)" data-in-page-id="poster">
 
     <div class="preview">
 
-      {% include_relative html/video-animation.html %}
+      {% include_relative html/poster.html %}
 
     </div>
 
-    <p><a class="external" href="video-animation" target="_blank">Open in new window</a></p>
+    <p><a class="external" href="poster" target="_blank">Open in new window</a></p>
 
     <h2>Code</h2>
 
@@ -254,7 +366,7 @@ title: "Animation Toggle v1.1"
     
         <div class="tab-accordion__content">
     
-          {% highlight html %}{% include_relative html/video-animation.html %}{% endhighlight %}
+          {% highlight html %}{% include_relative html/poster.html %}{% endhighlight %}
           
         </div>
     

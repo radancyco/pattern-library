@@ -32,14 +32,11 @@
   var atVideoClass = ".animation-toggle__video";
   var atVideoControlsName = "animation-toggle__controls"
   var atVideoLabel = "Background Animation";
-  var dataLargeViewport = "data-large-viewport";
+  var dataSrcSet = "data-srcset";
   var dataPauseButton = "data-pause-button";
   var dataVideoBreakPoint = "data-media";
-  var lazyLoadClassName = "lazy-load";
-  var lazyLoadClass = "." + lazyLoadClassName;
   var getAnimationWrappers = document.querySelectorAll(atClass);
   var getBackgroundVideos = document.querySelectorAll(atVideoClass);
-  var getLazyLoadClass = document.querySelectorAll(lazyLoadClass);
 
   // Used to retrieve cookie and pause video(s) if present.
 
@@ -221,7 +218,8 @@
       // Create audio description button 
 
       var btnAudioDescription = document.createElement("button");
-
+      btnAudioDescription.setAttribute("aria-label", "Audio Description");
+      btnAudioDescription.setAttribute("aria-pressed", "false");
       btnAudioDescription.setAttribute("class", atAudioDescriptionClassName);
 
       // Append pause button
@@ -233,35 +231,40 @@
       btnAudioDescription.addEventListener("click", function() {
 
         var thisVideo = wrapper.querySelector(atVideoClass);
-        var thisDescription = wrapper.querySelector(atDescriptionTrackClass)
+        var thisDescription = wrapper.querySelector(atDescriptionTrackClass);
 
         thisDescription.classList.toggle("active");
 
-        if (thisVideo.textTracks) {
+        if (this.getAttribute("aria-pressed") === "false") {
 
-          var track = thisVideo.textTracks[0];
-          track.mode = "hidden";
+          this.setAttribute("aria-pressed", "true");
+
+          if (thisVideo.textTracks) {
+
+            var track = thisVideo.textTracks[0];
+            track.mode = "hidden";
+  
+            track.addEventListener("cuechange", function () {
+  
+              var currentCue = this.activeCues[0];
+  
+              if (currentCue) {
+  
+                thisDescription.innerHTML = "";
+                thisDescription.appendChild(currentCue.getCueAsHTML());
       
-          track.oncuechange = function(e) {
-      
-            var cue = this.activeCues[0];
-      
-            if(cue) {
-      
-              thisDescription.innerHTML = "";
-              thisDescription.appendChild(cue.getCueAsHTML());
-      
-              var Message = thisDescription.textContent;
-              var msg = new SpeechSynthesisUtterance(Message);
-      
-              window.speechSynthesis.speak(msg);
-      
-            }
-      
+              } 
+  
+            },false);
+  
           }
 
+        } else {
+
+            this.setAttribute("aria-pressed", "false");
+
         }
-      
+
       });
 
     }
@@ -282,69 +285,9 @@
  
      }
 
-  }
-
-  // Video Lazy Load (Optional)
-
-  function videoLazyLoad() {
-
-    document.addEventListener("DOMContentLoaded", function() {
-
-      var lazyVideos = [].slice.call(getLazyLoadClass);
-  
-      if ("IntersectionObserver" in window) {
-  
-        var lazyVideoObserver = new IntersectionObserver(function(entries, observer) {
-  
-          entries.forEach(function(video) {
-  
-            if (video.isIntersecting) {
-  
-              for (var source in video.target.children) {
-  
-                var videoSource = video.target.children[source];
-  
-                if (typeof videoSource.tagName === "string" && videoSource.tagName === "SOURCE") {
-  
-                  videoSource.src = videoSource.dataset.src;
-  
-                }
-  
-              }
-  
-              video.target.load();
-
-              if (animationBody.classList.contains(atEnabledClassName)) {
-
-                video.target.play();
-        
-              }
-              
-              video.target.classList.remove(lazyLoadClassName);
-  
-              lazyVideoObserver.unobserve(video.target);
-  
-            }
-  
-          });
-  
-        });
-  
-        lazyVideos.forEach(function(lazyVideo) {
-  
-          lazyVideoObserver.observe(lazyVideo);
-  
-        });
-  
-      }
-  
-    });
+     // TODO: Include support for multiple source elements. See Line 19 in lazy.js
 
   }
-
-  // Initiate on page load.
-
-  videoLazyLoad();
 
   // Video Breakpoint Support
 
@@ -382,20 +325,20 @@
 
       if(video.hasAttribute(dataVideoBreakPoint)) {
 
-        var largeViewportSource = video.getAttribute(dataLargeViewport);
-        var smallViewportSource = video.querySelector("source").getAttribute("src");
+        var largeSource = video.getAttribute(dataSrcSet);
+        var defaultSource = video.querySelector("source").getAttribute("src");
 
         if (videoBreakPoints[i].matches) {
 
           // Large Viewport Video
 
-          video.setAttribute("src", largeViewportSource);
+          video.setAttribute("src", largeSource);
 
         } else { 
 
           // Small Viewport Video (Default)
 
-          video.setAttribute("src", smallViewportSource);
+          video.setAttribute("src", defaultSource);
 
         }
 
