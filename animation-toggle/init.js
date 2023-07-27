@@ -235,13 +235,12 @@
 
         if (thisVideo.textTracks) {
 
-        
-          const track = thisVideo.textTracks[0];
+          var track = thisVideo.textTracks[0];
           track.mode = "hidden";
       
           track.oncuechange = function(e) {
       
-            const cue = this.activeCues[0];
+            var cue = this.activeCues[0];
       
             if (cue) {
       
@@ -259,7 +258,6 @@
 
         }
       
-    
       });
 
     }
@@ -289,85 +287,6 @@
     }
 
   });
-
-
-
-
-/* ========================= */
-
-
-// Audi Description
-
-  /* <video id="hero-video" preload="none" aria-label="SCJ Recruiting" mute poster="example.jpg">
-			<source src="example.mp4" type="video/mp4">
-			<!-- track kind="captions" label="English" src="example-caps.vtt" srclang="en-US" -->
-			<track kind="descriptions" label="English" src="example-desc.vtt" srclang="en-US">
-		</video>
-
-		<div class="custom-controls">
-
-			<button id="btn-play-pause"><img src="btn-play.png" alt="Toggle Play/Pause"></button>
-
-			<button id="btn-audio-description"><img src="btn-audio.png" alt="Toggle Audio Description"></button>
-
-		</div> */
-/* 
-
-    const heroVideo = document.getElementById("hero-video");
-    const audioDescription = document.getElementById("audio-description");
-    
-    const btnAudioDescription = document.getElementById("btn-audio-description");
-    const btnPlayToggle = document.getElementById("btn-play-pause");
-    
-    btnAudioDescription.onclick = function() {
-    
-      this.classList.toggle("on");
-      audioDescription.classList.toggle("active");
-    
-      if (heroVideo.textTracks) {
-    
-        const track = heroVideo.textTracks[0];
-        track.mode = "hidden";
-    
-        track.oncuechange = function(e) {
-    
-          const cue = this.activeCues[0];
-    
-          if (cue) {
-    
-            audioDescription.innerHTML = "";
-            audioDescription.appendChild(cue.getCueAsHTML());
-    
-            var Message = audioDescription.textContent;
-            var msg = new SpeechSynthesisUtterance(Message);
-    
-            window.speechSynthesis.speak(msg);
-    
-          }
-    
-        }
-    
-      }
-    
-      heroVideo.volume = 0.05;
-    
-    }
-    
-
-
-*/
-
-
-/* ========================== */
-
-
-
-
-
-
-
-
-
 
   // Video Lazy Load (Optional)
 
