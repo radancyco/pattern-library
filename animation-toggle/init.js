@@ -18,26 +18,30 @@
   console.log('%c Animation Toggle v1.1 in use. ', 'background: #6e00ee; color: #fff');
 
   // Animation variables
-  // Note: For labels such as atButtonLabel and atVideoLabel, do not forget to translate on multi-language sites.
+  // Important: For labels such as atPauseButtonLabel, atAudioDescriptionLabel and atVideoLabel, do not forget to translate on multi-language sites.
 
-  var atPauseButtonClassName = "animation-toggle__pause";
-  var atPauseButtonClass = "." + atPauseButtonClassName;
-  var atButtonLabel = "Pause Animation";
+  var animationBody = document.body;
+  var atAudioDescriptionClassName = "animation-toggle__audio";
   var atClass = ".animation-toggle";
   var atCookieName = "AnimationPaused";
+  var atDescriptionTrackClass = ".animation-toggle__track";
   var atEnabledClassName = "animation-enabled"
-  var atMediaClass = ".animation-toggle__video";
+  var atPauseButtonClassName = "animation-toggle__pause";
+  var atPauseButtonClass = "." + atPauseButtonClassName;
+  var atPauseButtonLabel = "Pause Animation";
+  var atVideoClass = ".animation-toggle__video";
+  var atVideoControlsName = "animation-toggle__controls"
   var atVideoLabel = "Background Animation";
-  var animationBody = document.body;
+  var dataLargeViewport = "data-large-viewport";
   var dataPauseButton = "data-pause-button";
   var dataVideoBreakPoint = "data-media";
   var lazyLoadClassName = "lazy-load";
   var lazyLoadClass = "." + lazyLoadClassName;
-  var getAnimationToggles = document.querySelectorAll(atClass);
-  var getBackgroundVideos = document.querySelectorAll(atMediaClass);
+  var getAnimationWrappers = document.querySelectorAll(atClass);
+  var getBackgroundVideos = document.querySelectorAll(atVideoClass);
   var getLazyLoadClass = document.querySelectorAll(lazyLoadClass);
 
-  // Used to retrieve cookie and pause all video if present.
+  // Used to retrieve cookie and pause video(s) if present.
 
   function getCookie(name) {
 
@@ -46,7 +50,7 @@
     
   }
 
-  // Get cookie on initial load.
+  // Assign cookie to variable on page load.
 
   var animationPaused = getCookie(atCookieName);
 
@@ -68,7 +72,7 @@
 
   }
 
-  // If animation disabled in OS settings and cookie not present, set cookie.
+  // If animation disabled in OS settings and cookie not present, force pause.
 
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
 
@@ -82,33 +86,37 @@
 
   }
 
-  // For each animation control...
+  // For each animation wrapper...
 
-  getAnimationToggles.forEach(function(control){
+  getAnimationWrappers.forEach(function(wrapper){
 
-    // Create control container.
+    // Create control wrapper.
 
     var btnControls = document.createElement("div");
 
-    btnControls.setAttribute("class", "animation-toggle__controls");
+    btnControls.setAttribute("class", atVideoControlsName);
 
-    // Append control div.
+    // Append control wrapper.
     
-    control.append(btnControls);
+    wrapper.append(btnControls);
 
     // Create pause button.
 
     var btnPlayPause = document.createElement("button");
 
-    if(control.hasAttribute(dataPauseButton)) {
+    // See if wrapper contains custom pause button value; use over default if true.
 
-      btnPlayPause.setAttribute("aria-label", control.getAttribute(dataPauseButton));
+    if(wrapper.hasAttribute(dataPauseButton)) {
+
+      btnPlayPause.setAttribute("aria-label", wrapper.getAttribute(dataPauseButton));
 
     } else {
 
-      btnPlayPause.setAttribute("aria-label", atButtonLabel);
+      btnPlayPause.setAttribute("aria-label", atPauseButtonLabel);
 
     }
+
+    // Add class to pause button.
 
     btnPlayPause.classList.add(atPauseButtonClassName);
 
@@ -190,9 +198,9 @@
 
       getBackgroundVideos.forEach(function(video){
 
-        var isPlaying = video.currentTime > 0 && !video.paused && !video.ended && video.readyState > video.HAVE_CURRENT_DATA;
-
         // Note: https://stackoverflow.com/questions/36803176/how-to-prevent-the-play-request-was-interrupted-by-a-call-to-pause-error/37172024#37172024
+
+        var isPlaying = video.currentTime > 0 && !video.paused && !video.ended && video.readyState > video.HAVE_CURRENT_DATA;
 
         if(!isPlaying) {
 
@@ -208,13 +216,13 @@
 
     });
 
-    if (control.querySelector("track") !== null) {
+    if (wrapper.querySelector("track") !== null) {
 
       // Create audio description button 
 
       var btnAudioDescription = document.createElement("button");
 
-      btnAudioDescription.setAttribute("class", "animation-toggle__audio");
+      btnAudioDescription.setAttribute("class", atAudioDescriptionClassName);
 
       // Append pause button
 
@@ -224,13 +232,9 @@
 
       btnAudioDescription.addEventListener("click", function() {
 
+        var thisVideo = wrapper.querySelector(atVideoClass);
+        var thisDescription = wrapper.querySelector(atDescriptionTrackClass)
 
-        var thisVideo = control.querySelector(atMediaClass);
-        var thisDescription = control.querySelector(".animation-toggle__description")
-
-        // alert(thisVideo);
-
-        
         thisDescription.classList.toggle("active");
 
         if (thisVideo.textTracks) {
@@ -242,7 +246,7 @@
       
             var cue = this.activeCues[0];
       
-            if (cue) {
+            if(cue) {
       
               thisDescription.innerHTML = "";
               thisDescription.appendChild(cue.getCueAsHTML());
@@ -264,29 +268,21 @@
   
   });
 
-  // On page load, loop through all the videos on the page.
-
-  getBackgroundVideos.forEach(function(video){
-
-    if(!video.hasAttribute("aria-label")) {
-
-      video.setAttribute("aria-label", atVideoLabel);
-
-    }
+  function loadVideo(obj) {
 
     // If animation class on body exists...
 
     if (animationBody.classList.contains(atEnabledClassName)) {
 
-      video.play();
+      obj.play();
+ 
+     } else { 
+ 
+       obj.load();
+ 
+     }
 
-    } else { 
-
-      video.load();
-
-    }
-
-  });
+  }
 
   // Video Lazy Load (Optional)
 
@@ -350,7 +346,7 @@
 
   videoLazyLoad();
 
-  // Video Breakpoint Support (Optional)
+  // Video Breakpoint Support
 
   // Create array to store all video brakpoints in.
 
@@ -370,13 +366,23 @@
 
   });
 
-  function videoViewPortChange() {
+  function videoViewPort() {
+
+    // On page load, loop through all the videos on the page.
 
     getBackgroundVideos.forEach(function(video, i){
 
+      // If aria-label does not exist on video, add default. 
+
+      if(!video.hasAttribute("aria-label")) {
+
+        video.setAttribute("aria-label", atVideoLabel);
+
+      }
+
       if(video.hasAttribute(dataVideoBreakPoint)) {
 
-        var largeViewportSource = video.getAttribute("data-large-viewport");
+        var largeViewportSource = video.getAttribute(dataLargeViewport);
         var smallViewportSource = video.querySelector("source").getAttribute("src");
 
         if (videoBreakPoints[i].matches) {
@@ -393,15 +399,15 @@
 
         }
 
-        video.load();
+        // Load video
+
+        loadVideo(video);
        
-        // If animation class on body exists...
+      }  else { 
 
-        if (animationBody.classList.contains(atEnabledClassName)) {
+        // Load video
 
-          video.play();
-
-        }
+        loadVideo(video);
 
       }
 
@@ -413,12 +419,12 @@
 
   videoBreakPoints.forEach(function(breakpoints){
 
-    breakpoints.addEventListener("change", videoViewPortChange);
+    breakpoints.addEventListener("change", videoViewPort);
   
   });
   
   // Initiate on page load.
   
-  videoViewPortChange();
+  videoViewPort();
 
 })();
