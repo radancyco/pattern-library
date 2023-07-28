@@ -256,6 +256,8 @@
         
                 var Message = thisDescription.textContent;
                 var msg = new SpeechSynthesisUtterance(Message);
+
+                window.speechSynthesis.speak(msg);
   
               }
   
