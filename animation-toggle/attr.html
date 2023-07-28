@@ -4,70 +4,79 @@
 
 <div class="table-container">
 
+  <table id="elements">
+  <caption>Elements</caption>
+  <thead>
+    <tr>
+      <th>Element</th>
+      <th>Note</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>video</code></td>
+      <td>Optional, Hardcoded</td>
+      <td>Include this element when a background video is needed. Must include <code>.animation-toggle__video</code> to be used by the script.</td>
+    </tr>
+    <tr>
+      <td><code>track</code></td>
+      <td>Optional, Hardcoded</td>
+      <td>Include this element as a child of any video that requires audio descriptions. Must point to a valid <a href="demo-description.vtt">VTT</a> file.</td>
+    </tr>
+  </tbody>
+  </table>
+
+</div>
+
+<div class="table-container">
+
   <table id="attributes">
   <caption>Attributes</caption>
   <thead>
-      <tr>
-          <th>Attribute</th>
-          <th>Apply</th>
-          <th>Note</th>
-          <th>Description</th>
-      </tr>
+    <tr>
+      <th>Attribute</th>
+      <th>Apply</th>
+      <th>Note</th>
+      <th>Description</th>
+    </tr>
   </thead>
   <tbody>
     <tr>
       <td><code>aria-label</code></td>
       <td><code>video</code></td>
-      <td>String, Optional</td>
-      <td>This will override the default label, which is "Background Animation".</td>
+      <td>String, Optional, Hardcoded</td>
+      <td>Used to pass custom label to <code>video</code> element. This will override the default label, which is "Background Animation".</td>
     </tr>
     <tr>
-      <td><code>crossorigin</code></td>
-      <td><code>video</code></td>
-      <td>Boolean, Optional</td>
-      <td>Indicates whether to use CORS to fetch the related video, which is often needed for cross-domain hosting of assets.</td>
-    </tr>
-    <tr>
-      <td><code>data-large-viewport</code></td>
-      <td><code>video</code></td>
-      <td>String, Optional</td>
-      <td>Include when breakpoint is needed to load in larger video asset. It's value should be the path to your large screen video asset.</td>
+      <td><code>data-audio-description-button</code></td>
+      <td><code>.animation-toggle</code></td>
+      <td>String, Optional, Hardcoded</td>
+      <td>Used to pass custom label to <code>.animation-toggle__audio</code>. This will override the default label, which is "Audio Description".</td>
     </tr>
     <tr>
       <td><code>data-media</code></td>
       <td><code>video</code></td>
-      <td>String, Optional</td>
-      <td>Include when breakpoint is needed to load in larger video asset. It's value can be any valid media query.</td>
+      <td>String, Optional, Hardcoded</td>
+      <td>Used to indicate at which point <code>data-srcset</code> will load. Accepts any valid media query, but typically <code>min-width</code> will be used.</td>
     </tr>
     <tr>
       <td><code>data-pause-button</code></td>
       <td><code>.animation-toggle</code></td>
-      <td>String, Optional</td>
-      <td>This will override the default button label, which is "Pause Animation".</td>
+      <td>String, Optional, Hardcoded</td>
+      <td>Used to pass custom label to <code>.animation-toggle__pause</code>. This will override the default label, which is "Pause Animation".</td>
     </tr>
     <tr>
-      <td><code>data-src</code></td>
-      <td><code>source</code></td>
-      <td>Optional</td>
-      <td>Include when lazy loading required. It's value should be the path to your video asset.</td>
-    </tr>
-    <tr>
-      <td><code>loop</code></td>
+      <td><code>data-poster</code></td>
       <td><code>video</code></td>
-      <td>Boolean, Mandatory</td>
-      <td>Used to continulously loop the video.</td>
+      <td>Number, Optional, Hardcoded</td>
+      <td>Used to indicate at which point video will load when paused. Accepts any valid time increment. Video will start from this point when play is enabled. To test, pause video and refresh page.</td>
     </tr>
     <tr>
-      <td><code>muted</code></td>
+      <td><code>data-srcset</code></td>
       <td><code>video</code></td>
-      <td>Boolean, Mandatory</td>
-      <td>Permanetly mutes video. Without it, video will not autoplay.</td>
-    </tr>
-    <tr>
-      <td><code>playsinline</code></td>
-      <td><code>video</code></td>
-      <td>Boolean, Mandatory</td>
-      <td>Indicates that the video is to be played inline, within the element's playback area</td>
+      <td>String, Optional, Hardcoded</td>
+      <td>Used to reference video asset that will load when <code>data-media</code> is present. Typically, this will refrence the larger video, while the <code>src</code> attribute will refrence the smaller video.</td>
     </tr>
   </tbody>
   </table>
@@ -89,33 +98,45 @@
   <tbody>
     <tr>
       <td><code>.animation-toggle</code></td>
-      <td><code>div</code></td>
-      <td>Mandatory</td>
-      <td>Include on the parent element that wraps your content and animation.</td>
+      <td><code>div</code>, <code>section</code></td>
+      <td>Mandatory, Hardcoded</td>
+      <td>Used on the parent element that wraps your content and animation(s).</td>
     </tr>
     <tr>
-      <td><code>.animation-toggle__button</code></td>
+      <td><code>.animation-toggle__audio</code></td>
       <td><code>button</code></td>
-      <td>Mandatory</td>
-      <td>This class is included on all pause buttons generated by the script.</td>
+      <td>Optional, Dynamic</td>
+      <td>Used on all audio description buttons.</td>
+    </tr>
+    <tr>
+      <td><code>.animation-toggle__description</code></td>
+      <td><code>div</code></td>
+      <td>Optional, Hardcoded</td>
+      <td>Used on all <code>div</code> elements that are children of <code>.animation-toggle</code>. The <code>aria-live</code> attribue is required on this element when used.</td>
+    </tr>
+    <tr>
+      <td><code>.animation-toggle__backdrop</code></td>
+      <td><code>.animation-toggle</code></td>
+      <td>Optional, Hardcoded</td>
+      <td>Append to <code>.animation-toggle</code> class to enable. This will enable video to animate in on page load and for background shading when video is paused. Often used on hero banner.</td>
+    </tr>
+    <tr>
+      <td><code>.animation-toggle__pause</code></td>
+      <td><code>button</code></td>
+      <td>Mandatory, Dynamic</td>
+      <td>Used on all pause buttons.</td>
     </tr>
     <tr>
       <td><code>.animation-toggle__video</code></td>
       <td><code>video</code></td>
-      <td>Mandatory</td>
-      <td>Include this class on all <code>video</code> elements if used.</td>
+      <td>Mandatory, Hardcoded</td>
+      <td>Used on all <code>video</code> elements that are children of <code>.animation-toggle</code>.</td>
     </tr>
     <tr>
       <td><code>.animation-enabled</code></td>
       <td><code>body</code></td>
-      <td>Mandatory</td>
-      <td>This class is applied on page load. CSS animation will only run when this class is present. Removing it will pause animation. By default, we are putting accessibility first by treating animation as an enhancement.</td>
-    </tr>
-    <tr>
-      <td><code>.lazy-load</code></td>
-      <td><code>video</code></td>
-      <td>Optional</td>
-      <td>Include when lazy loading is required.</td>
+      <td>Mandatory, Dynamic</td>
+      <td>Applied on page load. CSS animation will only run when this class is present. Removing it will pause animation. By default, we are putting accessibility first by treating animation as an enhancement.</td>
     </tr>
   </tbody>
   </table>
@@ -125,32 +146,71 @@
 <div class="table-container">
 
   <table id="elements">
-  <caption>Elements</caption>
+  <caption>Translations</caption>
   <thead>
-      <tr>
-          <th>Element</th>
-          <th>Note</th>
-          <th>Description</th>
-      </tr>
+    <tr>
+      <th>English</th>
+      <th>Spanish</th>
+      <th>French</th>
+    </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><code>video</code></td>
-          <td>Optional</td>
-          <td>Include this element if choosing to include animation via HTML video. See <a href="#attributes">allowed attributes</a> for more details.</td>
-      </tr>
+    <tr>
+      <td>Audio Descripion</td>
+      <td>Descripción de audio</td>
+      <td>Description audio</td>
+    </tr>
+    <tr>
+      <td>Background Animation</td>
+      <td>Animación de fondo</td>
+      <td>Animation d'arrière-plan</td>
+    </tr>
+    <tr>
+      <td>Pause Animation</td>
+      <td>Pausar animación</td>
+      <td>Suspendre l'animation</td>
+    </tr>
+  </tbody>
+  </table>
+
+  <p><strong>Note:</strong> Be mindful of translating non-visual content, such as that found in the <code>alt</code> and <code>aria-label</code> attributes. If you receive translations for content not supported here, please send to the <a href="mailto:a11y@radancy.com">Accessibility Team</a> for inclusion.</li>
+
+</div>
+
+<div class="table-container">
+
+  <table id="elements">
+  <caption>Cookies</caption>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Value</th>
+      <th>Type</th>
+      <th>Secure</th>
+      <th>SameSite</th>
+      <th>Domain</th>
+      <th>Path</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+      <td>AnimationPaused</td>
+      <td>true/false</td>
+      <td>Persistent</td>
+      <td>Yes</td>
+      <td>None</td>
+      <td>N/A</td>
+      <td>/</td>
+  </tr>
   </tbody>
   </table>
 
 </div>
 
-<h2 id="notes">Notes</h2>
+<h2 id="notes">Additional Notes</h2>
 
 <ul>
-    <li>Video should always be delivered as an optimized <code>webm</code> or <code>mp4</code>. The file size should be as minimal as possible without sacrificing quality, to reduce overall page weight.</li>
+    <li>Video should always be delivered as an optimized <code>webm</code> or <code>mp4</code>. The file size should be as minimal as possible without sacrificing quality, to reduce overall page weight. Multiple <code>source</code> elements are not supported at this time.</li>
     <li>Video should be no longer than 15-30 seconds in length. The shorter the video is, the less of an impact it will have on performance.</li>
-    <li>In addition to the pause button, video and CSS animations utilize <code>prefers-reduced-motion</code>. When a user disables animation in their operating system, the animation will not autoplay, nor will the pause button be present.</li>
-    <li>A cookie called <code>AnimationPaused</code> is added and removed when pause button is toggled. This cookie remembers the desired setting on other pages of the site that use the same script and on return visits.</li>
-    <li>Video may not autoplay if mobile device is in low-power mode. This is to preserve battery life.</li>
-    <li>Be mindful on translation of video and pause button on multi-language sites.</li>
+    <li>In addition to the pause button, video and CSS animations utilize <code>prefers-reduced-motion</code>. When a user disables animation in their operating system, the animation will not autoplay.</li>
 </ul>

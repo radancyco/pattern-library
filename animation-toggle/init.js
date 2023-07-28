@@ -15,28 +15,54 @@
 
   // Display which component in use via console:
 
-  console.log('%c Animation Toggle v1.1 in use. ', 'background: #6e00ee; color: #fff');
+  console.log('%c Animation Toggle v1.2 in use. ', 'background: #6e00ee; color: #fff');
 
   // Animation variables
   // Important: For labels such as atPauseButtonLabel, atAudioDescriptionLabel and atVideoLabel, do not forget to translate on multi-language sites.
 
+  var animationHTML = document.documentElement;
   var animationBody = document.body;
   var atAudioDescriptionClassName = "animation-toggle__audio";
+  
   var atClass = ".animation-toggle";
   var atCookieName = "AnimationPaused";
   var atDescriptionTrackClass = ".animation-toggle__track";
   var atEnabledClassName = "animation-enabled"
   var atPauseButtonClassName = "animation-toggle__pause";
   var atPauseButtonClass = "." + atPauseButtonClassName;
-  var atPauseButtonLabel = "Pause Animation";
   var atVideoClass = ".animation-toggle__video";
   var atVideoControlsName = "animation-toggle__controls"
-  var atVideoLabel = "Background Animation";
+  var dataAudioDescriptionButton = "data-audio-description-button";
+  var dataPoster = "data-poster";
   var dataSrcSet = "data-srcset";
   var dataPauseButton = "data-pause-button";
   var dataVideoBreakPoint = "data-media";
   var getAnimationWrappers = document.querySelectorAll(atClass);
   var getBackgroundVideos = document.querySelectorAll(atVideoClass);
+
+  // Translations
+
+  var currentPageLanguage = animationHTML.getAttribute("lang");
+
+  if(currentPageLanguage === "es") {
+
+    var atAudioDescriptionLabel = "Descripción de audio";
+    var atPauseButtonLabel = "Pausar animación";
+    var atVideoLabel = "Animación de fondo";
+
+  } else if (currentPageLanguage === "fr") {
+
+    var atAudioDescriptionLabel = "Description audio";
+    var atPauseButtonLabel = "Suspendre l'animation";
+    var atVideoLabel = "Animation d'arrière-plan";
+      
+  } else {
+
+    var atAudioDescriptionLabel = "Audio Description";
+    var atPauseButtonLabel = "Pause Animation";
+    var atVideoLabel = "Background Animation";
+
+  }
 
   // Used to retrieve cookie and pause video(s) if present.
 
@@ -197,7 +223,7 @@
 
         // Note: https://stackoverflow.com/questions/36803176/how-to-prevent-the-play-request-was-interrupted-by-a-call-to-pause-error/37172024#37172024
 
-        var isPlaying = video.currentTime > 0 && !video.paused && !video.ended && video.readyState > video.HAVE_CURRENT_DATA;
+        var isPlaying = video.currentTime > 0 && !video.paused && !video.ended && video.readyState > video.HAVE_CURRENT_DATA; 
 
         if(!isPlaying) {
 
@@ -218,15 +244,27 @@
       // Create audio description button 
 
       var btnAudioDescription = document.createElement("button");
-      btnAudioDescription.setAttribute("aria-label", "Audio Description");
+      btnAudioDescription.setAttribute("aria-label", atAudioDescriptionLabel);
       btnAudioDescription.setAttribute("aria-pressed", "false");
       btnAudioDescription.setAttribute("class", atAudioDescriptionClassName);
 
-      // Append pause button
+      // See if wrapper contains custom audio description button value; use over default if true.
+
+      if(wrapper.hasAttribute(dataAudioDescriptionButton)) {
+
+        btnAudioDescription.setAttribute("aria-label", wrapper.getAttribute(dataAudioDescriptionButton));
+
+      } else {
+
+        btnAudioDescription.setAttribute("aria-label", atAudioDescriptionLabel);
+
+      }
+
+      // Append Audio Description button
 
       btnControls.append(btnAudioDescription);
 
-      // Pause Toggle Event
+      // Audio Description Toggle Event
 
       btnAudioDescription.addEventListener("click", function() {
 
@@ -299,6 +337,8 @@
   
   });
 
+  // Video Loader
+
   function loadVideo(obj, poster) {
 
     // If animation class on body exists...
@@ -308,6 +348,8 @@
       obj.play();
  
      } else { 
+
+      obj.load();
 
         if(poster) {
 
@@ -321,7 +363,7 @@
  
      }
 
-     // TODO: Include support for multiple source elements. See Line 19 in lazy.js
+     // TODO: Possibly include support for multiple source elements. See Line 19 in lazy.js
 
   }
 
@@ -334,6 +376,14 @@
   // Loop through each video...
 
   getBackgroundVideos.forEach(function(video){
+
+    // Add inital attributes.
+
+    video.setAttribute("crossorigin" , "");
+    video.setAttribute("loop" , "");
+    video.setAttribute("playsinline" , "");
+          
+    video.muted = true;
 
     // Get each breakpoint in video
 
@@ -361,9 +411,9 @@
 
       // If video has poster. 
 
-      if(video.hasAttribute("data-poster")) {
+      if(video.hasAttribute(dataPoster)) {
 
-        var posterLoad = video.getAttribute("data-poster");
+        var posterLoad = video.getAttribute(dataPoster);
 
       }
 

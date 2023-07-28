@@ -1,11 +1,13 @@
 {% include base.html %}
 
-<div class="animation-toggle animation-toggle__hero">
+<div class="animation-toggle animation-toggle__backdrop">
 
-  <video class="animation-toggle__video" data-media="(min-width:778px)" data-poster="15" data-srcset="{{base}}/demo-star-wars-lg.mp4" crossorigin loop muted playsinline>
+  <video class="animation-toggle__video" data-media="(min-width:778px)" data-poster="10.4" data-srcset="{{base}}/demo-star-wars-lg.mp4">
     <source src="{{base}}/demo-star-wars-sm.mp4" type="video/mp4">
     <track kind="descriptions" label="English" src="{{base}}/demo-description.vtt" srclang="en-US">
   </video>
+
+  <div class="animation-toggle__content">Kitchen Sink</div>
 
   <div class="animation-toggle__track" aria-live="polite"></div>
 
