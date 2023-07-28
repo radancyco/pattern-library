@@ -33,10 +33,10 @@
   var atVideoClass = ".animation-toggle__video";
   var atVideoControlsName = "animation-toggle__controls"
   var dataAudioDescriptionButton = "data-audio-description-button";
+  var dataMedia = "data-media";
   var dataPoster = "data-poster";
   var dataSrcSet = "data-srcset";
   var dataPauseButton = "data-pause-button";
-  var dataVideoBreakPoint = "data-media";
   var getAnimationWrappers = document.querySelectorAll(atClass);
   var getBackgroundVideos = document.querySelectorAll(atVideoClass);
 
@@ -329,6 +329,8 @@
 
           }
 
+          window.speechSynthesis.cancel();
+
         }
       
       });
@@ -381,13 +383,24 @@
 
     video.setAttribute("crossorigin" , "");
     video.setAttribute("loop" , "");
-    video.setAttribute("playsinline" , "");
-          
+    video.setAttribute("playsinline" , "");       
     video.muted = true;
+
+    // Grab source src and apply to video element as "data-src" then delete source elm. Used by videoViewPort();
+
+    if(video.hasAttribute(dataMedia)) {
+
+      var videoSource =  video.querySelector("source");
+      var defaultSource = videoSource.getAttribute("src");
+
+      video.setAttribute("data-src", defaultSource);
+      video.removeChild(videoSource);
+
+    }
 
     // Get each breakpoint in video
 
-    var videoBreakpoint = video.getAttribute(dataVideoBreakPoint);
+    var videoBreakpoint = video.getAttribute(dataMedia);
 
     // Store each breakpoint in array (videoBreakPoints) for later use by matchMedia.
 
@@ -417,10 +430,10 @@
 
       }
 
-      if(video.hasAttribute(dataVideoBreakPoint)) {
+      if(video.hasAttribute(dataMedia)) {
 
         var largeSource = video.getAttribute(dataSrcSet);
-        var defaultSource = video.querySelector("source").getAttribute("src");
+        var defaultSource = video.getAttribute("data-src");
 
         if (videoBreakPoints[i].matches) {
 
