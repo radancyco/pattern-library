@@ -46,13 +46,13 @@
 
   if(currentPageLanguage === "es") {
 
-    var atAudioDescriptionLabel = "Descripción de audio";
+    var atAudioDescriptionLabel = "Audiodescripción";
     var atPauseButtonLabel = "Pausar animación";
     var atVideoLabel = "Animación de fondo";
 
   } else if (currentPageLanguage === "fr") {
 
-    var atAudioDescriptionLabel = "Description audio";
+    var atAudioDescriptionLabel = "Audiodescription";
     var atPauseButtonLabel = "Suspendre l'animation";
     var atVideoLabel = "Animation d'arrière-plan";
       
