@@ -239,33 +239,55 @@
 
           this.setAttribute("aria-pressed", "true");
 
+          if (thisVideo.textTracks) {
+
+            var track = thisVideo.textTracks[0];
+            track.mode = "hidden";
+            track.oncuechange = function() {
+  
+              var currentCue = this.activeCues[0];
+  
+              console.log(currentCue)
+  
+              if (currentCue) {
+  
+                thisDescription.innerHTML = "";
+                thisDescription.appendChild(currentCue.getCueAsHTML());
+        
+                var Message = thisDescription.textContent;
+                var msg = new SpeechSynthesisUtterance(Message);
+  
+              }
+  
+            }
+
+          }
+
         } else {
 
           this.setAttribute("aria-pressed", "false");
 
-        }
+          // HACK: Need to figure out a way to disable or stop cue. Currently looping through cue and sending nothing to div. Grr.
 
-        if (thisVideo.textTracks) {
+          if (thisVideo.textTracks) {
 
-          var track = thisVideo.textTracks[0];
-          track.mode = "hidden";
-          track.oncuechange = function(e) {
-
-            var currentCue = this.activeCues[0];
-
-            if (currentCue) {
-
-              thisDescription.innerHTML = "";
-              thisDescription.appendChild(currentCue.getCueAsHTML());
-      
-              var Message = thisDescription.textContent;
-              var msg = new SpeechSynthesisUtterance(Message);
-      
-              window.speechSynthesis.speak(msg);
-
+            var track = thisVideo.textTracks[0];
+            track.mode = "hidden";
+            track.oncuechange = function() {
+  
+              var currentCue = this.activeCues[0];
+  
+              console.log(currentCue)
+  
+              if (currentCue) {
+  
+                thisDescription.innerHTML = "";
+  
+              }
+  
             }
 
-          };
+          }
 
         }
       
