@@ -21,6 +21,8 @@ position: relative;
   display: block;
   clip-path: inset(1px 1px); 
 
+    // Native controls
+  
     &::-webkit-media-controls {
     display: none;
     }

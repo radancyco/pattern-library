@@ -299,7 +299,7 @@
   
   });
 
-  function loadVideo(obj) {
+  function loadVideo(obj, poster) {
 
     // If animation class on body exists...
 
@@ -308,8 +308,16 @@
       obj.play();
  
      } else { 
+
+        if(poster) {
+
+          obj.currentTime = poster;
+
+        } else {
  
-       obj.load();
+          obj.load();
+
+        }
  
      }
 
@@ -351,6 +359,14 @@
 
       }
 
+      // If video has poster. 
+
+      if(video.hasAttribute("data-poster")) {
+
+        var posterLoad = video.getAttribute("data-poster");
+
+      }
+
       if(video.hasAttribute(dataVideoBreakPoint)) {
 
         var largeSource = video.getAttribute(dataSrcSet);
@@ -372,13 +388,13 @@
 
         // Load video
 
-        loadVideo(video);
+        loadVideo(video, posterLoad);
        
       }  else { 
 
         // Load video
 
-        loadVideo(video);
+        loadVideo(video, posterLoad);
 
       }
 
