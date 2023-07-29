@@ -382,6 +382,7 @@
     // Add inital attributes.
 
     video.setAttribute("crossorigin" , "");
+    video.setAttribute("disableRemotePlayback", "");
     video.setAttribute("loop" , "");
     video.setAttribute("playsinline" , "");       
     video.muted = true;
