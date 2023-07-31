@@ -70,13 +70,13 @@
       <td><code>data-poster</code></td>
       <td><code>video</code></td>
       <td>Number, Optional, Hardcoded</td>
-      <td>Used to indicate at which point video will load when paused. Accepts any valid time increment. Video will start from this point when play is enabled. To test, pause video and refresh page.</td>
+      <td>Used to indicate at which point video will load when paused. Accepts any valid time increment. Video will start from this point when play is enabled.</td>
     </tr>
     <tr>
       <td><code>data-srcset</code></td>
       <td><code>video</code></td>
       <td>String, Optional, Hardcoded</td>
-      <td>Used to reference video asset that will load when <code>data-media</code> is present. Typically, this will reference the larger video, while the <code>src</code> attribute will reference the smaller video.</td>
+      <td>Used to reference video asset that will load when <code>data-media</code> is present. Typically, this will reference a larger video, while the <code>src</code> attribute will reference a smaller video.</td>
     </tr>
   </tbody>
   </table>
@@ -142,7 +142,7 @@
       <td><code>.animation-enabled</code></td>
       <td><code>body</code></td>
       <td>Mandatory, Dynamic</td>
-      <td>Applied on page load. CSS animation will only run when this class is present. Removing it will pause animation. By default, we are putting accessibility first by treating animation as an enhancement.</td>
+      <td>Applied on page load. CSS and video animations will only run when this class is present. Removing it pauses animation.</td>
     </tr>
   </tbody>
   </table>
@@ -179,7 +179,7 @@
   </tbody>
   </table>
 
-  <p><strong>Note:</strong> Be mindful of translating non-visual content, such as that found in the <code>alt</code> and <code>aria-label</code> attributes. If you receive translations for content not supported here, please send to the <a href="mailto:a11y@radancy.com">Accessibility Team</a> for inclusion.</li>
+  <p><strong>Note:</strong> Always be mindful of translating non-visual content for assistive technology users. If you receive translations for content not supported here, please send to the <a href="mailto:a11y@radancy.com">Accessibility Team</a> for inclusion here.</li>
 
 </div>
 
@@ -219,5 +219,7 @@
     <li>Video should always be delivered as an optimized <code>webm</code> or <code>mp4</code>. The file size should be as minimal as possible without sacrificing quality, to reduce overall page weight. Multiple <code>source</code> elements are not supported at this time.</li>
     <li>Video should be no longer than 15-30 seconds in length. The shorter the video is, the less of an impact it will have on performance.</li>
     <li>In addition to the pause button, video and CSS animations utilize <code>prefers-reduced-motion</code>. When a user disables animation in their operating system, the animation will not autoplay.</li>
-    <li>Pausing one video pauses all videos that use the script across the site and on return visits.</li>
+    <li>By design, pausing one video pauses all videos that use the script across the site and on return visits.</li>
+    <li>Video may behave differently under certain conditions. For example, if a phone is in low power mode, the video will be paused to conserve battery life.</li>
+    <li>The <code>disableremoteplayback</code> attribute may be flagged as an error in certain validation tools. This can be ignored.</li>
 </ul>
