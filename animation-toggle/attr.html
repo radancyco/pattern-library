@@ -216,10 +216,11 @@
 <h2 id="notes">Additional Notes</h2>
 
 <ul>
-    <li>Video should always be delivered as an optimized <code>webm</code> or <code>mp4</code>. The file size should be as minimal as possible without sacrificing quality, to reduce overall page weight. Multiple <code>source</code> elements are not supported at this time.</li>
-    <li>Video should be no longer than 15-30 seconds in length. The shorter the video is, the less of an impact it will have on performance.</li>
-    <li>In addition to the pause button, video and CSS animations utilize <code>prefers-reduced-motion</code>. When a user disables animation in their operating system, the animation will not autoplay.</li>
-    <li>By design, pausing one video pauses all videos that use the script across the site and on return visits.</li>
+    <li>By design, pausing one animation will pause all animations across the site that utilize the script.</li>
+    <li>By design, animations that utilize the script, will be paused on return visits to the site.</li>
+    <li>This script utilizes <code>prefers-reduced-motion</code>. When a user disables animation via their operating system settings, the animation will not autoplay.</li>
     <li>Video may behave differently under certain conditions. For example, if a phone is in low power mode, the video will be paused to conserve battery life.</li>
     <li>The <code>disableremoteplayback</code> attribute may be flagged as an error in certain validation tools. This can be ignored.</li>
+    <li>Video should always be delivered as an optimized <code>webm</code> or <code>mp4</code>. The file size should be as minimal as possible without sacrificing quality, to reduce overall page weight. Multiple <code>source</code> elements are not supported at this time.</li>
+    <li>Video should be no longer than 15-30 seconds in length. The shorter the video is, the less of an impact it will have on performance.</li>
 </ul>
