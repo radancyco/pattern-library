@@ -1,11 +1,11 @@
-<section id="a11y-info" class="a11y-info">
+<section aria-labelledby="a11y-heading" class="a11y-info" id="a11y-info">
 
-    <h2>Responsible Animation</h2>
+    <h2 id="a11y=heading">Responsible Animation</h2>
 
     <p>Be mindful of the impact that animation can have on people with disabilities. Animation can be a distraction for some, make others ill, and dangerous for those subject to seizures. By adhering to the following rules, we can make our web experiences pleasant and safe for everybody!</p>
 
     <ul>    
-        <li>If animation <strong>loops continuously</strong>, such as a hero banner video, background animation, auto-scrolling carousel, etc. then it <strong>must</strong> include a pause button. A <a href="../animation-control">component is available</a> to easily implement a pause button on CSS and video animations. Third-party plugins, such as Slick, typically have their own <a href="https://accessible360.github.io/accessible-slick/#autoplay">implementation</a> of pause. </li>
+        <li>If animation <strong>loops continuously</strong>, such as a hero banner video, background animation, auto-scrolling carousel, etc. then it <strong>must</strong> include a <a href="/animation-toggle">pause button</a>. Third-party plugins, such as Slick, typically have their own <a href="https://accessible360.github.io/accessible-slick/#autoplay">implementation</a> of pause. </li>
         <li>Micro-animations, such as those which occur when scrolling or interacting with page elements, are exempt if they do not last for more than 5 seconds.</li>
         <li>Developers should honor user settings and implement the <code>prefers-reduced-motion</code> media query to reduce or eliminate animation where needed. See <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion">MDN</a> for more details.</li>
         <li>Animations that flash for more than <strong>3 times per second</strong> are <strong>prohibited</strong> on our websites, as they may induce seizures. A pause button will be ineffective here. If you suspect an animation of having a high flash rate, please bring this to the attention of the <a href="mailto:a11y@radancy.com">Accessibility Team</a>.</li>
