@@ -18,12 +18,10 @@
   console.log('%c Animation Toggle v1.2 in use. ', 'background: #6e00ee; color: #fff');
 
   // Animation variables
-  // Important: For labels such as atPauseButtonLabel, atAudioDescriptionLabel and atVideoLabel, do not forget to translate on multi-language sites.
 
   var animationHTML = document.documentElement;
   var animationBody = document.body;
   var atAudioDescriptionClassName = "animation-toggle__audio";
-  
   var atClass = ".animation-toggle";
   var atCookieName = "AnimationPaused";
   var atDescriptionTrackClass = ".animation-toggle__track";
@@ -119,9 +117,9 @@
 
     btnControls.setAttribute("class", atVideoControlsName);
 
-    // Append control wrapper.
+    // Prepend control wrapper.
     
-    wrapper.append(btnControls);
+    wrapper.prepend(btnControls);
 
     // Create pause button.
 
@@ -142,7 +140,7 @@
     // Add class to pause button.
 
     btnPlayPause.classList.add(atPauseButtonClassName);
-
+    
     // Check to see if cookie is false or null.
 
     if(animationPaused === "false" || animationPaused === null) {
@@ -377,14 +375,15 @@
 
   // Loop through each video...
 
-  getBackgroundVideos.forEach(function(video){
+  getBackgroundVideos.forEach(function(video, e){
 
     // Add inital attributes.
 
     video.setAttribute("crossorigin" , "");
     video.setAttribute("disableRemotePlayback", "");
     video.setAttribute("loop" , "");
-    video.setAttribute("playsinline" , "");       
+    video.setAttribute("playsinline" , "");
+    video.id = "animation-toggle-video-" + (e + 1);    
     video.muted = true;
 
     // Grab source src and apply to video element as "data-src" then delete source elm. Used by videoViewPort();
