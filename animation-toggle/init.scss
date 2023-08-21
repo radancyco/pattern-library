@@ -3,7 +3,7 @@
   Radancy: Animation Toggle
 
   Contributor(s):
-  Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy
+  Michael "Spell" Spellacy
 
   Dependencies: Sass
 
@@ -210,14 +210,13 @@ position: relative;
 
 }
 
+// CSS Animation Example
+
 .example {
 margin: 0 auto;
 
   .animation-enabled & {
-  animation-duration: 1s;
-  animation-fill-mode: both;
-  animation-iteration-count: infinite;
-  animation-name: rubberBand;
+  animation: 1s infinite both rubberBand;
   }
 
 }
