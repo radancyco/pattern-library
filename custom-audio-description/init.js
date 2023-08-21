@@ -20,7 +20,7 @@ btnAudioDescription.onclick = function() {
 
 			if (cue) {
 
-				audioDescription.innerHTML = "";
+				audioDescription.innerText = "";
 				audioDescription.appendChild(cue.getCueAsHTML());
 
 				var Message = audioDescription.textContent;

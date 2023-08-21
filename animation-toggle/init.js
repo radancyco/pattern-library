@@ -1,9 +1,9 @@
 /*!
 
-  Radancy: Animation Toggle
+  Radancy Component Library: Animation Toggle
 
   Contributor(s):
-  Michael "Spell" Spellacy, Email: michael.spellacy@radancy.com, Twitter: @spellacy, GitHub: michaelspellacy
+  Michael "Spell" Spellacy
 
   Dependencies: None
 
@@ -79,17 +79,7 @@
 
   function setCookie(state) {
 
-    if (location.protocol === "https:") {
-
-      // Secure environments require secure cookies.
-
-      document.cookie = atCookieName + "=" + state + "; Secure; SameSite=None; path=/";
-
-    } else {
-
-      document.cookie = atCookieName + "=" + state + "; path=/";
-
-    }
+    document.cookie = atCookieName + "=" + state + "; Secure; SameSite=None; path=/";
 
   }
 
@@ -287,7 +277,7 @@
   
               if (currentCue) {
   
-                thisDescription.innerHTML = "";
+                thisDescription.innerText = "";
                 thisDescription.appendChild(currentCue.getCueAsHTML());
         
                 var Message = thisDescription.textContent;
@@ -319,7 +309,7 @@
   
               if (currentCue) {
   
-                thisDescription.innerHTML = "";
+                thisDescription.innerText = "";
   
               }
   

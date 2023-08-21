@@ -1238,7 +1238,7 @@ function getGeoLocation() {
 
   } else {
 
-    x.innerHTML = "Geolocation is not supported by this browser.";
+    x.innerText = "Geolocation is not supported by this browser.";
 
   }
 
