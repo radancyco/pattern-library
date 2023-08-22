@@ -1,0 +1,73 @@
+---
+folder: dialog
+localcss: "init.css"
+localjs: "init.js"
+title: "Dialog"
+---
+
+<p>This component will allow you to implement a dialog window.</p>
+
+<button data-dialog-src="my-yt-video">Show YouTube Video</button>
+
+<dialog id="my-yt-video">
+
+   <iframe src="https://www.youtube-nocookie.com/embed/LHZmncJn6AA" title="Test" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  
+  <button data-dialog-button>Close</button>
+  
+</dialog>
+
+<button data-dialog-src="my-vm-video">Show Vimeo Video</button>
+
+<dialog id="my-vm-video">
+
+   <iframe src="https://player.vimeo.com/video/285086929"></iframe>
+  
+  <button data-dialog-button>Close</button>
+  
+</dialog>
+
+<button data-dialog-src="my-html-video">Show HTML5 Video</button>
+
+<dialog id="my-html-video">
+
+  <video aria-label="The Empire Strikes Back: Trailer A" controls crossorigin poster="https://radancy.dev/media/the-empire-strikes-back-trailer.png" preload="metadata">
+  <source src="https://radancy.dev/media/the-empire-strikes-back-trailer.mp4" type="video/mp4">
+  <track default label="English" kind="captions" src="https://radancy.dev/media/the-empire-strikes-back-trailer.vtt" srclang="en">
+  </video>
+  
+  <details>
+
+    <summary>Transcript</summary>
+
+    <p><strong>Narrator:</strong> Luke Skywalker and Han Solo rescue the princess, destroy the Death Star, but their story didn't end there.</p>
+
+    <p>Now, the creators of the biggest smash hit of all time, bring you the next episode in the "Star Wars" saga, "The Empire Strikes Back."</p>
+
+    <p>The continuing story of our band of heroes. Luke Skywalker, Princess Leia, Han Solo, C3PO, R2D2 and Chewbacca and introducing Lando Calrissian.</p>
+
+    <p>It's an epic of romance. Of heroes and villains. They cross trackless voids to unknown worlds.</p>
+
+    <p>A galactic odyssey against oppression.</p>
+
+    <p>A big new sprawling space adventure in the "Star Wars" saga, "The Empire Strikes Back."</p>
+
+    <p>Coming to your galaxy next summer.</p>
+    
+  </details>
+  
+  <button data-dialog-button>Close</button>
+  
+</dialog>
+
+<button data-dialog-src="my-text">Show Text Dialog</button>
+
+<dialog id="my-text">
+
+  <h2>Boo! did I scare you?<h2>
+
+  <button data-dialog-button>Close</button>
+
+</dialog>
+
+{% include notes.html %}

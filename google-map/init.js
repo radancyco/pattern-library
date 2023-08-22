@@ -39,7 +39,7 @@ if (localURL) {
 
   if(qaURL) {
 
-    googleMapCSS.setAttribute("href", "https://radancy.dev/pattern-library/google-map/init.css");
+    googleMapCSS.setAttribute("href", "https://radancy.dev/component-library/google-map/init.css");
 
   } else {
 
