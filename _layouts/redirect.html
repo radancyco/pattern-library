@@ -4,8 +4,15 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">
   <meta content="noindex, nofollow" name="robots">
+  {% if page.redirect-url %}
+
   <meta http-equiv="refresh" content="0; URL={{ page.redirect-url }}">
-  <style>body {background-color: #fff;}</style>
+
+  {% else %}
+
+  <meta http-equiv="refresh" content="0; URL=/component-library/{{ page.folder }}">
+
+  {% endif %}
   <title>{{ page.title }}</title>
 </head>
 
@@ -13,7 +20,15 @@
 
   <main>
 
+    {% if page.redirect-url %}
+
     <a href="{{ page.redirect-url }}">{{ page.title }} (Link may redirect)</a>
+
+    {% else %}
+
+    <a href="/component-library/{{ page.folder }}">{{ page.title }} (Link may redirect)</a>
+
+    {% endif %}
 
   </main>
 

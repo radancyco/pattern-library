@@ -12,8 +12,6 @@ exclude: [
   _template.bat
 ]
 destination: _httpdocs
-gems:
- - jekyll-redirect-from
 git-url: https://radancy.dev
 highlighter: rouge
 include: [_*.*]
